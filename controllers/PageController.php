@@ -35,6 +35,7 @@ class PageController extends Controller
                     'logout' => ['post'],
                 ],
             ],
+
         ];
     }
 
@@ -54,12 +55,14 @@ class PageController extends Controller
         ];
     }
 
-    public function actionServiceColdStamping(){
+    public function actionServiceColdStamping()
+    {
 
         return $this->render('service-cold-stamping');
     }
 
-    public function actionServiceMetalBending(){
+    public function actionServiceMetalBending()
+    {
 
         return $this->render('service-metal-bending');
     }
@@ -92,6 +95,18 @@ class PageController extends Controller
 
     public function actionError()
     {
+
         return $this->render('error');
+    }
+
+
+    public function beforeAction($action)
+    {
+        if (parent::beforeAction($action)) {
+            if ($action->id == 'error' || $action->id == 'contact') {
+                $this->layout = 'main-dark';
+            }
+            return true;
+        }
     }
 }
