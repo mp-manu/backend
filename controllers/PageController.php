@@ -65,7 +65,7 @@ class PageController extends Controller
         $questionModel = new AnswerQuestions();
 
         $service = Services::find()->where(['id' => 1, 'status' => 1])->asArray()->one();
-        $serviceInfo = ServiceInfo::find()->where(['service_id' => $service['id'], 'status' => 1])->all();
+        $serviceInfo = ServiceInfo::find()->where(['service_id' => $service['id'], 'status' => 1])->limit('3')->all();
         $answerQuestions = AnswerQuestions::find()->where(['service_id' => $service['id'], 'status' => 1, 'type' => 1])->all();
         $workProccess = WorkProccess::find()->where(['service_id' => $service['id'], 'status' => 1])->all();
         $workResults = WorkResults::find()->where(['status' => 1])->all();

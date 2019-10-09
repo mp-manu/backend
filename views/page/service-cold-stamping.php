@@ -9,6 +9,7 @@
 $this->title = 'Холодная штамповка';
 
 echo $this->render('/page/banners/service-cold-stamping', ['service' => $service]);
+
 ?>
 
 <div class="content__body">
@@ -18,62 +19,66 @@ echo $this->render('/page/banners/service-cold-stamping', ['service' => $service
                 <div class="section__body">
                     <div class="options">
                         <ul class="options__list grid is-row">
+                            <?php if(!empty($serviceInfo)): foreach($serviceInfo as $info): ?>
                             <li class="options__item col-4">
                                 <article class="option">
                                     <header class="option__header"><img class="option__icon"
                                                                         src="<?= Yii::getAlias('@web') ?>/img/option-1.svg" alt>
-                                        <h3 class="option__title">Преимущества способа</h3></header>
+                                        <h3 class="option__title"><?= $info['val'] ?></h3></header>
                                     <div class="option__body">
                                         <ul class="option__list">
-                                            <li class="option__item">Штамповка - самый недорогой способ
-                                                получить множество деталей на 100% соответсвующих
-                                                чертежу
-                                            </li>
-                                            <li class="option__item">Долговечность изделий</li>
-                                            <li class="option__item">Высокая скорость, большие объемы
-                                            </li>
+                                            <?php
+                                            if (substr($info['description'], -1) == '.') {
+                                                $info['description'] = substr_replace($info['description'], "", -1);
+                                            }
+                                                $description = explode('.', $info['description']);
+                                            foreach ($description as $item):
+                                            ?>
+                                            <li class="option__item"><?= $item ?></li>
+                                            <?php endforeach; ?>
                                         </ul>
                                     </div>
                                 </article>
                             </li>
-                            <li class="options__item col-4">
-                                <article class="option">
-                                    <header class="option__header"><img class="option__icon"
-                                                                        src="<?= Yii::getAlias('@web') ?>/img/option-2.svg" alt>
-                                        <h3 class="option__title">Когда вам нужна штамповка</h3>
-                                    </header>
-                                    <div class="option__body">
-                                        <ul class="option__list">
-                                            <li class="option__item">Нужно быстро сделать много деталей
-                                                по чертежам
-                                            </li>
-                                            <li class="option__item">У вас есть чертежи</li>
-                                            <li class="option__item">Толщина детали в широкой части не
-                                                более 5 мм
-                                            </li>
-                                            <li class="option__item">Вам нужны детали сложных форм с
-                                                высокой точностью размеров
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </article>
-                            </li>
-                            <li class="options__item col-4">
-                                <article class="option">
-                                    <header class="option__header"><img class="option__icon"
-                                                                        src="<?= Yii::getAlias('@web') ?>/img/option-3.svg" alt>
-                                        <h3 class="option__title">Наше оборудование</h3></header>
-                                    <div class="option__body">
-                                        <ul class="option__list">
-                                            <li class="option__item">Пресса кривошипные с усилием от 6
-                                                до 100 тонн
-                                            </li>
-                                            <li class="option__item">Пресс ножницы комбинированные</li>
-                                            <li class="option__item">Ножницы гильотинные до 12 мм</li>
-                                        </ul>
-                                    </div>
-                                </article>
-                            </li>
+                            <?php endforeach; endif; ?>
+<!--                            <li class="options__item col-4">-->
+<!--                                <article class="option">-->
+<!--                                    <header class="option__header"><img class="option__icon"-->
+<!--                                                                        src="--><?//= Yii::getAlias('@web') ?><!--/img/option-2.svg" alt>-->
+<!--                                        <h3 class="option__title">Когда вам нужна штамповка</h3>-->
+<!--                                    </header>-->
+<!--                                    <div class="option__body">-->
+<!--                                        <ul class="option__list">-->
+<!--                                            <li class="option__item">Нужно быстро сделать много деталей-->
+<!--                                                по чертежам-->
+<!--                                            </li>-->
+<!--                                            <li class="option__item">У вас есть чертежи</li>-->
+<!--                                            <li class="option__item">Толщина детали в широкой части не-->
+<!--                                                более 5 мм-->
+<!--                                            </li>-->
+<!--                                            <li class="option__item">Вам нужны детали сложных форм с-->
+<!--                                                высокой точностью размеров-->
+<!--                                            </li>-->
+<!--                                        </ul>-->
+<!--                                    </div>-->
+<!--                                </article>-->
+<!--                            </li>-->
+<!--                            <li class="options__item col-4">-->
+<!--                                <article class="option">-->
+<!--                                    <header class="option__header"><img class="option__icon"-->
+<!--                                                                        src="--><?//= Yii::getAlias('@web') ?><!--/img/option-3.svg" alt>-->
+<!--                                        <h3 class="option__title">Наше оборудование</h3></header>-->
+<!--                                    <div class="option__body">-->
+<!--                                        <ul class="option__list">-->
+<!--                                            <li class="option__item">Пресса кривошипные с усилием от 6-->
+<!--                                                до 100 тонн-->
+<!--                                            </li>-->
+<!--                                            <li class="option__item">Пресс ножницы комбинированные</li>-->
+<!--                                            <li class="option__item">Ножницы гильотинные до 12 мм</li>-->
+<!--                                        </ul>-->
+<!--                                    </div>-->
+<!--                                </article>-->
+<!--                            </li>-->
                         </ul>
                     </div>
                 </div>
