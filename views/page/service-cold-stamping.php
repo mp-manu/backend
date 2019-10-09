@@ -7,7 +7,8 @@
  */
 
 $this->title = 'Холодная штамповка';
-echo $this->render('/page/banners/service-cold-stamping');
+
+echo $this->render('/page/banners/service-cold-stamping', ['service' => $service]);
 ?>
 
 <div class="content__body">

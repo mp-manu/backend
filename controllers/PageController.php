@@ -2,6 +2,11 @@
 
 namespace app\controllers;
 
+use app\modules\admin\models\AnswerQuestions;
+use app\modules\admin\models\ServiceInfo;
+use app\modules\admin\models\Services;
+use app\modules\admin\models\WorkProccess;
+use app\modules\admin\models\WorkResults;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -57,8 +62,24 @@ class PageController extends Controller
 
     public function actionServiceColdStamping()
     {
+        $questionModel = new AnswerQuestions();
 
-        return $this->render('service-cold-stamping');
+        $service = Services::find()->where(['id' => 1, 'status' => 1])->asArray()->one();
+        $serviceInfo = ServiceInfo::find()->where(['service_id' => $service['id'], 'status' => 1])->all();
+        $answerQuestions = AnswerQuestions::find()->where(['service_id' => $service['id'], 'status' => 1, 'type' => 1])->all();
+        $workProccess = WorkProccess::find()->where(['service_id' => $service['id'], 'status' => 1])->all();
+        $workResults = WorkResults::find()->where(['status' => 1])->all();
+
+
+
+        return $this->render('service-cold-stamping', [
+            'service' => $service,
+            'serviceInfo' => $serviceInfo,
+            'answerQuestions' => $answerQuestions,
+            'workProccess' => $workProccess,
+            'workResults' => $workResults,
+            'questionModel' => $questionModel,
+        ]);
     }
 
     public function actionServiceMetalBending()

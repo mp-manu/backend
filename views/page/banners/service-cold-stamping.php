@@ -6,41 +6,42 @@
  * Time: 21:55
  */
 ?>
-<div class="content__headline">
-    <header class="headline has-cover">
-        <div class="headline__cover" style="background-image: url(/img/service-cover.jpg)"></div>
-        <div class="container">
-            <div class="grid is-row">
-                <div class="col-8">
-                    <div class="headline__body">
-                        <div class="headline__breadcrumb">
-                            <ul class="breadcrumb">
-                                <li class="breadcrumb__item"><a class="breadcrumb__link"
-                                                                href="/index.html" title="Главная">Главная</a>
-                                </li>
-                                <li class="breadcrumb__item"><a class="breadcrumb__link"
-                                                                href="/services.html" title="Услуги">Услуги</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <h1 class="headline__title title">Холодная штамповка</h1>
-                        <div class="headline__list">
-                            <ul class="list is-light">
-                                <li class="list__item">Холодная штамповка позволяет получить под
-                                    давлением без нагрева разнопрофильные изделия.
-                                </li>
-                                <li class="list__item">Производство очень эффективно, так как детали
-                                    почти не требуют дополнительной обработки и отличаются замечательным
-                                    внешним видом.
-                                </li>
-                                <li class="list__item">Само получение происходит в специальном
-                                    инструменте - штампе.
-                                </li>
-                            </ul>
+<?php if (!empty($service)): ?>
+    <div class="content__headline">
+        <header class="headline has-cover">
+            <div class="headline__cover" style="background-image: url(/img/services/<?= $service['img'] ?>)"></div>
+            <div class="container">
+                <div class="grid is-row">
+                    <div class="col-8">
+                        <div class="headline__body">
+                            <div class="headline__breadcrumb">
+                                <ul class="breadcrumb">
+                                    <li class="breadcrumb__item"><a class="breadcrumb__link"
+                                                                    href="/" title="Главная">Главная</a>
+                                    </li>
+                                    <li class="breadcrumb__item"><a class="breadcrumb__link"
+                                                                    href="#" title="Услуги">Услуги</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <h1 class="headline__title title"><?= $service['name'] ?></h1>
+                            <div class="headline__list">
+                                <ul class="list is-light">
+                                    <?php
+                                    if (substr($service['description'], -1) == '.') {
+                                        $service['description'] = substr_replace($service['description'], "", -1);
+                                    }
+                                    $description = explode('.', $service['description']);
+                                    if (!empty($description)):
+                                        foreach ($description as $item): ?>
+                                            <li class="list__item"><?= $item ?></li>
+                                        <?php  endforeach; endif; ?>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </header>
-</div>
+        </header>
+    </div>
+<?php endif; ?>
