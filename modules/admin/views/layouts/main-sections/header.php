@@ -13,7 +13,7 @@
     <div class="page-header-inner ">
         <!-- logo start -->
         <div class="page-logo">
-            <a href="index-2.html">
+            <a href="/">
                 <span class="logo-icon material-icons fa-rotate-20">star</span>
                 <span class="logo-default">ТехАрсенал</span> </a>
         </div>

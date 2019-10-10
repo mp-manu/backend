@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Requisites;
 use app\modules\admin\models\AnswerQuestions;
 use app\modules\admin\models\PriceList;
 use app\modules\admin\models\ServiceInfo;
@@ -122,14 +123,10 @@ class PageController extends Controller
 
     public function actionContact()
     {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
+        $reqvisit = Requisites::find()->where(['status' => 1])->asArray()->one();
 
-            return $this->refresh();
-        }
         return $this->render('contact', [
-            'model' => $model,
+            'reqvisit' => $reqvisit
         ]);
     }
 

@@ -8,6 +8,7 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\Requisites;
 use app\modules\admin\models\AnswerQuestions;
 use app\modules\admin\models\FrontMenu;
 use app\modules\admin\models\Services;
@@ -50,6 +51,10 @@ class EditableController extends Controller
             'front-menu-access' => [
                 'class' => EditableColumnAction::classname(),
                 'modelClass' => FrontMenu::className(),
+            ],
+            'requisites-status' => [
+                'class' => EditableColumnAction::classname(),
+                'modelClass' => Requisites::className(),
             ],
 
         ];

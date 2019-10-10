@@ -18,7 +18,7 @@ class RequisitesSearch extends Requisites
     {
         return [
             [['id'], 'integer'],
-            [['legal_address', 'mailing_address', 'inn', 'kpp', 'rs', 'ks', 'okpo'], 'safe'],
+            [['legal_address', 'mailing_address', 'inn', 'kpp', 'rs', 'ks', 'okpo', 'status'], 'safe'],
         ];
     }
 

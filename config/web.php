@@ -39,6 +39,9 @@ $config = [
             // for the mailer to send real emails.
             'useFileTransport' => true,
         ],
+        'settings' => [
+            'class' => 'yii2mod\settings\components\Settings',
+        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -62,6 +65,10 @@ $config = [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@app/messages',
                 ],
+                'yii2mod.settings' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@yii2mod/settings/messages',
+                ],
             ],
         ],
 
@@ -80,6 +87,10 @@ $config = [
         ],
         'gridview' => [
             'class' => 'kartik\grid\Module'],
+        'settings' => [
+            'class' => 'yii2mod\settings\Module',
+            'layout' => '@app/modules/admin/views/layouts/main'
+        ],
     ],
     'params' => $params,
 ];

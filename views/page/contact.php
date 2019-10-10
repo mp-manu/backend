@@ -121,39 +121,33 @@ $this->title = 'Контакты';
                                         <dl class="datalist">
                                             <div class="datalist__row">
                                                 <dt class="datalist__key">Юридический адрес</dt>
-                                                <dd class="datalist__value">Смоленск, дер. Тепличный
-                                                    Комбинат №1
+                                                <dd class="datalist__value"><?= $reqvisit['legal_address'] ?>
                                                 </dd>
                                             </div>
                                             <div class="datalist__row">
                                                 <dt class="datalist__key">Почтовый адрес</dt>
-                                                <dd class="datalist__value">Смоленск, дер. Тепличный
-                                                    Комбинат №1
+                                                <dd class="datalist__value"><?= $reqvisit['mailing_address'] ?>
                                                 </dd>
                                             </div>
                                             <div class="datalist__row">
                                                 <dt class="datalist__key">ИНН</dt>
-                                                <dd class="datalist__value">7712345678</dd>
+                                                <dd class="datalist__value"><?= $reqvisit['inn'] ?></dd>
                                             </div>
                                             <div class="datalist__row">
                                                 <dt class="datalist__key">КПП</dt>
-                                                <dd class="datalist__value">779101001</dd>
+                                                <dd class="datalist__value"><?= $reqvisit['kpp'] ?></dd>
                                             </div>
                                             <div class="datalist__row">
                                                 <dt class="datalist__key">Р/С</dt>
-                                                <dd class="datalist__value">40702810123450101230</dd>
+                                                <dd class="datalist__value"><?= $reqvisit['rs'] ?></dd>
                                             </div>
                                             <div class="datalist__row">
                                                 <dt class="datalist__key">К/С</dt>
-                                                <dd class="datalist__value">30101234500000000225</dd>
+                                                <dd class="datalist__value"><?= $reqvisit['ks'] ?></dd>
                                             </div>
                                             <div class="datalist__row">
                                                 <dt class="datalist__key">ОКПО</dt>
-                                                <dd class="datalist__value">7712345678</dd>
-                                            </div>
-                                            <div class="datalist__row">
-                                                <dt class="datalist__key">КПП</dt>
-                                                <dd class="datalist__value">779101001</dd>
+                                                <dd class="datalist__value"><?= $reqvisit['okpo'] ?></dd>
                                             </div>
                                         </dl>
                                     </div>

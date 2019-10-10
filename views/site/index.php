@@ -10,26 +10,22 @@ echo $this->render('/page/banners/slider', ['slider' => $slider]);
             <div class="intro">
                 <div class="grid is-row">
                     <div class="col-3">
-                        <div class="intro__label"><i>Теx</i>Арсенал</div>
+                        <div class="intro__label"><?= Yii::$app->settings->get('Сайт', 'имя') ?></div>
                     </div>
                     <div class="col-9">
-                        <div class="intro__body"><p class="intro__text">Производим методом холодной
-                                штамповки более 2000 видов стандартных деталей, разрабатываем уникальные
-                                формы на заказ для серийной штамповки.</p>
+                        <div class="intro__body"><p class="intro__text"><?= Yii::$app->settings->get('Компания', 'деятельность') ?></p>
                             <div class="intro__opinion">
                                 <article class="opinion">
                                     <figure class="opinion__cover"><img class="opinion__image"
                                                                         src="/img/person.jpg"
-                                                                        alt="Дмитрий Соляник"></figure>
-                                    <div class="opinion__body"><p class="opinion__text">Самая трудоёмкая
-                                            часть производства на заказ - создание оснастки (формы).
-                                            Необходимо точно сделать компьютерный расчет формы, а затем
-                                            выполнить ее в материале. Стоимость изготовления уникальной
-                                            оснастки от 100 000 руб. Затем переходим к серийной
-                                            штамповке.</p>
+                                                                        alt="<?= Yii::$app->settings->get('Сотрдник', 'руков_цеха_штамп') ?>"></figure>
+                                    <div class="opinion__body">
+                                        <p class="opinion__text">
+                                            <?= Yii::$app->settings->get('Текст', 'слова_руков_цеха_штамп') ?>
+                                        </p>
                                         <header class="opinion__header"><h3 class="opinion__name">
-                                                Дмитрий Соляник</h3>
-                                            <p class="opinion__position">Руководитель цеха штамповки</p>
+                                                <?= Yii::$app->settings->get('Сотрудник', 'руков_цеха_штамп') ?></h3>
+                                            <p class="opinion__position"><?= Yii::$app->settings->get('Должность', 'руков_цеха_штамп') ?></p>
                                         </header>
                                     </div>
                                 </article>
@@ -51,13 +47,11 @@ echo $this->render('/page/banners/slider', ['slider' => $slider]);
                         <div class="grid is-row is-middle">
                             <div class="col-4">
                                 <div class="service-showcase__header"><h2
-                                            class="service-showcase__title title">Холодная штамповка</h2>
-                                    <p class="service-showcase__descr">Производим детали методом
-                                        холодной штамповки по чертежам. Доводим оснастку до идеальной
-                                        формы и соответствия чертежу.</p>
+                                            class="service-showcase__title title"><?= Yii::$app->settings->get('Услуги', 'холодная_штамповка') ?></h2>
+                                    <p class="service-showcase__descr"><?= Yii::$app->settings->get('Услуги', 'инфо_об_холод_штамп') ?></p>
                                     <p class="service-showcase__warn">Минимальный заказ — 100 шт</p>
                                     <div class="service-showcase__link"><a class="link"
-                                                                           href="/service.html">
+                                                                           href="/page/service-cold-stamping">
                                             <div class="link__inner"><span class="link__text">Перейти к услуге</span>
                                                 <div class="link__arrow"><span
                                                             class="arrow is-small is-dark no-hover"><svg

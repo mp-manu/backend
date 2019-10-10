@@ -5,10 +5,10 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\WorkResults */
 
-$this->title = 'Update Work Results: ' . $model->name;
+$this->title = 'Обновить результат работы: ' . $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Work Results', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Обновить';
 ?>
 <div class="work-results-update">
 

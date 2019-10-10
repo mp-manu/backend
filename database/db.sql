@@ -65,15 +65,15 @@ CREATE TABLE `back_menu` (
   `arrow_tag` varchar(255) DEFAULT NULL,
   `position` enum('left','right','top') DEFAULT NULL,
   PRIMARY KEY (`nodeid`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 /*Data for the table `back_menu` */
 
 insert  into `back_menu`(`nodeid`,`parentnodeid`,`nodeshortname`,`nodename`,`nodeurl`,`userstatus`,`nodeaccess`,`nodestatus`,`nodeorder`,`nodefile`,`nodeicon`,`ishasdivider`,`hasnotify`,`notifyscript`,`isforguest`,`arrow_tag`,`position`) values 
 (1,0,'Главная','Главная','/admin','ALL',1,1,1,NULL,'dashboard','no','no','','no','','left'),
-(2,0,'Управление элементами','Управление элементами','#','ALL',1,1,1,NULL,'create','no','no','','no','arrow','left'),
-(3,0,'Страницы','Страницы','#','ALL',1,1,1,NULL,'dvr','no','no','','no','arrow','left'),
-(4,0,'Выход','Выход','/admin/main/logout','ALL',1,1,1,NULL,'directions_walk','no','no','','no',NULL,'left'),
+(2,0,'Управление элементами','Управление элементами','#','ALL',1,1,2,NULL,'create','no','no','','no','arrow','left'),
+(3,0,'Страницы','Страницы','#','ALL',1,1,3,NULL,'dvr','no','no','','no','arrow','left'),
+(4,0,'Выход','Выход','/admin/main/logout','ALL',1,1,100,NULL,'directions_walk','no','no','','no',NULL,'left'),
 (5,2,'Меню','Меню','/admin/front-menu/index','ALL',1,1,1,NULL,NULL,'no','no','','no',NULL,'left'),
 (6,2,'Слайдер','Слайдер','/admin/slider/index','ALL',1,1,1,NULL,NULL,'no','no','','no',NULL,'left'),
 (7,3,'Услуги','Услуги','#','ALL',1,1,1,NULL,NULL,'no','no','','yes','arrow','left'),
@@ -87,7 +87,72 @@ insert  into `back_menu`(`nodeid`,`parentnodeid`,`nodeshortname`,`nodename`,`nod
 (15,3,'О компании','О компании','#','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,'left'),
 (16,3,'Страница СПАСИБО','Страница СПАСИБО','#','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,'left'),
 (17,3,'Страница 404','Страница 404','#','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,'left'),
-(18,7,'Процесс работ','Процесс работ','/admin/work-proccess','ALL',1,1,2,NULL,NULL,'no','no','','yes',NULL,'left');
+(18,7,'Процесс работ','Процесс работ','/admin/work-proccess','ALL',1,1,2,NULL,NULL,'no','no','','yes',NULL,'left'),
+(19,0,'Организация','Организация','#','ALL',1,1,4,NULL,'location_city','no','no','','yes','arrow','left'),
+(20,19,'Реквизиты','Реквизиты','/admin/requisites','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,'left'),
+(21,19,'Контакты','Контакты','/admin/requisites','ALL',0,1,1,NULL,NULL,'no','no','','yes',NULL,'left'),
+(22,2,'Настройки и тексты','Настройки и тексты','/settings','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,'left');
+
+/*Table structure for table `call_request` */
+
+DROP TABLE IF EXISTS `call_request`;
+
+CREATE TABLE `call_request` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) DEFAULT NULL,
+  `status` tinyint(1) DEFAULT NULL COMMENT '1-active, 2-confirm, 0-denied',
+  `created_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+/*Data for the table `call_request` */
+
+insert  into `call_request`(`id`,`customer_id`,`status`,`created_at`) values 
+(1,1,1,'2019-10-10 12:15:03'),
+(2,2,1,'2019-10-10 12:15:41');
+
+/*Table structure for table `contact` */
+
+DROP TABLE IF EXISTS `contact`;
+
+CREATE TABLE `contact` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) NOT NULL,
+  `message` text NOT NULL,
+  `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '2-confirmed, 1-active, 0-inactive,',
+  `created_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+/*Data for the table `contact` */
+
+insert  into `contact`(`id`,`customer_id`,`message`,`status`,`created_at`) values 
+(1,4,'my message',1,'2019-10-10 13:07:47'),
+(2,5,'mmm',1,'2019-10-10 14:41:24');
+
+/*Table structure for table `customers` */
+
+DROP TABLE IF EXISTS `customers`;
+
+CREATE TABLE `customers` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(500) DEFAULT NULL,
+  `phone_number` varchar(18) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `organization` varchar(500) DEFAULT NULL,
+  `status` tinyint(2) DEFAULT NULL COMMENT '1-active, 0-inactive',
+  `created_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+/*Data for the table `customers` */
+
+insert  into `customers`(`id`,`name`,`phone_number`,`email`,`organization`,`status`,`created_at`) values 
+(1,'M','+7 (999) 999 99 99',NULL,NULL,1,'2019-10-10 12:15:03'),
+(2,'+7 (992) 700 10 11','+7 (999) 999 99 99',NULL,NULL,1,'2019-10-10 12:15:41'),
+(3,'Manuchehr','+7 (999) 999 99 99',NULL,NULL,1,'2019-10-10 12:16:42'),
+(4,'Manuchehr','+7 (922) 222 22 22','manu6699@mail.ru','TexApceNaL',1,'2019-10-10 13:07:47'),
+(5,'M','+7 (888) 585 85 85','manu6699@mail.ru','ppp',1,'2019-10-10 14:41:24');
 
 /*Table structure for table `front_menu` */
 
@@ -140,7 +205,7 @@ CREATE TABLE `login_details` (
   PRIMARY KEY (`login_detail_id`),
   KEY `login_user_id` (`login_user_id`),
   CONSTRAINT `login_details_ibfk_1` FOREIGN KEY (`login_user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 /*Data for the table `login_details` */
 
@@ -168,7 +233,8 @@ insert  into `login_details`(`login_detail_id`,`login_user_id`,`login_status`,`l
 (21,1,1,'2019-10-09 00:56:06',NULL,'127.0.0.1'),
 (22,1,1,'2019-10-09 08:09:30',NULL,'127.0.0.1'),
 (23,1,1,'2019-10-09 08:09:49',NULL,'127.0.0.1'),
-(24,1,1,'2019-10-09 15:14:33',NULL,'127.0.0.1');
+(24,1,1,'2019-10-09 15:14:33',NULL,'127.0.0.1'),
+(25,1,1,'2019-10-10 12:33:04',NULL,'127.0.0.1');
 
 /*Table structure for table `migration` */
 
@@ -183,7 +249,29 @@ CREATE TABLE `migration` (
 /*Data for the table `migration` */
 
 insert  into `migration`(`version`,`apply_time`) values 
-('m000000_000000_base',1570448170);
+('m000000_000000_base',1570448170),
+('m150227_114524_init',1570695247),
+('m161109_104201_rename_setting_table',1570695247),
+('m170323_102933_add_description_column_to_setting_table',1570695247),
+('m170413_125133_rename_date_columns',1570695247);
+
+/*Table structure for table `order_by_drawing` */
+
+DROP TABLE IF EXISTS `order_by_drawing`;
+
+CREATE TABLE `order_by_drawing` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `customer_id` int(11) NOT NULL,
+  `file` varchar(500) DEFAULT NULL,
+  `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '1-active, 2-confirm, 0-denied',
+  `created_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+/*Data for the table `order_by_drawing` */
+
+insert  into `order_by_drawing`(`id`,`customer_id`,`file`,`status`,`created_at`) values 
+(1,3,'detail.png',1,'2019-10-10 12:16:42');
 
 /*Table structure for table `pages` */
 
@@ -234,7 +322,7 @@ insert  into `price_list`(`id`,`service_id`,`signature`,`depth`,`length`,`deadli
 (2,1,'Листы 20 000 - 50 000 м², 5 мм толщина',NULL,NULL,'76-90','Листы 20 000 - 50 000 м², 5 мм толщина',650000.00,1,1),
 (3,1,'Листы 10 000 - 20 000 м², 5 мм толщина',NULL,NULL,'76-90','Листы 10 000 - 20 000 м², 5 мм толщина',450000.00,1,1),
 (4,1,'Листы до 10 000 м², 5 мм толщина',NULL,NULL,'76-90','Листы до 10 000 м², 5 мм толщина',450000.00,1,1),
-(5,3,'',1.00,100,'','',10.00,2,1),
+(5,3,'',1.00,100,'','',100.00,2,1),
 (6,3,'',2.00,100,'','',10.00,2,1),
 (7,3,'',3.00,100,'','',10.00,2,1),
 (8,3,'',4.00,100,'','',12.00,2,1),
@@ -255,69 +343,91 @@ insert  into `price_list`(`id`,`service_id`,`signature`,`depth`,`length`,`deadli
 (23,3,NULL,5.00,500,NULL,NULL,14.00,2,1),
 (24,3,NULL,5.50,500,NULL,NULL,14.00,2,1),
 (25,3,NULL,6.00,500,NULL,NULL,16.00,2,1),
-(26,4,NULL,1.00,100,NULL,NULL,10.00,NULL,1),
-(27,4,NULL,2.00,100,NULL,NULL,10.00,NULL,1),
-(28,4,NULL,3.00,100,NULL,NULL,10.00,NULL,1),
-(29,4,NULL,4.00,100,NULL,NULL,12.00,NULL,1),
-(30,4,NULL,5.00,100,NULL,NULL,12.00,NULL,1),
-(31,4,NULL,5.50,100,NULL,NULL,13.00,NULL,1),
-(32,4,NULL,6.00,100,NULL,NULL,12.00,NULL,1),
-(33,4,NULL,1.00,200,NULL,NULL,12.00,NULL,1),
-(34,4,NULL,2.00,200,NULL,NULL,12.00,NULL,1),
-(35,4,NULL,3.00,200,NULL,NULL,12.00,NULL,1),
-(36,4,NULL,4.00,200,NULL,NULL,14.00,NULL,1),
-(37,4,NULL,5.00,200,NULL,NULL,14.00,NULL,1),
-(38,4,NULL,5.50,200,NULL,NULL,14.00,NULL,1),
-(39,4,NULL,6.00,200,NULL,NULL,16.00,NULL,1),
-(40,4,NULL,1.00,500,NULL,NULL,12.00,NULL,1),
-(41,4,NULL,2.00,500,NULL,NULL,12.00,NULL,1),
-(42,4,NULL,3.00,500,NULL,NULL,12.00,NULL,1),
-(43,4,NULL,4.00,500,NULL,NULL,14.00,NULL,1),
-(44,4,NULL,5.00,500,NULL,NULL,14.00,NULL,1),
-(45,4,NULL,5.50,500,NULL,NULL,14.00,NULL,1),
-(46,4,NULL,6.00,500,NULL,NULL,16.00,NULL,1),
-(57,5,NULL,1.00,100,NULL,NULL,10.00,NULL,1),
-(58,5,NULL,2.00,100,NULL,NULL,10.00,NULL,1),
-(59,5,NULL,3.00,100,NULL,NULL,10.00,NULL,1),
-(60,5,NULL,4.00,100,NULL,NULL,12.00,NULL,1),
-(61,5,NULL,5.00,100,NULL,NULL,12.00,NULL,1),
-(62,5,NULL,5.50,100,NULL,NULL,13.00,NULL,1),
-(63,5,NULL,6.00,100,NULL,NULL,12.00,NULL,1),
-(64,5,NULL,1.00,200,NULL,NULL,12.00,NULL,1),
-(65,5,NULL,2.00,200,NULL,NULL,12.00,NULL,1),
-(66,5,NULL,3.00,200,NULL,NULL,12.00,NULL,1),
-(67,5,NULL,4.00,200,NULL,NULL,14.00,NULL,1),
-(68,5,NULL,5.00,200,NULL,NULL,14.00,NULL,1),
-(69,5,NULL,5.50,200,NULL,NULL,14.00,NULL,1),
-(70,5,NULL,6.00,200,NULL,NULL,16.00,NULL,1),
-(71,5,NULL,1.00,500,NULL,NULL,12.00,NULL,1),
-(72,5,NULL,2.00,500,NULL,NULL,12.00,NULL,1),
-(73,5,NULL,3.00,500,NULL,NULL,12.00,NULL,1),
-(74,5,NULL,4.00,500,NULL,NULL,14.00,NULL,1),
-(75,5,NULL,5.00,500,NULL,NULL,14.00,NULL,1),
-(76,5,NULL,5.50,500,NULL,NULL,14.00,NULL,1),
-(77,5,NULL,6.00,500,NULL,NULL,16.00,NULL,1),
-(88,6,NULL,1.00,100,NULL,NULL,10.00,NULL,1),
-(89,6,NULL,2.00,100,NULL,NULL,10.00,NULL,1),
-(90,6,NULL,3.00,100,NULL,NULL,10.00,NULL,1),
-(91,6,NULL,4.00,100,NULL,NULL,12.00,NULL,1),
-(92,6,NULL,5.00,100,NULL,NULL,12.00,NULL,1),
-(93,6,NULL,5.50,100,NULL,NULL,13.00,NULL,1),
-(94,6,NULL,6.00,100,NULL,NULL,12.00,NULL,1),
-(95,6,NULL,1.00,200,NULL,NULL,12.00,NULL,1),
-(96,6,NULL,2.00,200,NULL,NULL,12.00,NULL,1),
-(97,6,NULL,3.00,200,NULL,NULL,12.00,NULL,1),
-(98,6,NULL,4.00,200,NULL,NULL,14.00,NULL,1),
-(99,6,NULL,5.00,200,NULL,NULL,14.00,NULL,1),
-(100,6,NULL,5.50,200,NULL,NULL,14.00,NULL,1),
-(101,6,NULL,6.00,200,NULL,NULL,16.00,NULL,1),
-(102,6,NULL,1.00,500,NULL,NULL,12.00,NULL,1),
-(103,6,NULL,2.00,500,NULL,NULL,12.00,NULL,1),
-(104,6,NULL,3.00,500,NULL,NULL,12.00,NULL,1),
-(105,6,NULL,4.00,500,NULL,NULL,14.00,NULL,1),
-(106,6,NULL,5.00,500,NULL,NULL,14.00,NULL,1),
-(107,6,NULL,5.50,500,NULL,NULL,14.00,NULL,1),
-(108,6,NULL,6.00,500,NULL,NULL,16.00,NULL,1);
+(26,4,NULL,1.00,100,NULL,NULL,22.00,2,1),
+(27,4,NULL,2.00,100,NULL,NULL,10.00,2,1),
+(28,4,NULL,3.00,100,NULL,NULL,10.00,2,1),
+(29,4,NULL,4.00,100,NULL,NULL,12.00,2,1),
+(30,4,NULL,5.00,100,NULL,NULL,12.00,2,1),
+(31,4,NULL,5.50,100,NULL,NULL,13.00,2,1),
+(32,4,NULL,6.00,100,NULL,NULL,12.00,2,1),
+(33,4,NULL,1.00,200,NULL,NULL,12.00,2,1),
+(34,4,NULL,2.00,200,NULL,NULL,12.00,2,1),
+(35,4,NULL,3.00,200,NULL,NULL,12.00,2,1),
+(36,4,NULL,4.00,200,NULL,NULL,14.00,2,1),
+(37,4,NULL,5.00,200,NULL,NULL,14.00,2,1),
+(38,4,NULL,5.50,200,NULL,NULL,14.00,2,1),
+(39,4,NULL,6.00,200,NULL,NULL,16.00,2,1),
+(40,4,NULL,1.00,500,NULL,NULL,12.00,2,1),
+(41,4,NULL,2.00,500,NULL,NULL,12.00,2,1),
+(42,4,NULL,3.00,500,NULL,NULL,12.00,2,1),
+(43,4,NULL,4.00,500,NULL,NULL,14.00,2,1),
+(44,4,NULL,5.00,500,NULL,NULL,14.00,2,1),
+(45,4,NULL,5.50,500,NULL,NULL,14.00,2,1),
+(46,4,NULL,6.00,500,NULL,NULL,16.00,2,1),
+(57,5,NULL,1.00,100,NULL,NULL,10.00,2,1),
+(58,5,NULL,2.00,100,NULL,NULL,10.00,2,1),
+(59,5,NULL,3.00,100,NULL,NULL,10.00,2,1),
+(60,5,NULL,4.00,100,NULL,NULL,12.00,2,1),
+(61,5,NULL,5.00,100,NULL,NULL,12.00,2,1),
+(62,5,NULL,5.50,100,NULL,NULL,13.00,2,1),
+(63,5,NULL,6.00,100,NULL,NULL,12.00,2,1),
+(64,5,NULL,1.00,200,NULL,NULL,12.00,2,1),
+(65,5,NULL,2.00,200,NULL,NULL,12.00,2,1),
+(66,5,NULL,3.00,200,NULL,NULL,12.00,2,1),
+(67,5,NULL,4.00,200,NULL,NULL,14.00,2,1),
+(68,5,NULL,5.00,200,NULL,NULL,14.00,2,1),
+(69,5,NULL,5.50,200,NULL,NULL,14.00,2,1),
+(70,5,NULL,6.00,200,NULL,NULL,16.00,2,1),
+(71,5,NULL,1.00,500,NULL,NULL,12.00,2,1),
+(72,5,NULL,2.00,500,NULL,NULL,12.00,2,1),
+(73,5,NULL,3.00,500,NULL,NULL,12.00,2,1),
+(74,5,NULL,4.00,500,NULL,NULL,14.00,2,1),
+(75,5,NULL,5.00,500,NULL,NULL,14.00,2,1),
+(76,5,NULL,5.50,500,NULL,NULL,14.00,2,1),
+(77,5,NULL,6.00,500,NULL,NULL,16.00,2,1),
+(88,6,NULL,1.00,100,NULL,NULL,10.00,2,1),
+(89,6,NULL,2.00,100,NULL,NULL,10.00,2,1),
+(90,6,NULL,3.00,100,NULL,NULL,10.00,2,1),
+(91,6,NULL,4.00,100,NULL,NULL,12.00,2,1),
+(92,6,NULL,5.00,100,NULL,NULL,12.00,2,1),
+(93,6,NULL,5.50,100,NULL,NULL,13.00,2,1),
+(94,6,NULL,6.00,100,NULL,NULL,12.00,2,1),
+(95,6,NULL,1.00,200,NULL,NULL,12.00,2,1),
+(96,6,NULL,2.00,200,NULL,NULL,12.00,2,1),
+(97,6,NULL,3.00,200,NULL,NULL,12.00,2,1),
+(98,6,NULL,4.00,200,NULL,NULL,14.00,2,1),
+(99,6,NULL,5.00,200,NULL,NULL,14.00,2,1),
+(100,6,NULL,5.50,200,NULL,NULL,14.00,2,1),
+(101,6,NULL,6.00,200,NULL,NULL,16.00,2,1),
+(102,6,NULL,1.00,500,NULL,NULL,12.00,2,1),
+(103,6,NULL,2.00,500,NULL,NULL,12.00,2,1),
+(104,6,NULL,3.00,500,NULL,NULL,12.00,2,1),
+(105,6,NULL,4.00,500,NULL,NULL,14.00,2,1),
+(106,6,NULL,5.00,500,NULL,NULL,14.00,2,1),
+(107,6,NULL,5.50,500,NULL,NULL,14.00,2,1),
+(108,6,NULL,6.00,500,NULL,NULL,250.00,2,1);
+
+/*Table structure for table `requisites` */
+
+DROP TABLE IF EXISTS `requisites`;
+
+CREATE TABLE `requisites` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `legal_address` varchar(250) DEFAULT NULL,
+  `mailing_address` varchar(250) DEFAULT NULL,
+  `inn` varchar(12) DEFAULT NULL,
+  `kpp` varchar(12) DEFAULT NULL,
+  `rs` varchar(25) DEFAULT NULL,
+  `ks` varchar(25) DEFAULT NULL,
+  `okpo` varchar(12) DEFAULT NULL,
+  `status` tinyint(2) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+/*Data for the table `requisites` */
+
+insert  into `requisites`(`id`,`legal_address`,`mailing_address`,`inn`,`kpp`,`rs`,`ks`,`okpo`,`status`) values 
+(1,'Смоленск, дер. Тепличный Комбинат №1',' Смоленск, дер. Тепличный Комбинат №1',' 7712345678','301012345000','40702810123450101230','30101234500000000225','7712345678',1);
 
 /*Table structure for table `sections` */
 
@@ -388,24 +498,36 @@ insert  into `services`(`id`,`parent_id`,`name`,`alias`,`description`,`img`,`sta
 (8,0,'Порошковая покраска и цинкование','Порошковая покраска и цинкование','','',1),
 (9,0,'Сварочные работы','Сварочные работы','','',1);
 
-/*Table structure for table `settings` */
+/*Table structure for table `setting` */
 
-DROP TABLE IF EXISTS `settings`;
+DROP TABLE IF EXISTS `setting`;
 
-CREATE TABLE `settings` (
+CREATE TABLE `setting` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `site_name` varchar(25) NOT NULL,
-  `site_desciption` varchar(255) DEFAULT NULL,
-  `img-logo` varchar(500) NOT NULL,
-  `phone` varchar(25) NOT NULL,
-  `address` varchar(500) NOT NULL,
-  `director` varchar(500) DEFAULT NULL,
-  `copyright` varchar(500) NOT NULL,
-  `about` text,
+  `type` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
+  `section` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `key` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `value` text COLLATE utf8_unicode_ci NOT NULL,
+  `status` smallint(6) NOT NULL DEFAULT '1',
+  `description` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` int(11) NOT NULL,
+  `updated_at` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-/*Data for the table `settings` */
+/*Data for the table `setting` */
+
+insert  into `setting`(`id`,`type`,`section`,`key`,`value`,`status`,`description`,`created_at`,`updated_at`) values 
+(2,'string','Контакты','адресс','Смоленск, дер. Тепличный Комбинат №1',1,'адресс компании',1570700604,1570702057),
+(3,'string','Сайт','имя','<i>Тех</i>Арсенал',1,'имя сайта',1570701140,1570702031),
+(4,'string','Сайт','описание','Современный подход<br>к холодной штамповке',1,'коротко о сайте',1570702099,1570702099),
+(5,'string','Компания','тел','+7 (952) 687-58-04',1,'телефон компании',1570702305,1570702305),
+(6,'string','Компания','деятельность','Производим методом холодной штамповки \r\nболее 2000 видов стандартны деталей,\r\n разрабатываем уникальные формы на \r\nзаказ для серийной штамповки.',1,'главная страница - \r\nдеятельность компании',1570702648,1570704077),
+(7,'string','Сотрудник','руков_цеха_штамп','Дмитрий Соляник',1,'главная страница - \r\nРуководитель цеха штамповки',1570702781,1570704064),
+(8,'string','Текст','слова_руков_цеха_штамп','Самая трудоёмкая часть производства \r\nна заказ - создание оснастки (формы). \r\nНеобходимо точно сделать компьютерный \r\nрасчет формы, а затем выполнить ее в материале. \r\nСтоимость изготовления уникальной оснастки \r\nот 100 000 руб. Затем переходим к серийной штамповке.',1,'главная страница - \r\nСлова руководителя штамповки \r\nна главном странице',1570702966,1570704054),
+(9,'string','Должность','руков_цеха_штамп','Руководитель цеха штамповки',1,'главная страница - Руководитель \r\nцеха штамповки',1570703345,1570704043),
+(10,'string','Услуги','холодная_штамповка','Холодная штамповка',1,'главная страница - имя услуги',1570703729,1570704026),
+(11,'string','Услуги','инфо_об_холод_штамп','Производим детали методом холодной \r\nштамповки по чертежам. \r\nДоводим оснастку до идеальной \r\nформы и соответствия чертежу.',1,'главная страница - информация\r\nоб услуги хол. штамповки',1570704011,1570704017);
 
 /*Table structure for table `slider` */
 
@@ -428,7 +550,7 @@ CREATE TABLE `slider` (
 /*Data for the table `slider` */
 
 insert  into `slider`(`id`,`title`,`description`,`img_url`,`slide_cover`,`is_has_btn`,`btn_title`,`btn_link`,`order`,`access`) values 
-(1,'Тест ','тест','slide-cover_1.jpg','slide-cover-img-1.png',NULL,NULL,NULL,0,1);
+(1,'Тест ','тест','slide-cover_1.jpg','slide-cover-img-1.png',1,'Заказать по чертежу',NULL,0,1);
 
 /*Table structure for table `user` */
 
@@ -460,7 +582,7 @@ CREATE TABLE `user` (
 /*Data for the table `user` */
 
 insert  into `user`(`user_id`,`username`,`user_password`,`email`,`user_type`,`is_block`,`avatar`,`created_at`,`created_by`,`updated_at`,`updated_by`,`secret_key`,`auth_key`,`session_id`) values 
-(1,'admin','abcbbfaea4e618fa7f88cb6b47c6969c','admin@polytech.tj','A',0,'prof1.jpg','2017-10-23 11:52:23',1,'2015-05-27 15:56:35',1,NULL,NULL,'3h4nq6allfvle3t0jcvgdh5dqvr7hnih'),
+(1,'admin','abcbbfaea4e618fa7f88cb6b47c6969c','admin@polytech.tj','A',0,'prof1.jpg','2017-10-23 11:52:23',1,'2015-05-27 15:56:35',1,NULL,NULL,'ch0vblsusbe4g9muflbej29ihf1sole0'),
 (3,'admin2','4297f44b13955235245b2497399d7a93','manu6699@mail.ru','A',0,NULL,'2018-07-30 14:22:25',1,'2015-05-27 15:56:35',1,NULL,NULL,''),
 (15,'admin3','4baee7411b65cadc2c33bdc3a3155e06','admin@mail.ru','A',0,NULL,'2015-05-27 15:56:35',1,'2015-05-27 15:56:35',1,NULL,NULL,''),
 (16,'admin5','4baee7411b65cadc2c33bdc3a3155e06','admin5@mail.ru','U',0,NULL,'2015-05-27 15:56:35',1,'2015-05-27 15:56:35',1,NULL,NULL,''),

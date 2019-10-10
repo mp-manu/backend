@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Requisites */
 
-$this->title = 'Create Requisites';
+$this->title = 'Добавить реквизит';
 $this->params['breadcrumbs'][] = ['label' => 'Requisites', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

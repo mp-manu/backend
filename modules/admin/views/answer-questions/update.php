@@ -8,7 +8,7 @@ use yii\helpers\Html;
 $this->title = 'Обновить вопрос-ответ: ' . $model->question;
 $this->params['breadcrumbs'][] = ['label' => 'Answer Questions', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = 'Обновить';
 ?>
 <div class="answer-questions-update">
 

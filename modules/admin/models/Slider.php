@@ -53,15 +53,15 @@ class Slider extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'title' => 'Title',
-            'description' => 'Description',
-            'img_url' => 'Img Url',
-            'slide_cover' => 'Slide Cover',
-            'is_has_btn' => 'Is Has Btn',
-            'btn_title' => 'Btn Title',
-            'btn_link' => 'Btn Link',
-            'order' => 'Order',
-            'access' => 'Access',
+            'title' => 'Заголовка',
+            'description' => 'Описание',
+            'img_url' => 'Картинка слайда',
+            'slide_cover' => 'Фото над слайда',
+            'is_has_btn' => 'Кнопка',
+            'btn_title' => 'Текст кнопки',
+            'btn_link' => 'Ссылка',
+            'order' => 'Сортировка',
+            'access' => 'Доступ',
         ];
     }
 

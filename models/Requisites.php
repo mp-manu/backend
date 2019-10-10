@@ -15,6 +15,7 @@ use Yii;
  * @property string $rs
  * @property string $ks
  * @property string $okpo
+ * @property string $status
  */
 class Requisites extends \yii\db\ActiveRecord
 {
@@ -35,6 +36,7 @@ class Requisites extends \yii\db\ActiveRecord
             [['legal_address', 'mailing_address'], 'string', 'max' => 250],
             [['inn', 'kpp', 'okpo'], 'string', 'max' => 12],
             [['rs', 'ks'], 'string', 'max' => 25],
+            [['status'], 'integer'],
         ];
     }
 
@@ -45,13 +47,14 @@ class Requisites extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'legal_address' => 'Legal Address',
-            'mailing_address' => 'Mailing Address',
-            'inn' => 'Inn',
-            'kpp' => 'Kpp',
-            'rs' => 'Rs',
-            'ks' => 'Ks',
-            'okpo' => 'Okpo',
+            'legal_address' => 'Юридический адрес',
+            'mailing_address' => 'Почтовый адрес',
+            'inn' => 'ИНН',
+            'kpp' => 'КПП',
+            'rs' => 'Р/С',
+            'ks' => 'К/С',
+            'okpo' => 'ОКПО',
+            'status' => 'Доступ',
         ];
     }
 }
