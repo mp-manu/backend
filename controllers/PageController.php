@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\modules\admin\models\AnswerQuestions;
+use app\modules\admin\models\PriceList;
 use app\modules\admin\models\ServiceInfo;
 use app\modules\admin\models\Services;
 use app\modules\admin\models\WorkProccess;
@@ -62,15 +63,13 @@ class PageController extends Controller
 
     public function actionServiceColdStamping()
     {
-        $questionModel = new AnswerQuestions();
 
         $service = Services::find()->where(['id' => 1, 'status' => 1])->asArray()->one();
         $serviceInfo = ServiceInfo::find()->where(['service_id' => $service['id'], 'status' => 1])->limit('3')->all();
         $answerQuestions = AnswerQuestions::find()->where(['service_id' => $service['id'], 'status' => 1, 'type' => 1])->all();
         $workProccess = WorkProccess::find()->where(['service_id' => $service['id'], 'status' => 1])->all();
         $workResults = WorkResults::find()->where(['status' => 1])->all();
-
-
+        $priceList = PriceList::find()->where(['service_id' => $service['id'], 'status' => 1])->all();
 
         return $this->render('service-cold-stamping', [
             'service' => $service,
@@ -78,14 +77,46 @@ class PageController extends Controller
             'answerQuestions' => $answerQuestions,
             'workProccess' => $workProccess,
             'workResults' => $workResults,
-            'questionModel' => $questionModel,
+            'priceList' => $priceList,
         ]);
     }
 
     public function actionServiceMetalBending()
     {
+        $service = Services::find()->where(['id' => 2, 'status' => 1])->asArray()->one();
 
-        return $this->render('service-metal-bending');
+        $subServices = Services::find()
+            ->select('s.*, si.key, si.val, si.description as desc, si.img')
+            ->from('services s')
+            ->leftJoin('service_info si', 's.id=si.service_id')
+            ->where(['parent_id' => $service['id'], 'si.key' => 'equipment', 's.status' => 1, 'si.status' => 1])
+            ->asArray()->all();
+
+        $priceList = PriceList::find()
+            ->select('p.*, s.name, s.id as sid')
+            ->from('price_list p')
+            ->leftJoin('services s', 'p.service_id=s.id')
+            ->where(['p.type' => 2, 'p.status' => 1, 'p.status' => 1])
+            ->asArray()->all();
+        $data = array();
+        $activeServicesId = array();
+        foreach ($priceList as $list){
+            $activeServicesId[$list['sid']]=$list['sid'];
+            $data['name'][$list['service_id']] = $list['name'];
+            $data['length'][$list['service_id']] = $list['length'];
+            $data['depth'][$list['service_id']][$list['length']] = $list['depth'];
+            $data['price'][$list['service_id']][$list['length']][$list['depth']] = $list['price'];
+
+        }
+//        debug($data);
+
+        return $this->render('service-metal-bending', [
+            'service' => $service,
+            'subServices' => $subServices,
+            'priceList' => $priceList,
+            'activeServicesId' => $activeServicesId,
+            'data' => $data
+        ]);
     }
 
 

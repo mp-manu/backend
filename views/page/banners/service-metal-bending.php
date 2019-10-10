@@ -6,9 +6,10 @@
  * Time: 21:55
  */
 ?>
+<?php if(!empty($service)): ?>
 <div class="content__headline">
     <header class="headline has-cover">
-        <div class="headline__cover" style="background-image: url(/img/service-cover2.jpg)"></div>
+        <div class="headline__cover" style="background-image: url(/img/services/<?= $service['img'] ?>)"></div>
         <div class="container">
             <div class="grid is-row">
                 <div class="col-8">
@@ -23,14 +24,22 @@
                                 </li>
                             </ul>
                         </div>
-                        <h1 class="headline__title title">Гибка метала</h1>
-                        <p class="headline__subtitle">В отличие от сварки не увеличивает риск
-                            коррозии.</p>
-                        <div class="headline__descr text"><p>Гибку можно применять: на любом
-                                металлическом профиле, трубах, листовом металле и стальных листах.</p></div>
+                        <h1 class="headline__title title"><?= $service['name'] ?></h1>
+                        <?php
+                            if (substr($service['description'], -1) == '.') {
+                                $service['description'] = substr_replace($service['description'], "", -1);
+                            }
+                            $description = explode('.', $service['description']);
+                            if (!empty($description)):
+                                echo '<p class="headline__subtitle">'. $description[0] .'</p>';
+                                unset($description[0]);
+                            foreach ($description as $item): ?>
+                                <div class="headline__descr text"><p><?= $item ?></p></div>
+                            <?php  endforeach; endif; ?>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 </div>
+<?php endif; ?>

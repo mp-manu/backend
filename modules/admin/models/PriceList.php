@@ -23,6 +23,7 @@ use Yii;
 class PriceList extends \yii\db\ActiveRecord
 {
     public $name;
+
     /**
      * {@inheritdoc}
      */
@@ -65,6 +66,7 @@ class PriceList extends \yii\db\ActiveRecord
             'status' => 'Доступ',
         ];
     }
+
 
     /**
      * @return \yii\db\ActiveQuery

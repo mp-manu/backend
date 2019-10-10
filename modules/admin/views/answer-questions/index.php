@@ -43,7 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'attribute' => 'question',
                         'format' => 'html',
                         'value' => function ($data) {
-                            return wordwrap($data->question, 80, '<br>');
+                            return wordwrap($data->question, 40, '<br>');
                         }
                     ],
                     [
