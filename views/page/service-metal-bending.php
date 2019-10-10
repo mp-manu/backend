@@ -54,6 +54,7 @@ echo $this->render('/page/banners/service-metal-bending', ['service' => $service
                                                                          v-if="opened">
                                                                         <div class="accordion-item__text text">
                                                                             <p><?= $service['description'] ?></p></div>
+                                                                        <?php if(!empty($service['desc'])): ?>
                                                                         <div class="accordion-item__equipment">
                                                                             <article class="equipment">
                                                                                 <figure class="equipment__cover">
@@ -71,6 +72,7 @@ echo $this->render('/page/banners/service-metal-bending', ['service' => $service
                                                                                 </header>
                                                                             </article>
                                                                         </div>
+                                                                        <?php endif; ?>
                                                                     </div>
                                                                 </transition>
                                                             </div>
@@ -107,25 +109,26 @@ echo $this->render('/page/banners/service-metal-bending', ['service' => $service
                                 <div class="page-tabs__inner">
                                     <div class="page-tabs__header">
                                         <div class="page-tabs__toggles" ref="toggles">
-<!--                                            --><?php //foreach ($activeServicesId as $id): ?>
-                                            <button class="page-tabs__toggle is-active"
-                                                    data-tab-index="0" @click="goto">
-                                                Гибка металлопрофиля
+                                            <?php $i=0; foreach ($activeServicesId as $id): $i++; $isActive = ($i == 1) ? 'is-active' : ''; ?>
+                                            <button class="page-tabs__toggle <?= $isActive ?>"
+                                                    data-tab-index="<?= $i-1 ?>" @click="goto">
+                                                <?= $data['name'][$id] ?>
                                             </button>
-<!--                                            --><?php //endforeach; ?>
-                                            <button class="page-tabs__toggle" data-tab-index="1"
-                                                    @click="goto">Гибка труб
-                                            </button>
-                                            <button class="page-tabs__toggle" data-tab-index="2"
-                                                    @click="goto">Гибка листового метала
-                                            </button>
-                                            <button class="page-tabs__toggle" data-tab-index="3"
-                                                    @click="goto">Гибка стальных листов
-                                            </button>
+                                            <?php endforeach; ?>
+<!--                                            <button class="page-tabs__toggle" data-tab-index="1"-->
+<!--                                                    @click="goto">Гибка труб-->
+<!--                                            </button>-->
+<!--                                            <button class="page-tabs__toggle" data-tab-index="2"-->
+<!--                                                    @click="goto">Гибка листового метала-->
+<!--                                            </button>-->
+<!--                                            <button class="page-tabs__toggle" data-tab-index="3"-->
+<!--                                                    @click="goto">Гибка стальных листов-->
+<!--                                            </button>-->
                                         </div>
                                     </div>
                                     <div class="page-tabs__body" ref="swiper">
                                         <ul class="page-tabs__list" ref="list">
+                                            <?php foreach ($activeServicesId as $id): ?>
                                             <li class="page-tabs__item" ref="item">
                                                 <div class="page-tabs__fx" data-swiper-parallax-x="-20">
                                                     <div class="price-table">
@@ -140,228 +143,26 @@ echo $this->render('/page/banners/service-metal-bending', ['service' => $service
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td>1 мм</td>
-                                                                <td>2 мм</td>
-                                                                <td>3 мм</td>
-                                                                <td>4 мм</td>
-                                                                <td>5 мм</td>
-                                                                <td>5.5 мм</td>
-                                                                <td>6 мм</td>
+                                                                <?php foreach ($data['depth'][$id] as $depth): ?>
+                                                                <td><?= $depth ?> мм</td>
+                                                                <?php endforeach; ?>
                                                             </tr>
                                                             </thead>
                                                             <tbody>
+                                                            <?php foreach ($data['price'] as $price => $depth): ?>
                                                             <tr>
-                                                                <td>100</td>
-                                                                <td>10 ₽</td>
-                                                                <td>10 ₽</td>
-                                                                <td>10 ₽</td>
-                                                                <td>12 ₽</td>
-                                                                <td>12 ₽</td>
-                                                                <td>12 ₽</td>
-                                                                <td>13 ₽</td>
+                                                                <td><?= $price ?></td>
+                                                                <?php foreach ($depth as $item): ?>
+                                                                <td><?= $item[$id] ?> ₽</td>
+                                                                <?php endforeach; ?>
                                                             </tr>
-                                                            <tr>
-                                                                <td>200</td>
-                                                                <td>12 ₽</td>
-                                                                <td>12 ₽</td>
-                                                                <td>12 ₽</td>
-                                                                <td>14 ₽</td>
-                                                                <td>14 ₽</td>
-                                                                <td>14 ₽</td>
-                                                                <td>16 ₽</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>500</td>
-                                                                <td>12 ₽</td>
-                                                                <td>12 ₽</td>
-                                                                <td>12 ₽</td>
-                                                                <td>14 ₽</td>
-                                                                <td>14 ₽</td>
-                                                                <td>14 ₽</td>
-                                                                <td>16 ₽</td>
-                                                            </tr>
+                                                            <?php endforeach; ?>
                                                             </tbody>
                                                         </table>
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="page-tabs__item" ref="item">
-                                                <div class="page-tabs__fx" data-swiper-parallax-x="-20">
-                                                    <div class="price-table">
-                                                        <table>
-                                                            <thead>
-                                                            <tr>
-                                                                <td class="is-sep" rowspan="2">
-                                                                    <span>Длина гиба (мм)</span><span>Толщина листа</span>
-                                                                </td>
-                                                                <td colspan="7">Цена за гиб (заказ от
-                                                                    100 гибов)
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>1 мм</td>
-                                                                <td>2 мм</td>
-                                                                <td>3 мм</td>
-                                                                <td>4 мм</td>
-                                                                <td>5 мм</td>
-                                                                <td>5.5 мм</td>
-                                                                <td>6 мм</td>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <tr>
-                                                                <td>100</td>
-                                                                <td>10 ₽</td>
-                                                                <td>10 ₽</td>
-                                                                <td>10 ₽</td>
-                                                                <td>12 ₽</td>
-                                                                <td>12 ₽</td>
-                                                                <td>12 ₽</td>
-                                                                <td>13 ₽</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>200</td>
-                                                                <td>12 ₽</td>
-                                                                <td>12 ₽</td>
-                                                                <td>12 ₽</td>
-                                                                <td>14 ₽</td>
-                                                                <td>14 ₽</td>
-                                                                <td>14 ₽</td>
-                                                                <td>16 ₽</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>500</td>
-                                                                <td>12 ₽</td>
-                                                                <td>12 ₽</td>
-                                                                <td>12 ₽</td>
-                                                                <td>14 ₽</td>
-                                                                <td>14 ₽</td>
-                                                                <td>14 ₽</td>
-                                                                <td>16 ₽</td>
-                                                            </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="page-tabs__item" ref="item">
-                                                <div class="page-tabs__fx" data-swiper-parallax-x="-20">
-                                                    <div class="price-table">
-                                                        <table>
-                                                            <thead>
-                                                            <tr>
-                                                                <td class="is-sep" rowspan="2">
-                                                                    <span>Длина гиба (мм)</span><span>Толщина листа</span>
-                                                                </td>
-                                                                <td colspan="7">Цена за гиб (заказ от
-                                                                    100 гибов)
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>1 мм</td>
-                                                                <td>2 мм</td>
-                                                                <td>3 мм</td>
-                                                                <td>4 мм</td>
-                                                                <td>5 мм</td>
-                                                                <td>5.5 мм</td>
-                                                                <td>6 мм</td>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <tr>
-                                                                <td>100</td>
-                                                                <td>10 ₽</td>
-                                                                <td>10 ₽</td>
-                                                                <td>10 ₽</td>
-                                                                <td>12 ₽</td>
-                                                                <td>12 ₽</td>
-                                                                <td>12 ₽</td>
-                                                                <td>13 ₽</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>200</td>
-                                                                <td>12 ₽</td>
-                                                                <td>12 ₽</td>
-                                                                <td>12 ₽</td>
-                                                                <td>14 ₽</td>
-                                                                <td>14 ₽</td>
-                                                                <td>14 ₽</td>
-                                                                <td>16 ₽</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>500</td>
-                                                                <td>12 ₽</td>
-                                                                <td>12 ₽</td>
-                                                                <td>12 ₽</td>
-                                                                <td>14 ₽</td>
-                                                                <td>14 ₽</td>
-                                                                <td>14 ₽</td>
-                                                                <td>16 ₽</td>
-                                                            </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="page-tabs__item" ref="item">
-                                                <div class="page-tabs__fx" data-swiper-parallax-x="-20">
-                                                    <div class="price-table">
-                                                        <table>
-                                                            <thead>
-                                                            <tr>
-                                                                <td class="is-sep" rowspan="2">
-                                                                    <span>Длина гиба (мм)</span><span>Толщина листа</span>
-                                                                </td>
-                                                                <td colspan="7">Цена за гиб (заказ от
-                                                                    100 гибов)
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>1 мм</td>
-                                                                <td>2 мм</td>
-                                                                <td>3 мм</td>
-                                                                <td>4 мм</td>
-                                                                <td>5 мм</td>
-                                                                <td>5.5 мм</td>
-                                                                <td>6 мм</td>
-                                                            </tr>
-                                                            </thead>
-                                                            <tbody>
-                                                            <tr>
-                                                                <td>100</td>
-                                                                <td>10 ₽</td>
-                                                                <td>10 ₽</td>
-                                                                <td>10 ₽</td>
-                                                                <td>12 ₽</td>
-                                                                <td>12 ₽</td>
-                                                                <td>12 ₽</td>
-                                                                <td>13 ₽</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>200</td>
-                                                                <td>12 ₽</td>
-                                                                <td>12 ₽</td>
-                                                                <td>12 ₽</td>
-                                                                <td>14 ₽</td>
-                                                                <td>14 ₽</td>
-                                                                <td>14 ₽</td>
-                                                                <td>16 ₽</td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>500</td>
-                                                                <td>12 ₽</td>
-                                                                <td>12 ₽</td>
-                                                                <td>12 ₽</td>
-                                                                <td>14 ₽</td>
-                                                                <td>14 ₽</td>
-                                                                <td>14 ₽</td>
-                                                                <td>16 ₽</td>
-                                                            </tr>
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                </div>
-                                            </li>
+                                            <?php endforeach; ?>
                                         </ul>
                                     </div>
                                 </div>

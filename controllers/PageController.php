@@ -88,27 +88,27 @@ class PageController extends Controller
         $subServices = Services::find()
             ->select('s.*, si.key, si.val, si.description as desc, si.img')
             ->from('services s')
-            ->leftJoin('service_info si', 's.id=si.service_id')
-            ->where(['parent_id' => $service['id'], 'si.key' => 'equipment', 's.status' => 1, 'si.status' => 1])
+            ->join('LEFT JOIN', 'service_info si', 's.id=si.service_id')
+            ->where(['parent_id' => $service['id'], 's.status' => 1])
             ->asArray()->all();
 
         $priceList = PriceList::find()
             ->select('p.*, s.name, s.id as sid')
             ->from('price_list p')
             ->leftJoin('services s', 'p.service_id=s.id')
-            ->where(['p.type' => 2, 'p.status' => 1, 'p.status' => 1])
+            ->where(['p.type' => 2, 's.status' => 1, 'p.status' => 1])
             ->asArray()->all();
+
         $data = array();
         $activeServicesId = array();
         foreach ($priceList as $list){
             $activeServicesId[$list['sid']]=$list['sid'];
-            $data['name'][$list['service_id']] = $list['name'];
-            $data['length'][$list['service_id']] = $list['length'];
-            $data['depth'][$list['service_id']][$list['length']] = $list['depth'];
-            $data['price'][$list['service_id']][$list['length']][$list['depth']] = $list['price'];
-
+            $data['name'][$list['sid']] = $list['name'];
+            $data['length'][$list['sid']][$list['length']] = $list['length'];
+            $data['depth'][$list['sid']][$list['depth']] = $list['depth'];
+            $data['price'][$list['length']][$list['depth']][$list['sid']] = $list['price'];
         }
-//        debug($data);
+        //debug($data);
 
         return $this->render('service-metal-bending', [
             'service' => $service,
