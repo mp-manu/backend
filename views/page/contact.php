@@ -5,7 +5,7 @@
  * Date: 08.10.2019
  * Time: 0:18
  */
-
+$this->title = 'Контакты';
 ?>
 
 <div class="content__headline">
@@ -17,7 +17,7 @@
                         <div class="headline__breadcrumb">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb__item"><a class="breadcrumb__link"
-                                                                href="/index.html" title="Главная">Главная</a>
+                                                                href="/" title="Главная">Главная</a>
                                 </li>
                             </ul>
                         </div>
@@ -164,10 +164,12 @@
                                             <feedback-form inline-template>
                                                 <validation-observer ref="observer">
                                                     <form class="feedback-form form is-bordered"
-                                                          action="/thanks.html" @submit="onsubmit">
-                                                        <header class="form__header"><h3
-                                                                    class="form__title title is-big">По
-                                                                любым вопросам</h3></header>
+                                                          action="/request/contact" method="post" @submit="onsubmit">
+                                                        <header class="form__header">
+                                                            <h3 class="form__title title is-big">
+                                                                По любым вопросам
+                                                            </h3>
+                                                        </header>
                                                         <div class="form__body">
                                                             <div class="grid is-columns">
                                                                 <div class="col-6">
@@ -201,7 +203,7 @@
                                                                     <div class="form__control">
                                                                         <div class="form__field">
                                                                             <v-input inline-template
-                                                                                     :field-name="'name'"
+                                                                                     :field-name="'phone_number'"
                                                                                      :visible-errors="[]">
                                                                                 <validation-provider
                                                                                         class="v-input"
@@ -212,7 +214,7 @@
                                                                                     <label class="v-input__label"><span
                                                                                                 class="v-input__placeholder">Номер телефона</span><input
                                                                                                 class="v-input__field"
-                                                                                                name="name"
+                                                                                                name="phone_number"
                                                                                                 v-model="value"
                                                                                                 v-mask="&quot;+7 (###) ### ## ##&quot;"
                                                                                                 @focus="handler(&quot;focus&quot;)"

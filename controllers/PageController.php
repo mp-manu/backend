@@ -155,7 +155,7 @@ class PageController extends Controller
     public function beforeAction($action)
     {
         if (parent::beforeAction($action)) {
-            if ($action->id == 'error' || $action->id == 'contact') {
+            if ($action->id == 'error' || $action->id == 'contact' || $action->id == 'thanks') {
                 $this->layout = 'main-dark';
             }
             return true;

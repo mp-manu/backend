@@ -17,10 +17,10 @@
                         <div class="headline__breadcrumb">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb__item"><a class="breadcrumb__link"
-                                                                href="/index.html" title="Главная">Главная</a>
+                                                                href="/" title="Главная">Главная</a>
                                 </li>
                                 <li class="breadcrumb__item"><a class="breadcrumb__link"
-                                                                href="/services.html" title="Услуги">Услуги</a>
+                                                                href="/page/service-metal-bending" title="Услуги">Услуги</a>
                                 </li>
                             </ul>
                         </div>

@@ -74,7 +74,7 @@
                                         <callback-form inline-template>
                                             <validation-observer ref="observer">
                                                 <form class="callback-form form"
-                                                      action="/thanks.html" @submit="onsubmit">
+                                                      action="/request/need-to-call" method="post" @submit="onsubmit">
                                                     <header class="form__header"><h3
                                                                 class="form__title title">Заказать
                                                             обратный звонок</h3></header>
@@ -111,7 +111,7 @@
                                                                 <div class="form__control">
                                                                     <div class="form__field">
                                                                         <v-input inline-template
-                                                                                 :field-name="'name'"
+                                                                                 :field-name="'phone_number'"
                                                                                  :visible-errors="[]">
                                                                             <validation-provider
                                                                                     class="v-input"
@@ -122,7 +122,7 @@
                                                                                 <label class="v-input__label"><span
                                                                                             class="v-input__placeholder">Номер телефона</span><input
                                                                                             class="v-input__field"
-                                                                                            name="name"
+                                                                                            name="phone_number"
                                                                                             v-model="value"
                                                                                             v-mask="&quot;+7 (###) ### ## ##&quot;"
                                                                                             @focus="handler(&quot;focus&quot;)"
@@ -145,7 +145,7 @@
                                                                         type="checkbox" name="agreement"
                                                                         required><span
                                                                         class="checkbox__label">Заказывая обратный звонок, даю согласие на обработку <a
-                                                                            href="/policy.html">персональных данных</a></span></label>
+                                                                            href="#">персональных данных</a></span></label>
                                                         </div>
                                                         <div class="form__button">
                                                             <button class="button is-wide is-large">

@@ -5,7 +5,7 @@
  * Date: 08.10.2019
  * Time: 0:17
  */
-
+$this->title = 'О компании';
 ?>
 
 <div class="content__headline">
@@ -18,7 +18,7 @@
                         <div class="headline__breadcrumb">
                             <ul class="breadcrumb">
                                 <li class="breadcrumb__item"><a class="breadcrumb__link"
-                                                                href="/index.html" title="Главная">Главная</a>
+                                                                href="/" title="Главная">Главная</a>
                                 </li>
                             </ul>
                         </div>

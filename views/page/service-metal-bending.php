@@ -97,6 +97,7 @@ echo $this->render('/page/banners/service-metal-bending', ['service' => $service
         </section>
         <?php endif; ?>
     </div>
+    <?php if(!empty($activeServicesId)): ?>
     <div class="content__section is-pb110 is-pt0">
         <section class="section">
             <div class="container">
@@ -173,4 +174,5 @@ echo $this->render('/page/banners/service-metal-bending', ['service' => $service
             </div>
         </section>
     </div>
+    <?php endif; ?>
 </div>

@@ -10,19 +10,17 @@ use app\modules\admin\models\FrontMenu;
 
 ?>
 
-<header class="page__header is-absolute">
-    <div class="header is-transparent">
+<header class="page__header">
+    <div class="header">
         <div class="container">
             <div class="header__inner">
-                <div class="header__logo">
-                    <div class="logo">
+                <div class="header__logo"><a class="logo" href="/" title="Главная страница">
                         <div class="logo__label"><i>Тех</i>Арсенал</div>
                         <div class="logo__caption">Современный подход<br>к&nbsp;холодной штамповке</div>
-                    </div>
-                </div>
+                    </a></div>
                 <div class="header__nav">
                     <header-nav inline-template>
-                        <nav class="header-nav ">
+                        <nav class="header-nav">
                             <ul class="header-nav__list">
                                 <?= FrontMenu::PrintToHeader() ?>
                             </ul>
@@ -30,11 +28,11 @@ use app\modules\admin\models\FrontMenu;
                     </header-nav>
                 </div>
                 <div class="header__phone">
-                    <div class="phone "><a class="phone__value" href="tel:+7 (952) 687-58-04">+7 (952)
+                    <div class="phone"><a class="phone__value" href="tel:+7 (952) 687-58-04">+7 (952)
                             687-58-04</a></div>
                 </div>
                 <div class="header__button">
-                    <button class="button is-bordered" data-modal="callback">Заказать звонок</button>
+                    <button class="button is-bordered " data-modal="callback">Заказать звонок</button>
                 </div>
             </div>
         </div>
