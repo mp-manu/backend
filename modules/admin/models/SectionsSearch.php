@@ -18,7 +18,7 @@ class SectionsSearch extends Sections
     {
         return [
             [['id', 'page_id', 'type', 'status'], 'integer'],
-            [['title', 'alias', 'description'], 'safe'],
+            [['title', 'alias', 'description', 'page'], 'safe'],
         ];
     }
 
@@ -40,7 +40,9 @@ class SectionsSearch extends Sections
      */
     public function search($params)
     {
-        $query = Sections::find();
+        $query = Sections::find()->select('s.*, p.name as page')
+            ->from('sections s')
+            ->leftJoin('pages p', 'p.id=s.page_id');
 
         // add conditions that should always apply here
 

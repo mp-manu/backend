@@ -5,17 +5,14 @@ namespace app\controllers;
 use app\models\Requisites;
 use app\modules\admin\models\AnswerQuestions;
 use app\modules\admin\models\PriceList;
+use app\modules\admin\models\Sections;
 use app\modules\admin\models\ServiceInfo;
 use app\modules\admin\models\Services;
 use app\modules\admin\models\WorkProccess;
 use app\modules\admin\models\WorkResults;
-use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
-use yii\web\Response;
 use yii\filters\VerbFilter;
-use app\models\LoginForm;
-use app\models\ContactForm;
 
 class PageController extends Controller
 {
@@ -130,11 +127,25 @@ class PageController extends Controller
         ]);
     }
 
-
     public function actionAbout()
     {
-        return $this->render('about');
+        $howWeWork = Sections::getSectionsByType(2);
+        $whyChooseUs = Sections::getSectionsByType(1);
+        $banner = Sections::getSectionsByType(3);
+        $info = Sections::getSectionsByType(4);
+        $history = Sections::getSectionsByType(5);
+
+        return $this->render('about', [
+            'howWeWork' => $howWeWork,
+            'whyChooseUs' => $whyChooseUs,
+            'banner' => $banner,
+            'info' => $info,
+            'history' => $history,
+        ]);
     }
+
+
+
 
     public function actionThanks()
     {
@@ -142,9 +153,9 @@ class PageController extends Controller
     }
 
 
+
     public function actionError()
     {
-
         return $this->render('error');
     }
 

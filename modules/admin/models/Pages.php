@@ -50,6 +50,12 @@ class Pages extends \yii\db\ActiveRecord
         ];
     }
 
+
+    public static function getPages(){
+        $data = Pages::find()->where(['status' => 1])->asArray()->all();
+        return $data;
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */

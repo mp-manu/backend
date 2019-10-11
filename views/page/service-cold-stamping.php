@@ -134,11 +134,10 @@ echo $this->render('/page/banners/service-cold-stamping', ['service' => $service
                                         <div class="subsection__form">
                                             <question-form inline-template>
                                                 <validation-observer ref="observer">
-                                                    <form class="question-form form"
-                                                          action="/thanks.html" @submit="onsubmit">
-                                                        <header class="form__header"><h3
-                                                                    class="form__title title">Или задайте
-                                                                свой вопрос</h3></header>
+                                                    <form class="question-form form" action="/request/question" @submit="onsubmit" method="post">
+                                                        <header class="form__header">
+                                                            <h3 class="form__title title">Или задайте свой вопрос</h3>
+                                                        </header>
                                                         <div class="form__body">
                                                             <div class="grid is-columns">
                                                                 <div class="col-6">
@@ -172,7 +171,7 @@ echo $this->render('/page/banners/service-cold-stamping', ['service' => $service
                                                                     <div class="form__control">
                                                                         <div class="form__field">
                                                                             <v-input inline-template
-                                                                                     :field-name="'name'"
+                                                                                     :field-name="'phone_number'"
                                                                                      :visible-errors="[]">
                                                                                 <validation-provider
                                                                                         class="v-input"
@@ -183,12 +182,12 @@ echo $this->render('/page/banners/service-cold-stamping', ['service' => $service
                                                                                     <label class="v-input__label"><span
                                                                                                 class="v-input__placeholder">Номер телефона</span><input
                                                                                                 class="v-input__field"
-                                                                                                name="name"
+                                                                                                name="phone_number"
                                                                                                 v-model="value"
                                                                                                 v-mask="&quot;+7 (###) ### ## ##&quot;"
                                                                                                 @focus="handler(&quot;focus&quot;)"
-                                                                                                @blur="handler(&quot;blur&quot;)"><span
-                                                                                                class="v-input__errors"
+                                                                                                @blur="handler(&quot;blur&quot;)">
+                                                                                                <span class="v-input__errors"
                                                                                                 v-if="errors.length &gt; 0"><span
                                                                                                     class="v-input__error"
                                                                                                     v-for="error in errors">{{ error }}</span></span></label>

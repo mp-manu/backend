@@ -11,6 +11,7 @@ namespace app\modules\admin\controllers;
 use app\models\Requisites;
 use app\modules\admin\models\AnswerQuestions;
 use app\modules\admin\models\FrontMenu;
+use app\modules\admin\models\Sections;
 use app\modules\admin\models\Services;
 use app\modules\admin\models\WorkProccess;
 use app\modules\admin\models\WorkResults;
@@ -55,6 +56,10 @@ class EditableController extends Controller
             'requisites-status' => [
                 'class' => EditableColumnAction::classname(),
                 'modelClass' => Requisites::className(),
+            ],
+            'section-status' => [
+                'class' => EditableColumnAction::classname(),
+                'modelClass' => Sections::className(),
             ],
 
         ];

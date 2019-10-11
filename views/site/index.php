@@ -18,7 +18,7 @@ echo $this->render('/page/banners/slider', ['slider' => $slider]);
                                 <article class="opinion">
                                     <figure class="opinion__cover"><img class="opinion__image"
                                                                         src="/img/person.jpg"
-                                                                        alt="<?= Yii::$app->settings->get('Сотрдник', 'руков_цеха_штамп') ?>"></figure>
+                                                                        alt="<?= Yii::$app->settings->get('Сотрудник', 'руков_цеха_штамп') ?>"></figure>
                                     <div class="opinion__body">
                                         <p class="opinion__text">
                                             <?= Yii::$app->settings->get('Текст', 'слова_руков_цеха_штамп') ?>
@@ -124,90 +124,60 @@ echo $this->render('/page/banners/slider', ['slider' => $slider]);
                 <div class="section__body">
                     <div class="section__subsection">
                         <section class="subsection">
-                            <header class="subsection__header"><h3 class="subsection__title">Прочие
-                                    услуги</h3></header>
+                            <header class="subsection__header">
+                                <h3 class="subsection__title"><?= Yii::$app->settings->get('Текст','Прочие услуги') ?></h3>
+                            </header>
                             <div class="subsection__body">
                                 <div class="services">
                                     <ul class="services__list grid is-columns">
+                                        <?php foreach ($otherServices as $info): $i = rand(1, 6); ?>
                                         <li class="services__item col-3 col-3">
                                             <article class="service">
-                                                <figure class="service__cover"><img
-                                                            class="service__image" src="/img/service.jpg"
-                                                            alt="Гибка металла"></figure>
-                                                <div class="service__body"><img class="service__icon"
-                                                                                src="/img/service-ico-1.svg"
-                                                                                alt><h4
-                                                            class="service__title"><a class="service__link"
-                                                                                      href="/service.html">Гибка
-                                                            металла</a></h4></div>
+                                                <figure class="service__cover">
+                                                    <img class="service__image" src="/img/services/<?=$info['img'] ?>" alt="<?= $info['name'] ?>">
+                                                </figure>
+                                                <div class="service__body">
+                                                    <img class="service__icon" src="/img/service-ico-<?=$i?>.svg" alt="">
+                                                    <h4 class="service__title">
+                                                        <a class="service__link" href="<?= $info['url'] ?>">
+                                                            <?= $info['name'] ?>
+                                                        </a>
+                                                    </h4>
+                                                </div>
                                             </article>
                                         </li>
-                                        <li class="services__item col-3 col-3">
-                                            <article class="service">
-                                                <figure class="service__cover"><img
-                                                            class="service__image" src="/img/service.jpg"
-                                                            alt="Порошковая окраска и цинкование"></figure>
-                                                <div class="service__body"><img class="service__icon"
-                                                                                src="/img/service-ico-2.svg"
-                                                                                alt><h4
-                                                            class="service__title"><a class="service__link"
-                                                                                      href="/service.html">Порошковая
-                                                            окраска и цинкование</a></h4></div>
-                                            </article>
-                                        </li>
-                                        <li class="services__item col-3 col-3">
-                                            <article class="service">
-                                                <figure class="service__cover"><img
-                                                            class="service__image" src="/img/service.jpg"
-                                                            alt="Плазменная резка"></figure>
-                                                <div class="service__body"><img class="service__icon"
-                                                                                src="/img/service-ico-3.svg"
-                                                                                alt><h4
-                                                            class="service__title"><a class="service__link"
-                                                                                      href="/service.html">Плазменная
-                                                            резка</a></h4></div>
-                                            </article>
-                                        </li>
-                                        <li class="services__item col-3 col-3">
-                                            <article class="service">
-                                                <figure class="service__cover"><img
-                                                            class="service__image" src="/img/service.jpg"
-                                                            alt="Сварочные работы"></figure>
-                                                <div class="service__body"><img class="service__icon"
-                                                                                src="/img/service-ico-4.svg"
-                                                                                alt><h4
-                                                            class="service__title"><a class="service__link"
-                                                                                      href="/service.html">Сварочные
-                                                            работы</a></h4></div>
-                                            </article>
-                                        </li>
+                                        <?php endforeach; ?>
                                     </ul>
                                 </div>
                             </div>
                         </section>
                     </div>
+                    <?php if(!empty($howWeWork)): ?>
                     <div class="section__subsection">
                         <section class="subsection">
                             <div class="grid is-row">
                                 <div class="col-6">
-                                    <header class="subsection__header"><h3 class="subsection__title">Как
-                                            мы работаем</h3></header>
+                                    <header class="subsection__header">
+                                        <h3 class="subsection__title">
+                                            <?= Yii::$app->settings->get('Текст','Как мы работаем') ?>
+                                        </h3>
+                                    </header>
                                     <div class="subsection__body">
                                         <div class="subsection__accordion">
                                             <div class="accordion">
                                                 <ul class="accordion__list">
+                                                    <?php $i=0; foreach ($howWeWork as $work): $i++; $true = ($i==1) ? 'true' : 'false'; ?>
                                                     <li class="accordion__item">
-                                                        <accordion-item inline-template :initial="true">
+                                                        <accordion-item inline-template :initial="<?= $true ?>">
                                                             <div class="accordion-item"
                                                                  :class="{ &quot;is-open&quot;: opened }">
                                                                 <div class="accordion-item__header"
-                                                                     tabindex="0" data-index="1"
+                                                                     tabindex="<?= $i-1 ?>" data-index="<?= $i ?>"
                                                                      @click="toggle"
                                                                      @keypress.enter.space="toggle">
                                                                     <div class="accordion-item__heading">
                                                                         <h3 class="accordion-item__title">
-                                                                            Принятие чертежа. Уточнение
-                                                                            подробностей</h3></div>
+                                                                            <?= $work['title'] ?></h3></div>
                                                                     <svg class="accordion-item__arrow">
                                                                         <use xlink:href="/img/sprite.svg#arrow"></use>
                                                                     </svg>
@@ -216,153 +186,13 @@ echo $this->render('/page/banners/slider', ['slider' => $slider]);
                                                                     <div class="accordion-item__body"
                                                                          v-if="opened">
                                                                         <div class="accordion-item__text text">
-                                                                            <p>С самого начала выверяем
-                                                                                всё с максимальной
-                                                                                точностью. Чем точнее
-                                                                                первый этап, тем меньше
-                                                                                в дальнейшем будет
-                                                                                трудностей. Оснастку мы
-                                                                                изготавливаем сперва на
-                                                                                станке, а затем доводим
-                                                                                вручную, пока она не
-                                                                                будет на 100%
-                                                                                соответствовать чертежу.
-                                                                                Мы не начинаем
-                                                                                штамповку, пока она не
-                                                                                достигнет максимально
-                                                                                точных размеров. Иначе у
-                                                                                нас не бывает.</p></div>
+                                                                            <p><?= $work['description'] ?></p></div>
                                                                     </div>
                                                                 </transition>
                                                             </div>
                                                         </accordion-item>
                                                     </li>
-                                                    <li class="accordion__item">
-                                                        <accordion-item inline-template
-                                                                        :initial="false">
-                                                            <div class="accordion-item"
-                                                                 :class="{ &quot;is-open&quot;: opened }">
-                                                                <div class="accordion-item__header"
-                                                                     tabindex="0" data-index="2"
-                                                                     @click="toggle"
-                                                                     @keypress.enter.space="toggle">
-                                                                    <div class="accordion-item__heading">
-                                                                        <h3 class="accordion-item__title">
-                                                                            Расчёт количества
-                                                                            металла</h3></div>
-                                                                    <svg class="accordion-item__arrow">
-                                                                        <use xlink:href="/img/sprite.svg#arrow"></use>
-                                                                    </svg>
-                                                                </div>
-                                                                <transition name="fade">
-                                                                    <div class="accordion-item__body"
-                                                                         v-if="opened">
-                                                                        <div class="accordion-item__text text">
-                                                                            <p>С самого начала выверяем
-                                                                                всё с максимальной
-                                                                                точностью. Чем точнее
-                                                                                первый этап, тем меньше
-                                                                                в дальнейшем будет
-                                                                                трудностей. Оснастку мы
-                                                                                изготавливаем сперва на
-                                                                                станке, а затем доводим
-                                                                                вручную, пока она не
-                                                                                будет на 100%
-                                                                                соответствовать чертежу.
-                                                                                Мы не начинаем
-                                                                                штамповку, пока она не
-                                                                                достигнет максимально
-                                                                                точных размеров. Иначе у
-                                                                                нас не бывает.</p></div>
-                                                                    </div>
-                                                                </transition>
-                                                            </div>
-                                                        </accordion-item>
-                                                    </li>
-                                                    <li class="accordion__item">
-                                                        <accordion-item inline-template
-                                                                        :initial="false">
-                                                            <div class="accordion-item"
-                                                                 :class="{ &quot;is-open&quot;: opened }">
-                                                                <div class="accordion-item__header"
-                                                                     tabindex="0" data-index="3"
-                                                                     @click="toggle"
-                                                                     @keypress.enter.space="toggle">
-                                                                    <div class="accordion-item__heading">
-                                                                        <h3 class="accordion-item__title">
-                                                                            Эксперт контролирует
-                                                                            качество</h3></div>
-                                                                    <svg class="accordion-item__arrow">
-                                                                        <use xlink:href="/img/sprite.svg#arrow"></use>
-                                                                    </svg>
-                                                                </div>
-                                                                <transition name="fade">
-                                                                    <div class="accordion-item__body"
-                                                                         v-if="opened">
-                                                                        <div class="accordion-item__text text">
-                                                                            <p>С самого начала выверяем
-                                                                                всё с максимальной
-                                                                                точностью. Чем точнее
-                                                                                первый этап, тем меньше
-                                                                                в дальнейшем будет
-                                                                                трудностей. Оснастку мы
-                                                                                изготавливаем сперва на
-                                                                                станке, а затем доводим
-                                                                                вручную, пока она не
-                                                                                будет на 100%
-                                                                                соответствовать чертежу.
-                                                                                Мы не начинаем
-                                                                                штамповку, пока она не
-                                                                                достигнет максимально
-                                                                                точных размеров. Иначе у
-                                                                                нас не бывает.</p></div>
-                                                                    </div>
-                                                                </transition>
-                                                            </div>
-                                                        </accordion-item>
-                                                    </li>
-                                                    <li class="accordion__item">
-                                                        <accordion-item inline-template
-                                                                        :initial="false">
-                                                            <div class="accordion-item"
-                                                                 :class="{ &quot;is-open&quot;: opened }">
-                                                                <div class="accordion-item__header"
-                                                                     tabindex="0" data-index="4"
-                                                                     @click="toggle"
-                                                                     @keypress.enter.space="toggle">
-                                                                    <div class="accordion-item__heading">
-                                                                        <h3 class="accordion-item__title">
-                                                                            Отбракованные детали на
-                                                                            переплавку</h3></div>
-                                                                    <svg class="accordion-item__arrow">
-                                                                        <use xlink:href="/img/sprite.svg#arrow"></use>
-                                                                    </svg>
-                                                                </div>
-                                                                <transition name="fade">
-                                                                    <div class="accordion-item__body"
-                                                                         v-if="opened">
-                                                                        <div class="accordion-item__text text">
-                                                                            <p>С самого начала выверяем
-                                                                                всё с максимальной
-                                                                                точностью. Чем точнее
-                                                                                первый этап, тем меньше
-                                                                                в дальнейшем будет
-                                                                                трудностей. Оснастку мы
-                                                                                изготавливаем сперва на
-                                                                                станке, а затем доводим
-                                                                                вручную, пока она не
-                                                                                будет на 100%
-                                                                                соответствовать чертежу.
-                                                                                Мы не начинаем
-                                                                                штамповку, пока она не
-                                                                                достигнет максимально
-                                                                                точных размеров. Иначе у
-                                                                                нас не бывает.</p></div>
-                                                                    </div>
-                                                                </transition>
-                                                            </div>
-                                                        </accordion-item>
-                                                    </li>
+                                                    <?php endforeach; ?>
                                                 </ul>
                                             </div>
                                         </div>
@@ -375,69 +205,40 @@ echo $this->render('/page/banners/slider', ['slider' => $slider]);
                             </div>
                         </section>
                     </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </section>
     </div>
+    <?php if(!empty($whyChooseUs)): ?>
     <div class="content__section is-grey">
         <section class="section">
             <div class="container">
-                <header class="section__header"><h2 class="section__title title">Почему мы</h2></header>
+                <header class="section__header"><h2 class="section__title title"><?= Yii::$app->settings->get('Текст','Почему мы') ?></h2></header>
                 <div class="section__body">
                     <div class="features">
                         <ul class="features__list grid is-columns">
+                            <?php foreach ($whyChooseUs as $chooseUs): ?>
                             <li class="features__item col-6">
                                 <article class="feature">
-                                    <figure class="feature__cover"><img class="feature__image"
-                                                                        src="/img/feature-cover.jpg"
-                                                                        alt="100% совпадение&lt;br&gt;с&amp;nbsp;чертежами заказчика">
+                                    <figure class="feature__cover">
+                                        <img class="feature__image" src="/img/<?=$chooseUs['img']?>"
+                                        alt="<?=$chooseUs['description']?>">
                                     </figure>
-                                    <div class="feature__body"><img class="feature__icon"
-                                                                    src="/img/feature-1.png" alt><h4
-                                                class="feature__title">100% совпадение<br>с&nbsp;чертежами
-                                            заказчика</h4></div>
+                                    <div class="feature__body">
+                                        <img class="feature__icon" src="/img/<?=$chooseUs['ico']?>" alt>
+                                        <h4 class="feature__title">
+                                            <?=$chooseUs['description']?>
+                                        </h4>
+                                    </div>
                                 </article>
                             </li>
-                            <li class="features__item col-6">
-                                <article class="feature">
-                                    <figure class="feature__cover"><img class="feature__image"
-                                                                        src="/img/feature-cover.jpg"
-                                                                        alt="Мы реализуем все этапы производства.&lt;br&gt;Никаких субподрядчиков">
-                                    </figure>
-                                    <div class="feature__body"><img class="feature__icon"
-                                                                    src="/img/feature-2.png" alt><h4
-                                                class="feature__title">Мы реализуем все этапы
-                                            производства.<br>Никаких субподрядчиков</h4></div>
-                                </article>
-                            </li>
-                            <li class="features__item col-6">
-                                <article class="feature">
-                                    <figure class="feature__cover"><img class="feature__image"
-                                                                        src="/img/feature-cover.jpg"
-                                                                        alt="Годами отработанная технология по&amp;nbsp;всем&lt;br&gt;представленным услугам">
-                                    </figure>
-                                    <div class="feature__body"><img class="feature__icon"
-                                                                    src="/img/feature-3.png" alt><h4
-                                                class="feature__title">Годами отработанная технология по&nbsp;всем<br>представленным
-                                            услугам</h4></div>
-                                </article>
-                            </li>
-                            <li class="features__item col-6">
-                                <article class="feature">
-                                    <figure class="feature__cover"><img class="feature__image"
-                                                                        src="/img/feature-cover.jpg"
-                                                                        alt="Годами отработанная технология по&amp;nbsp;всем&lt;br&gt;представленным услугам">
-                                    </figure>
-                                    <div class="feature__body"><img class="feature__icon"
-                                                                    src="/img/feature-4.png" alt><h4
-                                                class="feature__title">Годами отработанная технология по&nbsp;всем<br>представленным
-                                            услугам</h4></div>
-                                </article>
-                            </li>
+                            <?php endforeach; ?>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
     </div>
+    <?php endif; ?>
 </div>

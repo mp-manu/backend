@@ -34,10 +34,15 @@ $config = [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'useFileTransport' => false,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.yandex.ru',
+                'username' => 'muzafarov7001911@yandex.ru',
+                'password' => 'm7001911',
+                'port' => '465',
+                'encryption' => 'ssl',
+            ],
         ],
         'settings' => [
             'class' => 'yii2mod\settings\components\Settings',
@@ -69,6 +74,10 @@ $config = [
                     'class' => 'yii\i18n\PhpMessageSource',
                     'basePath' => '@yii2mod/settings/messages',
                 ],
+                'yii2mod.rbac' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@yii2mod/rbac/messages',
+                ],
             ],
         ],
 
@@ -79,6 +88,10 @@ $config = [
             'showScriptName' => false,
             'rules' => [
             ],
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\DbManager',
+            'defaultRoles' => ['guest'],
         ],
     ],
     'modules' => [
@@ -91,6 +104,20 @@ $config = [
             'class' => 'yii2mod\settings\Module',
             'layout' => '@app/modules/admin/views/layouts/main'
         ],
+        'rbac' => [
+            'class' => 'yii2mod\rbac\Module',
+            'layout' => '@app/modules/admin/views/layouts/main'
+
+        ],
+    ],
+    'as access' => [
+        'class' => yii2mod\rbac\filters\AccessControl::className(),
+        'allowActions' => [
+            'site/*',
+            'page/*',
+            'request/*',
+            'admin/main/login',
+        ]
     ],
     'params' => $params,
 ];

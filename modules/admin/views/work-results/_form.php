@@ -50,7 +50,7 @@ use yii\widgets\ActiveForm;
                         </div>
                         <div class="col-lg-6">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                                <?= $form->field($model, 'status')->dropDownList(['1' => 'Включен', '0' => 'Отключен'], ['prompt' => 'Доступ']) ?>
+                                <?= $form->field($model, 'status')->dropDownList(['1' => 'Включен', '0' => 'Отключен']) ?>
                             </div>
                         </div>
                     </div>

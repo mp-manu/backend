@@ -13,6 +13,7 @@ use Yii;
  * @property string $alias
  * @property string $description
  * @property string $img
+ * @property string $url
  * @property int $status
  *
  * @property AnswerQuestions[] $answerQuestions
@@ -42,6 +43,7 @@ class Services extends \yii\db\ActiveRecord
             [['description'], 'string'],
             [['name'], 'string', 'max' => 255],
             [['alias'], 'string', 'max' => 150],
+            [['url'], 'string', 'max' => 500],
             [['img'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, svg'],
         ];
     }
@@ -58,6 +60,7 @@ class Services extends \yii\db\ActiveRecord
             'alias' => 'Алиас',
             'description' => 'Описание',
             'img' => 'Фото',
+            'url' => 'Ссылка',
             'status' => 'Статус',
         ];
     }
@@ -92,6 +95,16 @@ class Services extends \yii\db\ActiveRecord
     public function getWorkProccesses()
     {
         return $this->hasMany(WorkProccess::className(), ['service_id' => 'id']);
+    }
+
+    public static function getRandomServices(){
+        $data = Services::find()
+            ->where(['status' => 1])->andWhere(['<>', 'id', '1'])
+            ->orderBy('RAND()')
+            ->limit(4)
+            ->asArray()
+            ->all();
+        return $data;
     }
 
     public static function getServices(){

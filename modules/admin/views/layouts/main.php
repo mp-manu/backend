@@ -31,7 +31,7 @@ AppAsset::register($this);
         <?php $this->head() ?>
     </head>
     <!-- END HEAD -->
-    <body class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md header-white white-sidebar-color logo-red sidemenu-closed">
+    <body class="page-header-fixed sidemenu-closed-hidelogo page-content-white page-md header-white white-sidebar-color logo-red">
     <?php $this->beginBody() ?>
     <div class="page-wrapper">
 
@@ -44,18 +44,16 @@ AppAsset::register($this);
 
             <!-- start page content -->
             <div class="page-content-wrapper">
-                <div class="page-content">
+                <div class="page-content" >
                     <?= $content ?>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- end chat sidebar -->
 
     <!-- end page container -->
     <!-- start footer -->
     <div class="page-footer">
-        <div class="page-footer-inner">© <?= date('Y') ?> ООО ТехАрсенал, Смоленск
+        <div class="page-footer-inner">© <?= date('Y') ?> <?= Yii::$app->settings->get('Сайт', 'Имя компании') ?>
             <a href="https://dancecolor.ru" target="_top" class="makerCss">DANCECOLOR</a>
         </div>
         <div class="scroll-to-top">
@@ -64,6 +62,7 @@ AppAsset::register($this);
     </div>
     <!-- end footer -->
     </div>
+
     <?php $this->endBody() ?>
     </body>
 </html>

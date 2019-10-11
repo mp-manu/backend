@@ -18,7 +18,7 @@ class ServicesSearch extends Services
     {
         return [
             [['id', 'parent_id', 'status'], 'integer'],
-            [['name', 'alias', 'description', 'img'], 'safe'],
+            [['name', 'alias', 'description', 'img', 'url'], 'safe'],
         ];
     }
 
@@ -66,7 +66,8 @@ class ServicesSearch extends Services
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'alias', $this->alias])
             ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'img', $this->img]);
+            ->andFilterWhere(['like', 'img', $this->img])
+            ->andFilterWhere(['like', 'url', $this->img]);
 
         return $dataProvider;
     }

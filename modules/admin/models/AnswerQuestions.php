@@ -35,7 +35,7 @@ class AnswerQuestions extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['service_id', 'answer', 'type', 'question'], 'required'],
+            [['service_id', 'type', 'question'], 'required'],
             [['service_id', 'type', 'status'], 'integer'],
             [['question'], 'string'],
             [['answer'], 'string', 'max' => 500],

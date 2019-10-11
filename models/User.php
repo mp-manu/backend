@@ -78,11 +78,11 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             'user_id' => Yii::t('app', 'User ID'),
-            'username' => Yii::t('app', 'Username'),
-            'user_password' => Yii::t('app', 'Password'),
-            'user_type' => Yii::t('app', 'User Type'),
-            'is_block' => Yii::t('app', 'Is Block'),
-            'created_at' => Yii::t('app', 'Created Time'),
+            'username' => 'Логин',
+            'user_password' => 'Пароль',
+            'user_type' => 'Статус',
+            'is_block' => 'Доступ',
+            'created_at' => 'Время добавления',
             'created_by' => Yii::t('app', 'Created By'),
             'updated_at' => Yii::t('app', 'Updated Time'),
             'updated_by' => Yii::t('app', 'Updated By'),

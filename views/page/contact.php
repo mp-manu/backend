@@ -45,12 +45,13 @@ $this->title = 'Контакты';
                                                             <figure class="person__cover"><img
                                                                         class="person__image"
                                                                         src="/img/person.jpg"
-                                                                        alt="Дмитрий Соляник"></figure>
+                                                                        alt="<?= Yii::$app->settings->get('Сотрудник', 'главТехник') ?>"></figure>
                                                             <header class="person__header"><h4
-                                                                        class="person__name">Дмитрий
-                                                                    Соляник</h4>
-                                                                <p class="person__position">Главный
-                                                                    техник</p></header>
+                                                                        class="person__name"><?= Yii::$app->settings->get('Сотрудник', 'главТехник') ?></h4>
+                                                                <p class="person__position"><?= Yii::$app->settings->get('Должность', 'главТехник') ?>
+																</p>
+																
+																</header>
                                                         </article>
                                                     </div>
                                                 </div>
@@ -61,15 +62,14 @@ $this->title = 'Контакты';
                                                                 <div class="contact__caption">Телефон
                                                                 </div>
                                                                 <a class="contact__value"
-                                                                   href="tel:+7 (910) 788-40-41">+7
-                                                                    (910) 788-40-41</a></div>
+                                                                   href="tel:<?= Yii::$app->settings->get('Контакты', 'Телефон') ?>">
+																   <?= Yii::$app->settings->get('Контакты', 'Телефон') ?></a></div>
                                                         </li>
                                                         <li class="contacts__item">
                                                             <div class="contact">
                                                                 <div class="contact__caption">Адрес
                                                                 </div>
-                                                                <div class="contact__value">Смоленск,
-                                                                    дер. Тепличный Комбинат №1
+                                                                <div class="contact__value"><?= Yii::$app->settings->get('Контакты', 'адресс') ?>
                                                                 </div>
                                                             </div>
                                                         </li>

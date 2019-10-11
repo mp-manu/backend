@@ -2,11 +2,14 @@
 
 namespace app\modules\admin;
 use Yii;
+use yii\filters\AccessControl;
+
 /**
  * admin module definition class
  */
 class Module extends \yii\base\Module
 {
+
     /**
      * {@inheritdoc}
      */
@@ -25,4 +28,5 @@ class Module extends \yii\base\Module
         Yii::$app->user->loginUrl = '/admin/main/login';
 
     }
+
 }

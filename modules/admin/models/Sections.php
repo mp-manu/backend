@@ -12,6 +12,8 @@ use Yii;
  * @property string $title
  * @property string $alias
  * @property string $description
+ * @property string $img
+ * @property string $ico
  * @property int $type
  * @property int $status
  *
@@ -19,6 +21,9 @@ use Yii;
  */
 class Sections extends \yii\db\ActiveRecord
 {
+
+    public $page;
+    //const SCENARIO_MYSPECIAL = 'onUpdate';
     /**
      * {@inheritdoc}
      */
@@ -36,6 +41,8 @@ class Sections extends \yii\db\ActiveRecord
             [['page_id', 'type', 'status'], 'integer'],
             [['title'], 'required'],
             [['title', 'alias'], 'string', 'max' => 255],
+            [['img'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, svg'],
+            [['ico'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, ico'],
             [['description'], 'string', 'max' => 500],
             [['page_id'], 'exist', 'skipOnError' => true, 'targetClass' => Pages::className(), 'targetAttribute' => ['page_id' => 'id']],
         ];
@@ -48,13 +55,25 @@ class Sections extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'page_id' => 'Page ID',
-            'title' => 'Title',
-            'alias' => 'Alias',
-            'description' => 'Description',
-            'type' => 'Type',
-            'status' => 'Status',
+            'page_id' => 'Страница',
+            'title' => 'Названия',
+            'alias' => 'Алиас',
+            'description' => 'Описание',
+            'img' => 'Фото',
+            'ico' => 'Значок',
+            'type' => 'Тип',
+            'status' => 'Доступ',
         ];
+    }
+
+    public static function getSectionsByType($type){
+        $data = Sections::find()->where(['type' => $type, 'status' => 1])->asArray()->all();
+        return $data;
+    }
+
+    public static function getSections(){
+        $data = Sections::find()->where(['status' => 1])->asArray()->all();
+        return $data;
     }
 
     /**
@@ -64,4 +83,5 @@ class Sections extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Pages::className(), ['id' => 'page_id']);
     }
+
 }

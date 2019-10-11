@@ -25,18 +25,23 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'page_id',
-            'title',
-            'alias',
-            'description',
-            'type',
-            'status',
-        ],
-    ]) ?>
-
+    <div class="card-box">
+        <div class="card-head">
+            <header><?= $this->title ?></header>
+        </div>
+        <div class="card-body row">
+            <?= DetailView::widget([
+                'model' => $model,
+                'attributes' => [
+                    'id',
+                    'page_id',
+                    'title',
+                    'alias',
+                    'description',
+                    'type',
+                    'status',
+                ],
+            ]) ?>
+        </div>
+    </div>
 </div>
