@@ -96,9 +96,7 @@ class RequestController extends Controller
                 $contact->message = Html::encode(Yii::$app->request->post('message'));
                 $contact->created_at = (new Expression('NOW()'));
                 $contact->save();
-
                 $this->sendEmail('Contact', 'name', '1911');
-
                 $this->redirect('/page/thanks');
             } else {
                 echo 'not save';
@@ -119,7 +117,8 @@ class RequestController extends Controller
             $question->type = 2;
             $question->status = 1;
             $question->service_id = 1;
-            if ($question->save()) {
+            if ($this->sendEmail('Вопрос клиента', 'question', $question->phone, $question->username, $question->question)
+                && $question->save()) {
                return $this->redirect('/page/thanks');
             } else {
                return $this->goHome();
@@ -134,12 +133,18 @@ class RequestController extends Controller
         return parent::beforeAction($action);
     }
 
-    public function sendEmail($subject, $message_type, $phone, $customer)
+    public function sendEmail($subject, $message_type, $phone, $customer, $text)
     {
-        Yii::$app->mailer->compose('content', ['message_type' => $message_type])
+        Yii::$app->mailer->compose('@app/email/content', [
+            'message_type' => $message_type,
+            'phone' => $phone,
+            'customer' => $customer,
+            'text' => $text,
+        ])
             ->setFrom([Yii::$app->params['adminEmail'] => $customer . ' -> ' . $phone])
             ->setTo(Yii::$app->params['adminEmail'])
             ->setSubject($subject)
+            ->setTextBody($customer)
             ->send();
 
         return true;
