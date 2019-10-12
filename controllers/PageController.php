@@ -149,14 +149,21 @@ class PageController extends Controller
 
     public function actionThanks()
     {
-        return $this->render('thanks');
+        $sectionThanks = Sections::find()->where(['page_id' => 7])->asArray()->one();
+        //debug($sectionThanks);
+        return $this->render('thanks', [
+            'sectionThanks' => $sectionThanks
+        ]);
     }
 
 
 
     public function actionError()
     {
-        return $this->render('error');
+        $errorPage = Sections::find()->where(['page_id' => 6])->asArray()->one();
+        return $this->render('error',[
+            'errorPage' => $errorPage
+        ]);
     }
 
 

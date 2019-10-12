@@ -42,6 +42,8 @@ class RequestController extends Controller
                     $orderByDraw->file = basename($_FILES['file']['name']);
                 }
                 $orderByDraw->save();
+                $this->sendEmail('Заказ по чертежу', 'order-by-draw',
+                    $customer->phone_number, $customer->name);
                 $this->redirect('/page/thanks');
             } else {
                 echo 'not save';
@@ -69,6 +71,8 @@ class RequestController extends Controller
                 $request->status = 1; //1 active, 2 confirmed, 0-denied
                 $request->created_at = (new Expression('NOW()'));
                 $request->save();
+                $this->sendEmail('Запрос на званок', 'need-call',
+                    $customer->phone_number, $customer->name, 'Пожалуйста позвоните мне. Мой номер '.$customer->phone_number);
                 $this->redirect('/page/thanks');
             } else {
                 echo 'not save';
@@ -96,7 +100,8 @@ class RequestController extends Controller
                 $contact->message = Html::encode(Yii::$app->request->post('message'));
                 $contact->created_at = (new Expression('NOW()'));
                 $contact->save();
-                $this->sendEmail('Contact', 'name', '1911');
+                $this->sendEmail('Запрос клиента', 'contact',
+                    $customer->phone_number, $customer->name, $contact->message);
                 $this->redirect('/page/thanks');
             } else {
                 echo 'not save';
@@ -117,7 +122,7 @@ class RequestController extends Controller
             $question->type = 2;
             $question->status = 1;
             $question->service_id = 1;
-            if ($this->sendEmail('Вопрос клиента', 'question', $question->phone, $question->username, $question->question)
+            if ($this->sendEmail('Вопрос от клиента', 'question', $question->phone, $question->username, $question->question)
                 && $question->save()) {
                return $this->redirect('/page/thanks');
             } else {
@@ -133,21 +138,20 @@ class RequestController extends Controller
         return parent::beforeAction($action);
     }
 
-    public function sendEmail($subject, $message_type, $phone, $customer, $text)
+    public function sendEmail($subject=null, $message_type=null, $phone, $customer=null, $text=null)
     {
-        Yii::$app->mailer->compose('@app/email/content', [
+        Yii::$app->mailer->compose('content', [
             'message_type' => $message_type,
             'phone' => $phone,
             'customer' => $customer,
             'text' => $text,
         ])
-            ->setFrom([Yii::$app->params['adminEmail'] => $customer . ' -> ' . $phone])
+            ->setFrom([Yii::$app->params['adminEmail'] => $customer.' - '.$phone])
             ->setTo(Yii::$app->params['adminEmail'])
             ->setSubject($subject)
             ->setTextBody($customer)
             ->send();
 
         return true;
-
     }
 }

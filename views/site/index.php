@@ -17,7 +17,7 @@ echo $this->render('/page/banners/slider', ['slider' => $slider]);
                             <div class="intro__opinion">
                                 <article class="opinion">
                                     <figure class="opinion__cover"><img class="opinion__image"
-                                                                        src="/img/person.jpg"
+                                                                        src="/img/<?= Yii::$app->image->get('Главная страница', 'рук_цеха_штамповки') ?>"
                                                                         alt="<?= Yii::$app->settings->get('Сотрудник', 'руков_цеха_штамп') ?>"></figure>
                                     <div class="opinion__body">
                                         <p class="opinion__text">

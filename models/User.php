@@ -3,8 +3,6 @@
 namespace app\models;
 
 use Yii;
-use yii\base\NotSupportedException;
-use yii\db\ActiveRecord;
 use yii\helpers\Security;
 use yii\web\IdentityInterface;
 use \yii\db\Query;
@@ -95,40 +93,12 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         ];
     }
 
-    /**
-     * @inheritdoc
-     */
-    // public static function findIdentity($id)
-    // {
-    //     return static::findOne($id);
-    // }
-
-    /**
-     * @inheritdoc
-     */
-    // public static function findIdentityByAccessToken($token, $type = null)
-    // {
-    //     return static::findOne(['access_token' => $token]);
-    // }
-
-    /**
-     * Finds user by username
-     *
-     * @param  string      $username
-     * @return static|null
-     */
-
     public static function findByUsername($username)
     {
         return static::findOne(['username' => $username]);
     }
 
-    /**
-     * Finds user by password reset token
-     *
-     * @param  string      $token password reset token
-     * @return static|null
-     */
+
 
     public static function findByEmail($email)
     {
@@ -225,90 +195,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return $this->hasMany(AdmissionLetter::className(), ['created_by' => 'user_id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCities()
-    {
-        return $this->hasMany(City::className(), ['updated_by' => 'user_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getStates()
-    {
-        return $this->hasMany(State::className(), ['updated_by' => 'user_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCountries()
-    {
-        return $this->hasMany(Country::className(), ['updated_by' => 'user_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getDocumentCategories()
-    {
-        return $this->hasMany(DocumentCategory::className(), ['updated_by' => 'user_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getLanguages()
-    {
-        return $this->hasMany(Languages::className(), ['updated_by' => 'user_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getLoginDetails()
-    {
-        return $this->hasMany(LoginDetails::className(), ['login_user_id' => 'user_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getNationalities()
-    {
-        return $this->hasMany(Nationality::className(), ['updated_by' => 'user_id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCreatedBy()
-    {
-        return $this->hasOne(User::className(), ['user_id' => 'created_by']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUpdatedBy()
-    {
-        return $this->hasOne(User::className(), ['user_id' => 'updated_by']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getUsers()
-    {
-        return $this->hasMany(User::className(), ['updated_by' => 'user_id']);
-    }
-
-    public function getAuthuser()
-    {
-        return $this->hasOne(AuthAssignment::className(), ['user_id' => 'user_id']);
-    }
 
     /**
      *  @ check old password is correct or wrong.
@@ -325,48 +211,20 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public static function getUserType($user_id)
     {
         $query = new Query();
-        $type = $query->select(['user.user_type'])->from('user')->where(['user.user_id' => $user_id])->one();
+        $type = $query->select(['user.user_type'])
+            ->from('user')
+            ->where(['user.user_id' => $user_id])
+            ->one();
         return $type;
     }
 
-
-
-    public static function getUserFullName($user_id, $user_type)
-    {
-        switch ($user_type){
-            case 'A': case 'E':
-            $fullname = (new \yii\db\Query())
-                ->select(["CONCAT(emp_last_name, ' ', emp_first_name, ' ', emp_middle_name) fullname"])
-                ->from('emp_info')
-                ->join('INNER JOIN', 'emp_master', 'emp_info.emp_info_id = emp_master.emp_info_id')
-                ->join('INNER JOIN', 'user', 'emp_user_id = user.user_id')
-                ->where(['user.user_id' => $user_id])
-                ->andWhere(['user.user_type' => $user_type])
-                ->one();
-            return $fullname;
-            break;
-            case 'S':
-                $fullname = (new \yii\db\Query())
-                    ->select(["CONCAT(stu_last_name, ' ', stu_first_name, ' ', stu_middle_name) fullname"])
-                    ->from('stu_info')
-                    ->join('INNER JOIN', 'stu_master', 'stu_info.stu_info_id = stu_master.stu_info_id')
-                    ->join('INNER JOIN', 'user', 'stu_user_id = user.user_id')
-                    ->where(['user.user_id' => $user_id])
-                    ->andWhere(['user.user_type' => $user_type])
-                    ->one();
-                return $fullname;
-                break;
-            default:
-                $fullname['fullname'] = '';
-                return $fullname;
-                break;
-        }
+    public static function getUserList(){
+        $users = User::find()->all();
+        return $users;
     }
 
 
 
-
-    /* Хелперы */
     public function generateSecretKey()
     {
         $this->secret_key = Yii::$app->security->generateRandomString().'_'.time();

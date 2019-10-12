@@ -47,6 +47,9 @@ $config = [
         'settings' => [
             'class' => 'yii2mod\settings\components\Settings',
         ],
+        'image' => [
+            'class' => 'app\components\Image',
+        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -98,8 +101,10 @@ $config = [
         'admin' => [
             'class' => 'app\modules\admin\Module',
         ],
+
         'gridview' => [
             'class' => 'kartik\grid\Module'],
+
         'settings' => [
             'class' => 'yii2mod\settings\Module',
             'layout' => '@app/modules/admin/views/layouts/main'

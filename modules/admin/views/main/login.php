@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 </div>
 <div class="row">
     <div class="col-md-4 col-md-offset-4">
-        <?php if(\Yii::$app->session->hasFlash('loginError')) : ?>
+        <?php if (\Yii::$app->session->hasFlash('loginError')) : ?>
             <div class="alert alert-danger alert-dismissible" style="margin-top: 5%;">
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span></button>
@@ -29,17 +29,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <!-- Login Form-->
 <div class="login-form text-center">
-    <div>
-    </div>
+    <div></div>
+
     <div class="form formLogin">
         <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
-        <?= $form->field($model, 'username')->textInput(['autofocus' => true, 'class' => ''])->label('Логин') ?>
-        <?= $form->field($model, 'password')->passwordInput(['class' => ''])->label('Пароль') ?>
-<!--        --><?//= $form->field($model, 'rememberMe')->checkbox() ?>
+        <?= $form->field($model, 'username')->textInput(['autofocus' => true, 'class' => '', 'placeholder' => 'Логин'])->label(false) ?>
+        <?= $form->field($model, 'password')->passwordInput(['class' => '', 'placeholder' => 'Пароль'])->label(false) ?>
+        <!--        --><? //= $form->field($model, 'rememberMe')->checkbox() ?>
         <div class="form-group">
             <?= Html::submitButton('Вход', ['class' => '', 'name' => 'login-button']) ?>
         </div>
         <?php ActiveForm::end(); ?>
     </div>
-
+    <a href="/" class="btn btn-link">Перейти на главную страницу</a>
 </div>

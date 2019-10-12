@@ -24,14 +24,14 @@ CREATE TABLE `answer_questions` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `service_id` int(11) NOT NULL,
   `question` text,
-  `answer` varchar(500) DEFAULT NULL,
+  `answer` varchar(500) NOT NULL,
   `username` varchar(50) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `type` tinyint(4) NOT NULL,
   `status` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `service_id` (`service_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 /*Data for the table `answer_questions` */
 
@@ -40,421 +40,7 @@ insert  into `answer_questions`(`id`,`service_id`,`question`,`answer`,`username`
 (2,1,'Я из другого города. Возможно ли сделать заказ?','С самого начала выверяем всё с максимальной точностью. Чем точнее первый этап, тем меньше в дальнейшем будет трудностей. Оснастку мы изготавливаем сперва на станке, а затем доводим вручную, пока она не будет на 100% соответствовать чертежу. Мы не начинаем штамповку, пока она не достигнет максимально точных размеров. Иначе у нас не бывает.','','',1,1),
 (3,1,'Как мне контролировать ход выполнения заказа?','С самого начала выверяем всё с максимальной точностью. Чем точнее первый этап, тем меньше в дальнейшем будет трудностей. Оснастку мы изготавливаем сперва на станке, а затем доводим вручную, пока она не будет на 100% соответствовать чертежу. Мы не начинаем штамповку, пока она не достигнет максимально точных размеров. Иначе у нас не бывает.','','',1,1),
 (4,1,'Может ли быть так, что деталь не будет соответствовать чертежу?','С самого начала выверяем всё с максимальной точностью. Чем точнее первый этап, тем меньше в дальнейшем будет трудностей. Оснастку мы изготавливаем сперва на станке, а затем доводим вручную, пока она не будет на 100% соответствовать чертежу. Мы не начинаем штамповку, пока она не достигнет максимально точных размеров. Иначе у нас не бывает.','','',1,1),
-(5,1,'Может ли меняться цена в процессе выполнения заказа?','С самого начала выверяем всё с максимальной точностью. Чем точнее первый этап, тем меньше в дальнейшем будет трудностей. Оснастку мы изготавливаем сперва на станке, а затем доводим вручную, пока она не будет на 100% соответствовать чертежу. Мы не начинаем штамповку, пока она не достигнет максимально точных размеров. Иначе у нас не бывает.','','',1,1),
-(6,1,'213131231321',NULL,'Manuchehr','+7 (999) 999 99 99',2,1),
-(7,1,'dawdawdawdwadwa',NULL,'Manuchehr','+7 (999) 999 99 99',2,1),
-(8,1,'adwwada',NULL,'asdaw','+7 (999) 999 99 99',2,1),
-(9,1,'324242342 qwdwada dwada',NULL,'Manuchehr','+7 (999) 999 99 99',2,1);
-
-/*Table structure for table `auth_assignment` */
-
-DROP TABLE IF EXISTS `auth_assignment`;
-
-CREATE TABLE `auth_assignment` (
-  `item_name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `user_id` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` int(11) DEFAULT NULL,
-  PRIMARY KEY (`item_name`,`user_id`),
-  KEY `idx-auth_assignment-user_id` (`user_id`),
-  CONSTRAINT `auth_assignment_ibfk_1` FOREIGN KEY (`item_name`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-/*Data for the table `auth_assignment` */
-
-insert  into `auth_assignment`(`item_name`,`user_id`,`created_at`) values 
-('Администратор','1',1570799169);
-
-/*Table structure for table `auth_item` */
-
-DROP TABLE IF EXISTS `auth_item`;
-
-CREATE TABLE `auth_item` (
-  `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `type` smallint(6) NOT NULL,
-  `description` text COLLATE utf8_unicode_ci,
-  `rule_name` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `data` blob,
-  `created_at` int(11) DEFAULT NULL,
-  `updated_at` int(11) DEFAULT NULL,
-  PRIMARY KEY (`name`),
-  KEY `rule_name` (`rule_name`),
-  KEY `idx-auth_item-type` (`type`),
-  CONSTRAINT `auth_item_ibfk_1` FOREIGN KEY (`rule_name`) REFERENCES `auth_rule` (`name`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-/*Data for the table `auth_item` */
-
-insert  into `auth_item`(`name`,`type`,`description`,`rule_name`,`data`,`created_at`,`updated_at`) values 
-('/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/answer-questions/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/answer-questions/create',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/answer-questions/delete',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/answer-questions/index',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/answer-questions/update',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/answer-questions/view',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/default/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/default/index',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/depend',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/depend/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/editable/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/editable/answer-question-status',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/editable/chenge-order',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/editable/chenge-slide-access',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/editable/front-menu-access',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/editable/requisites-status',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/editable/section-status',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/editable/service-status',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/editable/work-proccess-status',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/editable/work-result-status',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/front-menu/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/front-menu/create',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/front-menu/delete',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/front-menu/index',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/front-menu/update',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/front-menu/view',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/main/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/main/index',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/main/login',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/main/logout',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/pages/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/pages/create',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/pages/delete',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/pages/index',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/pages/update',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/pages/view',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/price-list/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/price-list/create',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/price-list/delete',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/price-list/index',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/price-list/update',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/price-list/view',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/requisites/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/requisites/create',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/requisites/delete',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/requisites/index',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/requisites/update',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/requisites/view',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/sections/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/sections/create',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/sections/delete',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/sections/index',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/sections/update',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/sections/view',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/service-info/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/service-info/create',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/service-info/delete',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/service-info/index',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/service-info/update',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/service-info/view',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/services/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/services/create',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/services/delete',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/services/index',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/services/update',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/services/view',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/slider/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/slider/create',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/slider/delete',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/slider/index',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/slider/update',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/slider/view',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/user/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/user/change-password',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/user/login-details',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/user/profile',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/user/register',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/work-proccess/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/work-proccess/create',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/work-proccess/delete',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/work-proccess/index',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/work-proccess/update',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/work-proccess/view',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/work-results/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/work-results/create',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/work-results/delete',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/work-results/index',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/work-results/update',2,NULL,NULL,NULL,1570799082,1570799082),
-('/admin/work-results/view',2,NULL,NULL,NULL,1570799082,1570799082),
-('/debug/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/debug/default/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/debug/default/db-explain',2,NULL,NULL,NULL,1570799082,1570799082),
-('/debug/default/download-mail',2,NULL,NULL,NULL,1570799082,1570799082),
-('/debug/default/index',2,NULL,NULL,NULL,1570799082,1570799082),
-('/debug/default/toolbar',2,NULL,NULL,NULL,1570799082,1570799082),
-('/debug/default/view',2,NULL,NULL,NULL,1570799082,1570799082),
-('/debug/user/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/debug/user/reset-identity',2,NULL,NULL,NULL,1570799082,1570799082),
-('/debug/user/set-identity',2,NULL,NULL,NULL,1570799082,1570799082),
-('/gii/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/gii/default/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/gii/default/action',2,NULL,NULL,NULL,1570799082,1570799082),
-('/gii/default/diff',2,NULL,NULL,NULL,1570799082,1570799082),
-('/gii/default/index',2,NULL,NULL,NULL,1570799082,1570799082),
-('/gii/default/preview',2,NULL,NULL,NULL,1570799082,1570799082),
-('/gii/default/view',2,NULL,NULL,NULL,1570799082,1570799082),
-('/gridview/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/gridview/export/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/gridview/export/download',2,NULL,NULL,NULL,1570799082,1570799082),
-('/page/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/page/about',2,NULL,NULL,NULL,1570799082,1570799082),
-('/page/captcha',2,NULL,NULL,NULL,1570799082,1570799082),
-('/page/contact',2,NULL,NULL,NULL,1570799082,1570799082),
-('/page/error',2,NULL,NULL,NULL,1570799082,1570799082),
-('/page/service-cold-stamping',2,NULL,NULL,NULL,1570799082,1570799082),
-('/page/service-metal-bending',2,NULL,NULL,NULL,1570799082,1570799082),
-('/page/thanks',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/assignment/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/assignment/assign',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/assignment/index',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/assignment/remove',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/assignment/view',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/permission/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/permission/assign',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/permission/create',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/permission/delete',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/permission/index',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/permission/remove',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/permission/update',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/permission/view',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/role/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/role/assign',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/role/create',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/role/delete',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/role/index',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/role/remove',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/role/update',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/role/view',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/route/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/route/assign',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/route/index',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/route/refresh',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/route/remove',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/rule/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/rule/create',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/rule/delete',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/rule/index',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/rule/update',2,NULL,NULL,NULL,1570799082,1570799082),
-('/rbac/rule/view',2,NULL,NULL,NULL,1570799082,1570799082),
-('/request/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/request/contact',2,NULL,NULL,NULL,1570799082,1570799082),
-('/request/need-to-call',2,NULL,NULL,NULL,1570799082,1570799082),
-('/request/order-by-drawing',2,NULL,NULL,NULL,1570799082,1570799082),
-('/request/question',2,NULL,NULL,NULL,1570799082,1570799082),
-('/settings/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/settings/default/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/settings/default/create',2,NULL,NULL,NULL,1570799082,1570799082),
-('/settings/default/delete',2,NULL,NULL,NULL,1570799082,1570799082),
-('/settings/default/edit-setting',2,NULL,NULL,NULL,1570799082,1570799082),
-('/settings/default/index',2,NULL,NULL,NULL,1570799082,1570799082),
-('/settings/default/update',2,NULL,NULL,NULL,1570799082,1570799082),
-('/site/*',2,NULL,NULL,NULL,1570799082,1570799082),
-('/site/captcha',2,NULL,NULL,NULL,1570799082,1570799082),
-('/site/error',2,NULL,NULL,NULL,1570799082,1570799082),
-('/site/index',2,NULL,NULL,NULL,1570799082,1570799082),
-('/site/logout',2,NULL,NULL,NULL,1570799082,1570799082),
-('Администратор',2,'Доступ администратора',NULL,NULL,1570799133,1570799133);
-
-/*Table structure for table `auth_item_child` */
-
-DROP TABLE IF EXISTS `auth_item_child`;
-
-CREATE TABLE `auth_item_child` (
-  `parent` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `child` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`parent`,`child`),
-  KEY `child` (`child`),
-  CONSTRAINT `auth_item_child_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `auth_item_child_ibfk_2` FOREIGN KEY (`child`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-/*Data for the table `auth_item_child` */
-
-insert  into `auth_item_child`(`parent`,`child`) values 
-('Администратор','/*'),
-('Администратор','/admin/*'),
-('Администратор','/admin/answer-questions/*'),
-('Администратор','/admin/answer-questions/create'),
-('Администратор','/admin/answer-questions/delete'),
-('Администратор','/admin/answer-questions/index'),
-('Администратор','/admin/answer-questions/update'),
-('Администратор','/admin/answer-questions/view'),
-('Администратор','/admin/default/*'),
-('Администратор','/admin/default/index'),
-('Администратор','/admin/depend'),
-('Администратор','/admin/depend/*'),
-('Администратор','/admin/editable/*'),
-('Администратор','/admin/editable/answer-question-status'),
-('Администратор','/admin/editable/chenge-order'),
-('Администратор','/admin/editable/chenge-slide-access'),
-('Администратор','/admin/editable/front-menu-access'),
-('Администратор','/admin/editable/requisites-status'),
-('Администратор','/admin/editable/section-status'),
-('Администратор','/admin/editable/service-status'),
-('Администратор','/admin/editable/work-proccess-status'),
-('Администратор','/admin/editable/work-result-status'),
-('Администратор','/admin/front-menu/*'),
-('Администратор','/admin/front-menu/create'),
-('Администратор','/admin/front-menu/delete'),
-('Администратор','/admin/front-menu/index'),
-('Администратор','/admin/front-menu/update'),
-('Администратор','/admin/front-menu/view'),
-('Администратор','/admin/main/*'),
-('Администратор','/admin/main/index'),
-('Администратор','/admin/main/login'),
-('Администратор','/admin/main/logout'),
-('Администратор','/admin/pages/*'),
-('Администратор','/admin/pages/create'),
-('Администратор','/admin/pages/delete'),
-('Администратор','/admin/pages/index'),
-('Администратор','/admin/pages/update'),
-('Администратор','/admin/pages/view'),
-('Администратор','/admin/price-list/*'),
-('Администратор','/admin/price-list/create'),
-('Администратор','/admin/price-list/delete'),
-('Администратор','/admin/price-list/index'),
-('Администратор','/admin/price-list/update'),
-('Администратор','/admin/price-list/view'),
-('Администратор','/admin/requisites/*'),
-('Администратор','/admin/requisites/create'),
-('Администратор','/admin/requisites/delete'),
-('Администратор','/admin/requisites/index'),
-('Администратор','/admin/requisites/update'),
-('Администратор','/admin/requisites/view'),
-('Администратор','/admin/sections/*'),
-('Администратор','/admin/sections/create'),
-('Администратор','/admin/sections/delete'),
-('Администратор','/admin/sections/index'),
-('Администратор','/admin/sections/update'),
-('Администратор','/admin/sections/view'),
-('Администратор','/admin/service-info/*'),
-('Администратор','/admin/service-info/create'),
-('Администратор','/admin/service-info/delete'),
-('Администратор','/admin/service-info/index'),
-('Администратор','/admin/service-info/update'),
-('Администратор','/admin/service-info/view'),
-('Администратор','/admin/services/*'),
-('Администратор','/admin/services/create'),
-('Администратор','/admin/services/delete'),
-('Администратор','/admin/services/index'),
-('Администратор','/admin/services/update'),
-('Администратор','/admin/services/view'),
-('Администратор','/admin/slider/*'),
-('Администратор','/admin/slider/create'),
-('Администратор','/admin/slider/delete'),
-('Администратор','/admin/slider/index'),
-('Администратор','/admin/slider/update'),
-('Администратор','/admin/slider/view'),
-('Администратор','/admin/user/*'),
-('Администратор','/admin/user/change-password'),
-('Администратор','/admin/user/login-details'),
-('Администратор','/admin/user/profile'),
-('Администратор','/admin/user/register'),
-('Администратор','/admin/work-proccess/*'),
-('Администратор','/admin/work-proccess/create'),
-('Администратор','/admin/work-proccess/delete'),
-('Администратор','/admin/work-proccess/index'),
-('Администратор','/admin/work-proccess/update'),
-('Администратор','/admin/work-proccess/view'),
-('Администратор','/admin/work-results/*'),
-('Администратор','/admin/work-results/create'),
-('Администратор','/admin/work-results/delete'),
-('Администратор','/admin/work-results/index'),
-('Администратор','/admin/work-results/update'),
-('Администратор','/admin/work-results/view'),
-('Администратор','/debug/*'),
-('Администратор','/debug/default/*'),
-('Администратор','/debug/default/db-explain'),
-('Администратор','/debug/default/download-mail'),
-('Администратор','/debug/default/index'),
-('Администратор','/debug/default/toolbar'),
-('Администратор','/debug/default/view'),
-('Администратор','/debug/user/*'),
-('Администратор','/debug/user/reset-identity'),
-('Администратор','/debug/user/set-identity'),
-('Администратор','/gii/*'),
-('Администратор','/gii/default/*'),
-('Администратор','/gii/default/action'),
-('Администратор','/gii/default/diff'),
-('Администратор','/gii/default/index'),
-('Администратор','/gii/default/preview'),
-('Администратор','/gii/default/view'),
-('Администратор','/gridview/*'),
-('Администратор','/gridview/export/*'),
-('Администратор','/gridview/export/download'),
-('Администратор','/page/*'),
-('Администратор','/page/about'),
-('Администратор','/page/captcha'),
-('Администратор','/page/contact'),
-('Администратор','/page/error'),
-('Администратор','/page/service-cold-stamping'),
-('Администратор','/page/service-metal-bending'),
-('Администратор','/page/thanks'),
-('Администратор','/rbac/*'),
-('Администратор','/rbac/assignment/*'),
-('Администратор','/rbac/assignment/assign'),
-('Администратор','/rbac/assignment/index'),
-('Администратор','/rbac/assignment/remove'),
-('Администратор','/rbac/assignment/view'),
-('Администратор','/rbac/permission/*'),
-('Администратор','/rbac/permission/assign'),
-('Администратор','/rbac/permission/create'),
-('Администратор','/rbac/permission/delete'),
-('Администратор','/rbac/permission/index'),
-('Администратор','/rbac/permission/remove'),
-('Администратор','/rbac/permission/update'),
-('Администратор','/rbac/permission/view'),
-('Администратор','/rbac/role/*'),
-('Администратор','/rbac/role/assign'),
-('Администратор','/rbac/role/create'),
-('Администратор','/rbac/role/delete'),
-('Администратор','/rbac/role/index'),
-('Администратор','/rbac/role/remove'),
-('Администратор','/rbac/role/update'),
-('Администратор','/rbac/role/view'),
-('Администратор','/rbac/route/*'),
-('Администратор','/rbac/route/assign'),
-('Администратор','/rbac/route/index'),
-('Администратор','/rbac/route/refresh'),
-('Администратор','/rbac/route/remove'),
-('Администратор','/rbac/rule/*'),
-('Администратор','/rbac/rule/create'),
-('Администратор','/rbac/rule/delete'),
-('Администратор','/rbac/rule/index'),
-('Администратор','/rbac/rule/update'),
-('Администратор','/rbac/rule/view'),
-('Администратор','/request/*'),
-('Администратор','/request/contact'),
-('Администратор','/request/need-to-call'),
-('Администратор','/request/order-by-drawing'),
-('Администратор','/request/question'),
-('Администратор','/settings/*'),
-('Администратор','/settings/default/*'),
-('Администратор','/settings/default/create'),
-('Администратор','/settings/default/delete'),
-('Администратор','/settings/default/edit-setting'),
-('Администратор','/settings/default/index'),
-('Администратор','/settings/default/update'),
-('Администратор','/site/*'),
-('Администратор','/site/captcha'),
-('Администратор','/site/error'),
-('Администратор','/site/index'),
-('Администратор','/site/logout');
-
-/*Table structure for table `auth_rule` */
-
-DROP TABLE IF EXISTS `auth_rule`;
-
-CREATE TABLE `auth_rule` (
-  `name` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
-  `data` blob,
-  `created_at` int(11) DEFAULT NULL,
-  `updated_at` int(11) DEFAULT NULL,
-  PRIMARY KEY (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
-/*Data for the table `auth_rule` */
+(5,1,'Может ли меняться цена в процессе выполнения заказа?','С самого начала выверяем всё с максимальной точностью. Чем точнее первый этап, тем меньше в дальнейшем будет трудностей. Оснастку мы изготавливаем сперва на станке, а затем доводим вручную, пока она не будет на 100% соответствовать чертежу. Мы не начинаем штамповку, пока она не достигнет максимально точных размеров. Иначе у нас не бывает.','','',1,1);
 
 /*Table structure for table `back_menu` */
 
@@ -479,7 +65,7 @@ CREATE TABLE `back_menu` (
   `arrow_tag` varchar(255) DEFAULT NULL,
   `position` enum('left','right','top') DEFAULT NULL,
   PRIMARY KEY (`nodeid`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 /*Data for the table `back_menu` */
 
@@ -489,32 +75,23 @@ insert  into `back_menu`(`nodeid`,`parentnodeid`,`nodeshortname`,`nodename`,`nod
 (3,0,'Страницы','Страницы','#','ALL',1,1,3,NULL,'dvr','no','no','','no','arrow','left'),
 (4,0,'Выход','Выход','/admin/main/logout','ALL',1,1,100,NULL,'directions_walk','no','no','','no',NULL,'left'),
 (5,2,'Меню','Меню','/admin/front-menu/index','ALL',1,1,1,NULL,NULL,'no','no','','no',NULL,'left'),
-(6,2,'Слайдер','Слайдер','/admin/slider/index','ALL',1,1,2,NULL,NULL,'no','no','','no',NULL,'left'),
-(7,3,'Услуги','Услуги','#','ALL',1,1,2,NULL,NULL,'no','no','','yes','arrow','left'),
+(6,2,'Слайдер','Слайдер','/admin/slider/index','ALL',1,1,1,NULL,NULL,'no','no','','no',NULL,'left'),
+(7,3,'Услуги','Услуги','#','ALL',1,1,1,NULL,NULL,'no','no','','yes','arrow','left'),
 (8,7,'Управление услугами','Управление услугами','/admin/services','ALL',1,1,0,NULL,NULL,'no','no','','yes',NULL,'left'),
 (9,7,'Примеры работ','Примеры работ','/admin/work-results','ALL',1,1,3,NULL,NULL,'no','no','','yes',NULL,'left'),
 (10,7,'Прайслист','Прайслист','/admin/price-list','ALL',1,1,4,NULL,NULL,'no','no','','yes',NULL,'left'),
 (11,7,'Вопрос-ответ','Вопрос-ответ','/admin/answer-questions','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,'left'),
 (12,7,'Доп. информации','Доп. информации','/admin/service-info','ALL',1,1,5,NULL,NULL,'no','no','','yes',NULL,'left'),
-(13,3,'Главная страница','Главная страница','/admin/sections?SectionsSearch%5Bpage_id%5D=1','ALL',1,1,1,NULL,'arrow','no','no','','yes',NULL,'left'),
-(14,3,'Контакты','Контакты','/admin/sections?SectionsSearch%5Bpage_id%5D=3','ALL',1,1,3,NULL,NULL,'no','no','','yes',NULL,'left'),
-(15,3,'О компании','О компании','/admin/sections?SectionsSearch%5Bpage_id%5D=4&SectionsSearch%5Btitle%5D=&SectionsSearch%5Balias%5D=&SectionsSearch%5Bdescription%5D=&SectionsSearch%5Btype%5','ALL',1,1,4,NULL,NULL,'no','no','','yes',NULL,'left'),
-(16,3,'Страница СПАСИБО','Страница СПАСИБО','#','ALL',1,1,5,NULL,NULL,'no','no','','yes',NULL,'left'),
-(17,3,'Страница 404','Страница 404','#','ALL',1,1,6,NULL,NULL,'no','no','','yes',NULL,'left'),
+(13,3,'Главная страница','Главная страница','#','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,'left'),
+(14,3,'Страница контактов','Страница контактов','#','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,'left'),
+(15,3,'О компании','О компании','#','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,'left'),
+(16,3,'Страница СПАСИБО','Страница СПАСИБО','#','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,'left'),
+(17,3,'Страница 404','Страница 404','#','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,'left'),
 (18,7,'Процесс работ','Процесс работ','/admin/work-proccess','ALL',1,1,2,NULL,NULL,'no','no','','yes',NULL,'left'),
 (19,0,'Организация','Организация','#','ALL',1,1,4,NULL,'location_city','no','no','','yes','arrow','left'),
 (20,19,'Реквизиты','Реквизиты','/admin/requisites','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,'left'),
 (21,19,'Контакты','Контакты','/admin/requisites','ALL',0,1,1,NULL,NULL,'no','no','','yes',NULL,'left'),
-(22,2,'Настройки и тексты','Настройки и тексты','/settings','ALL',1,1,10,NULL,NULL,'no','no','','yes',NULL,'left'),
-(23,13,'Как мы работаем','Как мы работаем','/admin/how-we-work','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,'left'),
-(24,13,'Почему мы','Почему мы','/admin/why-we','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,'left'),
-(25,2,'Блоки страниц','Раздeл страниц','/admin/sections','ALL',1,1,3,NULL,NULL,'no','no','','yes',NULL,'left'),
-(26,2,'Фото страниц','Фото страниц','/admin/page-photos','ALL',1,1,4,NULL,NULL,'no','no','','yes',NULL,'left'),
-(27,0,'Пользователи','Пользователи','#','ALL',1,1,4,NULL,'person','no','no','','yes','arrow','left'),
-(28,27,'Назначения','Назначения','/rbac','ALL',1,1,1,NULL,NULL,'no','no','','yes','',NULL),
-(29,27,'Маршруты','Маршруты','/rbac/route','ALL',1,1,2,NULL,NULL,'no','no','','yes',NULL,NULL),
-(30,27,'Разрешения','Разрешения','/rbac/permission','ALL',1,1,3,NULL,NULL,'no','no','','yes',NULL,NULL),
-(31,27,'Роли','Роли','/rbac/role','ALL',1,1,3,NULL,NULL,'no','no','','yes',NULL,NULL);
+(22,2,'Настройки и тексты','Настройки и тексты','/settings','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,'left');
 
 /*Table structure for table `call_request` */
 
@@ -526,16 +103,13 @@ CREATE TABLE `call_request` (
   `status` tinyint(1) DEFAULT NULL COMMENT '1-active, 2-confirm, 0-denied',
   `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `call_request` */
 
 insert  into `call_request`(`id`,`customer_id`,`status`,`created_at`) values 
 (1,1,1,'2019-10-10 12:15:03'),
-(2,2,1,'2019-10-10 12:15:41'),
-(3,6,1,'2019-10-10 16:51:54'),
-(4,7,1,'2019-10-11 00:40:16'),
-(5,12,1,'2019-10-11 13:13:03');
+(2,2,1,'2019-10-10 12:15:41');
 
 /*Table structure for table `contact` */
 
@@ -548,17 +122,13 @@ CREATE TABLE `contact` (
   `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '2-confirmed, 1-active, 0-inactive,',
   `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `contact` */
 
 insert  into `contact`(`id`,`customer_id`,`message`,`status`,`created_at`) values 
 (1,4,'my message',1,'2019-10-10 13:07:47'),
-(2,5,'mmm',1,'2019-10-10 14:41:24'),
-(3,8,'my message',1,'2019-10-11 09:08:24'),
-(4,9,'my message',1,'2019-10-11 09:09:53'),
-(5,10,'my message',1,'2019-10-11 09:10:12'),
-(6,11,'my message',1,'2019-10-11 09:10:26');
+(2,5,'mmm',1,'2019-10-10 14:41:24');
 
 /*Table structure for table `customers` */
 
@@ -573,7 +143,7 @@ CREATE TABLE `customers` (
   `status` tinyint(2) DEFAULT NULL COMMENT '1-active, 0-inactive',
   `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 /*Data for the table `customers` */
 
@@ -582,14 +152,7 @@ insert  into `customers`(`id`,`name`,`phone_number`,`email`,`organization`,`stat
 (2,'+7 (992) 700 10 11','+7 (999) 999 99 99',NULL,NULL,1,'2019-10-10 12:15:41'),
 (3,'Manuchehr','+7 (999) 999 99 99',NULL,NULL,1,'2019-10-10 12:16:42'),
 (4,'Manuchehr','+7 (922) 222 22 22','manu6699@mail.ru','TexApceNaL',1,'2019-10-10 13:07:47'),
-(5,'M','+7 (888) 585 85 85','manu6699@mail.ru','ppp',1,'2019-10-10 14:41:24'),
-(6,'muzafarov9797','+7 (242) 422 42 42',NULL,NULL,1,'2019-10-10 16:51:54'),
-(7,'da','+7 (424) 242 42 42',NULL,NULL,1,'2019-10-11 00:40:16'),
-(8,'admin','+7 (314) 343 24 24','manu6699@mail.ru','organization',1,'2019-10-11 09:08:24'),
-(9,'admin','+7 (314) 343 24 24','manu6699@mail.ru','organization',1,'2019-10-11 09:09:53'),
-(10,'admin','+7 (314) 343 24 24','manu6699@mail.ru','organization',1,'2019-10-11 09:10:12'),
-(11,'admin','+7 (314) 343 24 24','manu6699@mail.ru','organization',1,'2019-10-11 09:10:26'),
-(12,'adwa','+7 (342) 242 43 24',NULL,NULL,1,'2019-10-11 13:13:03');
+(5,'M','+7 (888) 585 85 85','manu6699@mail.ru','ppp',1,'2019-10-10 14:41:24');
 
 /*Table structure for table `front_menu` */
 
@@ -642,7 +205,7 @@ CREATE TABLE `login_details` (
   PRIMARY KEY (`login_detail_id`),
   KEY `login_user_id` (`login_user_id`),
   CONSTRAINT `login_details_ibfk_1` FOREIGN KEY (`login_user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 /*Data for the table `login_details` */
 
@@ -671,16 +234,7 @@ insert  into `login_details`(`login_detail_id`,`login_user_id`,`login_status`,`l
 (22,1,1,'2019-10-09 08:09:30',NULL,'127.0.0.1'),
 (23,1,1,'2019-10-09 08:09:49',NULL,'127.0.0.1'),
 (24,1,1,'2019-10-09 15:14:33',NULL,'127.0.0.1'),
-(25,1,1,'2019-10-10 12:33:04',NULL,'127.0.0.1'),
-(26,1,1,'2019-10-10 16:39:05',NULL,'127.0.0.1'),
-(27,1,1,'2019-10-10 17:58:33',NULL,'127.0.0.1'),
-(28,1,1,'2019-10-10 22:08:48',NULL,'127.0.0.1'),
-(29,1,1,'2019-10-10 22:45:37',NULL,'127.0.0.1'),
-(30,1,1,'2019-10-11 09:05:28',NULL,'127.0.0.1'),
-(31,1,1,'2019-10-11 09:05:44',NULL,'127.0.0.1'),
-(32,1,1,'2019-10-11 13:27:11',NULL,'127.0.0.1'),
-(33,1,1,'2019-10-11 18:21:45',NULL,'127.0.0.1'),
-(34,1,1,'2019-10-11 18:23:33',NULL,'127.0.0.1');
+(25,1,1,'2019-10-10 12:33:04',NULL,'127.0.0.1');
 
 /*Table structure for table `migration` */
 
@@ -696,13 +250,10 @@ CREATE TABLE `migration` (
 
 insert  into `migration`(`version`,`apply_time`) values 
 ('m000000_000000_base',1570448170),
-('m140506_102106_rbac_init',1570774067),
 ('m150227_114524_init',1570695247),
 ('m161109_104201_rename_setting_table',1570695247),
 ('m170323_102933_add_description_column_to_setting_table',1570695247),
-('m170413_125133_rename_date_columns',1570695247),
-('m170907_052038_rbac_add_index_on_auth_assignment_user_id',1570774067),
-('m180523_151638_rbac_updates_indexes_without_prefix',1570774068);
+('m170413_125133_rename_date_columns',1570695247);
 
 /*Table structure for table `order_by_drawing` */
 
@@ -762,7 +313,7 @@ CREATE TABLE `price_list` (
   `status` tinyint(2) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `service_id` (`service_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=119 DEFAULT CHARSET=utf8;
 
 /*Data for the table `price_list` */
 
@@ -889,35 +440,12 @@ CREATE TABLE `sections` (
   `alias` varchar(255) DEFAULT NULL,
   `description` varchar(500) DEFAULT NULL,
   `type` tinyint(2) DEFAULT NULL,
-  `ico` varchar(500) DEFAULT NULL,
-  `img` varchar(500) DEFAULT NULL,
   `status` tinyint(2) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `page_id` (`page_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `sections` */
-
-insert  into `sections`(`id`,`page_id`,`title`,`alias`,`description`,`type`,`ico`,`img`,`status`) values 
-(1,1,'Почему мы','','100% совпадение с чертежами заказчика',1,'feature-1.png','feature-cover.jpg',1),
-(2,1,'Почему мы','Почему мы','Мы реализуем все этапы производства.<br>Никаких субподрядчиков',1,'feature-2.png','feature-cover.jpg',1),
-(3,1,'Почему мы','Почему мы','Годами отработанная технология по всем<br>представленным услугам',1,'feature-3.png','feature-cover.jpg',1),
-(4,1,'Почему мы','Почему мы','Годами отработанная технология по всем<br>представленным услугам',1,'feature-4.png','feature-cover.jpg',1),
-(5,1,'Принятие чертежа. Уточнение подробностей','Как мы работаем','С самого начала выверяем всё с максимальной точностью. Чем точнее первый этап, тем меньше в дальнейшем будет трудностей. Оснастку мы изготавливаем сперва на станке, а затем доводим вручную, пока она не будет на 100% соответствовать чертежу. Мы не начинаем штамповку, пока она не достигнет максимально точных размеров. Иначе у нас не бывает.',2,'','',1),
-(6,1,'Расчёт количества металла','Как мы работаем','С самого начала выверяем всё с максимальной точностью. Чем точнее первый этап, тем меньше в дальнейшем будет трудностей. Оснастку мы изготавливаем сперва на станке, а затем доводим вручную, пока она не будет на 100% соответствовать чертежу. Мы не начинаем штамповку, пока она не достигнет максимально точных размеров. Иначе у нас не бывает.',2,'','',1),
-(7,1,'Эксперт контролирует качество','Как мы работаем','С самого начала выверяем всё с максимальной точностью. Чем точнее первый этап, тем меньше в дальнейшем будет трудностей. Оснастку мы изготавливаем сперва на станке, а затем доводим вручную, пока она не будет на 100% соответствовать чертежу. Мы не начинаем штамповку, пока она не достигнет максимально точных размеров. Иначе у нас не бывает.',2,'','',1),
-(8,1,'Отбракованные детали на переплавку','Как мы работаем','С самого начала выверяем всё с максимальной точностью. Чем точнее первый этап, тем меньше в дальнейшем будет трудностей. Оснастку мы изготавливаем сперва на станке, а затем доводим вручную, пока она не будет на 100% соответствовать чертежу. Мы не начинаем штамповку, пока она не достигнет максимально точных размеров. Иначе у нас не бывает.',2,'','',1),
-(9,4,'Компания ТехАрсенал','о компании','На сегодняшний день обработка металла холодной штамповкой – наиболее прогрессивный метод. Так можно получить детали различных размеров, форм и конфигураций. Они сразу готовы к использованию и не требуют последующего термического воздействия, что значительно упрощает процесс и позволяет его автоматизировать. Рассмотрим все особенности такой обработки давлением.',3,'','about-cover.jpg',1),
-(10,4,'Штампуем уникальные детали по чертежам','о компании','Производим методом холодной штамповки более 2000 видов стандартных деталей. А также разрабатываем уникальные формы на заказ для серийной штамповки. <br>',4,'','',1),
-(11,4,'Холодная штамповка<br>«под ключ»','о компании','Наша продукция: металлоизделия по чертежам, закладные для ЖБИ, винтовые сваи, скребки, диски, цепи коммунальной техники.  Выполняем полный цикл изготовления продукции от заказа и чертежа до готового изделия',4,'','',1),
-(12,4,'С чего все начиналось','2009','Идейным вдохновителем был Дмитрий Семёнов. Как-то ему были нужны качественные детали для станка цеха отца, который достался ему по ',5,'','history-item-1.jpg',1),
-(13,4,'С чего все начиналось','2012','Идейным вдохновителем был Дмитрий Семёнов. Как-то ему были нужны качественные детали для станка цеха отца, который достался ему по ',5,'','history-item-1.jpg',1),
-(14,4,'С чего все начиналось','206','Идейным вдохновителем был Дмитрий Семёнов. Как-то ему были нужны качественные детали для станка цеха отца, который достался ему по ',5,'','history-item-1.jpg',1),
-(15,4,'С чего все начиналось','2014','Идейным вдохновителем был Дмитрий Семёнов. Как-то ему были нужны качественные детали для станка цеха отца, который достался ему по ',5,'','history-item-1.jpg',1),
-(16,4,'С чего все начиналось','2019','Идейным вдохновителем был Дмитрий Семёнов. Как-то ему были нужны качественные детали для станка цеха отца, который достался ему по ',5,'','history-item-1.jpg',1),
-(17,3,'Телефон','Тел','+7 (910) 788-40-41',NULL,'','person.jpg',1),
-(18,3,'Адрес','','Смоленск, дер. Тепличный Комбинат №1',NULL,'','',1),
-(19,3,'Email','','andrey@prometey67.ru',NULL,'','',1);
 
 /*Table structure for table `service_info` */
 
@@ -953,23 +481,22 @@ CREATE TABLE `services` (
   `alias` varchar(150) DEFAULT NULL,
   `description` text,
   `img` varchar(500) NOT NULL DEFAULT 'service-cover.jpg',
-  `url` varchar(500) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 /*Data for the table `services` */
 
-insert  into `services`(`id`,`parent_id`,`name`,`alias`,`description`,`img`,`url`,`status`) values 
-(1,0,'Холодная штамповка','Холодная штамповка','Холодная штамповка позволяет получить под давлением без нагрева разнопрофильные изделия.\r\nПроизводство очень эффективно, так как детали почти не требуют дополнительной обработки и отличаются замечательным внешним видом.\r\nСамо получение происходит в специальном инструменте - штампе.','service_cover_1.jpg','/page/service-cold-stamping',1),
-(2,0,'Гибка метала','Гибка метала','В отличие от сварки не увеличивает риск коррозии.\r\nГибку можно применять: на любом металлическом профиле, трубах, листовом металле и стальных листах.','service_cover_2.jpg','/page/service-metal-bending',1),
-(3,2,'Гибка металлопрофиля','Гибка металлопрофиля','Это самый распространённый способ изготовления карнизов, рельс для дверей, оконных откосов, металлических уголков для декорирования помещений, скоб, самых сложных металлических коробов для компьютерной и другой техники и мн. др.','service_cover_1.jpg','/page/service-metal-bending',1),
-(4,2,'Гибка труб','Гибка труб','С самого начала выверяем всё с максимальной точностью. Чем точнее первый этап, тем меньше в дальнейшем будет трудностей. Оснастку мы изготавливаем сперва на станке, а затем доводим вручную, пока она не будет на 100% соответствовать чертежу. Мы не начинаем штамповку, пока она не достигнет максимально точных размеров. Иначе у нас не бывает.','service_cover_1.jpg','/page/service-metal-bending',1),
-(5,0,'Гибка листового метала','Гибка листового метала','С самого начала выверяем всё с максимальной точностью. Чем точнее первый этап, тем меньше в дальнейшем будет трудностей. Оснастку мы изготавливаем сперва на станке, а затем доводим вручную, пока она не будет на 100% соответствовать чертежу. Мы не начинаем штамповку, пока она не достигнет максимально точных размеров. Иначе у нас не бывает.','service_cover_1.jpg','/page/service-metal-bending',1),
-(6,2,'Гибка стальных листов','Гибка стальных листов','С самого начала выверяем всё с максимальной точностью. Чем точнее первый этап, тем меньше в дальнейшем будет трудностей. Оснастку мы изготавливаем сперва на станке, а затем доводим вручную, пока она не будет на 100% соответствовать чертежу. Мы не начинаем штамповку, пока она не достигнет максимально точных размеров. Иначе у нас не бывает.','service_cover_1.jpg','/page/service-metal-bending',1),
-(7,0,'Плазменная резка','Плазменная резка','','service_cover_1.jpg','/page/service-metal-bending',1),
-(8,0,'Порошковая покраска и цинкование','Порошковая покраска и цинкование','','service_cover_2.jpg','/page/service-metal-bending',1),
-(9,0,'Сварочные работы','Сварочные работы','','service_cover_2.jpg','/page/service-metal-bending',1);
+insert  into `services`(`id`,`parent_id`,`name`,`alias`,`description`,`img`,`status`) values 
+(1,0,'Холодная штамповка','Холодная штамповка','Холодная штамповка позволяет получить под давлением без нагрева разнопрофильные изделия.\r\nПроизводство очень эффективно, так как детали почти не требуют дополнительной обработки и отличаются замечательным внешним видом.\r\nСамо получение происходит в специальном инструменте - штампе.','service_cover_1.jpg',1),
+(2,0,'Гибка метала','Гибка метала','В отличие от сварки не увеличивает риск коррозии.\r\nГибку можно применять: на любом металлическом профиле, трубах, листовом металле и стальных листах.','service_cover_2.jpg',1),
+(3,2,'Гибка металлопрофиля','Гибка металлопрофиля','Это самый распространённый способ изготовления карнизов, рельс для дверей, оконных откосов, металлических уголков для декорирования помещений, скоб, самых сложных металлических коробов для компьютерной и другой техники и мн. др.','',1),
+(4,2,'Гибка труб','Гибка труб','С самого начала выверяем всё с максимальной точностью. Чем точнее первый этап, тем меньше в дальнейшем будет трудностей. Оснастку мы изготавливаем сперва на станке, а затем доводим вручную, пока она не будет на 100% соответствовать чертежу. Мы не начинаем штамповку, пока она не достигнет максимально точных размеров. Иначе у нас не бывает.','',1),
+(5,0,'Гибка листового метала','Гибка листового метала','С самого начала выверяем всё с максимальной точностью. Чем точнее первый этап, тем меньше в дальнейшем будет трудностей. Оснастку мы изготавливаем сперва на станке, а затем доводим вручную, пока она не будет на 100% соответствовать чертежу. Мы не начинаем штамповку, пока она не достигнет максимально точных размеров. Иначе у нас не бывает.','',1),
+(6,2,'Гибка стальных листов','Гибка стальных листов','С самого начала выверяем всё с максимальной точностью. Чем точнее первый этап, тем меньше в дальнейшем будет трудностей. Оснастку мы изготавливаем сперва на станке, а затем доводим вручную, пока она не будет на 100% соответствовать чертежу. Мы не начинаем штамповку, пока она не достигнет максимально точных размеров. Иначе у нас не бывает.','',1),
+(7,0,'Плазменная резка','Плазменная резка','','',1),
+(8,0,'Порошковая покраска и цинкование','Порошковая покраска и цинкование','','',1),
+(9,0,'Сварочные работы','Сварочные работы','','',1);
 
 /*Table structure for table `setting` */
 
@@ -986,7 +513,7 @@ CREATE TABLE `setting` (
   `created_at` int(11) NOT NULL,
   `updated_at` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `setting` */
 
@@ -1000,16 +527,7 @@ insert  into `setting`(`id`,`type`,`section`,`key`,`value`,`status`,`description
 (8,'string','Текст','слова_руков_цеха_штамп','Самая трудоёмкая часть производства \r\nна заказ - создание оснастки (формы). \r\nНеобходимо точно сделать компьютерный \r\nрасчет формы, а затем выполнить ее в материале. \r\nСтоимость изготовления уникальной оснастки \r\nот 100 000 руб. Затем переходим к серийной штамповке.',1,'главная страница - \r\nСлова руководителя штамповки \r\nна главном странице',1570702966,1570704054),
 (9,'string','Должность','руков_цеха_штамп','Руководитель цеха штамповки',1,'главная страница - Руководитель \r\nцеха штамповки',1570703345,1570704043),
 (10,'string','Услуги','холодная_штамповка','Холодная штамповка',1,'главная страница - имя услуги',1570703729,1570704026),
-(11,'string','Услуги','инфо_об_холод_штамп','Производим детали методом холодной \r\nштамповки по чертежам. \r\nДоводим оснастку до идеальной \r\nформы и соответствия чертежу.',1,'главная страница - информация\r\nоб услуги хол. штамповки',1570704011,1570704017),
-(12,'string','Сайт','Имя компании','ООО ТехАрсенал, Смоленск',1,'имя компании в низу',1570707829,1570707829),
-(13,'string','Текст','Прочие услуги','Прочие услуги',1,'Прочие услуги',1570716884,1570716884),
-(14,'string','Текст','Как мы работаем','Как мы работаем',1,'Как мы работаем',1570716926,1570716926),
-(15,'string','Текст','Почему мы','Почему мы',1,'Почему мы',1570716953,1570716953),
-(16,'string','Текст','Контакты','Контакты',1,'Контакты',1570717000,1570717000),
-(17,'string','Должность','главТехник','Дмитрий Соляник',1,'',1570739691,1570739691),
-(18,'string','Контакты','Телефон','+7 (910) 788-40-41',1,'Телефон',1570739811,1570739907),
-(19,'string','Контакты','Email','andrey@prometey67.ru',1,'Email',1570739847,1570739942),
-(20,'string','Сотрудник','главТехник','Дмитрий Соляник',1,'главТехник',1570739891,1570739891);
+(11,'string','Услуги','инфо_об_холод_штамп','Производим детали методом холодной \r\nштамповки по чертежам. \r\nДоводим оснастку до идеальной \r\nформы и соответствия чертежу.',1,'главная страница - информация\r\nоб услуги хол. штамповки',1570704011,1570704017);
 
 /*Table structure for table `slider` */
 
@@ -1064,7 +582,7 @@ CREATE TABLE `user` (
 /*Data for the table `user` */
 
 insert  into `user`(`user_id`,`username`,`user_password`,`email`,`user_type`,`is_block`,`avatar`,`created_at`,`created_by`,`updated_at`,`updated_by`,`secret_key`,`auth_key`,`session_id`) values 
-(1,'admin','af8eb328301d219cfd1d50e6c6a48f58','admin@polytech.tj','A',0,'prof1.jpg','2017-10-23 11:52:23',1,'2015-05-27 15:56:35',1,NULL,NULL,'dcv64k274tu97igcnhugtpv1gcg7inks'),
+(1,'admin','abcbbfaea4e618fa7f88cb6b47c6969c','admin@polytech.tj','A',0,'prof1.jpg','2017-10-23 11:52:23',1,'2015-05-27 15:56:35',1,NULL,NULL,'ch0vblsusbe4g9muflbej29ihf1sole0'),
 (3,'admin2','4297f44b13955235245b2497399d7a93','manu6699@mail.ru','A',0,NULL,'2018-07-30 14:22:25',1,'2015-05-27 15:56:35',1,NULL,NULL,''),
 (15,'admin3','4baee7411b65cadc2c33bdc3a3155e06','admin@mail.ru','A',0,NULL,'2015-05-27 15:56:35',1,'2015-05-27 15:56:35',1,NULL,NULL,''),
 (16,'admin5','4baee7411b65cadc2c33bdc3a3155e06','admin5@mail.ru','U',0,NULL,'2015-05-27 15:56:35',1,'2015-05-27 15:56:35',1,NULL,NULL,''),
