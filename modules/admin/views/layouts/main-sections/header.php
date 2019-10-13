@@ -6,6 +6,17 @@
  * Time: 14:55
  */
 
+use app\models\CallRequest;
+use app\models\Contact;
+
+$contacts = Contact::find()->select('c.*, cs.*, time(c.created_at) as created_at')
+    ->from('contact c')
+    ->leftJoin('customers cs', 'c.customer_id=cs.id')
+    ->where(['c.status' => 1])->asArray()->all();
+$calls = Contact::find()->select('c.*, cs.*, time(cs.created_at) as created_at')
+    ->from('call_request c')
+    ->innerJoin('customers cs', 'c.customer_id=cs.id')
+    ->where(['c.status' => 1])->asArray()->all();
 ?>
 
 <!-- start header -->
@@ -42,70 +53,30 @@
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"
                        data-hover="dropdown" data-close-others="true">
                         <i class="fa fa-bell-o"></i>
-                        <span class="badge headerBadgeColor1"> 6 </span>
+                        <span class="badge headerBadgeColor1"> <?= count($calls) ?> </span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="external">
-                            <h3><span class="bold">Notifications</span></h3>
-                            <span class="notification-label purple-bgcolor">New 6</span>
+                            <h3><span class="bold">Запросы на звонок</span></h3>
+                            <span class="notification-label purple-bgcolor">Новые <?=  count($calls) ?> </span>
                         </li>
                         <li>
                             <ul class="dropdown-menu-list small-slimscroll-style"
                                 data-handle-color="#637283">
+                                <?php foreach ($calls as $call): ?>
                                 <li>
-                                    <a href="javascript:;">
-                                        <span class="time">just now</span>
-                                        <span class="details">
-                                                <span class="notification-icon circle deepPink-bgcolor"><i
-                                                            class="fa fa-check"></i></span> Congratulations!. </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="time">3 mins</span>
-                                        <span class="details">
-                                                <span class="notification-icon circle purple-bgcolor"><i
-                                                            class="fa fa-user o"></i></span>
-                                                <b>John Micle </b>is now following you. </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="time">7 mins</span>
+                                    <a href="/admin/user/calls?uid="<?=$call['customer_id']?>>
+                                        <span class="time"><?= $call['created_at'] ?></span>
                                         <span class="details">
                                                 <span class="notification-icon circle blue-bgcolor"><i
-                                                            class="fa fa-comments-o"></i></span>
-                                                <b>Sneha Jogi </b>sent you a message. </span>
+                                                            class="fa fa-phone"></i></span>
+                                                <b><?= $call['name'] ?> </b> <?= substr($call['phone_number'], 0, 15).'...' ?> </span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="time">12 mins</span>
-                                        <span class="details">
-                                                <span class="notification-icon circle pink"><i
-                                                            class="fa fa-heart"></i></span>
-                                                <b>Ravi Patel </b>like your photo. </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="time">15 mins</span>
-                                        <span class="details">
-                                                <span class="notification-icon circle yellow"><i
-                                                            class="fa fa-warning"></i></span> Warning! </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="time">10 hrs</span>
-                                        <span class="details">
-                                                <span class="notification-icon circle red"><i
-                                                            class="fa fa-times"></i></span> Application error. </span>
-                                    </a>
-                                </li>
+                                <?php endforeach; ?>
                             </ul>
                             <div class="dropdown-menu-footer">
-                                <a href="javascript:void(0)"> All notifications </a>
+                                <a href="/admin/user/messages"> Все оповищение </a>
                             </div>
                         </li>
                     </ul>
@@ -116,84 +87,30 @@
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"
                        data-hover="dropdown" data-close-others="true">
                         <i class="fa fa-envelope-o"></i>
-                        <span class="badge headerBadgeColor2"> 2 </span>
+                        <span class="badge headerBadgeColor2"> <?=  count($contacts) ?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li class="external">
-                            <h3><span class="bold">Messages</span></h3>
-                            <span class="notification-label cyan-bgcolor">New 2</span>
+                            <h3><span class="bold">Сообщение</span></h3>
+                            <span class="notification-label cyan-bgcolor">Новые <?=  count($contacts) ?></span>
                         </li>
                         <li>
                             <ul class="dropdown-menu-list small-slimscroll-style"
                                 data-handle-color="#637283">
+                                <?php foreach ($contacts as $contact): ?>
                                 <li>
                                     <a href="#">
-                                                <span class="photo">
-                                                	<img src="src="<?= Yii::getAlias('@web') ?>
-                                                    /admin_assets/img/prof/<?= Yii::$app->session->get('avatar', 'default-prof.jpg') ?>"
-                                                         class="img-circle" alt=""> </span>
                                         <span class="subject">
-                                                	<span class="from"> Sarah Smith </span>
-                                                	<span class="time">Just Now </span>
+                                                	<span class="from"> <?=$contact['name'].' - '.$contact['phone_number']?> </span>
+                                                	<span class="time"><?=$contact['created_at']?> </span>
                                                 </span>
-                                        <span class="message"> Jatin I found you on LinkedIn... </span>
+                                        <span class="message"> <?= substr($contact['message'], 0, 20).'...' ?> </span>
                                     </a>
                                 </li>
-                                <li>
-                                    <a href="#">
-                                                <span class="photo">
-                                                	<img src="src="<?= Yii::getAlias('@web') ?>
-                                                    /admin_assets/img/prof/prof3.jpg"
-                                                         class="img-circle" alt=""> </span>
-                                        <span class="subject">
-                                                	<span class="from"> John Deo </span>
-                                                	<span class="time">16 mins </span>
-                                                </span>
-                                        <span class="message"> Fwd: Important Notice Regarding Your Domain Name... </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                                <span class="photo">
-                                                	<img src="src="<?= Yii::getAlias('@web') ?>
-                                                    /admin_assets/img/prof/prof1.jpg"
-                                                         class="img-circle" alt=""> </span>
-                                        <span class="subject">
-                                                	<span class="from"> Rajesh </span>
-                                                	<span class="time">2 hrs </span>
-                                                </span>
-                                        <span class="message"> pls take a print of attachments. </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                                <span class="photo">
-                                                	<img src="src="<?= Yii::getAlias('@web') ?>
-                                                    /admin_assets/img/prof/prof8.jpg"
-                                                         class="img-circle" alt=""> </span>
-                                        <span class="subject">
-                                                	<span class="from"> Lina Smith </span>
-                                                	<span class="time">40 mins </span>
-                                                </span>
-                                        <span class="message"> Apply for Ortho Surgeon </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                                <span class="photo">
-                                                	<img src="src="<?= Yii::getAlias('@web') ?>
-                                                    /admin_assets/img/prof/prof5.jpg"
-                                                         class="img-circle" alt=""> </span>
-                                        <span class="subject">
-                                                	<span class="from"> Jacob Ryan </span>
-                                                	<span class="time">46 mins </span>
-                                                </span>
-                                        <span class="message"> Request for leave application. </span>
-                                    </a>
-                                </li>
+                                <?php endforeach; ?>
                             </ul>
                             <div class="dropdown-menu-footer">
-                                <a href="#"> All Messages </a>
+                                <a href="#"> Все сообщение </a>
                             </div>
                         </li>
                     </ul>

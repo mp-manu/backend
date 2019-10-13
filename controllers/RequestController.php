@@ -42,14 +42,12 @@ class RequestController extends Controller
                     $orderByDraw->file = basename($_FILES['file']['name']);
                 }
                 $orderByDraw->save();
-                $this->sendEmail('Заказ по чертежу', 'order-by-draw',
-                    $customer->phone_number, $customer->name);
+//                $this->sendEmail('Заказ по чертежу', 'order-by-draw',
+//                    $customer->phone_number, $customer->name);
                 $this->redirect('/page/thanks');
             } else {
                 echo 'not save';
             }
-
-
         } else {
             $this->goHome();
         }
@@ -71,8 +69,8 @@ class RequestController extends Controller
                 $request->status = 1; //1 active, 2 confirmed, 0-denied
                 $request->created_at = (new Expression('NOW()'));
                 $request->save();
-                $this->sendEmail('Запрос на званок', 'need-call',
-                    $customer->phone_number, $customer->name, 'Пожалуйста позвоните мне. Мой номер '.$customer->phone_number);
+                //$this->sendEmail('Запрос на званок', 'need-call',
+                //    $customer->phone_number, $customer->name, 'Пожалуйста позвоните мне. Мой номер '.$customer->phone_number);
                 $this->redirect('/page/thanks');
             } else {
                 echo 'not save';
@@ -100,8 +98,8 @@ class RequestController extends Controller
                 $contact->message = Html::encode(Yii::$app->request->post('message'));
                 $contact->created_at = (new Expression('NOW()'));
                 $contact->save();
-                $this->sendEmail('Запрос клиента', 'contact',
-                    $customer->phone_number, $customer->name, $contact->message);
+                //$this->sendEmail('Запрос клиента', 'contact',
+                //    $customer->phone_number, $customer->name, $contact->message);
                 $this->redirect('/page/thanks');
             } else {
                 echo 'not save';
@@ -122,13 +120,108 @@ class RequestController extends Controller
             $question->type = 2;
             $question->status = 1;
             $question->service_id = 1;
-            if ($this->sendEmail('Вопрос от клиента', 'question', $question->phone, $question->username, $question->question)
-                && $question->save()) {
+            if (/*$this->sendEmail('Вопрос от клиента', 'question', $question->phone, $question->username, $question->question)
+                && */$question->save()) {
                return $this->redirect('/page/thanks');
             } else {
                return $this->goHome();
             }
         }
+    }
+
+
+
+    public function actionChangeCallStatus(){
+        $callId = Html::encode($_POST['call_id']);
+        $s = Html::encode($_POST['status']);
+        switch ($s){
+            case 1:
+                $s = 0;
+                break;
+            case 0:
+                $s = 2;
+                break;
+            case 2:
+                $s = 1;
+                break;
+            default:
+                $s = 0;
+                break;
+        }
+
+        Yii::$app->db
+            ->createCommand('UPDATE call_request SET status = '.$s.' WHERE id = '.$callId)->execute();
+        return $s;
+    }
+
+    public function actionChangeOrderStatus(){
+        $orderId = Html::encode($_POST['order_id']);
+        $s = Html::encode($_POST['status']);
+        switch ($s){
+            case 1:
+                $s = 0;
+                break;
+            case 0:
+                $s = 2;
+                break;
+            case 2:
+                $s = 1;
+                break;
+            default:
+                $s = 0;
+                break;
+        }
+
+        Yii::$app->db
+            ->createCommand('UPDATE order_by_drawing SET status = '.$s.' WHERE id = '.$orderId)->execute();
+        return $s;
+    }
+
+    public function actionChangeContactStatus(){
+        $contactId = Html::encode($_POST['contact_id']);
+        $s = Html::encode($_POST['status']);
+        switch ($s){
+            case 1:
+                $s = 0;
+                break;
+            case 0:
+                $s = 2;
+                break;
+            case 2:
+                $s = 1;
+                break;
+            default:
+                $s = 0;
+                break;
+        }
+
+        Yii::$app->db
+            ->createCommand('UPDATE contact SET status = '.$s.' WHERE id = '.$contactId)->execute();
+        return $s;
+    }
+
+    public function actionChangeQuestionStatus(){
+        $questionId = Html::encode($_POST['question_id']);
+        $s = Html::encode($_POST['status']);
+        $text = Html::encode($_POST['answer']);
+        switch ($s){
+            case 1:
+                $s = 0;
+                break;
+            case 0:
+                $s = 2;
+                break;
+            case 2:
+                $s = 1;
+                break;
+            default:
+                $s = 0;
+                break;
+        }
+
+        Yii::$app->db
+            ->createCommand('UPDATE answer_questions SET status = '.$s.', answer = "'.$text.'" WHERE id = '.$questionId)->execute();
+        return $s;
     }
 
 

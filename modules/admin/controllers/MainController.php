@@ -7,6 +7,9 @@
  */
 
 namespace app\modules\admin\controllers;
+use app\models\CallRequest;
+use app\models\Contact;
+use app\models\OrderByDrawing;
 use Yii;
 use yii\db\Expression;
 use yii\filters\AccessControl;
@@ -90,14 +93,25 @@ class MainController extends Controller
         }
     }
 
-
     public function actionIndex()
     {
-        return $this->render('index');
+        $callRequests = CallRequest::find()
+            ->select('c.status st, c.id as call_id, cs.*, DATE(cs.created_at) as d, TIME(cs.created_at) as t')
+            ->from('call_request c')
+            ->leftJoin('customers cs', 'c.customer_id=cs.id')
+            ->orderBy('c.status DESC, cs.created_at ASC')
+            ->limit(20)->asArray()->all();
+        $orderByDraws = OrderByDrawing::find()->where(['status' => 1])->count();
+        $contacts = Contact::find()->where(['status' => 1])->count();
+        $calls = CallRequest::find()->where(['status' => 1])->count();
+
+        return $this->render('index', [
+            'orderByDraws' =>$orderByDraws,
+            'contacts' => $contacts,
+            'callRequests' => $callRequests,
+            'calls' => $calls,
+        ]);
     }
-
-
-
 
     public function actionLogout(){
 
@@ -105,6 +119,4 @@ class MainController extends Controller
 
         return $this->redirect('/admin/main/login');
     }
-
-
 }

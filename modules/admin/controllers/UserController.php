@@ -8,6 +8,10 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\CallRequest;
+use app\models\Contact;
+use app\models\OrderByDrawing;
+use app\modules\admin\models\AnswerQuestions;
 use Yii;
 use yii\db\Expression;
 use yii\filters\AccessControl;
@@ -181,10 +185,11 @@ class UserController extends Controller
 
     public function actionProfile()
     {
+        $user = User::find()->where(['user_id' => Yii::$app->user->id])->asArray()->one();
 
-
-        // TODO: Manuchehr
-        return $this->redirect('/admin/main/login');
+        return $this->render('profile', [
+            'user' => $user
+        ]);
     }
 
     public function actionLoginDetails()
@@ -194,7 +199,92 @@ class UserController extends Controller
 
     public function actionChangePassword()
     {
-        return parent::actions(); // TODO: Manuchehr
+        $uid = Yii::$app->user->id;
+
+        if(Yii::$app->request->post()){
+            $login = Html::encode(Yii::$app->request->post('username'));
+            $password = Html::encode(Yii::$app->request->post('user_password'));
+            $retype = Html::encode(Yii::$app->request->post('confirm_password'));
+            $password = md5($password.$password);
+            $retype = md5($retype.$retype);
+            if($password != $retype){
+                Yii::$app->session->setFlash('errorRetype', 'Пароли не совпадают!');
+                return $this->redirect('/admin/user/profile');
+            }elseif($password == $retype) {
+                if (!empty($login)) {
+                    $user = User::find()->where(['username' => $login])->asArray()->one();
+                    if(!empty($user)){
+                        Yii::$app->session->setFlash('errorRetype', 'Этот логин уже существует! Выберите другой логин.');
+                        return $this->redirect('/admin/user/profile');
+                    }
+                    Yii::$app->db->createCommand('UPDATE user SET
+                    username="' . $login . '", user_password="' . $password . '" WHERE user_id=' . $uid)->execute();
+                    Yii::$app->session->set('username', $login);
+                } else {
+                    Yii::$app->db->createCommand('UPDATE user SET
+                    user_password="' . $password . '" WHERE user_id=' . $uid)->execute();
+                }
+                Yii::$app->session->setFlash('success', 'Данные успешно сохранены!');
+            }
+            $this->redirect('/admin/user/profile');
+        }
+        $this->redirect('/admin/user/profile');
     }
 
+    public function actionCallRequests(){
+
+        $callRequests = CallRequest::find()
+            ->select('c.status st, c.id as call_id, cs.*, DATE(cs.created_at) as d, TIME(cs.created_at) as t')
+            ->from('call_request c')
+            ->leftJoin('customers cs', 'c.customer_id=cs.id')
+            ->orderBy('c.status DESC, cs.created_at ASC')->limit(500)->asArray()->all();
+
+        return $this->render('call-requests', [
+            'data' => $callRequests
+        ]);
+    }
+
+    public function actionOrderByDraws(){
+
+        $orders = OrderByDrawing::find()
+            ->select('o.status st, o.id as order_id, o.file, cs.*, DATE(cs.created_at) as d, TIME(cs.created_at) as t')
+            ->from('order_by_drawing o')
+            ->leftJoin('customers cs', 'o.customer_id=cs.id')
+            ->orderBy('o.status DESC, cs.created_at ASC')->limit(500)->asArray()->all();
+
+        return $this->render('order-by-draws', [
+            'orders' => $orders
+        ]);
+    }
+
+    public function actionQuestions(){
+        $question = AnswerQuestions::find()->where(['type' => 2])
+            ->orderBy('status DESC')->limit(500)
+            ->asArray()
+            ->all();
+        return $this->render('questions', [
+            'question' => $question
+        ]);
+    }
+
+    public function actionContacts(){
+        $contact = Contact::find()
+            ->select('c.message, c.status, cs.name, cs.phone_number, email, organization, c.created_at, c.id as contact_id')
+            ->from('contact c')
+            ->leftJoin('customers cs', 'c.customer_id=cs.id')
+            ->orderBy('c.status DESC, c.created_at ASC')->limit(500)
+            ->asArray()
+            ->all();
+        return $this->render('contacts', [
+            'contacts' => $contact
+        ]);
+    }
+
+
+    public function beforeAction($action)
+    {
+        $this->enableCsrfValidation = false;
+        return parent::beforeAction($action);
+    }
 }
+

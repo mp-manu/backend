@@ -31,7 +31,7 @@ CREATE TABLE `answer_questions` (
   `status` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `service_id` (`service_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 /*Data for the table `answer_questions` */
 
@@ -41,10 +41,7 @@ insert  into `answer_questions`(`id`,`service_id`,`question`,`answer`,`username`
 (3,1,'Как мне контролировать ход выполнения заказа?','С самого начала выверяем всё с максимальной точностью. Чем точнее первый этап, тем меньше в дальнейшем будет трудностей. Оснастку мы изготавливаем сперва на станке, а затем доводим вручную, пока она не будет на 100% соответствовать чертежу. Мы не начинаем штамповку, пока она не достигнет максимально точных размеров. Иначе у нас не бывает.','','',1,1),
 (4,1,'Может ли быть так, что деталь не будет соответствовать чертежу?','С самого начала выверяем всё с максимальной точностью. Чем точнее первый этап, тем меньше в дальнейшем будет трудностей. Оснастку мы изготавливаем сперва на станке, а затем доводим вручную, пока она не будет на 100% соответствовать чертежу. Мы не начинаем штамповку, пока она не достигнет максимально точных размеров. Иначе у нас не бывает.','','',1,1),
 (5,1,'Может ли меняться цена в процессе выполнения заказа?','С самого начала выверяем всё с максимальной точностью. Чем точнее первый этап, тем меньше в дальнейшем будет трудностей. Оснастку мы изготавливаем сперва на станке, а затем доводим вручную, пока она не будет на 100% соответствовать чертежу. Мы не начинаем штамповку, пока она не достигнет максимально точных размеров. Иначе у нас не бывает.','','',1,1),
-(6,1,'213131231321',NULL,'Manuchehr','+7 (999) 999 99 99',2,1),
-(7,1,'dawdawdawdwadwa',NULL,'Manuchehr','+7 (999) 999 99 99',2,1),
-(8,1,'adwwada',NULL,'asdaw','+7 (999) 999 99 99',2,1),
-(9,1,'324242342 qwdwada dwada',NULL,'Manuchehr','+7 (999) 999 99 99',2,1);
+(11,1,'Тест формы из страницы сервис холодной штамповки','dawdawdwaasdawdawdaawdawdwadwa','Manu','+7 (123) 193 13 91',2,0);
 
 /*Table structure for table `auth_assignment` */
 
@@ -507,7 +504,7 @@ CREATE TABLE `back_menu` (
   `arrow_tag` varchar(255) DEFAULT NULL,
   `position` enum('left','right','top') DEFAULT NULL,
   PRIMARY KEY (`nodeid`)
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
 
 /*Data for the table `back_menu` */
 
@@ -538,14 +535,18 @@ insert  into `back_menu`(`nodeid`,`parentnodeid`,`nodeshortname`,`nodename`,`nod
 (24,13,'Почему мы','Почему мы','/admin/why-we','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,'left'),
 (25,2,'Блоки страниц','Раздел страниц','/admin/sections','ALL',1,1,3,NULL,NULL,'no','no','','yes',NULL,'left'),
 (26,2,'Фото страниц','Фото страниц','/admin/page-photos','ALL',1,1,4,NULL,NULL,'no','no','','yes',NULL,'left'),
-(27,0,'Пользователи','Пользователи','#','ALL',1,1,4,NULL,'person','no','no','','yes','arrow','left'),
-(28,27,'Назначения','Назначения','/rbac','ALL',1,1,1,NULL,NULL,'no','no','','yes','',NULL),
-(29,27,'Маршруты','Маршруты','/rbac/route','ALL',1,1,2,NULL,NULL,'no','no','','yes',NULL,NULL),
-(30,27,'Разрешения','Разрешения','/rbac/permission','ALL',1,1,3,NULL,NULL,'no','no','','yes',NULL,NULL),
-(31,27,'Роли','Роли','/rbac/role','ALL',1,1,3,NULL,NULL,'no','no','','yes',NULL,NULL),
-(32,27,'Список пользователей','Список пользователей','/admin/user/list','ALL',1,1,0,NULL,NULL,'no','no','','yes',NULL,NULL),
-(33,27,'Добавить','Добавить','/admin/user/create','ALL',1,1,0,NULL,NULL,'no','no','','yes',NULL,NULL),
-(34,2,'Настройки фото','Настройки фото','/admin/image-manager/index','ALL',1,1,10,NULL,NULL,'no','no','','yes',NULL,'left');
+(27,0,'Пользователи','Пользователи','#','ALL',1,1,4,NULL,'person','no','no','<span class=\"label label-rouded label-menu label-danger\">2</span>','yes','arrow','left'),
+(28,27,'Назначения','Назначения','/rbac','ALL',1,1,102,NULL,NULL,'no','no','','yes','',NULL),
+(29,27,'Маршруты','Маршруты','/rbac/route','ALL',1,1,103,NULL,NULL,'no','no','','yes',NULL,NULL),
+(30,27,'Разрешения','Разрешения','/rbac/permission','ALL',1,1,104,NULL,NULL,'no','no','','yes',NULL,NULL),
+(31,27,'Роли','Роли','/rbac/role','ALL',1,1,105,NULL,NULL,'no','no','','yes',NULL,NULL),
+(32,27,'Список пользователей','Список пользователей','/admin/user/list','ALL',1,1,100,NULL,NULL,'no','no','','yes',NULL,NULL),
+(33,27,'Добавить','Добавить нового пользователя','/admin/user/create','ALL',1,1,101,NULL,NULL,'no','no','','yes',NULL,NULL),
+(34,2,'Настройки фото','Настройки фото','/admin/image-manager/index','ALL',1,1,10,NULL,NULL,'no','no','','yes',NULL,'left'),
+(35,27,'Сообщение','Сообщение','/admin/user/contacts','ALL',1,1,0,NULL,NULL,'no','no','','yes',NULL,NULL),
+(36,27,'Запросы на звонок','Запросы на звонок','/admin/user/call-requests','ALL',1,1,2,NULL,NULL,'no','no','<span class=\"label label-rouded label-menu label-primary\">2</span>','yes',NULL,NULL),
+(37,27,'Заказы по чертежу','Заказы по чертежу','/admin/user/order-by-draws','ALL',1,1,3,NULL,NULL,'no','no','','yes',NULL,NULL),
+(38,27,'Вопросы','Вопросы','/admin/user/questions','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,NULL);
 
 /*Table structure for table `call_request` */
 
@@ -554,20 +555,21 @@ DROP TABLE IF EXISTS `call_request`;
 CREATE TABLE `call_request` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `customer_id` int(11) DEFAULT NULL,
-  `status` tinyint(1) DEFAULT NULL COMMENT '1-active, 2-confirm, 0-denied',
+  `status` tinyint(4) DEFAULT NULL COMMENT '1-active, 2-confirm, 0-denied',
   `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 /*Data for the table `call_request` */
 
 insert  into `call_request`(`id`,`customer_id`,`status`,`created_at`) values 
-(1,1,1,'2019-10-10 12:15:03'),
-(2,2,1,'2019-10-10 12:15:41'),
-(3,6,1,'2019-10-10 16:51:54'),
-(4,7,1,'2019-10-11 00:40:16'),
-(5,12,1,'2019-10-11 13:13:03'),
-(6,13,1,'2019-10-11 21:16:53');
+(1,4,1,'2019-10-13 02:01:59'),
+(2,5,0,'2019-10-13 02:02:53'),
+(3,6,0,'2019-10-13 02:09:59'),
+(4,7,0,'2019-10-13 02:14:40'),
+(5,9,1,'2019-10-13 02:16:19'),
+(6,10,0,'2019-10-13 02:16:54'),
+(7,11,0,'2019-10-13 02:19:41');
 
 /*Table structure for table `contact` */
 
@@ -580,17 +582,12 @@ CREATE TABLE `contact` (
   `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '2-confirmed, 1-active, 0-inactive,',
   `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 /*Data for the table `contact` */
 
 insert  into `contact`(`id`,`customer_id`,`message`,`status`,`created_at`) values 
-(1,4,'my message',1,'2019-10-10 13:07:47'),
-(2,5,'mmm',1,'2019-10-10 14:41:24'),
-(3,8,'my message',1,'2019-10-11 09:08:24'),
-(4,9,'my message',1,'2019-10-11 09:09:53'),
-(5,10,'my message',1,'2019-10-11 09:10:12'),
-(6,11,'my message',1,'2019-10-11 09:10:26');
+(1,8,'It&#039;s test from contact page!',0,'2019-10-13 02:15:36');
 
 /*Table structure for table `customers` */
 
@@ -605,24 +602,20 @@ CREATE TABLE `customers` (
   `status` tinyint(2) DEFAULT NULL COMMENT '1-active, 0-inactive',
   `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 /*Data for the table `customers` */
 
 insert  into `customers`(`id`,`name`,`phone_number`,`email`,`organization`,`status`,`created_at`) values 
-(1,'M','+7 (999) 999 99 99',NULL,NULL,1,'2019-10-10 12:15:03'),
-(2,'+7 (992) 700 10 11','+7 (999) 999 99 99',NULL,NULL,1,'2019-10-10 12:15:41'),
-(3,'Manuchehr','+7 (999) 999 99 99',NULL,NULL,1,'2019-10-10 12:16:42'),
-(4,'Manuchehr','+7 (922) 222 22 22','manu6699@mail.ru','TexApceNaL',1,'2019-10-10 13:07:47'),
-(5,'M','+7 (888) 585 85 85','manu6699@mail.ru','ppp',1,'2019-10-10 14:41:24'),
-(6,'muzafarov9797','+7 (242) 422 42 42',NULL,NULL,1,'2019-10-10 16:51:54'),
-(7,'da','+7 (424) 242 42 42',NULL,NULL,1,'2019-10-11 00:40:16'),
-(8,'admin','+7 (314) 343 24 24','manu6699@mail.ru','organization',1,'2019-10-11 09:08:24'),
-(9,'admin','+7 (314) 343 24 24','manu6699@mail.ru','organization',1,'2019-10-11 09:09:53'),
-(10,'admin','+7 (314) 343 24 24','manu6699@mail.ru','organization',1,'2019-10-11 09:10:12'),
-(11,'admin','+7 (314) 343 24 24','manu6699@mail.ru','organization',1,'2019-10-11 09:10:26'),
-(12,'adwa','+7 (342) 242 43 24',NULL,NULL,1,'2019-10-11 13:13:03'),
-(13,'admin','+7 (213) 132 13 12',NULL,NULL,1,'2019-10-11 21:16:53');
+(3,'Ману','+7 (929) 912 93 12',NULL,NULL,1,'2019-10-13 02:01:04'),
+(4,'Ману','+7 (922) 312 31 23',NULL,NULL,1,'2019-10-13 02:01:59'),
+(5,'Ману','+7 (912) 312 32 13',NULL,NULL,1,'2019-10-13 02:02:53'),
+(6,'Саша','+7 (123) 123 12 31',NULL,NULL,1,'2019-10-13 02:09:59'),
+(7,'Марина','+7 (912) 839 12 83',NULL,NULL,1,'2019-10-13 02:14:40'),
+(8,'Стас','+7 (912) 312 31 31','stas@mail.ru','Toyota',1,'2019-10-13 02:15:36'),
+(9,'Stas','+7 (142) 343 24 23',NULL,NULL,1,'2019-10-13 02:16:19'),
+(10,'Stas','+7 (134) 234 23 42',NULL,NULL,1,'2019-10-13 02:16:54'),
+(11,'thanks','+7 (999) 999 99 99',NULL,NULL,1,'2019-10-13 02:19:41');
 
 /*Table structure for table `front_menu` */
 
@@ -700,71 +693,15 @@ CREATE TABLE `login_details` (
   PRIMARY KEY (`login_detail_id`),
   KEY `login_user_id` (`login_user_id`),
   CONSTRAINT `login_details_ibfk_1` FOREIGN KEY (`login_user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 /*Data for the table `login_details` */
 
 insert  into `login_details`(`login_detail_id`,`login_user_id`,`login_status`,`login_at`,`logout_at`,`user_ip_address`) values 
-(1,1,1,'2019-10-07 18:13:45',NULL,'127.0.0.1'),
-(2,1,1,'2019-10-07 18:15:29',NULL,'127.0.0.1'),
-(3,1,1,'2019-10-07 18:15:31',NULL,'127.0.0.1'),
-(4,1,1,'2019-10-07 18:15:32',NULL,'127.0.0.1'),
-(5,1,1,'2019-10-07 18:15:33',NULL,'127.0.0.1'),
-(6,1,1,'2019-10-07 18:15:34',NULL,'127.0.0.1'),
-(7,1,1,'2019-10-07 18:15:34',NULL,'127.0.0.1'),
-(8,1,1,'2019-10-07 18:15:35',NULL,'127.0.0.1'),
-(9,1,1,'2019-10-07 18:16:58',NULL,'127.0.0.1'),
-(10,1,1,'2019-10-07 18:17:00',NULL,'127.0.0.1'),
-(11,1,1,'2019-10-07 18:18:27',NULL,'127.0.0.1'),
-(12,1,1,'2019-10-07 18:20:27',NULL,'127.0.0.1'),
-(13,1,1,'2019-10-07 18:24:14',NULL,'127.0.0.1'),
-(14,1,1,'2019-10-07 18:24:30',NULL,'127.0.0.1'),
-(15,1,1,'2019-10-07 20:09:22',NULL,'127.0.0.1'),
-(16,1,1,'2019-10-07 23:31:59',NULL,'127.0.0.1'),
-(17,1,1,'2019-10-07 23:37:22',NULL,'127.0.0.1'),
-(18,1,1,'2019-10-07 23:38:32',NULL,'127.0.0.1'),
-(19,1,1,'2019-10-07 23:42:26',NULL,'127.0.0.1'),
-(20,1,1,'2019-10-09 00:54:11',NULL,'127.0.0.1'),
-(21,1,1,'2019-10-09 00:56:06',NULL,'127.0.0.1'),
-(22,1,1,'2019-10-09 08:09:30',NULL,'127.0.0.1'),
-(23,1,1,'2019-10-09 08:09:49',NULL,'127.0.0.1'),
-(24,1,1,'2019-10-09 15:14:33',NULL,'127.0.0.1'),
-(25,1,1,'2019-10-10 12:33:04',NULL,'127.0.0.1'),
-(26,1,1,'2019-10-10 16:39:05',NULL,'127.0.0.1'),
-(27,1,1,'2019-10-10 17:58:33',NULL,'127.0.0.1'),
-(28,1,1,'2019-10-10 22:08:48',NULL,'127.0.0.1'),
-(29,1,1,'2019-10-10 22:45:37',NULL,'127.0.0.1'),
-(30,1,1,'2019-10-11 09:05:28',NULL,'127.0.0.1'),
-(31,1,1,'2019-10-11 09:05:44',NULL,'127.0.0.1'),
-(32,1,1,'2019-10-11 13:27:11',NULL,'127.0.0.1'),
-(33,1,1,'2019-10-11 18:21:45',NULL,'127.0.0.1'),
-(34,1,1,'2019-10-11 18:23:33',NULL,'127.0.0.1'),
-(35,1,1,'2019-10-11 21:15:27',NULL,'127.0.0.1'),
-(36,1,1,'2019-10-11 21:15:43',NULL,'127.0.0.1'),
-(37,1,1,'2019-10-11 22:04:45',NULL,'127.0.0.1'),
-(38,1,1,'2019-10-11 22:06:45',NULL,'127.0.0.1'),
-(39,1,1,'2019-10-11 22:07:29',NULL,'127.0.0.1'),
-(40,1,1,'2019-10-12 08:46:18',NULL,'127.0.0.1'),
-(41,1,1,'2019-10-12 13:39:55',NULL,'127.0.0.1'),
-(42,1,1,'2019-10-12 13:44:23',NULL,'127.0.0.1'),
-(43,22,1,'2019-10-12 13:49:26',NULL,'127.0.0.1'),
-(44,22,1,'2019-10-12 13:50:50',NULL,'127.0.0.1'),
-(45,1,1,'2019-10-12 13:51:57',NULL,'127.0.0.1'),
-(46,23,1,'2019-10-12 13:52:20',NULL,'127.0.0.1'),
-(47,1,1,'2019-10-12 13:52:58',NULL,'127.0.0.1'),
-(48,1,1,'2019-10-12 13:55:17',NULL,'127.0.0.1'),
-(49,1,1,'2019-10-12 13:55:23',NULL,'127.0.0.1'),
-(50,1,1,'2019-10-12 13:55:28',NULL,'127.0.0.1'),
-(51,25,1,'2019-10-12 13:58:06',NULL,'127.0.0.1'),
-(52,1,1,'2019-10-12 14:04:48',NULL,'127.0.0.1'),
-(53,26,1,'2019-10-12 14:05:11',NULL,'127.0.0.1'),
-(54,1,1,'2019-10-12 14:05:26',NULL,'127.0.0.1'),
-(55,1,1,'2019-10-12 14:10:28',NULL,'127.0.0.1'),
-(56,1,1,'2019-10-12 14:10:45',NULL,'127.0.0.1'),
-(57,22,1,'2019-10-12 14:17:28',NULL,'127.0.0.1'),
-(58,22,1,'2019-10-12 14:19:30',NULL,'127.0.0.1'),
-(59,1,1,'2019-10-12 14:32:43',NULL,'127.0.0.1'),
-(60,1,1,'2019-10-12 14:33:07',NULL,'127.0.0.1');
+(1,22,1,'2019-10-13 01:59:21',NULL,'127.0.0.1'),
+(2,1,1,'2019-10-13 02:01:31',NULL,'127.0.0.1'),
+(3,1,1,'2019-10-13 02:03:18',NULL,'127.0.0.1'),
+(4,22,1,'2019-10-13 14:56:18',NULL,'127.0.0.1');
 
 /*Table structure for table `migration` */
 
@@ -804,7 +741,7 @@ CREATE TABLE `order_by_drawing` (
 /*Data for the table `order_by_drawing` */
 
 insert  into `order_by_drawing`(`id`,`customer_id`,`file`,`status`,`created_at`) values 
-(1,3,'detail.png',1,'2019-10-10 12:16:42');
+(1,3,'Dzhon_Skit_C_dlya_professionalov-2.pdf',2,'2019-10-13 02:01:04');
 
 /*Table structure for table `pages` */
 
@@ -1150,8 +1087,8 @@ CREATE TABLE `user` (
 /*Data for the table `user` */
 
 insert  into `user`(`user_id`,`username`,`user_password`,`email`,`user_type`,`is_block`,`avatar`,`created_at`,`created_by`,`updated_at`,`updated_by`,`secret_key`,`auth_key`,`session_id`) values 
-(1,'admin','f6fdffe48c908deb0f4c3bd36c032e72','admin@polytech.tj','E',0,'std7.jpg','2019-10-12 14:32:54',1,'2015-05-27 15:56:35',1,NULL,NULL,'1048ltl19ahhn013l96v0g40jvg4vhs1'),
-(22,'admin2','af8eb328301d219cfd1d50e6c6a48f58',NULL,'A',0,'std5.jpg','2019-10-12 13:45:41',1,NULL,NULL,NULL,NULL,'2514tkgqduig3mq1ubbr2okt335l7ndm'),
+(1,'admin','f6fdffe48c908deb0f4c3bd36c032e72','admin@polytech.tj','E',0,'std7.jpg','2019-10-12 14:32:54',1,'2015-05-27 15:56:35',1,NULL,NULL,'nbmu3gifvm2m9ib5s1299o9rt3568fnv'),
+(22,'admin2','af8eb328301d219cfd1d50e6c6a48f58',NULL,'A',0,'std5.jpg','2019-10-12 13:45:41',1,NULL,NULL,NULL,NULL,'a9naqr1h8m619b0jk8ndahgorfi5v16g'),
 (23,'admin3','7169390683d2b222ba778ca6374b59d3',NULL,'A',1,'std7.jpg','2019-10-12 13:52:10',1,NULL,NULL,NULL,NULL,'ak5h7tnec99b69cipd80ralc0p2fa23l'),
 (25,'admin4','dfa5f43cb476ef890a83010f0da7c6b0',NULL,'A',1,'std3.jpg','2019-10-12 13:57:57',1,NULL,NULL,NULL,NULL,'2pqp9rissts870sj830jkor0jntj15h9'),
 (26,'admin6','b48d62f30f50c2c191ab949186c532d3',NULL,'A',1,'std6.jpg','2019-10-12 14:05:01',1,NULL,NULL,NULL,NULL,'90c8pfqa6cchpcofouj9qsl1hvngu3f3');
@@ -1200,6 +1137,167 @@ CREATE TABLE `work_results` (
 insert  into `work_results`(`id`,`name`,`description`,`deadline`,`price`,`tooked_metall`,`img`,`status`) values 
 (1,'100 000 дверных петель для фирмы производителя дверей','Форма петель не типовая,дизайнерская. Поэтому основные трудозатраты - создание форм и оснастка. А дальше дело техники','за 560 часов','700 000 руб','10 тонн','work-result_1.jpg',1),
 (2,'100 000 дверных петель для фирмы производителя дверей 2','Форма петель не типовая,дизайнерская. Поэтому основные трудозатраты - создание форм и оснастка. А дальше дело техники','за 560 часов','700 000 руб','10 тонн','work-result_2.jpg',1);
+
+/* Trigger structure for table `answer_questions` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `afterInsertAnswerQuestion` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'%' */ /*!50003 TRIGGER `afterInsertAnswerQuestion` AFTER INSERT ON `answer_questions` FOR EACH ROW BEGIN
+	CALL setMenuNotify();
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `answer_questions` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `afterUpdateAnswerQuestion` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'%' */ /*!50003 TRIGGER `afterUpdateAnswerQuestion` AFTER UPDATE ON `answer_questions` FOR EACH ROW BEGIN
+	call setMenuNotify();
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `call_request` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `afterInsertCallRequest` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'%' */ /*!50003 TRIGGER `afterInsertCallRequest` AFTER INSERT ON `call_request` FOR EACH ROW BEGIN
+	call setMenuNotify();
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `call_request` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `afterUpdateCallRequest` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'%' */ /*!50003 TRIGGER `afterUpdateCallRequest` AFTER UPDATE ON `call_request` FOR EACH ROW BEGIN
+	call setMenuNotify();
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `contact` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `afterInsertContact` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'%' */ /*!50003 TRIGGER `afterInsertContact` AFTER INSERT ON `contact` FOR EACH ROW BEGIN
+	call setMenuNotify();
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `contact` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `afterUpdateContact` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'%' */ /*!50003 TRIGGER `afterUpdateContact` AFTER UPDATE ON `contact` FOR EACH ROW BEGIN
+	call setMenuNotify();
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `order_by_drawing` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `afterInsertOrderByDraw` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'%' */ /*!50003 TRIGGER `afterInsertOrderByDraw` AFTER INSERT ON `order_by_drawing` FOR EACH ROW BEGIN
+	call setMenuNotify();
+    END */$$
+
+
+DELIMITER ;
+
+/* Trigger structure for table `order_by_drawing` */
+
+DELIMITER $$
+
+/*!50003 DROP TRIGGER*//*!50032 IF EXISTS */ /*!50003 `afterOrderByDraw` */$$
+
+/*!50003 CREATE */ /*!50017 DEFINER = 'root'@'%' */ /*!50003 TRIGGER `afterOrderByDraw` AFTER UPDATE ON `order_by_drawing` FOR EACH ROW BEGIN
+	call setMenuNotify();
+    END */$$
+
+
+DELIMITER ;
+
+/* Procedure structure for procedure `setMenuNotify` */
+
+/*!50003 DROP PROCEDURE IF EXISTS  `setMenuNotify` */;
+
+DELIMITER $$
+
+/*!50003 CREATE DEFINER=`root`@`%` PROCEDURE `setMenuNotify`()
+BEGIN
+	declare all_count int(11);
+	DECLARE count_messages INT(11);
+	DECLARE count_draw_orders INT(11);
+	DECLARE count_call_orders INT(11);
+	declare count_questions int(11);
+	select count(*) into count_messages from contact ct WHERE ct.status=1;
+	SELECT COUNT(*) INTO count_draw_orders FROM order_by_drawing od WHERE od.status=1;
+	SELECT COUNT(*) INTO count_call_orders FROM call_request cr where cr.status=1;
+	SELECT COUNT(*) INTO count_questions FROM answer_questions a where a.type = 2 and a.status=1;
+	set all_count=count_messages+count_call_orders+count_draw_orders+count_questions;
+	
+	if (all_count = 0) then
+		UPDATE back_menu sET notifyscript = '' WHERE nodeid=27;
+	else
+		UPDATE back_menu 
+		SET notifyscript = CONCAT('<span class="label label-rouded label-menu label-danger">',all_count,'</span>') 
+		WHERE nodeid=27;
+	end if;	
+	IF (count_messages = 0) THEN
+		UPDATE back_menu sET notifyscript = '' WHERE nodeid=35;
+	else
+		UPDATE back_menu 
+		SET notifyscript = CONCAT('<span class="label label-rouded label-menu label-warning">',count_messages,'</span>') 
+		WHERE nodeid=35;
+	END IF;
+	IF (count_questions = 0) THEN
+		UPDATE back_menu sET notifyscript = '' WHERE nodeid=38;
+	else
+		UPDATE back_menu 
+		SET notifyscript = CONCAT('<span class="label label-rouded label-menu label-success">',count_questions,'</span>') 
+		WHERE nodeid=38;
+	END IF;
+	IF (count_call_orders = 0) THEN
+		UPDATE back_menu sET notifyscript = '' WHERE nodeid=36;
+	else
+		UPDATE back_menu 
+		SET notifyscript = CONCAT('<span class="label label-rouded label-menu label-primary">',count_call_orders,'</span>') 
+		WHERE nodeid=36;
+	END IF;
+	IF (count_draw_orders = 0) THEN
+		UPDATE back_menu sET notifyscript = '' WHERE nodeid=37;
+	else
+	UPDATE back_menu 
+		SET notifyscript = CONCAT('<span class="label label-rouded label-menu label-dander">',count_draw_orders,'</span>') 
+	WHERE nodeid=37;
+	END IF;
+    END */$$
+DELIMITER ;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
