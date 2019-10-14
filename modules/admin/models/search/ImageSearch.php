@@ -5,11 +5,7 @@ namespace app\modules\admin\models\search;
 use yii\data\ActiveDataProvider;
 use app\modules\admin\models\ImageModel;
 
-/**
- * Class SettingSearch
- *
- * @package yii2mod\settings\models\search
- */
+
 class ImageSearch extends ImageModel
 {
     /**
@@ -21,7 +17,7 @@ class ImageSearch extends ImageModel
     /**
      * @inheritdoc
      */
-    public function rules(): array
+    public function rules()
     {
         return [
             [['type', 'section', 'key', 'value', 'status', 'img', 'description'], 'safe'],
@@ -35,7 +31,7 @@ class ImageSearch extends ImageModel
      *
      * @return ActiveDataProvider
      */
-    public function search(array $params): ActiveDataProvider
+    public function search(array $params)
     {
         $query = self::find();
 

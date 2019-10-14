@@ -149,7 +149,7 @@ class PageController extends Controller
 
     public function actionThanks()
     {
-        $sectionThanks = Sections::find()->where(['page_id' => 7])->asArray()->one();
+        $sectionThanks = Sections::find()->where(['page_id' => 7, 'status' => 1])->asArray()->one();
         //debug($sectionThanks);
         return $this->render('thanks', [
             'sectionThanks' => $sectionThanks

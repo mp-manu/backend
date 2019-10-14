@@ -21,6 +21,8 @@ use Yii;
 class RequestController extends Controller
 {
 
+
+    /*-------------------Форма заказов по чертежу----------------------*/
     public function actionOrderByDrawing()
     {
         if (Yii::$app->request->post() && Yii::$app->request->post('agreement') == 'on') {
@@ -42,18 +44,28 @@ class RequestController extends Controller
                     $orderByDraw->file = basename($_FILES['file']['name']);
                 }
                 $orderByDraw->save();
-//                $this->sendEmail('Заказ по чертежу', 'order-by-draw',
-//                    $customer->phone_number, $customer->name);
+
+                if (empty($uploadfile)) {
+                    $this->sendEmail('Заказ по чертежу', 'order-by-draw',
+                        $customer->phone_number, $customer->name);
+                } else {
+                    $this->sendEmailWithFile('Заказ по чертежу', 'order-by-draw',
+                        $customer->phone_number, $customer->name, '', $uploadfile);
+                }
+
+
                 $this->redirect('/page/thanks');
             } else {
-                echo 'not save';
+                Yii::$app->session
+                    ->setFlash('error', 'Неудалось отправить запрос! Пожалуйста попробуйте снова.');
+                $this->goHome();
             }
         } else {
             $this->goHome();
         }
     }
 
-
+    /*-------------------Форма заказа звонков----------------------*/
     public function actionNeedToCall()
     {
 
@@ -69,22 +81,23 @@ class RequestController extends Controller
                 $request->status = 1; //1 active, 2 confirmed, 0-denied
                 $request->created_at = (new Expression('NOW()'));
                 $request->save();
-                //$this->sendEmail('Запрос на званок', 'need-call',
-                //    $customer->phone_number, $customer->name, 'Пожалуйста позвоните мне. Мой номер '.$customer->phone_number);
+                $this->sendEmail('Запрос на званок', 'need-call',
+                    $customer->phone_number, $customer->name);
                 $this->redirect('/page/thanks');
             } else {
-                echo 'not save';
+                Yii::$app->session->setFlash('error', 'Неудалось отправить запрос! Пожалуйста попробуйте снова.');
+                $this->goHome();
             }
         } else {
             $this->goHome();
         }
     }
 
+
+    /*-------------------Форма контакта----------------------*/
     public function actionContact()
     {
-
         if (Yii::$app->request->post() && Yii::$app->request->post('agreement') == 'on') {
-
             $customer = new Customers();
             $customer->name = Html::encode(Yii::$app->request->post('name'));
             $customer->phone_number = Html::encode(Yii::$app->request->post('phone_number'));
@@ -98,11 +111,12 @@ class RequestController extends Controller
                 $contact->message = Html::encode(Yii::$app->request->post('message'));
                 $contact->created_at = (new Expression('NOW()'));
                 $contact->save();
-                //$this->sendEmail('Запрос клиента', 'contact',
-                //    $customer->phone_number, $customer->name, $contact->message);
+                $this->sendEmail('Cообщение от сайта ТехАрсенал', 'contact',
+                    $customer->phone_number, $customer->name, 'Название организации: '.$customer->organization.' <br><hr> Текст: '.$contact->message);
                 $this->redirect('/page/thanks');
             } else {
-                echo 'not save';
+                Yii::$app->session->setFlash('error', 'Неудалось отправить запрос! Пожалуйста попробуйте снова.');
+                $this->goHome();
             }
         } else {
             $this->goHome();
@@ -120,21 +134,23 @@ class RequestController extends Controller
             $question->type = 2;
             $question->status = 1;
             $question->service_id = 1;
-            if (/*$this->sendEmail('Вопрос от клиента', 'question', $question->phone, $question->username, $question->question)
-                && */$question->save()) {
-               return $this->redirect('/page/thanks');
+            if ($this->sendEmail('Новый вопрос', 'question',
+                    $question->phone, $question->username, $question->question)
+                && $question->save()) {
+                return $this->redirect('/page/thanks');
             } else {
-               return $this->goHome();
+                return $this->goHome();
             }
         }
     }
 
 
-
-    public function actionChangeCallStatus(){
+    /*------------------- AJAX обновление статусов из админки ----------------------*/
+    public function actionChangeCallStatus()
+    {
         $callId = Html::encode($_POST['call_id']);
         $s = Html::encode($_POST['status']);
-        switch ($s){
+        switch ($s) {
             case 1:
                 $s = 0;
                 break;
@@ -150,14 +166,15 @@ class RequestController extends Controller
         }
 
         Yii::$app->db
-            ->createCommand('UPDATE call_request SET status = '.$s.' WHERE id = '.$callId)->execute();
+            ->createCommand('UPDATE call_request SET status = ' . $s . ' WHERE id = ' . $callId)->execute();
         return $s;
     }
 
-    public function actionChangeOrderStatus(){
+    public function actionChangeOrderStatus()
+    {
         $orderId = Html::encode($_POST['order_id']);
         $s = Html::encode($_POST['status']);
-        switch ($s){
+        switch ($s) {
             case 1:
                 $s = 0;
                 break;
@@ -173,14 +190,15 @@ class RequestController extends Controller
         }
 
         Yii::$app->db
-            ->createCommand('UPDATE order_by_drawing SET status = '.$s.' WHERE id = '.$orderId)->execute();
+            ->createCommand('UPDATE order_by_drawing SET status = ' . $s . ' WHERE id = ' . $orderId)->execute();
         return $s;
     }
 
-    public function actionChangeContactStatus(){
+    public function actionChangeContactStatus()
+    {
         $contactId = Html::encode($_POST['contact_id']);
         $s = Html::encode($_POST['status']);
-        switch ($s){
+        switch ($s) {
             case 1:
                 $s = 0;
                 break;
@@ -196,15 +214,16 @@ class RequestController extends Controller
         }
 
         Yii::$app->db
-            ->createCommand('UPDATE contact SET status = '.$s.' WHERE id = '.$contactId)->execute();
+            ->createCommand('UPDATE contact SET status = ' . $s . ' WHERE id = ' . $contactId)->execute();
         return $s;
     }
 
-    public function actionChangeQuestionStatus(){
+    public function actionChangeQuestionStatus()
+    {
         $questionId = Html::encode($_POST['question_id']);
         $s = Html::encode($_POST['status']);
         $text = Html::encode($_POST['answer']);
-        switch ($s){
+        switch ($s) {
             case 1:
                 $s = 0;
                 break;
@@ -220,7 +239,7 @@ class RequestController extends Controller
         }
 
         Yii::$app->db
-            ->createCommand('UPDATE answer_questions SET status = '.$s.', answer = "'.$text.'" WHERE id = '.$questionId)->execute();
+            ->createCommand('UPDATE answer_questions SET status = ' . $s . ', answer = "' . $text . '" WHERE id = ' . $questionId)->execute();
         return $s;
     }
 
@@ -231,7 +250,7 @@ class RequestController extends Controller
         return parent::beforeAction($action);
     }
 
-    public function sendEmail($subject=null, $message_type=null, $phone, $customer=null, $text=null)
+    public function sendEmail($subject = null, $message_type = null, $phone, $customer = null, $text = null)
     {
         Yii::$app->mailer->compose('content', [
             'message_type' => $message_type,
@@ -239,12 +258,28 @@ class RequestController extends Controller
             'customer' => $customer,
             'text' => $text,
         ])
-            ->setFrom([Yii::$app->params['adminEmail'] => $customer.' - '.$phone])
+            ->setFrom([Yii::$app->params['adminEmail'] => $customer . ' - ' . $phone])
             ->setTo(Yii::$app->params['adminEmail'])
             ->setSubject($subject)
             ->setTextBody($customer)
             ->send();
+        return true;
+    }
 
+    public function sendEmailWithFile($subject = null, $message_type = null, $phone, $customer = null, $text = null, $filename)
+    {
+        Yii::$app->mailer->compose('content', [
+            'message_type' => $message_type,
+            'phone' => $phone,
+            'customer' => $customer,
+            'text' => $text,
+        ])
+            ->setFrom([Yii::$app->params['adminEmail'] => $customer . ' - ' . $phone])
+            ->setTo(Yii::$app->params['adminEmail'])
+            ->setSubject($subject)
+            ->setTextBody($customer)
+            ->attach($filename)
+            ->send();
         return true;
     }
 }

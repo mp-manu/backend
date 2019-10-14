@@ -9,8 +9,6 @@ use app\modules\admin\models\enumerables\ImageStatus;
 use app\modules\admin\models\enumerables\ImageType;
 use app\modules\admin\models\ImageModel;
 
-/* @var $dataProvider \yii\data\ActiveDataProvider */
-/* @var $searchModel \yii2mod\settings\models\search\SettingSearch */
 
 $this->title = Yii::t('yii2mod.settings', 'Settings');
 $this->params['breadcrumbs'][] = $this->title;
@@ -38,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'filterInputOptions' => ['prompt' => Yii::t('yii2mod.settings', 'Select Section'), 'class' => 'form-control'],
                 ],
                 'key',
-                'value:ntext',
+                'value:url',
                 [
                     'class' => EditableColumn::className(),
                     'attribute' => 'status',

@@ -98,7 +98,7 @@ class ImageModel extends ActiveRecord
     {
         parent::afterDelete();
 
-        Yii::$app->settings->invalidateCache();
+        Yii::$app->images->invalidateCache();
     }
 
     /**
@@ -108,7 +108,7 @@ class ImageModel extends ActiveRecord
     {
         parent::afterSave($insert, $changedAttributes);
 
-        Yii::$app->settings->invalidateCache();
+        Yii::$app->images->invalidateCache();
     }
 
     /**
@@ -136,17 +136,7 @@ class ImageModel extends ActiveRecord
         return $result;
     }
 
-    /**
-     * Set setting
-     *
-     * @param $section
-     * @param $key
-     * @param $value
-     * @param null $type
-     *
-     * @return bool
-     */
-    public function setSetting($section, $key, $value, $type = null): bool
+    public function setSetting($section, $key, $value, $type = null)
     {
         $model = static::findOne(['section' => $section, 'key' => $key]);
 
@@ -206,7 +196,7 @@ class ImageModel extends ActiveRecord
      *
      * @return bool
      */
-    public function activateSetting($section, $key): bool
+    public function activateSetting($section, $key)
     {
         $model = static::findOne(['section' => $section, 'key' => $key]);
 
@@ -227,7 +217,7 @@ class ImageModel extends ActiveRecord
      *
      * @return bool
      */
-    public function deactivateSetting($section, $key): bool
+    public function deactivateSetting($section, $key)
     {
         $model = static::findOne(['section' => $section, 'key' => $key]);
 

@@ -16,9 +16,10 @@ echo $this->render('/page/banners/slider', ['slider' => $slider]);
                         <div class="intro__body"><p class="intro__text"><?= Yii::$app->settings->get('Компания', 'деятельность') ?></p>
                             <div class="intro__opinion">
                                 <article class="opinion">
-                                    <figure class="opinion__cover"><img class="opinion__image"
-                                                                        src="/img/<?= Yii::$app->image->get('Главная страница', 'рук_цеха_штамповки') ?>"
-                                                                        alt="<?= Yii::$app->settings->get('Сотрудник', 'руков_цеха_штамп') ?>"></figure>
+                                    <figure class="opinion__cover">
+                                        <img class="opinion__image" src="/img/<?= Yii::$app->images->get('Главная', 'руков_цеха') ?>"
+                                                                        alt="<?= Yii::$app->settings->get('Сотрудник', 'руков_цеха_штамп') ?>">
+                                    </figure>
                                     <div class="opinion__body">
                                         <p class="opinion__text">
                                             <?= Yii::$app->settings->get('Текст', 'слова_руков_цеха_штамп') ?>
@@ -37,7 +38,7 @@ echo $this->render('/page/banners/slider', ['slider' => $slider]);
         </div>
     </div>
     <div class="content__image">
-        <div class="container"><img class="image" src="/img/image.jpg" alt></div>
+        <div class="container"><img class="image" src="/img/<?= Yii::$app->images->get('Главная', 'баннер') ?>" alt></div>
     </div>
     <div class="content__section is-grey">
         <section class="section">

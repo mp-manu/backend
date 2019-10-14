@@ -5,11 +5,7 @@ namespace app\modules\admin\models;
 use yii\db\ActiveQuery;
 use app\modules\admin\models\enumerables\ImageStatus;
 
-/**
- * Class SettingQuery
- *
- * @package yii2mod\settings\models
- */
+
 class ImageQuery extends ActiveQuery
 {
     /**

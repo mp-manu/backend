@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'adminEmail' => 'muzafarov7001911@yandex.ru',
-    'senderEmail' => 'muzafarov7001911@yandex.ru',
+    'adminEmail' => 'techarsenal-smolensk@yandex.ru',
+    'senderEmail' => 'techarsenal-smolensk@yandex.ru',
     'senderName' => 'Admin TechArsenal',
 ];

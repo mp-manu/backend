@@ -15,11 +15,10 @@ $config = [
     ],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
     'components' => [
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'tD3UwxiOg2fUwvZRX9rod9-OcMvOZJ8u',
         ],
         'cache' => [
@@ -38,8 +37,8 @@ $config = [
             'transport' => [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.yandex.ru',
-                'username' => 'muzafarov7001911@yandex.ru',
-                'password' => 'm7001911',
+                'username' => 'techarsenal-smolensk@yandex.ru',
+                'password' => 'smolensk',
                 'port' => '465',
                 'encryption' => 'ssl',
             ],
@@ -47,8 +46,8 @@ $config = [
         'settings' => [
             'class' => 'yii2mod\settings\components\Settings',
         ],
-        'image' => [
-            'class' => 'app\components\Image',
+        'images' => [
+            'class' => 'app\components\Images',
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -83,9 +82,7 @@ $config = [
                 ],
             ],
         ],
-
         'db' => $db,
-
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
@@ -101,7 +98,6 @@ $config = [
         'admin' => [
             'class' => 'app\modules\admin\Module',
         ],
-
         'gridview' => [
             'class' => 'kartik\grid\Module'],
 
@@ -112,7 +108,6 @@ $config = [
         'rbac' => [
             'class' => 'yii2mod\rbac\Module',
             'layout' => '@app/modules/admin/views/layouts/main'
-
         ],
     ],
     'as access' => [
@@ -128,19 +123,15 @@ $config = [
 ];
 
 if (YII_ENV_DEV) {
-    // configuration adjustments for 'dev' environment
+
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
-        // uncomment the following to add your IP if you are not connecting from localhost.
-        //'allowedIPs' => ['127.0.0.1', '::1'],
     ];
 }
 
