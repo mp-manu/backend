@@ -6,34 +6,38 @@
  * Time: 22:17
  */
 
+use yii\bootstrap\BootstrapAsset;
 use yii\helpers\Html;
+use yii\web\JqueryAsset;
 
 $this->title = 'Заказы по чертежу';
 
 ?>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card card-box">
-                <div class="card-head">
-                    <header><?= $this->title ?></header>
-                </div>
-                <div class="card-body ">
-                    <div class="table-scrollable">
-                        <table class="table table-striped table-bordered table-hover table-checkable order-column valign-middle"
-                               id="example4">
-                            <thead>
-                            <tr>
-                                <th> №</th>
-                                <th> Имя</th>
-                                <th> Номер телефона</th>
-                                <th> Файл</th>
-                                <th> Дата заказа</th>
-                                <th> Статус</th>
-                                <th> Скачать файл</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <?php $i=0; foreach ($orders as $order): $i++; ?>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-box">
+            <div class="card-head">
+                <header><?= $this->title ?></header>
+            </div>
+            <div class="card-body ">
+                <div class="table-scrollable">
+                    <table class="table table-striped table-bordered table-hover table-checkable order-column valign-middle"
+                           id="example4">
+                        <thead>
+                        <tr>
+                            <th> №</th>
+                            <th> Имя</th>
+                            <th> Номер телефона</th>
+                            <th> Файл</th>
+                            <th> Дата заказа</th>
+                            <th> Статус</th>
+                            <th> Скачать файл</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php if(!empty($orders)): ?>
+                            <?php $i = 0;
+                            foreach ($orders as $order): $i++; ?>
                                 <tr class="odd gradeX">
                                     <td class="left">
                                         <?= $i ?>
@@ -45,7 +49,7 @@ $this->title = 'Заказы по чертежу';
                                         <?= $order['phone_number'] ?>
                                     </td>
                                     <td class="left">
-                                        <a href="<?= Yii::getAlias('@web').'/img/draw-orders/'.$order['file'] ?>" ><?= $order['file'] ?></a>
+                                        <a href="<?= Yii::getAlias('@web') . '/img/draw-orders/' . $order['file'] ?>"><?= $order['file'] ?></a>
                                     </td>
                                     <td class="left">
                                         <?php
@@ -56,60 +60,62 @@ $this->title = 'Заказы по чертежу';
                                     <td class="left">
                                         <?php if ($order['st'] == 1) {
                                             echo '<span class="label label-md label-warning" 
-                                                data-id="'.$order['order_id'].'" data-text="'.$order['st'].'" onclick="order(this);">
+                                                data-id="' . $order['order_id'] . '" data-text="' . $order['st'] . '" onclick="order(this);">
                                                         В ожидании
                                                       </span>';
                                         } elseif ($order['st'] == 0) {
                                             echo '<span class="label label-md label-success" 
-                                                data-id="'.$order['order_id'].'" data-text="'.$order['st'].'" onclick="order(this);">
+                                                data-id="' . $order['order_id'] . '" data-text="' . $order['st'] . '" onclick="order(this);">
                                                         Выполнено
                                                       </span>';
                                         } else {
                                             echo '<span class="label label-md label-danger" 
-                                                data-id="'.$order['order_id'].'" data-text="'.$order['st'].'" onclick="order(this);">
+                                                data-id="' . $order['order_id'] . '" data-text="' . $order['st'] . '" onclick="order(this);">
                                                         Отказано
                                                       </span>';
                                         }
                                         ?>
                                     </td>
                                     <td class="left">
-                                        <a href="<?= Yii::getAlias('@web').'/img/draw-orders/'.$order['file'] ?>" download="<?= $order['file'] ?>">Скачать</a>
+                                        <a href="<?= Yii::getAlias('@web') . '/img/draw-orders/' . $order['file'] ?>"
+                                           download="<?= $order['file'] ?>">Скачать</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
+                        <?php endif; ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+</div>
 <?php
 $this->registerCssFile('@web/admin_assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.css', [
     'depends' => [
-        \yii\bootstrap\BootstrapAsset::className()
+        BootstrapAsset::className()
     ]
 ]);
 $this->registerJsFile('@web/admin_assets/plugins/datatables/jquery.dataTables.min.js', [
     'depends' => [
-        \yii\web\JqueryAsset::className()
+        JqueryAsset::className()
     ]
 ]);
 $this->registerJsFile('@web/admin_assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.js', [
     'depends' => [
-        \yii\web\JqueryAsset::className()
+        JqueryAsset::className()
     ]
 ]);
 $this->registerJsFile('@web/admin_assets/js/pages/table/table_data.js', [
     'depends' => [
-        \yii\web\JqueryAsset::className()
+        JqueryAsset::className()
     ]
 ]);
 
 ?>
 
 <style>
-    .label{
+    .label {
         cursor: pointer;
     }
 </style>

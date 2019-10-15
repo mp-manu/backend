@@ -6,21 +6,21 @@
  * Time: 19:09
  */
 
-$this->title = 'Холодная штамповка';
+$this->title = $service['name'];
 
 echo $this->render('/page/banners/service-cold-stamping', ['service' => $service]);
 
 ?>
 
 <div class="content__body">
-    <?php if(!empty($serviceInfo)): ?>
+    <?php if (!empty($serviceInfo)): ?>
         <div class="content__section is-pb110">
             <section class="section">
                 <div class="container">
                     <div class="section__body">
                         <div class="options">
                             <ul class="options__list grid is-row">
-                                <?php foreach ($serviceInfo as $info): ?>
+                                <?php if (!empty($serviceInfo)): foreach ($serviceInfo as $info): ?>
                                     <li class="options__item col-4">
                                         <article class="option">
                                             <header class="option__header"><img class="option__icon"
@@ -42,7 +42,7 @@ echo $this->render('/page/banners/service-cold-stamping', ['service' => $service
                                             </div>
                                         </article>
                                     </li>
-                                <?php endforeach; ?>
+                                <?php endforeach; endif; ?>
                             </ul>
                         </div>
                     </div>
@@ -67,9 +67,10 @@ echo $this->render('/page/banners/service-cold-stamping', ['service' => $service
                                                 <ul class="accordion__list">
                                                     <?php
                                                     $i = 0;
-                                                    foreach($answerQuestions as $question):
+                                                    $opened;
+                                                    foreach ($answerQuestions as $question):
                                                         $i++;
-                                                        if($i == 1): ?>
+                                                        if ($i == 1): ?>
                                                             <li class="accordion__item">
                                                                 <accordion-item inline-template :initial="true">
                                                                     <div class="accordion-item"
@@ -314,7 +315,7 @@ echo $this->render('/page/banners/service-cold-stamping', ['service' => $service
             </div>
         </section>
     </div>
-    <?php if(!empty($workResults)): ?>
+    <?php if (!empty($workResults)): ?>
         <div class="content__section is-dark is-pb100">
             <section class="section">
                 <div class="container">

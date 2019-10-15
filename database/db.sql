@@ -495,6 +495,7 @@ CREATE TABLE `back_menu` (
   `nodeaccess` int(1) NOT NULL,
   `nodestatus` int(1) NOT NULL,
   `nodeorder` int(3) NOT NULL,
+  `service_id` int(11) DEFAULT NULL,
   `nodefile` varchar(255) DEFAULT NULL,
   `nodeicon` varchar(50) DEFAULT NULL,
   `ishasdivider` enum('no','yes') NOT NULL DEFAULT 'no',
@@ -504,49 +505,48 @@ CREATE TABLE `back_menu` (
   `arrow_tag` varchar(255) DEFAULT NULL,
   `position` enum('left','right','top') DEFAULT NULL,
   PRIMARY KEY (`nodeid`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 
 /*Data for the table `back_menu` */
 
-insert  into `back_menu`(`nodeid`,`parentnodeid`,`nodeshortname`,`nodename`,`nodeurl`,`userstatus`,`nodeaccess`,`nodestatus`,`nodeorder`,`nodefile`,`nodeicon`,`ishasdivider`,`hasnotify`,`notifyscript`,`isforguest`,`arrow_tag`,`position`) values 
-(1,0,'Главная','Главная','/admin','ALL',1,1,1,NULL,'dashboard','no','no','','no','','left'),
-(2,0,'Управление элементами','Управление элементами','#','ALL',1,1,2,NULL,'create','no','no','','no','arrow','left'),
-(3,0,'Страницы','Страницы','#','ALL',1,1,3,NULL,'dvr','no','no','','no','arrow','left'),
-(4,0,'Выход','Выход','/admin/main/logout','ALL',1,1,100,NULL,'directions_walk','no','no','','no',NULL,'left'),
-(5,2,'Меню','Меню','/admin/front-menu/index','ALL',1,1,1,NULL,NULL,'no','no','','no',NULL,'left'),
-(6,2,'Слайдер','Слайдер','/admin/slider/index','ALL',1,1,2,NULL,NULL,'no','no','','no',NULL,'left'),
-(7,3,'Услуги','Услуги','#','ALL',1,1,2,NULL,NULL,'no','no','','yes','arrow','left'),
-(8,7,'Управление услугами','Управление услугами','/admin/services','ALL',1,1,0,NULL,NULL,'no','no','','yes',NULL,'left'),
-(9,7,'Примеры работ','Примеры работ','/admin/work-results','ALL',1,1,3,NULL,NULL,'no','no','','yes',NULL,'left'),
-(10,7,'Прайслист','Прайслист','/admin/price-list','ALL',1,1,4,NULL,NULL,'no','no','','yes',NULL,'left'),
-(11,7,'Вопрос-ответ','Вопрос-ответ','/admin/answer-questions','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,'left'),
-(12,7,'Доп. информации','Доп. информации','/admin/service-info','ALL',1,1,5,NULL,NULL,'no','no','','yes',NULL,'left'),
-(13,3,'Главная страница','Главная страница','/admin/sections?SectionsSearch%5Bpage_id%5D=1','ALL',1,1,1,NULL,'arrow','no','no','','yes',NULL,'left'),
-(14,3,'Контакты','Контакты','/admin/sections?SectionsSearch%5Bpage_id%5D=3','ALL',1,1,3,NULL,NULL,'no','no','','yes',NULL,'left'),
-(15,3,'О компании','О компании','/admin/sections?SectionsSearch%5Bpage_id%5D=4&SectionsSearch%5Btitle%5D=&SectionsSearch%5Balias%5D=&SectionsSearch%5Bdescription%5D=&SectionsSearch%5Btype%5','ALL',1,1,4,NULL,NULL,'no','no','','yes',NULL,'left'),
-(16,3,'Страница СПАСИБО','Страница СПАСИБО','/admin/sections?SectionsSearch%5Bpage_id%5D=7','ALL',1,1,5,NULL,NULL,'no','no','','yes',NULL,'left'),
-(17,3,'Страница 404','Страница 404','/admin/sections?SectionsSearch%5Bpage_id%5D=6','ALL',1,1,6,NULL,NULL,'no','no','','yes',NULL,'left'),
-(18,7,'Процесс работ','Процесс работ','/admin/work-proccess','ALL',1,1,2,NULL,NULL,'no','no','','yes',NULL,'left'),
-(19,0,'Организация','Организация','#','ALL',1,1,4,NULL,'location_city','no','no','','yes','arrow','left'),
-(20,19,'Реквизиты','Реквизиты','/admin/requisites','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,'left'),
-(21,19,'Контакты','Контакты','/admin/requisites','ALL',0,1,1,NULL,NULL,'no','no','','yes',NULL,'left'),
-(22,2,'Настройки текстов','Настройки текстов','/settings','ALL',1,1,10,NULL,NULL,'no','no','','yes',NULL,'left'),
-(23,13,'Как мы работаем','Как мы работаем','/admin/how-we-work','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,'left'),
-(24,13,'Почему мы','Почему мы','/admin/why-we','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,'left'),
-(25,2,'Блоки страниц','Раздел страниц','/admin/sections','ALL',1,1,3,NULL,NULL,'no','no','','yes',NULL,'left'),
-(26,2,'Фото страниц','Фото страниц','/admin/page-photos','ALL',1,1,4,NULL,NULL,'no','no','','yes',NULL,'left'),
-(27,0,'Пользователи','Пользователи','#','ALL',1,1,4,NULL,'person','no','no','<span class=\"label label-rouded label-menu label-danger\">2</span>','yes','arrow','left'),
-(28,27,'Назначения','Назначения','/rbac','ALL',1,1,102,NULL,NULL,'no','no','','yes','',NULL),
-(29,27,'Маршруты','Маршруты','/rbac/route','ALL',1,1,103,NULL,NULL,'no','no','','yes',NULL,NULL),
-(30,27,'Разрешения','Разрешения','/rbac/permission','ALL',1,1,104,NULL,NULL,'no','no','','yes',NULL,NULL),
-(31,27,'Роли','Роли','/rbac/role','ALL',1,1,105,NULL,NULL,'no','no','','yes',NULL,NULL),
-(32,27,'Список пользователей','Список пользователей','/admin/user/list','ALL',1,1,100,NULL,NULL,'no','no','','yes',NULL,NULL),
-(33,27,'Добавить','Добавить нового пользователя','/admin/user/create','ALL',1,1,101,NULL,NULL,'no','no','','yes',NULL,NULL),
-(34,2,'Настройки фото','Настройки фото','/admin/image-manager/index','ALL',1,1,10,NULL,NULL,'no','no','','yes',NULL,'left'),
-(35,27,'Сообщение','Сообщение','/admin/user/contacts','ALL',1,1,0,NULL,NULL,'no','no','','yes',NULL,NULL),
-(36,27,'Запросы на звонок','Запросы на звонок','/admin/user/call-requests','ALL',1,1,2,NULL,NULL,'no','no','<span class=\"label label-rouded label-menu label-primary\">2</span>','yes',NULL,NULL),
-(37,27,'Заказы по чертежу','Заказы по чертежу','/admin/user/order-by-draws','ALL',1,1,3,NULL,NULL,'no','no','','yes',NULL,NULL),
-(38,27,'Вопросы','Вопросы','/admin/user/questions','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,NULL);
+insert  into `back_menu`(`nodeid`,`parentnodeid`,`nodeshortname`,`nodename`,`nodeurl`,`userstatus`,`nodeaccess`,`nodestatus`,`nodeorder`,`service_id`,`nodefile`,`nodeicon`,`ishasdivider`,`hasnotify`,`notifyscript`,`isforguest`,`arrow_tag`,`position`) values 
+(1,0,'Главная','Главная','/admin','ALL',1,1,1,NULL,NULL,'dashboard','no','no','','no','','left'),
+(2,0,'Управление элементами','Управление элементами','#','ALL',1,1,2,NULL,NULL,'create','no','no','','no','arrow','left'),
+(3,0,'Страницы','Страницы','#','ALL',1,1,3,NULL,NULL,'dvr','no','no','','no','arrow','left'),
+(4,0,'Выход','Выход','/admin/main/logout','ALL',1,1,100,NULL,NULL,'directions_walk','no','no','','no',NULL,'left'),
+(5,2,'Меню','Меню','/admin/front-menu/index','ALL',1,1,1,NULL,NULL,NULL,'no','no','','no',NULL,'left'),
+(6,2,'Слайдер','Слайдер','/admin/slider/index','ALL',1,1,2,NULL,NULL,NULL,'no','no','','no',NULL,'left'),
+(7,3,'Услуги','Услуги','#','ALL',0,0,2,NULL,NULL,NULL,'no','no','','yes','arrow','left'),
+(9,7,'Примеры работ','Примеры работ','/admin/work-results','ALL',0,0,3,NULL,NULL,NULL,'no','no','','yes',NULL,'left'),
+(10,7,'Прайслист','Прайслист','/admin/price-list','ALL',0,0,4,NULL,NULL,NULL,'no','no','','yes',NULL,'left'),
+(11,7,'Вопрос-ответ','Вопрос-ответ','/admin/answer-questions','ALL',0,0,1,NULL,NULL,NULL,'no','no','','yes',NULL,'left'),
+(12,7,'Доп. информации','Доп. информации','/admin/service-info','ALL',0,0,5,NULL,NULL,NULL,'no','no','','yes',NULL,'left'),
+(13,3,'Главная страница','Главная страница','/admin/sections?SectionsSearch%5Bpage_id%5D=1','ALL',1,1,1,NULL,NULL,'arrow','no','no','','yes',NULL,'left'),
+(14,3,'Контакты','Контакты','/admin/sections?SectionsSearch%5Bpage_id%5D=3','ALL',1,1,3,NULL,NULL,NULL,'no','no','','yes',NULL,'left'),
+(15,3,'О компании','О компании','/admin/sections?SectionsSearch%5Bpage_id%5D=4&SectionsSearch%5Btitle%5D=&SectionsSearch%5Balias%5D=&SectionsSearch%5Bdescription%5D=&SectionsSearch%5Btype%5','ALL',1,1,4,NULL,NULL,NULL,'no','no','','yes',NULL,'left'),
+(16,3,'Страница СПАСИБО','Страница СПАСИБО','/admin/sections?SectionsSearch%5Bpage_id%5D=7','ALL',1,1,5,NULL,NULL,NULL,'no','no','','yes',NULL,'left'),
+(17,3,'Страница 404','Страница 404','/admin/sections?SectionsSearch%5Bpage_id%5D=6','ALL',1,1,6,NULL,NULL,NULL,'no','no','','yes',NULL,'left'),
+(18,7,'Процесс работ','Процесс работ','/admin/work-proccess','ALL',0,0,2,NULL,NULL,NULL,'no','no','','yes',NULL,'left'),
+(19,0,'Организация','Организация','#','ALL',1,1,4,NULL,NULL,'location_city','no','no','','yes','arrow','left'),
+(20,19,'Реквизиты','Реквизиты','/admin/requisites','ALL',1,1,1,NULL,NULL,NULL,'no','no','','yes',NULL,'left'),
+(21,19,'Контакты','Контакты','/admin/requisites','ALL',0,1,1,NULL,NULL,NULL,'no','no','','yes',NULL,'left'),
+(22,2,'Настройки текстов','Настройки текстов','/settings','ALL',1,1,10,NULL,NULL,NULL,'no','no','','yes',NULL,'left'),
+(23,13,'Как мы работаем','Как мы работаем','/admin/how-we-work','ALL',1,1,1,NULL,NULL,NULL,'no','no','','yes',NULL,'left'),
+(24,13,'Почему мы','Почему мы','/admin/why-we','ALL',1,1,1,NULL,NULL,NULL,'no','no','','yes',NULL,'left'),
+(25,2,'Блоки страниц','Раздел страниц','/admin/sections','ALL',1,1,3,NULL,NULL,NULL,'no','no','','yes',NULL,'left'),
+(26,2,'Фото страниц','Фото страниц','/admin/page-photos','ALL',1,1,4,NULL,NULL,NULL,'no','no','','yes',NULL,'left'),
+(27,0,'Пользователи','Пользователи','#','ALL',1,1,4,NULL,NULL,'person','no','no','<span class=\"label label-rouded label-menu label-danger\">6</span>','yes','arrow','left'),
+(28,27,'Назначения','Назначения','/rbac','ALL',1,1,102,NULL,NULL,NULL,'no','no','','yes','',NULL),
+(29,27,'Маршруты','Маршруты','/rbac/route','ALL',1,1,103,NULL,NULL,NULL,'no','no','','yes',NULL,NULL),
+(30,27,'Разрешения','Разрешения','/rbac/permission','ALL',1,1,104,NULL,NULL,NULL,'no','no','','yes',NULL,NULL),
+(31,27,'Роли','Роли','/rbac/role','ALL',1,1,105,NULL,NULL,NULL,'no','no','','yes',NULL,NULL),
+(32,27,'Список пользователей','Список пользователей','/admin/user/list','ALL',1,1,100,NULL,NULL,NULL,'no','no','','yes',NULL,NULL),
+(33,27,'Добавить','Добавить нового пользователя','/admin/user/create','ALL',1,1,101,NULL,NULL,NULL,'no','no','','yes',NULL,NULL),
+(34,2,'Настройки фото','Настройки фото','/admin/image-manager/index','ALL',1,1,10,NULL,NULL,NULL,'no','no','','yes',NULL,'left'),
+(35,27,'Сообщение','Сообщение','/admin/user/contacts','ALL',1,1,0,NULL,NULL,NULL,'no','no','<span class=\"label label-rouded label-menu label-warning\">1</span>','yes',NULL,NULL),
+(36,27,'Запросы на звонок','Запросы на звонок','/admin/user/call-requests','ALL',1,1,2,NULL,NULL,NULL,'no','no','<span class=\"label label-rouded label-menu label-primary\">4</span>','yes',NULL,NULL),
+(37,27,'Заказы по чертежу','Заказы по чертежу','/admin/user/order-by-draws','ALL',1,1,3,NULL,NULL,NULL,'no','no','<span class=\"label label-rouded label-menu label-dander\">1</span>','yes',NULL,NULL),
+(38,27,'Вопросы','Вопросы','/admin/user/questions','ALL',1,1,1,NULL,NULL,NULL,'no','no','','yes',NULL,NULL);
 
 /*Table structure for table `call_request` */
 
@@ -568,8 +568,8 @@ insert  into `call_request`(`id`,`customer_id`,`status`,`created_at`) values
 (3,6,0,'2019-10-13 02:09:59'),
 (4,7,0,'2019-10-13 02:14:40'),
 (5,9,1,'2019-10-13 02:16:19'),
-(6,10,0,'2019-10-13 02:16:54'),
-(7,11,0,'2019-10-13 02:19:41');
+(6,10,1,'2019-10-13 02:16:54'),
+(7,11,1,'2019-10-13 02:19:41');
 
 /*Table structure for table `contact` */
 
@@ -587,7 +587,7 @@ CREATE TABLE `contact` (
 /*Data for the table `contact` */
 
 insert  into `contact`(`id`,`customer_id`,`message`,`status`,`created_at`) values 
-(1,8,'It&#039;s test from contact page!',0,'2019-10-13 02:15:36');
+(1,8,'It&#039;s test from contact page!',1,'2019-10-13 02:15:36');
 
 /*Table structure for table `customers` */
 
@@ -602,7 +602,7 @@ CREATE TABLE `customers` (
   `status` tinyint(2) DEFAULT NULL COMMENT '1-active, 0-inactive',
   `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 /*Data for the table `customers` */
 
@@ -615,7 +615,8 @@ insert  into `customers`(`id`,`name`,`phone_number`,`email`,`organization`,`stat
 (8,'Стас','+7 (912) 312 31 31','stas@mail.ru','Toyota',1,'2019-10-13 02:15:36'),
 (9,'Stas','+7 (142) 343 24 23',NULL,NULL,1,'2019-10-13 02:16:19'),
 (10,'Stas','+7 (134) 234 23 42',NULL,NULL,1,'2019-10-13 02:16:54'),
-(11,'thanks','+7 (999) 999 99 99',NULL,NULL,1,'2019-10-13 02:19:41');
+(11,'thanks','+7 (999) 999 99 99',NULL,NULL,1,'2019-10-13 02:19:41'),
+(12,'asda','+7 (342) 423 42 42',NULL,NULL,1,'2019-10-14 08:47:24');
 
 /*Table structure for table `front_menu` */
 
@@ -631,6 +632,7 @@ CREATE TABLE `front_menu` (
   `nodeaccess` int(1) NOT NULL,
   `nodestatus` int(1) NOT NULL,
   `nodeorder` int(3) NOT NULL,
+  `service_id` int(11) DEFAULT NULL,
   `nodefile` varchar(255) DEFAULT NULL,
   `nodeicon` varchar(50) DEFAULT NULL,
   `ishasdivider` enum('no','yes') NOT NULL DEFAULT 'no',
@@ -640,19 +642,13 @@ CREATE TABLE `front_menu` (
   `arrow_tag` varchar(255) DEFAULT NULL,
   `position` enum('left','right','top') DEFAULT NULL,
   PRIMARY KEY (`nodeid`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 /*Data for the table `front_menu` */
 
-insert  into `front_menu`(`nodeid`,`parentnodeid`,`nodeshortname`,`nodename`,`nodeurl`,`userstatus`,`nodeaccess`,`nodestatus`,`nodeorder`,`nodefile`,`nodeicon`,`ishasdivider`,`hasnotify`,`notifyscript`,`isforguest`,`arrow_tag`,`position`) values 
-(1,0,'Услуги','Услуги','#','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,NULL),
-(2,0,'О компании','О компании','/page/about','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,NULL),
-(3,0,'Контакты','Контакты','/page/contact','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,NULL),
-(4,1,'Холодная штамповка','Холодная штамповка','/page/service-cold-stamping','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,NULL),
-(5,1,'Гибка металла','Гибка металла','/page/service-metal-bending','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,NULL),
-(6,1,'Плазменная резка','Плазменная резка','#','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,NULL),
-(7,1,'Порошковая покраска и цинкование','Порошковая покраска и цинкование','#','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,NULL),
-(8,1,'Сварочные работы','Сварочные работы','#','ALL',1,1,1,NULL,NULL,'no','no','','yes',NULL,NULL);
+insert  into `front_menu`(`nodeid`,`parentnodeid`,`nodeshortname`,`nodename`,`nodeurl`,`userstatus`,`nodeaccess`,`nodestatus`,`nodeorder`,`service_id`,`nodefile`,`nodeicon`,`ishasdivider`,`hasnotify`,`notifyscript`,`isforguest`,`arrow_tag`,`position`) values 
+(2,0,'О компании','О компании','/page/about','ALL',1,1,1,NULL,NULL,NULL,'no','no','','yes',NULL,NULL),
+(3,0,'Контакты','Контакты','/page/contact','ALL',1,1,1,NULL,NULL,NULL,'no','no','','yes',NULL,NULL);
 
 /*Table structure for table `image_manager` */
 
@@ -693,7 +689,7 @@ CREATE TABLE `login_details` (
   PRIMARY KEY (`login_detail_id`),
   KEY `login_user_id` (`login_user_id`),
   CONSTRAINT `login_details_ibfk_1` FOREIGN KEY (`login_user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 /*Data for the table `login_details` */
 
@@ -701,7 +697,8 @@ insert  into `login_details`(`login_detail_id`,`login_user_id`,`login_status`,`l
 (1,22,1,'2019-10-13 01:59:21',NULL,'127.0.0.1'),
 (2,1,1,'2019-10-13 02:01:31',NULL,'127.0.0.1'),
 (3,1,1,'2019-10-13 02:03:18',NULL,'127.0.0.1'),
-(4,22,1,'2019-10-13 14:56:18',NULL,'127.0.0.1');
+(4,22,1,'2019-10-13 14:56:18',NULL,'127.0.0.1'),
+(5,1,1,'2019-10-14 18:03:05',NULL,'127.0.0.1');
 
 /*Table structure for table `migration` */
 
@@ -736,12 +733,13 @@ CREATE TABLE `order_by_drawing` (
   `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '1-active, 2-confirm, 0-denied',
   `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `order_by_drawing` */
 
 insert  into `order_by_drawing`(`id`,`customer_id`,`file`,`status`,`created_at`) values 
-(1,3,'Dzhon_Skit_C_dlya_professionalov-2.pdf',2,'2019-10-13 02:01:04');
+(1,3,'Dzhon_Skit_C_dlya_professionalov-2.pdf',2,'2019-10-13 02:01:04'),
+(2,12,'about-cover.jpg',1,'2019-10-14 08:47:24');
 
 /*Table structure for table `pages` */
 
@@ -1009,7 +1007,7 @@ CREATE TABLE `setting` (
   `created_at` int(11) NOT NULL,
   `updated_at` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `setting` */
 
@@ -1087,7 +1085,7 @@ CREATE TABLE `user` (
 /*Data for the table `user` */
 
 insert  into `user`(`user_id`,`username`,`user_password`,`email`,`user_type`,`is_block`,`avatar`,`created_at`,`created_by`,`updated_at`,`updated_by`,`secret_key`,`auth_key`,`session_id`) values 
-(1,'admin','f6fdffe48c908deb0f4c3bd36c032e72','admin@polytech.tj','E',0,'std7.jpg','2019-10-12 14:32:54',1,'2015-05-27 15:56:35',1,NULL,NULL,'nbmu3gifvm2m9ib5s1299o9rt3568fnv'),
+(1,'admin','f6fdffe48c908deb0f4c3bd36c032e72','admin@polytech.tj','E',0,'std7.jpg','2019-10-12 14:32:54',1,'2015-05-27 15:56:35',1,NULL,NULL,'pcrf8r3ekps32eho7le2t7lvdigc6gft'),
 (22,'admin2','af8eb328301d219cfd1d50e6c6a48f58',NULL,'A',0,'std5.jpg','2019-10-12 13:45:41',1,NULL,NULL,NULL,NULL,'a9naqr1h8m619b0jk8ndahgorfi5v16g'),
 (23,'admin3','7169390683d2b222ba778ca6374b59d3',NULL,'A',1,'std7.jpg','2019-10-12 13:52:10',1,NULL,NULL,NULL,NULL,'ak5h7tnec99b69cipd80ralc0p2fa23l'),
 (25,'admin4','dfa5f43cb476ef890a83010f0da7c6b0',NULL,'A',1,'std3.jpg','2019-10-12 13:57:57',1,NULL,NULL,NULL,NULL,'2pqp9rissts870sj830jkor0jntj15h9'),
@@ -1122,6 +1120,7 @@ DROP TABLE IF EXISTS `work_results`;
 
 CREATE TABLE `work_results` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
+  `service_id` int(11) NOT NULL,
   `name` varchar(500) NOT NULL,
   `description` varchar(500) DEFAULT NULL,
   `deadline` varchar(200) DEFAULT NULL,
@@ -1134,9 +1133,9 @@ CREATE TABLE `work_results` (
 
 /*Data for the table `work_results` */
 
-insert  into `work_results`(`id`,`name`,`description`,`deadline`,`price`,`tooked_metall`,`img`,`status`) values 
-(1,'100 000 дверных петель для фирмы производителя дверей','Форма петель не типовая,дизайнерская. Поэтому основные трудозатраты - создание форм и оснастка. А дальше дело техники','за 560 часов','700 000 руб','10 тонн','work-result_1.jpg',1),
-(2,'100 000 дверных петель для фирмы производителя дверей 2','Форма петель не типовая,дизайнерская. Поэтому основные трудозатраты - создание форм и оснастка. А дальше дело техники','за 560 часов','700 000 руб','10 тонн','work-result_2.jpg',1);
+insert  into `work_results`(`id`,`service_id`,`name`,`description`,`deadline`,`price`,`tooked_metall`,`img`,`status`) values 
+(1,1,'100 000 дверных петель для фирмы производителя дверей','Форма петель не типовая,дизайнерская. Поэтому основные трудозатраты - создание форм и оснастка. А дальше дело техники','за 560 часов','700 000 руб','10 тонн','work-result_1.jpg',1),
+(2,1,'100 000 дверных петель для фирмы производителя дверей 2','Форма петель не типовая,дизайнерская. Поэтому основные трудозатраты - создание форм и оснастка. А дальше дело техники','за 560 часов','700 000 руб','10 тонн','work-result_2.jpg',1);
 
 /* Trigger structure for table `answer_questions` */
 

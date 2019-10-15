@@ -10,19 +10,15 @@ use  kartik\grid\GridView;
 /* @var $searchModel app\modules\admin\models\ServicesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Услуги';
+$this->title = 'Список услуг';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="services-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
+    <h2><?= Html::encode($this->title) ?></h2>
     <p>
         <?= Html::a('Добавить услугу', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
     <div class="card-box">
         <div class="card-head">
             <header><?= $this->title ?></header>
@@ -32,7 +28,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'dataProvider' => $dataProvider,
                 'filterModel' => $searchModel,
                 'columns' => [
-                    'id',
+                    [
+                        'attribute' => 'id',
+                        'width' => '20px'
+                    ],
                     [
                         'attribute' => 'parent_id',
                         'filter' => ArrayHelper::map(Services::getServices(), 'id', 'name'),
@@ -40,15 +39,18 @@ $this->params['breadcrumbs'][] = $this->title;
                             return $data->name;
                         }
                     ],
-                    'name',
-//                    'alias',
-                    'img',
-
                     [
-                        'attribute' => 'description',
+                        'attribute' => 'name',
                         'format' => 'html',
-                        'value' => function ($data) {
-                            return wordwrap($data->description, 60, '<br>');
+                        'value' => function($data){
+                           return '<a href="/admin/services/detatails?='.$data->id.'">'.$data->name.'</a>';
+                        }
+                    ],
+                    [
+                       'attribute' => 'img',
+                        'format' => 'html',
+                        'value' => function($model){
+                            return '<a target="_blank" href="'.Yii::getAlias('@web').'/img/services/'.$model->img.'">'.$model->img.'</a>';
                         }
                     ],
 

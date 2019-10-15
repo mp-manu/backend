@@ -25,7 +25,7 @@ $calls = Contact::find()->select('c.*, cs.*, time(cs.created_at) as created_at')
         <!-- logo start -->
         <div class="page-logo">
             <a href="/">
-                <span class="logo-icon material-icons fa-rotate-20">star</span>
+<!--                <span class="logo-icon material-icons fa-rotate-20">star</span>-->
                 <span class="logo-default">ТехАрсенал</span> </a>
         </div>
         <!-- logo end -->

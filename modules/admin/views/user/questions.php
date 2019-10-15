@@ -37,6 +37,7 @@ $this->title = 'Вопросы пользователей';
                             </tr>
                             </thead>
                             <tbody>
+                            <?php if(!empty($question)): ?>
                             <?php $i=0; foreach ($question as $q): $i+=1; ?>
                                 <tr class="odd gradeX">
                                     <td class="left"><?= $i ?></td>
@@ -70,6 +71,7 @@ $this->title = 'Вопросы пользователей';
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
+                            <?php endif; ?>
                             </tbody>
                         </table>
                     </div>

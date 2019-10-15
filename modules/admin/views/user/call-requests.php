@@ -11,30 +11,31 @@ use yii\helpers\Html;
 $this->title = 'Заказы на звонок';
 
 ?>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card card-box">
-                <div class="card-head">
-                    <header><?= $this->title ?></header>
-                    <div class="tools">
-                        <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
-                        <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
-                        <a class="t-close btn-color fa fa-times" href="javascript:;"></a>
-                    </div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="card card-box">
+            <div class="card-head">
+                <header><?= $this->title ?></header>
+                <div class="tools">
+                    <a class="fa fa-repeat btn-color box-refresh" href="javascript:;"></a>
+                    <a class="t-collapse btn-color fa fa-chevron-down" href="javascript:;"></a>
+                    <a class="t-close btn-color fa fa-times" href="javascript:;"></a>
                 </div>
-                <div class="card-body ">
-                    <div class="table-scrollable">
-                        <table class="table table-striped table-bordered table-hover table-checkable order-column valign-middle"
-                               id="example4">
-                            <thead>
-                            <tr>
-                                <th> Имя</th>
-                                <th> Телефон</th>
-                                <th> Время заказа звонка</th>
-                                <th> Статус</th>
-                            </tr>
-                            </thead>
-                            <tbody>
+            </div>
+            <div class="card-body ">
+                <div class="table-scrollable">
+                    <table class="table table-striped table-bordered table-hover table-checkable order-column valign-middle"
+                           id="example4">
+                        <thead>
+                        <tr>
+                            <th> Имя</th>
+                            <th> Телефон</th>
+                            <th> Время заказа звонка</th>
+                            <th> Статус</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php if (!empty($data)): ?>
                             <?php foreach ($data as $call): ?>
                                 <tr class="odd gradeX">
                                     <td class="left"><?= $call['name'] ?></td>
@@ -48,17 +49,17 @@ $this->title = 'Заказы на звонок';
                                     <td>
                                         <?php if ($call['st'] == 1) {
                                             echo '<span class="label label-md label-warning" 
-                                                data-id="'.$call['call_id'].'" data-text="'.$call['st'].'" onclick="f(this);">
+                                                data-id="' . $call['call_id'] . '" data-text="' . $call['st'] . '" onclick="f(this);">
                                                         В ожидании
                                                       </span>';
                                         } elseif ($call['st'] == 0) {
                                             echo '<span class="label label-md label-success" 
-                                                data-id="'.$call['call_id'].'" data-text="'.$call['st'].'" onclick="f(this);">
+                                                data-id="' . $call['call_id'] . '" data-text="' . $call['st'] . '" onclick="f(this);">
                                                         Выполнено
                                                       </span>';
                                         } else {
                                             echo '<span class="label label-md label-danger" 
-                                                data-id="'.$call['call_id'].'" data-text="'.$call['st'].'" onclick="f(this);">
+                                                data-id="' . $call['call_id'] . '" data-text="' . $call['st'] . '" onclick="f(this);">
                                                         Отказано
                                                       </span>';
                                         }
@@ -66,13 +67,14 @@ $this->title = 'Заказы на звонок';
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
+                        <?php endif; ?>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+</div>
 <?php
 $this->registerCssFile('@web/admin_assets/plugins/datatables/plugins/bootstrap/dataTables.bootstrap4.min.css', [
     'depends' => [
@@ -97,7 +99,7 @@ $this->registerJsFile('@web/admin_assets/js/pages/table/table_data.js', [
 
 ?>
 <style>
-    .label{
+    .label {
         cursor: pointer;
     }
 </style>

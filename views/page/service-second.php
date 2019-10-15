@@ -5,13 +5,13 @@
  * Date: 08.10.2019
  * Time: 19:09
  */
-$this->title = 'Гибка метала';
+$this->title = $service['name'];
 echo $this->render('/page/banners/service-metal-bending', ['service' => $service]);
 ?>
 
 <div class="content__body">
-   <?php if(!empty($subServices)): ?>
     <div class="content__section is-pb110">
+        <?php if(!empty($subServices)): ?>
         <section class="section">
             <div class="container">
                 <div class="section__body">
@@ -95,8 +95,8 @@ echo $this->render('/page/banners/service-metal-bending', ['service' => $service
                 </div>
             </div>
         </section>
+        <?php endif; ?>
     </div>
-   <?php endif; ?>
     <?php if(!empty($activeServicesId)): ?>
     <div class="content__section is-pb110 is-pt0">
         <section class="section">
@@ -116,6 +116,15 @@ echo $this->render('/page/banners/service-metal-bending', ['service' => $service
                                                 <?= $data['name'][$id] ?>
                                             </button>
                                             <?php endforeach; ?>
+<!--                                            <button class="page-tabs__toggle" data-tab-index="1"-->
+<!--                                                    @click="goto">Гибка труб-->
+<!--                                            </button>-->
+<!--                                            <button class="page-tabs__toggle" data-tab-index="2"-->
+<!--                                                    @click="goto">Гибка листового метала-->
+<!--                                            </button>-->
+<!--                                            <button class="page-tabs__toggle" data-tab-index="3"-->
+<!--                                                    @click="goto">Гибка стальных листов-->
+<!--                                            </button>-->
                                         </div>
                                     </div>
                                     <div class="page-tabs__body" ref="swiper">

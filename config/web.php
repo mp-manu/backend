@@ -14,8 +14,13 @@ $config = [
         ],
     ],
     'aliases' => [
+        '@uploads' => '/uploads',
+        '@img' => '/img',
+        '@uploadsroot' => $_SERVER['DOCUMENT_ROOT'].'/uploads',
+        '@imgroot' => $_SERVER['DOCUMENT_ROOT'].'/img',
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset',
+
     ],
     'components' => [
         'request' => [
@@ -87,6 +92,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'page/service/<id:\d+>' => '/page/service',
             ],
         ],
         'authManager' => [

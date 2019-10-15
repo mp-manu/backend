@@ -10,170 +10,128 @@ use app\modules\admin\models\ServiceInfo;
 use app\modules\admin\models\Services;
 use app\modules\admin\models\WorkProccess;
 use app\modules\admin\models\WorkResults;
-use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
 
 class PageController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'only' => ['logout'],
-                'rules' => [
-                    [
-                        'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
 
-        ];
-    }
+   public function actions()
+   {
+      return [
+          'error' => [
+              'class' => 'yii\web\ErrorAction',
+          ],
+      ];
+   }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function actions()
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
-        ];
-    }
+   public function actionService($id)
+   {
+      $id = Html::encode($id);
+      $service = Services::find()->where(['id' => $id, 'status' => 1])->asArray()->one();
 
-    public function actionServiceColdStamping()
-    {
+      if(empty($service)) return $this->goHome();
 
-        $service = Services::find()->where(['id' => 1, 'status' => 1])->asArray()->one();
-        $serviceInfo = ServiceInfo::find()->where(['service_id' => $service['id'], 'status' => 1])->limit('3')->all();
-        $answerQuestions = AnswerQuestions::find()->where(['service_id' => $service['id'], 'status' => 1, 'type' => 1])->all();
-        $workProccess = WorkProccess::find()->where(['service_id' => $service['id'], 'status' => 1])->all();
-        $workResults = WorkResults::find()->where(['status' => 1])->all();
-        $priceList = PriceList::find()->where(['service_id' => $service['id'], 'status' => 1])->all();
+      $serviceInfo = ServiceInfo::find()->where(['service_id' => $id, 'status' => 1])->limit('3')->all();
+      $answerQuestions = AnswerQuestions::find()->where(['service_id' => $id, 'status' => 1, 'type' => 1])->all();
+      $workProccess = WorkProccess::find()->where(['service_id' => $id, 'status' => 1])->all();
+      $workResults = WorkResults::find()->where(['service_id' => $id, 'status' => 1,])->all();
+      $subServices = Services::find()
+          ->select('s.*, si.key, si.val, si.description as desc, si.img')
+          ->from('services s')
+          ->join('LEFT JOIN', 'service_info si', 's.id=si.service_id')
+          ->where(['parent_id' => $id, 's.status' => 1])
+          ->asArray()->all();
+      $priceList = PriceList::find()->where(['service_id' => $id, 'status' => 1])->all();
 
-        return $this->render('service-cold-stamping', [
-            'service' => $service,
-            'serviceInfo' => $serviceInfo,
-            'answerQuestions' => $answerQuestions,
-            'workProccess' => $workProccess,
-            'workResults' => $workResults,
-            'priceList' => $priceList,
-        ]);
-    }
+      $servicesAndSubservices[$id]=$id;
+      $servicesAndSubservices = ArrayHelper::map($subServices, 'id', 'id');
 
-    public function actionServiceMetalBending()
-    {
-        $service = Services::find()->where(['id' => 2, 'status' => 1])->asArray()->one();
 
-        $subServices = Services::find()
-            ->select('s.*, si.key, si.val, si.description as desc, si.img')
-            ->from('services s')
-            ->join('LEFT JOIN', 'service_info si', 's.id=si.service_id')
-            ->where(['parent_id' => $service['id'], 's.status' => 1])
-            ->asArray()->all();
+      $priceListTable = PriceList::find()
+          ->select('p.*, s.name, s.id as sid')
+          ->from('price_list p')
+          ->leftJoin('services s', 'p.service_id=s.id')
+          ->where(['s.id' => $servicesAndSubservices, 'p.type' => 2, 's.status' => 1, 'p.status' => 1])
+          ->asArray()->all();
 
-        $priceList = PriceList::find()
-            ->select('p.*, s.name, s.id as sid')
-            ->from('price_list p')
-            ->leftJoin('services s', 'p.service_id=s.id')
-            ->where(['p.type' => 2, 's.status' => 1, 'p.status' => 1])
-            ->asArray()->all();
-
-        $data = array();
-        $activeServicesId = array();
-        foreach ($priceList as $list){
-            $activeServicesId[$list['sid']]=$list['sid'];
+      if(!empty($priceListTable)){
+         $data = array();
+         $activeServicesId = array();
+         foreach ($priceListTable as $list) {
+            $activeServicesId[$list['sid']] = $list['sid'];
             $data['name'][$list['sid']] = $list['name'];
             $data['length'][$list['sid']][$list['length']] = $list['length'];
             $data['depth'][$list['sid']][$list['depth']] = $list['depth'];
             $data['price'][$list['length']][$list['depth']][$list['sid']] = $list['price'];
-        }
-        //debug($data);
+         }
+      }
 
-        return $this->render('service-metal-bending', [
-            'service' => $service,
-            'subServices' => $subServices,
-            'priceList' => $priceList,
-            'activeServicesId' => $activeServicesId,
-            'data' => $data
-        ]);
-    }
+      return $this->render('service', [
+          'service' => $service,
+          'serviceInfo' => $serviceInfo,
+          'answerQuestions' => $answerQuestions,
+          'workProccess' => $workProccess,
+          'workResults' => $workResults,
+          'subServices' => $subServices,
+          'activeServicesId' => $activeServicesId,
+          'priceList' => $priceList,
+          'data' => $data,
 
+      ]);
+   }
 
-    public function actionContact()
-    {
-        $reqvisit = Requisites::find()->where(['status' => 1])->asArray()->one();
+   public function actionContact()
+   {
+      $reqvisit = Requisites::find()->where(['status' => 1])->asArray()->one();
 
-        return $this->render('contact', [
-            'reqvisit' => $reqvisit
-        ]);
-    }
+      return $this->render('contact', [
+          'reqvisit' => $reqvisit
+      ]);
+   }
 
-    public function actionAbout()
-    {
-        $howWeWork = Sections::getSectionsByType(2);
-        $whyChooseUs = Sections::getSectionsByType(1);
-        $banner = Sections::getSectionsByType(3);
-        $info = Sections::getSectionsByType(4);
-        $history = Sections::getSectionsByType(5);
+   public function actionAbout()
+   {
+      $howWeWork = Sections::getSectionsByType(2);
+      $whyChooseUs = Sections::getSectionsByType(1);
+      $banner = Sections::getSectionsByType(3);
+      $info = Sections::getSectionsByType(4);
+      $history = Sections::getSectionsByType(5);
 
-        return $this->render('about', [
-            'howWeWork' => $howWeWork,
-            'whyChooseUs' => $whyChooseUs,
-            'banner' => $banner,
-            'info' => $info,
-            'history' => $history,
-        ]);
-    }
+      return $this->render('about', [
+          'howWeWork' => $howWeWork,
+          'whyChooseUs' => $whyChooseUs,
+          'banner' => $banner,
+          'info' => $info,
+          'history' => $history,
+      ]);
+   }
 
+   public function actionThanks()
+   {
+      $sectionThanks = Sections::find()->where(['page_id' => 7, 'status' => 1])->asArray()->one();
+      //debug($sectionThanks);
+      return $this->render('thanks', [
+          'sectionThanks' => $sectionThanks
+      ]);
+   }
 
+   public function actionError()
+   {
+      $errorPage = Sections::find()->where(['page_id' => 6])->asArray()->one();
+      return $this->render('error', [
+          'errorPage' => $errorPage
+      ]);
+   }
 
-
-    public function actionThanks()
-    {
-        $sectionThanks = Sections::find()->where(['page_id' => 7, 'status' => 1])->asArray()->one();
-        //debug($sectionThanks);
-        return $this->render('thanks', [
-            'sectionThanks' => $sectionThanks
-        ]);
-    }
-
-
-
-    public function actionError()
-    {
-        $errorPage = Sections::find()->where(['page_id' => 6])->asArray()->one();
-        return $this->render('error',[
-            'errorPage' => $errorPage
-        ]);
-    }
-
-
-    public function beforeAction($action)
-    {
-        if (parent::beforeAction($action)) {
-            if ($action->id == 'error' || $action->id == 'contact' || $action->id == 'thanks') {
-                $this->layout = 'main-dark';
-            }
-            return true;
-        }
-    }
+   public function beforeAction($action)
+   {
+      if (parent::beforeAction($action)) {
+         if ($action->id == 'error' || $action->id == 'contact' || $action->id == 'thanks') {
+            $this->layout = 'main-dark';
+         }
+         return true;
+      }
+   }
 }

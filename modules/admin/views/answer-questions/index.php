@@ -5,9 +5,6 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use kartik\grid\GridView;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\modules\admin\models\AnswerQuestionsSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Вопросы и ответы';
 $this->params['breadcrumbs'][] = $this->title;
