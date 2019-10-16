@@ -10,7 +10,7 @@ use yii\helpers\ArrayHelper;
 use app\modules\admin\models\enumerables\ImageType;
 
 /**
- * Class Settings
+ * Class Images Setting
  *
  * @package app\components\Images
  */

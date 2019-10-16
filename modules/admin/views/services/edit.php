@@ -8,7 +8,7 @@
 
 use yii\bootstrap\Tabs;
 
-$this->title = 'Добавить услугу';
+$this->title = 'Редактировать услугу';
 
 $display = (count($services) > 0 || !empty($services)) ? true : false;
 
@@ -36,7 +36,8 @@ $display = (count($services) > 0 || !empty($services)) ? true : false;
             <div class="card-head">
                 <header>
                    <?php if (!empty($service_id['name'])): ?>
-                       Выбранная УСЛУГА: <span style="color: #0cc745"><?= $service_id['name'] ?></span>
+                       Выбранная УСЛУГА: <span
+                               style="color: #0cc745"><?= $service_id['name'] ?></span>
                    <?php endif; ?>
                 </header>
             </div>
@@ -66,8 +67,9 @@ $display = (count($services) > 0 || !empty($services)) ? true : false;
                        [
                            'label' => 'Вопросы и ответы',
                            'visible' => $display,
-                           'content' => $this->render('forms/answer-question', [
+                           'content' => $this->render('forms/_edit-answer-question', [
                                'model' => $answerQuestions,
+                               'answerQuestionsData' => $answerQuestionsData,
                                'services' => $services,
                                'service_id' => $service_id
                            ]),
@@ -109,7 +111,7 @@ $display = (count($services) > 0 || !empty($services)) ? true : false;
     </div>
 </div>
 <style>
-    .form-group {
+    .tab-pane {
         font-weight: normal;
     }
 </style>

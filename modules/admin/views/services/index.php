@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h2><?= Html::encode($this->title) ?></h2>
     <p>
-        <?= Html::a('Добавить услугу', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить услугу', ['add'], ['class' => 'btn btn-success']) ?>
     </p>
     <div class="card-box">
         <div class="card-head">
@@ -50,10 +50,9 @@ $this->params['breadcrumbs'][] = $this->title;
                        'attribute' => 'img',
                         'format' => 'html',
                         'value' => function($model){
-                            return '<a target="_blank" href="'.Yii::getAlias('@web').'/img/services/'.$model->img.'">'.$model->img.'</a>';
+                            return '<a target="_blank" href="'.Yii::getAlias('@uploads').'/services/'.$model->img.'">'.$model->img.'</a>';
                         }
                     ],
-
                     [
                         'class' => 'kartik\grid\EditableColumn',
                         'attribute' => 'status',
@@ -74,7 +73,28 @@ $this->params['breadcrumbs'][] = $this->title;
                         'pageSummary' => true
                     ],
 
-                    ['class' => 'yii\grid\ActionColumn'],
+                    [
+                        'class' => 'yii\grid\ActionColumn',
+                        'template' => '{view}{update}{delete}',
+                        'buttons' => [
+                            'view' => function ($url, $model) {
+                               return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', '/admin/services/details?id='.$model->id, [
+                                   'title' => Yii::t('app', 'lead-view'),
+                               ]);
+                            },
+
+                            'update' => function ($url, $model) {
+                               return Html::a('<span class="glyphicon glyphicon-pencil"></span>', '/admin/services/edit?id='.$model->id, [
+                                   'title' => Yii::t('app', 'lead-update'),
+                               ]);
+                            },
+                            'delete' => function ($url, $model) {
+                               return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, [
+                                   'title' => Yii::t('app', 'lead-delete'),
+                               ]);
+                            }
+                        ],
+                    ],
                 ],
             ]); ?>
 

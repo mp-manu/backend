@@ -43,7 +43,7 @@ class PageController extends Controller
           ->join('LEFT JOIN', 'service_info si', 's.id=si.service_id')
           ->where(['parent_id' => $id, 's.status' => 1])
           ->asArray()->all();
-      $priceList = PriceList::find()->where(['service_id' => $id, 'status' => 1])->all();
+      $priceList = PriceList::find()->where(['service_id' => $id, 'status' => 1, 'type' => 1])->all();
 
       $servicesAndSubservices[$id]=$id;
       $servicesAndSubservices = ArrayHelper::map($subServices, 'id', 'id');
@@ -56,6 +56,8 @@ class PageController extends Controller
           ->where(['s.id' => $servicesAndSubservices, 'p.type' => 2, 's.status' => 1, 'p.status' => 1])
           ->asArray()->all();
 
+
+
       if(!empty($priceListTable)){
          $data = array();
          $activeServicesId = array();
@@ -67,6 +69,7 @@ class PageController extends Controller
             $data['price'][$list['length']][$list['depth']][$list['sid']] = $list['price'];
          }
       }
+
 
       return $this->render('service', [
           'service' => $service,

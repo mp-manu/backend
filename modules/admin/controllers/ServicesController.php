@@ -12,6 +12,7 @@ use app\modules\admin\models\WorkResults;
 use Yii;
 use app\modules\admin\models\Services;
 use app\modules\admin\models\ServicesSearch;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -153,6 +154,7 @@ class ServicesController extends Controller
       return $this->redirect(['index']);
    }
 
+
    public function actionAdd($id=null){
 
       $id = Html::encode($id);
@@ -185,7 +187,7 @@ class ServicesController extends Controller
          if (empty($serviceModel->parent_id)) {
             $serviceModel->parent_id = 0;
          }
-         $service_id['id'] = (empty($service_id['id'])) ? $serviceModel->service_id : $service_id['id'];
+         $service_id['id'] = (empty($service_id['id'])) ? $serviceModel->id : $service_id['id'];
          if ($serviceModel->save()) {
             Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
             return $this->redirect(['add', 'id' => $serviceModel->id]);
@@ -272,7 +274,8 @@ class ServicesController extends Controller
 
       /*********************************************************************************************
       ****************************PRICELIST SAVE FORM***********************************************
-      ********************************************************************************************/
+      *********************************************************************************************/
+
       if ($priceList->load(Yii::$app->request->post())) {
 
          $priceList->description = (empty($priceList->description)) ? $priceList->signature : $priceList->description;
@@ -287,10 +290,9 @@ class ServicesController extends Controller
          }
       }
 
-      /*********************************************************************************************
+       /********************************************************************************************
        *********************************************************************************************
        ********************************************************************************************/
-
 
       return $this->render('add', [
           'serviceModel' => $serviceModel,
@@ -305,13 +307,169 @@ class ServicesController extends Controller
    }
 
 
+   public function actionEdit($id){
+
+      $id = Html::encode($id);
+      $serviceModel = $this->findModel($id);
+      $serviceInfoModel = $this->findServiceInfoModel($id);
+      $answerQuestions = $this->findQuestionModel($id);
+      $workProccess = $this->findProcces($id);
+      $workResults = $this->findResult($id);
+      $priceList = $this->findPriceList($id);
+
+      $answerQuestionsData = AnswerQuestions::find()->where(['service_id' => $id, 'status' => 1, 'type' => 1])->all();
+      $workProccessData  = WorkProccess::find()->where(['service_id' => $id, 'status' => 1])->all();
+      $workResultsData  = WorkResults::find()->where(['service_id' => $id, 'status' => 1,])->all();
+      $subServices = Services::find()
+          ->select('s.*, si.key, si.val, si.description as desc, si.img')
+          ->from('services s')
+          ->join('LEFT JOIN', 'service_info si', 's.id=si.service_id')
+          ->where(['parent_id' => $id, 's.status' => 1])
+          ->asArray()->all();
+      $priceListData = PriceList::find()->where(['service_id' => $id, 'status' => 1, 'type' => 1])->all();
+
+      $servicesAndSubservices[$id]=$id;
+      $servicesAndSubservices = ArrayHelper::map($subServices, 'id', 'id');
+
+
+      $priceListTable = PriceList::find()
+          ->select('p.*, s.name, s.id as sid')
+          ->from('price_list p')
+          ->leftJoin('services s', 'p.service_id=s.id')
+          ->where(['s.id' => $servicesAndSubservices, 'p.type' => 2, 's.status' => 1, 'p.status' => 1])
+          ->asArray()->all();
+
+      $services = Services::find()->where(['status' => 1])->asArray()->all();
+      $service_id['id'] = $id;
+      $service_id['name'] = $serviceModel->name;
+      $oldServiceImg = $serviceModel->img;
+
+      /**************форма добавление услуг*********************/
+      if($serviceModel->load(Yii::$app->request->post())){
+         $serviceImage = UploadedFile::getInstance($serviceModel, 'img');
+         $maxId = Services::find()->max('id');
+         if($maxId == 0){
+            $maxId = 1;
+         }else{
+            $maxId += 1;
+         }
+         if (!empty($serviceImage)) {
+            $path = Yii::getAlias('@uploadsroot');
+            $fileName = 'service_cover_' . $maxId . '.' . $serviceImage->extension;
+            $serviceImage->saveAs($path . '/services/' . $fileName);
+            $serviceModel->img = $fileName;
+         }else{
+            $serviceModel->img = $oldServiceImg;
+         }
+         if (empty($serviceModel->parent_id)) {
+            $serviceModel->parent_id = 0;
+         }
+         $service_id['id'] = (empty($service_id['id'])) ? $serviceModel->id : $service_id['id'];
+         if ($serviceModel->save()) {
+            Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
+            return $this->redirect(['edit', 'id' => $serviceModel->id]);
+         } else {
+            Yii::$app->session->setFlash('error', 'Не удается сохранить запись!');
+            return $this->redirect(['edit', 'id' => $serviceModel->id]);
+         }
+      }
+      /////////////////////Добавление информации об услуги//////////////////////////////////////
+
+      if($serviceInfoModel->load(Yii::$app->request->post())){
+         $service_id['id'] = (empty($service_id['id'])) ? $serviceInfoModel->service_id : $service_id['id'];
+         if ($serviceInfoModel->save()) {
+            Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
+            return $this->redirect(['add', 'id' => $service_id['id']]);
+         }else{
+            Yii::$app->session->setFlash('error', 'Не удается сохранить запись!');
+            return $this->redirect(['add', 'id' => $service_id['id']]);
+         }
+      }
+
+
+
+      //debug($answerQuestionsData);
+
+      return $this->render('edit', [
+          'serviceModel' => $serviceModel,
+          'serviceInfoModel' => $serviceInfoModel,
+          'answerQuestions' => $answerQuestions,
+          'workProccess' => $workProccess,
+          'workResults' => $workResults,
+          'priceList' => $priceList,
+          'priceListTable' => $priceListTable,
+          'services' => $services,
+          'service_id' => $service_id,
+
+          'answerQuestionsData' => $answerQuestionsData,
+          'workProccessData' => $workProccessData,
+          'workResultsData' => $workResultsData,
+          'priceListData' => $priceListData,
+          'priceListTable' => $priceListTable
+      ]);
+
+   }
+
 
    protected function findModel($id)
    {
-      if (($model = Services::findOne($id)) !== null) {
+      if(($model = Services::findOne($id)) !== null){
          return $model;
       }
 
-      throw new NotFoundHttpException('The requested page does not exist.');
+      throw new NotFoundHttpException('Страница не существует!');
    }
+
+   protected function findServiceInfoModel($id)
+   {
+      if(($model = ServiceInfo::findOne(['service_id' => $id])) !== null) {
+         return $model;
+      }
+      $model = new ServiceInfo();
+      return $model;
+
+   }
+
+   protected function findQuestionModel($id)
+   {
+      if (($model = AnswerQuestions::findOne(['service_id' => $id])) !== null) {
+         return $model;
+      }
+      $model = new AnswerQuestions();
+      return $model;
+
+   }
+
+   protected function findProcces($id)
+   {
+      if (($model = WorkProccess::findOne(['service_id' => $id])) !== null) {
+         return $model;
+      }
+      $model = new WorkProccess();
+      return $model;
+
+   }
+
+   protected function findResult($id)
+   {
+      if (($model = WorkResults::findOne(['service_id' => $id])) !== null) {
+         return $model;
+      }
+      $model = new WorkResults();
+      return $model;
+
+   }
+
+   protected function findPriceList($id)
+   {
+      if (($model = PriceList::findOne(['service_id' => $id])) !== null) {
+         return $model;
+      }
+      $model = new PriceList();
+      return $model;
+
+   }
+
+
+
 }

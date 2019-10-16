@@ -8,7 +8,9 @@ $model->service_id = $service_id['id'];
 ?>
 
 <div class="service-info-form">
-    <h4>Добавьте преимущества способа, оборудование...</h4>
+    <div class="col-lg-12">
+        <h3>Добавьте преимущества способа, оборудование...</h3>
+    </div>
    <?php $form = ActiveForm::begin(); ?>
     <div class="col-lg-6">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">

@@ -36,8 +36,9 @@
                                     }
                                     $description = explode('.', $service['description']);
                                     if (!empty($description)):
+
                                         foreach ($description as $item): ?>
-                                            <li class="list__item"><?= $item ?></li>
+                                            <li class="list__item"><?= $item ?>.</li>
                                         <?php  endforeach; endif; ?>
                                 </ul>
                             </div>

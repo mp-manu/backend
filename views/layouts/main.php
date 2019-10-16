@@ -36,11 +36,7 @@ AppAsset::register($this);
 <div id="root">
     <div class="page">
         <?php $this->beginBody() ?>
-        <?php if (Yii::$app->controller->id == 'error'): ?>
-            <?= $this->render('header-dark') ?>
-        <?php else: ?>
-            <?= $this->render('header') ?>
-        <?php endif; ?>
+        <?= $this->render('header') ?>
         <main class="page__content">
             <div class="content">
                 <?= $content ?>
