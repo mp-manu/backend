@@ -102,7 +102,7 @@ class BackMenu extends \yii\db\ActiveRecord
                   $menu .= '<li class="nav-item">';
                   foreach ($service as $serv) {
                      $menu .= '<li class="nav-item">';
-                     $menu .= '<a href="/admin/services/details?=' . $serv['id'] . '" class="nav-link nav-toggle">';
+                     $menu .= '<a href="/admin/services/edit?id=' . $serv['id'] . '" class="nav-link nav-toggle">';
                      $menu .= '<span class="title">' . $serv['name'] . '</span></a></li>';
                   }
                   $menu .= '</ul>';

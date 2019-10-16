@@ -16,7 +16,6 @@ use app\modules\admin\models\Sections;
 use app\modules\admin\models\Services;
 use app\modules\admin\models\WorkProccess;
 use app\modules\admin\models\WorkResults;
-use yii\bootstrap\Html;
 use yii\web\Controller;
 use app\modules\admin\models\Slider;
 use kartik\grid\EditableColumnAction;
@@ -74,17 +73,89 @@ class EditableController extends Controller
 
    public function actionChangeQuestionStatus()
    {
-      $q_id = Html::encode(Yii::$app->request->post('id'));
-      $q_status = Html::encode(Yii::$app->request->post('status'));
-      if($q_status == 1){
-         Yii::$app->db->createCommand('UPDATE answer_questions SET status = 0 WHERE id = ' . $q_id)->execute();
-         return 0;
-      }elseif($q_status==0){
-         Yii::$app->db->createCommand('UPDATE answer_questions SET status = 1 WHERE id = ' . $q_id)->execute();
-         return 1;
-      }else{
-         Yii::$app->db->createCommand('UPDATE answer_questions SET status = 0 WHERE id = ' . $q_id)->execute();
-         return 0;
+
+      if (Yii::$app->request->post()) {
+         $q_id = Yii::$app->request->post('id');
+         $status = Yii::$app->request->post('status');
+         if($status == 0) {
+            $status = 1;
+         }elseif($status == 1) {
+            $status = 0;
+         }else{
+            $status =0;
+         }
+         Yii::$app->db->createCommand('UPDATE answer_questions SET status = '.$status.' WHERE id=' . $q_id)->execute();
+         return $status;
       }
    }
+
+   public function actionChangeProccessStatus()
+   {
+      if (Yii::$app->request->post()) {
+         $q_id = Yii::$app->request->post('id');
+         $status = Yii::$app->request->post('status');
+         if($status == 0) {
+            $status = 1;
+         }elseif($status == 1) {
+            $status = 0;
+         }else{
+            $status =0;
+         }
+         Yii::$app->db->createCommand('UPDATE work_proccess SET status = '.$status.' WHERE id=' . $q_id)->execute();
+         return $status;
+      }
+   }
+
+   public function actionChangeResultStatus()
+   {
+      if (Yii::$app->request->post()) {
+         $q_id = Yii::$app->request->post('id');
+         $status = Yii::$app->request->post('status');
+         if($status == 0) {
+            $status = 1;
+         }elseif($status == 1) {
+            $status = 0;
+         }else{
+            $status =0;
+         }
+         Yii::$app->db->createCommand('UPDATE work_results SET status = '.$status.' WHERE id=' . $q_id)->execute();
+         return $status;
+      }
+   }
+
+
+   public function actionChangePricelistStatus()
+   {
+      if (Yii::$app->request->post()) {
+         $q_id = Yii::$app->request->post('id');
+         $status = Yii::$app->request->post('status');
+         if($status == 0) {
+            $status = 1;
+         }elseif($status == 1) {
+            $status = 0;
+         }else{
+            $status =0;
+         }
+         Yii::$app->db->createCommand('UPDATE price_list SET status = '.$status.' WHERE id=' . $q_id)->execute();
+         return $status;
+      }
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

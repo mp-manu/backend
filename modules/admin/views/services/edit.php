@@ -79,6 +79,7 @@ $display = (count($services) > 0 || !empty($services)) ? true : false;
                            'visible' => $display,
                            'content' => $this->render('forms/work-proccess', [
                                'model' => $workProccess,
+                               'workProccessData' => $workProccessData,
                                'services' => $services,
                                'service_id' => $service_id
                            ]),
@@ -88,17 +89,18 @@ $display = (count($services) > 0 || !empty($services)) ? true : false;
                            'visible' => $display,
                            'content' => $this->render('forms/work-results', [
                                'model' => $workResults,
+                               'workResultsData' => $workResultsData,
                                'services' => $services,
                                'service_id' => $service_id
                            ]),
                        ],
-
                        [
                            'label' => 'Прайс лист',
                            'visible' => $display,
                            'content' => $this->render('forms/price-list',
                                [
                                    'model' => $priceList,
+                                   'priceListData' => $priceListData,
                                    'services' => $services,
                                    'service_id' => $service_id
                                ]),
@@ -115,3 +117,4 @@ $display = (count($services) > 0 || !empty($services)) ? true : false;
         font-weight: normal;
     }
 </style>
+<?php $this->registerJsFile('@web/admin_assets/js/change-status.js') ?>

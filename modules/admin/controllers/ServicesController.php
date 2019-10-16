@@ -317,27 +317,10 @@ class ServicesController extends Controller
       $workResults = $this->findResult($id);
       $priceList = $this->findPriceList($id);
 
-      $answerQuestionsData = AnswerQuestions::find()->where(['service_id' => $id, 'status' => 1, 'type' => 1])->all();
-      $workProccessData  = WorkProccess::find()->where(['service_id' => $id, 'status' => 1])->all();
-      $workResultsData  = WorkResults::find()->where(['service_id' => $id, 'status' => 1,])->all();
-      $subServices = Services::find()
-          ->select('s.*, si.key, si.val, si.description as desc, si.img')
-          ->from('services s')
-          ->join('LEFT JOIN', 'service_info si', 's.id=si.service_id')
-          ->where(['parent_id' => $id, 's.status' => 1])
-          ->asArray()->all();
-      $priceListData = PriceList::find()->where(['service_id' => $id, 'status' => 1, 'type' => 1])->all();
-
-      $servicesAndSubservices[$id]=$id;
-      $servicesAndSubservices = ArrayHelper::map($subServices, 'id', 'id');
-
-
-      $priceListTable = PriceList::find()
-          ->select('p.*, s.name, s.id as sid')
-          ->from('price_list p')
-          ->leftJoin('services s', 'p.service_id=s.id')
-          ->where(['s.id' => $servicesAndSubservices, 'p.type' => 2, 's.status' => 1, 'p.status' => 1])
-          ->asArray()->all();
+      $answerQuestionsData = AnswerQuestions::find()->where(['service_id' => $id, 'type' => 1])->all();
+      $workProccessData  = WorkProccess::find()->where(['service_id' => $id])->all();
+      $workResultsData  = WorkResults::find()->where(['service_id' => $id])->all();
+      $priceListData = PriceList::find()->where(['service_id' => $id])->orderBy('type')->all();
 
       $services = Services::find()->where(['status' => 1])->asArray()->all();
       $service_id['id'] = $id;
@@ -387,9 +370,6 @@ class ServicesController extends Controller
       }
 
 
-
-      //debug($answerQuestionsData);
-
       return $this->render('edit', [
           'serviceModel' => $serviceModel,
           'serviceInfoModel' => $serviceInfoModel,
@@ -397,7 +377,6 @@ class ServicesController extends Controller
           'workProccess' => $workProccess,
           'workResults' => $workResults,
           'priceList' => $priceList,
-          'priceListTable' => $priceListTable,
           'services' => $services,
           'service_id' => $service_id,
 
@@ -405,7 +384,6 @@ class ServicesController extends Controller
           'workProccessData' => $workProccessData,
           'workResultsData' => $workResultsData,
           'priceListData' => $priceListData,
-          'priceListTable' => $priceListTable
       ]);
 
    }
@@ -416,13 +394,12 @@ class ServicesController extends Controller
       if(($model = Services::findOne($id)) !== null){
          return $model;
       }
-
       throw new NotFoundHttpException('Страница не существует!');
    }
 
    protected function findServiceInfoModel($id)
    {
-      if(($model = ServiceInfo::findOne(['service_id' => $id])) !== null) {
+      if(($model = ServiceInfo::findOne(['service_id' => $id, 'status' => 1])) !== null) {
          return $model;
       }
       $model = new ServiceInfo();
@@ -432,7 +409,7 @@ class ServicesController extends Controller
 
    protected function findQuestionModel($id)
    {
-      if (($model = AnswerQuestions::findOne(['service_id' => $id])) !== null) {
+      if (($model = AnswerQuestions::findOne(['service_id' => $id, 'status' => 1])) !== null) {
          return $model;
       }
       $model = new AnswerQuestions();
@@ -442,7 +419,7 @@ class ServicesController extends Controller
 
    protected function findProcces($id)
    {
-      if (($model = WorkProccess::findOne(['service_id' => $id])) !== null) {
+      if (($model = WorkProccess::findOne(['service_id' => $id, 'status' => 1])) !== null) {
          return $model;
       }
       $model = new WorkProccess();
@@ -452,7 +429,7 @@ class ServicesController extends Controller
 
    protected function findResult($id)
    {
-      if (($model = WorkResults::findOne(['service_id' => $id])) !== null) {
+      if (($model = WorkResults::findOne(['service_id' => $id, 'status' => 1])) !== null) {
          return $model;
       }
       $model = new WorkResults();
@@ -462,7 +439,7 @@ class ServicesController extends Controller
 
    protected function findPriceList($id)
    {
-      if (($model = PriceList::findOne(['service_id' => $id])) !== null) {
+      if (($model = PriceList::findOne(['service_id' => $id, 'status' => 1])) !== null) {
          return $model;
       }
       $model = new PriceList();
