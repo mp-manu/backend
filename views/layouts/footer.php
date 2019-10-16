@@ -30,7 +30,7 @@ use app\modules\admin\models\FrontMenu;
                         <div class="footer__links">
                             <div class="links is-additional">
                                 <ul class="links__list">
-                                    <li class="links__item"><a class="links__link" href="/about.html">
+                                    <li class="links__item"><a class="links__link" href="/page/about">
                                             О компании
                                         </a></li>
                                     <li class="links__item"><a class="links__link"
@@ -49,7 +49,7 @@ use app\modules\admin\models\FrontMenu;
                             <?= Yii::$app->settings->get('Сайт', 'Имя компании') ?>
                         </p>
                     </div>
-                    <div class="col-4"><a class="footer__policy" href="#">Политика конфиденциальности</a></div>
+                    <div class="col-4"><a class="footer__policy" href="/page/policy">Политика конфиденциальности</a></div>
                     <div class="col-4">
                         <div class="footer__dc">
                             <a class="dc" href="//dancecolor.ru" target="_blank" rel="noreferrer">

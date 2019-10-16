@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'attribute' => 'img_url',
             'format' => 'html',
             'value' => function($dataProvider){
-                return Html::a($dataProvider->img_url, [Yii::getAlias('@web').'/img/slider/'.$dataProvider->img_url],
+                return Html::a($dataProvider->img_url, [Yii::getAlias('@uploads').'/slider/'.$dataProvider->img_url],
                     ['target' => '_blank']);
             }
         ],

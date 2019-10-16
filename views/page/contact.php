@@ -314,7 +314,7 @@ $this->title = 'Контакты';
                                                                             type="checkbox" name="agreement"
                                                                             required><span
                                                                             class="checkbox__label">Заказывая обратный звонок, даю согласие на обработку <a
-                                                                                href="/policy.html">персональных данных</a></span></label>
+                                                                                href="/page/policy">персональных данных</a></span></label>
                                                             </div>
                                                             <div class="form__button">
                                                                 <button class="button is-wide is-large">

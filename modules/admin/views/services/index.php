@@ -34,16 +34,17 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                     [
                         'attribute' => 'parent_id',
+                        'format' => 'html',
                         'filter' => ArrayHelper::map(Services::getServices(), 'id', 'name'),
                         'value' => function($data){
-                            return $data->name;
+                            return '<a href="/admin/services/edit?id='.$data->id.'">'.$data->name.'</a>';
                         }
                     ],
                     [
                         'attribute' => 'name',
                         'format' => 'html',
                         'value' => function($data){
-                           return '<a href="/admin/services/detatails?='.$data->id.'">'.$data->name.'</a>';
+                           return '<a href="/admin/services/edit?id='.$data->id.'">'.$data->name.'</a>';
                         }
                     ],
                     [

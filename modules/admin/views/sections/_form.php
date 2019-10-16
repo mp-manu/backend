@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-lg-6 p-t-3">
+                        <div class="col-lg-6">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
                                 <?= $form->field($model, 'page_id')
                                     ->dropDownList(ArrayHelper::map($pages, 'id', 'name'), [
@@ -28,43 +28,57 @@ use yii\widgets\ActiveForm;
                                     ]) ?>
                             </div>
                         </div>
-                        <div class="col-lg-6 p-t-3">
+                        <div class="col-lg-6">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
                                 <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6 p-t-3">
+                        <div class="col-lg-6">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
                                 <?= $form->field($model, 'alias')->textInput(['maxlength' => true]) ?>
                             </div>
                         </div>
-                        <div class="col-lg-6 p-t-3">
+                        <div class="col-lg-6">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
                                 <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
                             </div>
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6 p-t-3">
+                        <div class="col-lg-6">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
                                 <?= $form->field($model, 'type')->textInput() ?>
                             </div>
                         </div>
-                        <div class="col-lg-6 p-t-3">
+                        <div class="col-lg-6">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
                                 <?= $form->field($model, 'status')->dropDownList(['1' => 'Включён', '0' => 'Выключен']) ?>
                             </div>
                         </div>
                     </div>
+                    <?php if(!$model->isNewRecord): ?>
                     <div class="row">
-                        <div class="col-lg-6 p-t-3">
+                        <div class="col-lg-6">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                               <img src="<?= Yii::getAlias('@uploads').'/'.$model->img ?>" width="300" height="220">
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                                <img src="<?= Yii::getAlias('@uploads').'/'.$model->ico ?>">
+                            </div>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                    <div class="row">
+                        <div class="col-lg-6">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
                                 <?= $form->field($model, 'img')->fileInput() ?>
                             </div>
                         </div>
-                        <div class="col-lg-6 p-t-3">
+                        <div class="col-lg-6">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
                                 <?= $form->field($model, 'ico')->fileInput() ?>
                             </div>

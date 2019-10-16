@@ -154,20 +154,18 @@ class FrontMenu extends \yii\db\ActiveRecord
       $footerMenu = '<div class="footer__links">
                             <div class="links">
                                 <ul class="links__list">';
-      $parents = FrontMenu::find()->where(['parentnodeid' => 0, 'nodeaccess' => 1])->andWhere('nodeid not in (2, 3)')
-          ->orderBy('nodeorder ASC')->asArray()->all();
+      $parents = Services::find()->where(['status' => 1, 'parent_id' => 0])->asArray()->all();
       if (!empty($parents)) {
          foreach ($parents as $parent) {
             $footerMenu .= '<li class="links__item"><a class="links__link"
-                                                               href="' . $parent['nodeurl'] . '">' . $parent['nodename'] . '</a>';
-            $childs = FrontMenu::find()->where(['parentnodeid' => $parent['nodeid'], 'nodeaccess' => 1])
-                ->orderBy('nodeorder ASC')->asArray()->all();
+                                                               href="/page/service/' . $parent['id'] . '">' . $parent['name'] . '</a>';
+            $childs = Services::find()->where(['parent_id' => $parent['id'], 'status' => 1])->asArray()->all();
             if (!empty($childs)) {
                $footerMenu .= '<ul class="links__sublist">';
                foreach ($childs as $child) {
                   $footerMenu .= '<li class="links__subitem"><a class="links__sublink"
-                                                                          href="' . $child['nodeurl'] . '">
-                            ' . $child['nodename'] . '</a></li>';
+                                                                          href="/page/service/' . $child['id'] . '">
+                            ' . $child['name'] . '</a></li>';
                }
                $footerMenu .= '</ul>';
             }
