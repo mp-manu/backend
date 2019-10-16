@@ -31,7 +31,7 @@ CREATE TABLE `answer_questions` (
   `status` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `service_id` (`service_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 /*Data for the table `answer_questions` */
 
@@ -41,7 +41,7 @@ insert  into `answer_questions`(`id`,`service_id`,`question`,`answer`,`username`
 (3,1,'Как мне контролировать ход выполнения заказа?','С самого начала выверяем всё с максимальной точностью. Чем точнее первый этап, тем меньше в дальнейшем будет трудностей. Оснастку мы изготавливаем сперва на станке, а затем доводим вручную, пока она не будет на 100% соответствовать чертежу. Мы не начинаем штамповку, пока она не достигнет максимально точных размеров. Иначе у нас не бывает.','','',1,1),
 (4,1,'Может ли быть так, что деталь не будет соответствовать чертежу?','С самого начала выверяем всё с максимальной точностью. Чем точнее первый этап, тем меньше в дальнейшем будет трудностей. Оснастку мы изготавливаем сперва на станке, а затем доводим вручную, пока она не будет на 100% соответствовать чертежу. Мы не начинаем штамповку, пока она не достигнет максимально точных размеров. Иначе у нас не бывает.','','',1,1),
 (5,1,'Может ли меняться цена в процессе выполнения заказа?','С самого начала выверяем всё с максимальной точностью. Чем точнее первый этап, тем меньше в дальнейшем будет трудностей. Оснастку мы изготавливаем сперва на станке, а затем доводим вручную, пока она не будет на 100% соответствовать чертежу. Мы не начинаем штамповку, пока она не достигнет максимально точных размеров. Иначе у нас не бывает.','','',1,1),
-(11,1,'Тест формы из страницы сервис холодной штамповки','dawdawdwaasdawdawdaawdawdwadwa','Manu','+7 (123) 193 13 91',2,0);
+(6,1,'мой вопрос','','Ману','+7 (927) 001 91 11',2,1);
 
 /*Table structure for table `auth_assignment` */
 
@@ -535,7 +535,7 @@ insert  into `back_menu`(`nodeid`,`parentnodeid`,`nodeshortname`,`nodename`,`nod
 (24,13,'Почему мы','Почему мы','/admin/why-we','ALL',1,1,1,NULL,NULL,NULL,'no','no','','yes',NULL,'left'),
 (25,2,'Блоки страниц','Раздел страниц','/admin/sections','ALL',1,1,3,NULL,NULL,NULL,'no','no','','yes',NULL,'left'),
 (26,2,'Фото страниц','Фото страниц','/admin/page-photos','ALL',1,1,4,NULL,NULL,NULL,'no','no','','yes',NULL,'left'),
-(27,0,'Пользователи','Пользователи','#','ALL',1,1,4,NULL,NULL,'person','no','no','<span class=\"label label-rouded label-menu label-danger\">6</span>','yes','arrow','left'),
+(27,0,'Пользователи','Пользователи','#','ALL',1,1,4,NULL,NULL,'person','no','no','<span class=\"label label-rouded label-menu label-danger\">1</span>','yes','arrow','left'),
 (28,27,'Назначения','Назначения','/rbac','ALL',1,1,102,NULL,NULL,NULL,'no','no','','yes','',NULL),
 (29,27,'Маршруты','Маршруты','/rbac/route','ALL',1,1,103,NULL,NULL,NULL,'no','no','','yes',NULL,NULL),
 (30,27,'Разрешения','Разрешения','/rbac/permission','ALL',1,1,104,NULL,NULL,NULL,'no','no','','yes',NULL,NULL),
@@ -543,10 +543,10 @@ insert  into `back_menu`(`nodeid`,`parentnodeid`,`nodeshortname`,`nodename`,`nod
 (32,27,'Список пользователей','Список пользователей','/admin/user/list','ALL',1,1,100,NULL,NULL,NULL,'no','no','','yes',NULL,NULL),
 (33,27,'Добавить','Добавить нового пользователя','/admin/user/create','ALL',1,1,101,NULL,NULL,NULL,'no','no','','yes',NULL,NULL),
 (34,2,'Настройки фото','Настройки фото','/admin/image-manager/index','ALL',1,1,10,NULL,NULL,NULL,'no','no','','yes',NULL,'left'),
-(35,27,'Сообщение','Сообщение','/admin/user/contacts','ALL',1,1,0,NULL,NULL,NULL,'no','no','<span class=\"label label-rouded label-menu label-warning\">1</span>','yes',NULL,NULL),
-(36,27,'Запросы на звонок','Запросы на звонок','/admin/user/call-requests','ALL',1,1,2,NULL,NULL,NULL,'no','no','<span class=\"label label-rouded label-menu label-primary\">4</span>','yes',NULL,NULL),
-(37,27,'Заказы по чертежу','Заказы по чертежу','/admin/user/order-by-draws','ALL',1,1,3,NULL,NULL,NULL,'no','no','<span class=\"label label-rouded label-menu label-dander\">1</span>','yes',NULL,NULL),
-(38,27,'Вопросы','Вопросы','/admin/user/questions','ALL',1,1,1,NULL,NULL,NULL,'no','no','','yes',NULL,NULL);
+(35,27,'Сообщение','Сообщение','/admin/user/contacts','ALL',1,1,0,NULL,NULL,NULL,'no','no','','yes',NULL,NULL),
+(36,27,'Запросы на звонок','Запросы на звонок','/admin/user/call-requests','ALL',1,1,2,NULL,NULL,NULL,'no','no','','yes',NULL,NULL),
+(37,27,'Заказы по чертежу','Заказы по чертежу','/admin/user/order-by-draws','ALL',1,1,3,NULL,NULL,NULL,'no','no','','yes',NULL,NULL),
+(38,27,'Вопросы','Вопросы','/admin/user/questions','ALL',1,1,1,NULL,NULL,NULL,'no','no','<span class=\"label label-rouded label-menu label-success\">1</span>','yes',NULL,NULL);
 
 /*Table structure for table `call_request` */
 
@@ -558,18 +558,9 @@ CREATE TABLE `call_request` (
   `status` tinyint(4) DEFAULT NULL COMMENT '1-active, 2-confirm, 0-denied',
   `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `call_request` */
-
-insert  into `call_request`(`id`,`customer_id`,`status`,`created_at`) values 
-(1,4,1,'2019-10-13 02:01:59'),
-(2,5,0,'2019-10-13 02:02:53'),
-(3,6,0,'2019-10-13 02:09:59'),
-(4,7,0,'2019-10-13 02:14:40'),
-(5,9,1,'2019-10-13 02:16:19'),
-(6,10,1,'2019-10-13 02:16:54'),
-(7,11,1,'2019-10-13 02:19:41');
 
 /*Table structure for table `contact` */
 
@@ -582,12 +573,9 @@ CREATE TABLE `contact` (
   `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '2-confirmed, 1-active, 0-inactive,',
   `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `contact` */
-
-insert  into `contact`(`id`,`customer_id`,`message`,`status`,`created_at`) values 
-(1,8,'It&#039;s test from contact page!',1,'2019-10-13 02:15:36');
 
 /*Table structure for table `customers` */
 
@@ -602,21 +590,9 @@ CREATE TABLE `customers` (
   `status` tinyint(2) DEFAULT NULL COMMENT '1-active, 0-inactive',
   `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `customers` */
-
-insert  into `customers`(`id`,`name`,`phone_number`,`email`,`organization`,`status`,`created_at`) values 
-(3,'Ману','+7 (929) 912 93 12',NULL,NULL,1,'2019-10-13 02:01:04'),
-(4,'Ману','+7 (922) 312 31 23',NULL,NULL,1,'2019-10-13 02:01:59'),
-(5,'Ману','+7 (912) 312 32 13',NULL,NULL,1,'2019-10-13 02:02:53'),
-(6,'Саша','+7 (123) 123 12 31',NULL,NULL,1,'2019-10-13 02:09:59'),
-(7,'Марина','+7 (912) 839 12 83',NULL,NULL,1,'2019-10-13 02:14:40'),
-(8,'Стас','+7 (912) 312 31 31','stas@mail.ru','Toyota',1,'2019-10-13 02:15:36'),
-(9,'Stas','+7 (142) 343 24 23',NULL,NULL,1,'2019-10-13 02:16:19'),
-(10,'Stas','+7 (134) 234 23 42',NULL,NULL,1,'2019-10-13 02:16:54'),
-(11,'thanks','+7 (999) 999 99 99',NULL,NULL,1,'2019-10-13 02:19:41'),
-(12,'asda','+7 (342) 423 42 42',NULL,NULL,1,'2019-10-14 08:47:24');
 
 /*Table structure for table `front_menu` */
 
@@ -689,7 +665,7 @@ CREATE TABLE `login_details` (
   PRIMARY KEY (`login_detail_id`),
   KEY `login_user_id` (`login_user_id`),
   CONSTRAINT `login_details_ibfk_1` FOREIGN KEY (`login_user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 /*Data for the table `login_details` */
 
@@ -698,7 +674,18 @@ insert  into `login_details`(`login_detail_id`,`login_user_id`,`login_status`,`l
 (2,1,1,'2019-10-13 02:01:31',NULL,'127.0.0.1'),
 (3,1,1,'2019-10-13 02:03:18',NULL,'127.0.0.1'),
 (4,22,1,'2019-10-13 14:56:18',NULL,'127.0.0.1'),
-(5,1,1,'2019-10-14 18:03:05',NULL,'127.0.0.1');
+(5,1,1,'2019-10-14 18:03:05',NULL,'127.0.0.1'),
+(6,22,1,'2019-10-15 21:35:57',NULL,'127.0.0.1'),
+(7,22,1,'2019-10-15 22:28:04',NULL,'127.0.0.1'),
+(8,22,1,'2019-10-15 22:59:32',NULL,'127.0.0.1'),
+(9,22,1,'2019-10-15 23:01:46',NULL,'127.0.0.1'),
+(10,22,1,'2019-10-16 08:08:22',NULL,'127.0.0.1'),
+(11,22,1,'2019-10-16 09:14:41',NULL,'127.0.0.1'),
+(12,22,1,'2019-10-16 09:19:58',NULL,'127.0.0.1'),
+(13,22,1,'2019-10-16 10:08:49',NULL,'127.0.0.1'),
+(14,22,1,'2019-10-16 12:50:28',NULL,'127.0.0.1'),
+(15,1,1,'2019-10-16 12:53:36',NULL,'127.0.0.1'),
+(16,22,1,'2019-10-16 12:53:44',NULL,'127.0.0.1');
 
 /*Table structure for table `migration` */
 
@@ -733,13 +720,9 @@ CREATE TABLE `order_by_drawing` (
   `status` tinyint(2) NOT NULL DEFAULT '1' COMMENT '1-active, 2-confirm, 0-denied',
   `created_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 /*Data for the table `order_by_drawing` */
-
-insert  into `order_by_drawing`(`id`,`customer_id`,`file`,`status`,`created_at`) values 
-(1,3,'Dzhon_Skit_C_dlya_professionalov-2.pdf',2,'2019-10-13 02:01:04'),
-(2,12,'about-cover.jpg',1,'2019-10-14 08:47:24');
 
 /*Table structure for table `pages` */
 
@@ -781,11 +764,39 @@ CREATE TABLE `price_list` (
   `status` tinyint(2) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `service_id` (`service_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 /*Data for the table `price_list` */
 
 insert  into `price_list`(`id`,`service_id`,`signature`,`depth`,`length`,`deadline`,`description`,`price`,`type`,`status`) values 
+(1,1,'Листы свыше 50 000 м², 5 мм толщина',NULL,NULL,'76-90','Листы свыше 50 000 м², 5 мм толщина',950000.00,1,1),
+(2,1,'Листы 20 000 - 50 000 м², 5 мм толщина',NULL,NULL,'76-90','Листы 20 000 - 50 000 м², 5 мм толщина',650000.00,1,1),
+(3,1,'Листы 10 000 - 20 000 м², 5 мм толщина',NULL,NULL,'76-90','Листы 10 000 - 20 000 м², 5 мм толщина',450000.00,1,1),
+(4,1,'Листы до 10 000 м², 5 мм толщина',NULL,NULL,'76-90','Листы до 10 000 м², 5 мм толщина',450000.00,1,1),
+(5,3,'',100.00,1,'','',10.00,2,1);
+
+/*Table structure for table `price_list_copy` */
+
+DROP TABLE IF EXISTS `price_list_copy`;
+
+CREATE TABLE `price_list_copy` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `service_id` int(11) NOT NULL,
+  `signature` varchar(200) DEFAULT NULL,
+  `depth` double(6,2) DEFAULT NULL,
+  `length` int(6) DEFAULT NULL,
+  `deadline` varchar(15) DEFAULT NULL COMMENT 'Days',
+  `description` varchar(500) DEFAULT NULL,
+  `price` float(11,2) NOT NULL,
+  `type` tinyint(2) DEFAULT NULL,
+  `status` tinyint(2) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `service_id` (`service_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=109 DEFAULT CHARSET=utf8;
+
+/*Data for the table `price_list_copy` */
+
+insert  into `price_list_copy`(`id`,`service_id`,`signature`,`depth`,`length`,`deadline`,`description`,`price`,`type`,`status`) values 
 (1,1,'Листы свыше 50 000 м², 5 мм толщина',NULL,NULL,'76-90','Листы свыше 50 000 м², 5 мм толщина',950000.00,1,1),
 (2,1,'Листы 20 000 - 50 000 м², 5 мм толщина',NULL,NULL,'76-90','Листы 20 000 - 50 000 м², 5 мм толщина',650000.00,1,1),
 (3,1,'Листы 10 000 - 20 000 м², 5 мм толщина',NULL,NULL,'76-90','Листы 10 000 - 20 000 м², 5 мм толщина',450000.00,1,1),
@@ -959,9 +970,9 @@ CREATE TABLE `service_info` (
 /*Data for the table `service_info` */
 
 insert  into `service_info`(`id`,`service_id`,`key`,`val`,`img`,`description`,`status`) values 
-(1,1,'advantage','Преимущества способа',NULL,'Штамповка - самый недорогой способ получить множество деталей на 100% соответсвующих чертежу.\r\nДолговечность изделий.\r\nВысокая скорость, большие объемы.',1),
-(2,1,'when_you_need','Когда вам нужна штамповка',NULL,'Нужно быстро сделать много деталей по чертежам.\r\nУ вас есть чертежи.\r\nТолщина детали в широкой части не более 5 мм.\r\nВам нужны детали сложных форм с высокой точностью размеров.',1),
-(3,1,'our_equipment','Наше оборудование',NULL,'Пресса кривошипные с усилием от 6 до 100 тонн.\r\nПресс ножницы комбинированные.\r\nНожницы гильотинные до 12 мм.',1);
+(1,1,'преимущество','Преимущества способа',NULL,'Штамповка - самый недорогой способ получить множество деталей на 100% соответсвующих чертежу. Долговечность изделий. Высокая скорость, большие объемы.',1),
+(2,1,'когда нужно штамповка','Когда вам нужна штамповка',NULL,'Нужно быстро сделать много деталей по чертежам. У вас есть чертежи. Толщина детали в широкой части не более 5 мм. Вам нужны детали сложных форм с высокой точностью размеров.',1),
+(3,1,'оборудование','Наше оборудование',NULL,'Пресса кривошипные с усилием от 6 до 100 тонн. Пресс ножницы комбинированные. Ножницы гильотинные до 12 мм.',1);
 
 /*Table structure for table `services` */
 
@@ -977,20 +988,17 @@ CREATE TABLE `services` (
   `url` varchar(500) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 /*Data for the table `services` */
 
 insert  into `services`(`id`,`parent_id`,`name`,`alias`,`description`,`img`,`url`,`status`) values 
-(1,0,'Холодная штамповка','Холодная штамповка','Холодная штамповка позволяет получить под давлением без нагрева разнопрофильные изделия.\r\nПроизводство очень эффективно, так как детали почти не требуют дополнительной обработки и отличаются замечательным внешним видом.\r\nСамо получение происходит в специальном инструменте - штампе.','service_cover_1.jpg','/page/service-cold-stamping',1),
-(2,0,'Гибка метала','Гибка метала','В отличие от сварки не увеличивает риск коррозии.\r\nГибку можно применять: на любом металлическом профиле, трубах, листовом металле и стальных листах.','service_cover_2.jpg','/page/service-metal-bending',1),
-(3,2,'Гибка металлопрофиля','Гибка металлопрофиля','Это самый распространённый способ изготовления карнизов, рельс для дверей, оконных откосов, металлических уголков для декорирования помещений, скоб, самых сложных металлических коробов для компьютерной и другой техники и мн. др.','service_cover_1.jpg','/page/service-metal-bending',1),
-(4,2,'Гибка труб','Гибка труб','С самого начала выверяем всё с максимальной точностью. Чем точнее первый этап, тем меньше в дальнейшем будет трудностей. Оснастку мы изготавливаем сперва на станке, а затем доводим вручную, пока она не будет на 100% соответствовать чертежу. Мы не начинаем штамповку, пока она не достигнет максимально точных размеров. Иначе у нас не бывает.','service_cover_1.jpg','/page/service-metal-bending',1),
-(5,0,'Гибка листового метала','Гибка листового метала','С самого начала выверяем всё с максимальной точностью. Чем точнее первый этап, тем меньше в дальнейшем будет трудностей. Оснастку мы изготавливаем сперва на станке, а затем доводим вручную, пока она не будет на 100% соответствовать чертежу. Мы не начинаем штамповку, пока она не достигнет максимально точных размеров. Иначе у нас не бывает.','service_cover_1.jpg','/page/service-metal-bending',1),
-(6,2,'Гибка стальных листов','Гибка стальных листов','С самого начала выверяем всё с максимальной точностью. Чем точнее первый этап, тем меньше в дальнейшем будет трудностей. Оснастку мы изготавливаем сперва на станке, а затем доводим вручную, пока она не будет на 100% соответствовать чертежу. Мы не начинаем штамповку, пока она не достигнет максимально точных размеров. Иначе у нас не бывает.','service_cover_1.jpg','/page/service-metal-bending',1),
-(7,0,'Плазменная резка','Плазменная резка','','service_cover_1.jpg','/page/service-metal-bending',1),
-(8,0,'Порошковая покраска и цинкование','Порошковая покраска и цинкование','','service_cover_2.jpg','/page/service-metal-bending',1),
-(9,0,'Сварочные работы','Сварочные работы','','service_cover_2.jpg','/page/service-metal-bending',1);
+(1,0,'Холодная штамповка','Холодная штамповка','Холодная штамповка позволяет получить под давлением без нагрева разнопрофильные изделия.\r\nПроизводство очень эффективно, так как детали почти не требуют дополнительной обработки и отличаются замечательным внешним видом.\r\nСамо получение происходит в специальном инструменте - штампе.','service_cover_7.jpg',NULL,1),
+(2,0,'Гибка метала','Гибка метала','В отличие от сварки не увеличивает риск коррозии.\r\nГибку можно применять: на любом металлическом профиле, трубах, листовом металле и стальных листах.','service_cover_2.jpg',NULL,1),
+(3,2,'Гибка металлопрофиля','Гибка металлопрофиля','Это самый распространённый способ изготовления карнизов, рельс для дверей, оконных откосов, металлических уголков для декорирования помещений, скоб, самых сложных металлических коробов для компьютерной и другой техники и многие другие.','service_cover_3.jpg',NULL,1),
+(4,2,'Гибка труб','Гибка труб','С самого начала выверяем всё с максимальной точностью. Чем точнее первый этап, тем меньше в дальнейшем будет трудностей. Оснастку мы изготавливаем сперва на станке, а затем доводим вручную, пока она не будет на 100% соответствовать чертежу. Мы не начинаем штамповку, пока она не достигнет максимально точных размеров. Иначе у нас не бывает.','service_cover_4.jpg',NULL,1),
+(5,2,'Гибка листового метала','Гибка листового метала','С самого начала выверяем всё с максимальной точностью. Чем точнее первый этап, тем меньше в дальнейшем будет трудностей. Оснастку мы изготавливаем сперва на станке, а затем доводим вручную, пока она не будет на 100% соответствовать чертежу. Мы не начинаем штамповку, пока она не достигнет максимально точных размеров. Иначе у нас не бывает.','service_cover_5.jpg',NULL,1),
+(6,2,'Гибка стальных листов','Гибка стальных листов','С самого начала выверяем всё с максимальной точностью. Чем точнее первый этап, тем меньше в дальнейшем будет трудностей. Оснастку мы изготавливаем сперва на станке, а затем доводим вручную, пока она не будет на 100% соответствовать чертежу. Мы не начинаем штамповку, пока она не достигнет максимально точных размеров. Иначе у нас не бывает.','service_cover_6.jpg',NULL,1);
 
 /*Table structure for table `setting` */
 
@@ -1085,8 +1093,8 @@ CREATE TABLE `user` (
 /*Data for the table `user` */
 
 insert  into `user`(`user_id`,`username`,`user_password`,`email`,`user_type`,`is_block`,`avatar`,`created_at`,`created_by`,`updated_at`,`updated_by`,`secret_key`,`auth_key`,`session_id`) values 
-(1,'admin','f6fdffe48c908deb0f4c3bd36c032e72','admin@polytech.tj','E',0,'std7.jpg','2019-10-12 14:32:54',1,'2015-05-27 15:56:35',1,NULL,NULL,'pcrf8r3ekps32eho7le2t7lvdigc6gft'),
-(22,'admin2','af8eb328301d219cfd1d50e6c6a48f58',NULL,'A',0,'std5.jpg','2019-10-12 13:45:41',1,NULL,NULL,NULL,NULL,'a9naqr1h8m619b0jk8ndahgorfi5v16g'),
+(1,'admin','f6fdffe48c908deb0f4c3bd36c032e72','admin@polytech.tj','E',0,'std7.jpg','2019-10-12 14:32:54',1,'2015-05-27 15:56:35',1,NULL,NULL,'eu1466tvbac35cfb3htftl9rorp8lkre'),
+(22,'admin2','af8eb328301d219cfd1d50e6c6a48f58',NULL,'A',0,'std5.jpg','2019-10-12 13:45:41',1,NULL,NULL,NULL,NULL,'1aknqmrh2nijvpfnp22t9ic8rgp4mipl'),
 (23,'admin3','7169390683d2b222ba778ca6374b59d3',NULL,'A',1,'std7.jpg','2019-10-12 13:52:10',1,NULL,NULL,NULL,NULL,'ak5h7tnec99b69cipd80ralc0p2fa23l'),
 (25,'admin4','dfa5f43cb476ef890a83010f0da7c6b0',NULL,'A',1,'std3.jpg','2019-10-12 13:57:57',1,NULL,NULL,NULL,NULL,'2pqp9rissts870sj830jkor0jntj15h9'),
 (26,'admin6','b48d62f30f50c2c191ab949186c532d3',NULL,'A',1,'std6.jpg','2019-10-12 14:05:01',1,NULL,NULL,NULL,NULL,'90c8pfqa6cchpcofouj9qsl1hvngu3f3');
@@ -1104,15 +1112,13 @@ CREATE TABLE `work_proccess` (
   `status` tinyint(2) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `service_id` (`service_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 /*Data for the table `work_proccess` */
 
 insert  into `work_proccess`(`id`,`service_id`,`title`,`description`,`img`,`status`) values 
-(1,1,'Владимир подготавливает оснастку 190','Владимир подготавливает оснастку 190','work-proccess_1.png',1),
-(2,1,'Владимир подготавливает оснастку 11','Владимир подготавливает оснастку 11','work-proccess_2.jpg',1),
-(3,1,'Владимир подготавливает оснастку 33','Владимир подготавливает оснастку 33','work-proccess_3.jpg',1),
-(4,1,'Владимир подготавливает оснастку 44','Владимир подготавливает оснастку 44','work-proccess_4.jpg',1);
+(1,1,'Процесс работ по холодной штамповке','Владимир подготавливает оснастку 112','work-proccess_1.jpg',1),
+(2,1,'Владимир подготавливает оснастку 22','Владимир подготавливает оснастку 22','work-proccess_2.jpg',1);
 
 /*Table structure for table `work_results` */
 
@@ -1129,13 +1135,14 @@ CREATE TABLE `work_results` (
   `img` varchar(500) NOT NULL,
   `status` tinyint(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 /*Data for the table `work_results` */
 
 insert  into `work_results`(`id`,`service_id`,`name`,`description`,`deadline`,`price`,`tooked_metall`,`img`,`status`) values 
-(1,1,'100 000 дверных петель для фирмы производителя дверей','Форма петель не типовая,дизайнерская. Поэтому основные трудозатраты - создание форм и оснастка. А дальше дело техники','за 560 часов','700 000 руб','10 тонн','work-result_1.jpg',1),
-(2,1,'100 000 дверных петель для фирмы производителя дверей 2','Форма петель не типовая,дизайнерская. Поэтому основные трудозатраты - создание форм и оснастка. А дальше дело техники','за 560 часов','700 000 руб','10 тонн','work-result_2.jpg',1);
+(1,1,'100 000 дверных петель для фирмы производителя дверей','Форма петель не типовая,дизайнерская. Поэтому основные трудозатраты - создание форм и оснастка. А дальше дело техники','за 560 часов','700 000 руб., включая создание форм (270 000 руб.)','10 тонн','work-result_1.jpg',1),
+(2,1,'100 000 дверных петель для фирмы производителя дверей 2','Форма петель не типовая,дизайнерская. Поэтому основные трудозатраты - создание форм и оснастка. А дальше дело техники','за 560 часов','700 000 руб., включая создание форм (270 000 руб.)','10 тонн','work-result_2.jpg',1),
+(3,1,'100 000 дверных петель для фирмы производителя дверей','Форма петель не типовая,дизайнерская. Поэтому основные трудозатраты - создание форм и оснастка. А дальше дело техники','за 560 часов','700 000 руб., включая создание форм (270 000 руб.)','10 тонн','work-result_1.jpg',1);
 
 /* Trigger structure for table `answer_questions` */
 
