@@ -22,11 +22,14 @@ echo $this->render('/page/banners/banner', ['service' => $service]);
                    <div class="section__body">
                        <div class="options">
                            <ul class="options__list grid is-row">
-                              <?php foreach ($serviceInfo as $info): ?>
+                              <?php
+                                $k=0; foreach ($serviceInfo as $info): $k++;
+                                $k = ($k==4) ? 1 : $k;
+                              ?>
                                   <li class="options__item col-4">
                                       <article class="option">
                                           <header class="option__header"><img class="option__icon"
-                                                                              src="<?= Yii::getAlias('@web') ?>/img/option-1.svg"
+                                                                              src="<?= Yii::getAlias('@web') ?>/img/option-<?= $k ?>.svg"
                                                                               alt>
                                               <h3 class="option__title"><?= $info['val'] ?></h3>
                                           </header>
@@ -241,7 +244,9 @@ echo $this->render('/page/banners/banner', ['service' => $service]);
        <div class="content__section is-p110">
            <section class="section has-small-title">
                <div class="container">
-                   <header class="section__header"><h2 class="section__title title"><?= $workProccess[0]['title'] ?></h2></header>
+                   <header class="section__header">
+                       <h2 class="section__title title"><?= $workProccess[0]['title'] ?></h2>
+                   </header>
                    <div class="section__body">
                        <image-gallery inline-template>
                            <div class="image-gallery" :class="{ &quot;is-ready&quot;: ready }">
@@ -253,9 +258,9 @@ echo $this->render('/page/banners/banner', ['service' => $service]);
                                                   <li class="image-gallery__item" ref="sliderItem"><a
                                                               class="image-gallery__cover lightbox"
                                                               data-group="image-gallery"
-                                                              href="/img/proccess/<?= $proccess['img'] ?>"><img
+                                                              href="<?= Yii::getAlias('@uploads') ?>/proccess/<?= $proccess['img'] ?>"><img
                                                                   class="image-gallery__image"
-                                                                  src="<?= Yii::getAlias('@web') ?>/img/proccess/<?= $proccess['img'] ?>"
+                                                                  src="<?= Yii::getAlias('@uploads') ?>/proccess/<?= $proccess['img'] ?>"
                                                                   alt>
                                                           <div class="image-gallery__heading"><h5
                                                                       class="image-gallery__title"
@@ -267,20 +272,22 @@ echo $this->render('/page/banners/banner', ['service' => $service]);
                                        </div>
                                    </div>
                                    <div class="image-gallery__footer">
-                                       <button class="image-gallery__arrow" ref="prev"><span
-                                                   class="arrow is-left is-grey"><svg class="arrow__icon"
-                                                                                      tabindex="-1"><use
-                                                           tabindex="-1"
-                                                           xlink:href="/img/sprite.svg#arrow"></use></svg></span>
+                                       <button class="image-gallery__arrow" ref="prev">
+                                           <span class="arrow is-left is-grey">
+                                               <svg class="arrow__icon" tabindex="-1">
+                                                   <use tabindex="-1" xlink:href="/img/sprite.svg#arrow">
+                                                   </use>
+                                               </svg>
+                                           </span>
                                        </button>
                                        <div class="image-gallery__roll" ref="roll">
                                            <ul class="image-gallery__thumbs" ref="rollList">
                                               <?php foreach ($workProccess as $proccess): ?>
                                                   <li class="image-gallery__thumb" ref="rollItem"
                                                       @click="clickHandler">
-                                                      <img class="image-gallery__image"
-                                                           src="<?= Yii::getAlias('@web') ?>/img/proccess/<?= $proccess['img'] ?>"
-                                                           alt></li>
+                                                      <img class="image-gallery__image" src="<?= Yii::getAlias('@uploads') ?>/proccess/<?= $proccess['img'] ?>"
+                                                           alt>
+                                                  </li>
                                               <?php endforeach; ?>
                                            </ul>
                                        </div>
@@ -322,11 +329,11 @@ echo $this->render('/page/banners/banner', ['service' => $service]);
                                                                   data-group="example"
                                                                   href="/img/results/<?= $result['img'] ?>">
                                                               <img class="example-showcase__image"
-                                                                   src="<?= Yii::getAlias('@web') ?>/img/results/<?= $result['img'] ?>"
+                                                                   src="<?= Yii::getAlias('@uploads') ?>/results/<?= $result['img'] ?>"
                                                                    alt>
                                                               <img class="example-showcase__schema"
                                                                    data-swiper-parallax-x="-60"
-                                                                   src="<?= Yii::getAlias('@web') ?>/img/results/<?= $result['img'] ?>"
+                                                                   src="<?= Yii::getAlias('@uploads') ?>/results/<?= $result['img'] ?>"
                                                                    alt></a>
                                                       </li>
                                                   <?php endforeach; ?>
@@ -598,7 +605,7 @@ echo $this->render('/page/banners/banner', ['service' => $service]);
                                                               <h5 class="pricelist__title">
                                                                  <?= $list['description'] ?>
                                                               </h5>
-                                                              <p class="pricelist__caption"><?= $list['deadline'] ?> дней</p></div>
+                                                              <p class="pricelist__caption"><?= $list['deadline'] ?> рабочих дней</p></div>
                                                           <div class="col-30p"><p class="pricelist__cost">
                                                                 <?= $list['price'] ?> ₽</p></div>
                                                       </div>

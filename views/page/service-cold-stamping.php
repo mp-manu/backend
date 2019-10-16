@@ -24,7 +24,7 @@ echo $this->render('/page/banners/service-cold-stamping', ['service' => $service
                                     <li class="options__item col-4">
                                         <article class="option">
                                             <header class="option__header"><img class="option__icon"
-                                                                                src="<?= Yii::getAlias('@web') ?>/img/option-1.svg"
+                                                                                src="<?= Yii::getAlias('@uploads') ?>/option-1.svg"
                                                                                 alt>
                                                 <h3 class="option__title"><?= $info['val'] ?></h3></header>
                                             <div class="option__body">
@@ -272,7 +272,7 @@ echo $this->render('/page/banners/service-cold-stamping', ['service' => $service
                                                             data-group="image-gallery"
                                                             href="/img/proccess/<?= $proccess['img'] ?>"><img
                                                                 class="image-gallery__image"
-                                                                src="<?= Yii::getAlias('@web') ?>/img/proccess/<?= $proccess['img'] ?>"
+                                                                src="<?= Yii::getAlias('@uploads') ?>/proccess/<?= $proccess['img'] ?>"
                                                                 alt>
                                                         <div class="image-gallery__heading"><h5
                                                                     class="image-gallery__title"
@@ -296,7 +296,7 @@ echo $this->render('/page/banners/service-cold-stamping', ['service' => $service
                                                 <li class="image-gallery__thumb" ref="rollItem"
                                                     @click="clickHandler">
                                                     <img class="image-gallery__image"
-                                                         src="<?= Yii::getAlias('@web') ?>/img/proccess/<?= $proccess['img'] ?>"
+                                                         src="<?= Yii::getAlias('@uploads') ?>/proccess/<?= $proccess['img'] ?>"
                                                          alt></li>
                                             <?php endforeach; ?>
                                         </ul>
@@ -335,11 +335,11 @@ echo $this->render('/page/banners/service-cold-stamping', ['service' => $service
                                                                     data-group="example"
                                                                     href="/img/results/<?= $result['img'] ?>">
                                                                 <img class="example-showcase__image"
-                                                                     src="<?= Yii::getAlias('@web') ?>/img/results/<?= $result['img'] ?>"
+                                                                     src="<?= Yii::getAlias('@uploads') ?>/results/<?= $result['img'] ?>"
                                                                      alt>
                                                                 <img class="example-showcase__schema"
                                                                      data-swiper-parallax-x="-60"
-                                                                     src="<?= Yii::getAlias('@web') ?>/img/results/<?= $result['img'] ?>"
+                                                                     src="<?= Yii::getAlias('@uploads') ?>/results/<?= $result['img'] ?>"
                                                                      alt></a>
                                                         </li>
                                                     <?php endforeach; ?>

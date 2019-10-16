@@ -18,7 +18,7 @@
                         <li class="main-slider__item" ref="item">
                             <article class="slide">
                                 <div class="slide__background"
-                                     style="background-image: url(<?= Yii::getAlias('@web') . '/img/slider/' . $item['img_url'] ?>);"
+                                     style="background-image: url(<?= Yii::getAlias('@uploads') . '/slider/' . $item['img_url'] ?>);"
                                      data-swiper-parallax-x="-30"></div>
                                 <div class="slide__container container">
                                     <div class="slide__grid grid is-row">
@@ -43,7 +43,7 @@
                                             <div class="col-6">
                                                 <figure class="slide__cover" data-swiper-parallax-x="-100"><img
                                                             class="slide__image"
-                                                            src="<?= Yii::getAlias('@web') . '/img/slider/' . $item['slide_cover'] ?>"
+                                                            src="<?= Yii::getAlias('@uploads') . '/slider/' . $item['slide_cover'] ?>"
                                                             alt></figure>
                                             </div>
                                         <?php endif; ?>

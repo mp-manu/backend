@@ -17,7 +17,7 @@ echo $this->render('/page/banners/slider', ['slider' => $slider]);
                             <div class="intro__opinion">
                                 <article class="opinion">
                                     <figure class="opinion__cover">
-                                        <img class="opinion__image" src="/img/<?= Yii::$app->images->get('Главная', 'руков_цеха') ?>"
+                                        <img class="opinion__image" src="<?= Yii::getAlias('@web') ?>/img/<?= Yii::$app->images->get('Главная', 'руков_цеха') ?>"
                                                                         alt="<?= Yii::$app->settings->get('Сотрудник', 'руков_цеха_штамп') ?>">
                                     </figure>
                                     <div class="opinion__body">
@@ -135,10 +135,10 @@ echo $this->render('/page/banners/slider', ['slider' => $slider]);
                                         <li class="services__item col-3 col-3">
                                             <article class="service">
                                                 <figure class="service__cover">
-                                                    <img class="service__image" src="/img/services/<?=$info['img'] ?>" alt="<?= $info['name'] ?>">
+                                                    <img class="service__image" src="/uploads/services/<?=$info['img'] ?>" alt="<?= $info['name'] ?>">
                                                 </figure>
                                                 <div class="service__body">
-                                                    <img class="service__icon" src="/img/service-ico-<?=$i?>.svg" alt="">
+                                                    <img class="service__icon" src="/uploads/service-ico-<?=$i?>.svg" alt="">
                                                     <h4 class="service__title">
                                                         <a class="service__link" href="<?= $info['url'] ?>">
                                                             <?= $info['name'] ?>

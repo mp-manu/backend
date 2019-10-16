@@ -9,7 +9,7 @@
 <?php if (!empty($service)): ?>
     <div class="content__headline">
         <header class="headline has-cover">
-            <div class="headline__cover" style="background-image: url(/img/services/<?= $service['img'] ?>)"></div>
+            <div class="headline__cover" style="background-image: url(/uploads/services/<?= $service['img'] ?>)"></div>
             <div class="container">
                 <div class="grid is-row">
                     <div class="col-8">

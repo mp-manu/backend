@@ -79,7 +79,8 @@ class BackMenu extends \yii\db\ActiveRecord
       $menu = '';
       $service = Services::find()->where(['status' => 1])->asArray()->all();
 
-      $parent0 = BackMenu::find()->where(['parentnodeid' => 0, 'userstatus' => ['ALL'], 'nodeaccess' => 1])
+      $parent0 = BackMenu::find()
+          ->where(['parentnodeid' => 0, 'userstatus' => ['ALL'], 'nodeaccess' => 1])
           ->orderBy('nodeorder')->asArray()->all();
       $index = 0;
       if (!empty($parent0)) {
@@ -95,12 +96,26 @@ class BackMenu extends \yii\db\ActiveRecord
                   $menu .= '<li class="nav-item">';
                   $menu .= '<a href="/admin/services/index" class="nav-link nav-toggle">';
                   $menu .= '<span class="title">Все услуги</span></a></li>';
+                  $menu .= '<li class="nav-item">';
+                  $menu .= '<a href="/admin/services/add" class="nav-link nav-toggle">';
+                  $menu .= '<span class="title">Добавить услугу</span></a></li>';
+                  $menu .= '<li class="nav-item">';
                   foreach ($service as $serv) {
                      $menu .= '<li class="nav-item">';
                      $menu .= '<a href="/admin/services/details?=' . $serv['id'] . '" class="nav-link nav-toggle">';
                      $menu .= '<span class="title">' . $serv['name'] . '</span></a></li>';
                   }
                   $menu .= '</ul>';
+               }
+               else{
+                  $menu .= '<li class="nav-item">';
+                  $menu .= '<a href="#" class="nav-link nav-toggle">
+                            <i class="material-icons">beenhere</i>
+                            <span class="title">Услуги</span><span class="arrow"></span></a>';
+                  $menu .= '<ul class="sub-menu">';
+                  $menu .= '<li class="nav-item">';
+                  $menu .= '<a href="/admin/services/add" class="nav-link nav-toggle">';
+                  $menu .= '<span class="title">Добавить новую услугу</span></a></li></ul></li>';
                }
             }
             $menu .= '<li class="nav-item">';

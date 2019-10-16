@@ -107,7 +107,7 @@ class ImageManagerController extends Controller
 
             $img = UploadedFile::getInstance($model, 'img');
             if(!empty($img)){
-                $path = Yii::getAlias('@webroot').'/img/';
+                $path = Yii::getAlias('@uploadsroot');
                 $imgName = $img->baseName.'.'.$img->extension;
                 $img->saveAs($path.$imgName);
                 $model->img = $imgName;
@@ -141,7 +141,7 @@ class ImageManagerController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             $img = UploadedFile::getInstance($model, 'img');
             if(!empty($img)){
-                $path = Yii::getAlias('@webroot').'/img/';
+                $path = Yii::getAlias('@uploadsroot');
                 $imgName = $img->baseName.'.'.$img->extension;
                 $img->saveAs($path.$imgName);
                 $model->img = $imgName;

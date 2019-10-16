@@ -33,7 +33,7 @@ class PageController extends Controller
 
       if(empty($service)) return $this->goHome();
 
-      $serviceInfo = ServiceInfo::find()->where(['service_id' => $id, 'status' => 1])->limit('3')->all();
+      $serviceInfo = ServiceInfo::find()->where(['service_id' => $id, 'status' => 1])->all();
       $answerQuestions = AnswerQuestions::find()->where(['service_id' => $id, 'status' => 1, 'type' => 1])->all();
       $workProccess = WorkProccess::find()->where(['service_id' => $id, 'status' => 1])->all();
       $workResults = WorkResults::find()->where(['service_id' => $id, 'status' => 1,])->all();

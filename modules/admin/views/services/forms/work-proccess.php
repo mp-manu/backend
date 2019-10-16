@@ -7,12 +7,14 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\WorkProccess */
 /* @var $form yii\widgets\ActiveForm */
+
+$model->service_id = $service_id['id'];
 ?>
 
 <div class="work-proccess-form">
 
     <div class="col-sm-12">
-        <h3 style="text-align: center">Добавить процесс работы</h3>
+<!--        <h3 style="text-align: center">Добавить процесс работы</h3>-->
        <?php $form = ActiveForm::begin(); ?>
         <div class="col-lg-6">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">

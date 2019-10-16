@@ -76,7 +76,7 @@ class WorkResultsController extends Controller
             }
             $resultImage = UploadedFile::getInstance($model, 'img');
             if (!empty($resultImage)) {
-                $path = Yii::getAlias('@webroot') . '/img';
+                $path = Yii::getAlias('@uploadsroot');
                 $fileName = 'work-result_' . $max_id . '.' . $resultImage->extension;
                 $resultImage->saveAs($path . '/results/' . $fileName);
                 $model->img = $fileName;
@@ -120,7 +120,7 @@ class WorkResultsController extends Controller
 
             $resultImage = UploadedFile::getInstance($model, 'img');
             if (!empty($resultImage)) {
-                $path = Yii::getAlias('@webroot') . '/img';
+                $path = Yii::getAlias('@uploadsroot');
                 $fileName = 'work-result_' . $max_id . '.' . $resultImage->extension;
                 $resultImage->saveAs($path . '/results/' . $fileName);
                 $model->img = $fileName;

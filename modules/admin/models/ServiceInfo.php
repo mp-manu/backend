@@ -47,9 +47,9 @@ class ServiceInfo extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'service_id' => 'Сервис',
-            'key' => 'Ключивое слово',
-            'val' => 'Информация',
+            'service_id' => 'Услуга',
+            'key' => 'Алиас',
+            'val' => 'Заголовок',
             'description' => 'Описание',
             'status' => 'Доступ',
         ];

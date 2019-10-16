@@ -12,6 +12,7 @@ use Yii;
  * @property string $description
  * @property string $deadline
  * @property double $price
+ * @property double $service_id
  * @property string $tooked_metall
  * @property string $img
  * @property string $status
@@ -33,7 +34,7 @@ class WorkResults extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'price'], 'required'],
+            [['name', 'price', 'service_id'], 'required'],
             [['img'], 'required', 'on' => self::SCENARIO_DEFAULT],
             [['img'], 'safe', 'on' => self::SCENARIO_MYSPECIAL],
             [['status'], 'integer'],
@@ -53,9 +54,10 @@ class WorkResults extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Название',
             'description' => 'Описание',
-            'deadline' => 'Выполнили в срок:',
-            'price' => 'Стоимость:',
-            'tooked_metall' => 'Потребовалось металла:',
+            'deadline' => 'Срок выполнения',
+            'price' => 'Стоимость',
+            'service_id' => 'Услуга',
+            'tooked_metall' => 'Потребовалось металла',
             'img' => 'Фото',
             'status' => 'Доступ',
         ];

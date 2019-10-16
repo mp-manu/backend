@@ -7,10 +7,11 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\PriceList */
 /* @var $form yii\widgets\ActiveForm */
+$model->service_id = $service_id['id'];
 ?>
 
 <div class="price-list-form">
-    <h3 style="text-align: center">Прайс лист</h3>
+<!--    <h3 style="text-align: center">Прайс лист</h3>-->
     <div class="col-lg-12">
        <?php $form = ActiveForm::begin(); ?>
         <div class="col-lg-6 p-t-3">
@@ -53,6 +54,11 @@ use yii\widgets\ActiveForm;
             </div>
         </div>
         <div class="col-lg-6 p-t-3">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+               <?= $form->field($model, 'type')->dropDownList(['2' => 'Таблица', '1' => 'Список']) ?>
+            </div>
+        </div>
+        <div class="col-lg-12 p-t-3">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
                <?= $form->field($model, 'description')->textarea(['maxlength' => true]) ?>
             </div>

@@ -80,7 +80,7 @@ class SliderController extends Controller
             $slide_cover = UploadedFile::getInstance($model, 'slide_cover');
 
             if(!empty($slide_image)){
-                $path = Yii::getAlias('@webroot').'/img';
+                $path = Yii::getAlias('@uploadsroot');
                 $fileName = 'slide-cover_'.$max_id.'.'.$slide_image->extension;
                 $slide_image->saveAs($path.'/slider/'.$fileName);
                 $model->img_url = $fileName;
@@ -139,7 +139,7 @@ class SliderController extends Controller
 
 
             if(!empty($slide_image)){
-                $path = Yii::getAlias('@webroot').'/img';
+                $path = Yii::getAlias('@uploadsroot');
                 $fileName = 'slide-cover_'.$max_id.'.'.$slide_image->extension;
                 $slide_image->saveAs($path.'/slider/'.$fileName);
                 $model->img_url = $fileName;

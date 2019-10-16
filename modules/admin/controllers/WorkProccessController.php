@@ -77,7 +77,7 @@ class WorkProccessController extends Controller
             }
             $proccessImage = UploadedFile::getInstance($model, 'img');
             if (!empty($proccessImage)) {
-                $path = Yii::getAlias('@webroot') . '/img';
+                $path = Yii::getAlias('@uploadsroot');
                 $fileName = 'work-proccess_' . $max_id . '.' . $proccessImage->extension;
                 $proccessImage->saveAs($path . '/proccess/' . $fileName);
                 $model->img = $fileName;
@@ -121,7 +121,7 @@ class WorkProccessController extends Controller
             }
             $proccessImage = UploadedFile::getInstance($model, 'img');
             if (!empty($proccessImage)) {
-                $path = Yii::getAlias('@webroot') . '/img';
+                $path = Yii::getAlias('@uploadsroot');
                 $fileName = 'work-proccess_' . $max_id . '.' . $proccessImage->extension;
                 $proccessImage->saveAs($path . '/proccess/' . $fileName);
                 $model->img = $fileName;
