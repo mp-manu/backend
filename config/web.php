@@ -48,8 +48,11 @@ $config = [
                 'encryption' => 'ssl',
             ],
         ],
+//        'settings' => [
+//            'class' => 'yii2mod\settings\components\Settings',
+//        ],
         'settings' => [
-            'class' => 'yii2mod\settings\components\Settings',
+            'class' => 'app\components\Settings',
         ],
         'images' => [
             'class' => 'app\components\Images',

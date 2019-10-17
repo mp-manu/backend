@@ -21,9 +21,11 @@ use yii\widgets\ActiveForm;
             <header><?= $this->title ?></header>
         </div>
        <?php if (!$model->isNewRecord): ?>
-           <div class="col-md-12 text-center">
-               <img src="<?= Yii::getAlias('@uploads') . '/slider/' . $model->img_url ?>" width="500" height="300">
-           </div>
+          <?php if(!empty($model->img_url)): ?>
+               <div class="col-md-12 text-center">
+                   <img src="<?= Yii::getAlias('@uploads') . '/slider/' . $model->img_url ?>" width="500" height="300">
+               </div>
+          <?php endif; ?>
        <?php endif; ?>
         <div class="card-body row">
             <div class="col-lg-6">

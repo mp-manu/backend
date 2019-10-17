@@ -12,13 +12,17 @@ use app\modules\admin\models\SettingModel;
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 /* @var $searchModel \yii2mod\settings\models\search\SettingSearch */
 
-$this->title = Yii::t('yii2mod.settings', 'Settings');
+$this->title = 'Настройка текстов';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="setting-index">
     <h1><?php echo Html::encode($this->title); ?></h1>
-
-    <p><?php echo Html::a(Yii::t('yii2mod.settings', 'Create Setting'), ['create'], ['class' => 'btn btn-success']); ?></p>
+    <div class="card-box">
+        <div class="card-head">
+            <header><?= $this->title ?></header>
+        </div>
+        <div class="card-body row">
+    <p><?php echo Html::a('Добавить текст', ['create'], ['class' => 'btn btn-success']); ?></p>
     <?php Pjax::begin(['timeout' => 10000, 'enablePushState' => false]); ?>
     <?php echo GridView::widget([
             'dataProvider' => $dataProvider,
@@ -66,4 +70,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ]
     ); ?>
     <?php Pjax::end(); ?>
+</div>
+    </div>
 </div>

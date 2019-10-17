@@ -24,7 +24,13 @@ $this->params['breadcrumbs'][] = $this->title;
     $columns = [
         ['class' => 'yii\grid\SerialColumn', 'header' => '№'],
         'title',
-        'description',
+        [
+            'attribute' => 'description',
+            'format' => 'html',
+            'value' => function ($dataProvider) {
+               return wordwrap($dataProvider->description, 40, '<br>');
+            }
+        ],
         [
             'attribute' => 'img_url',
             'format' => 'html',

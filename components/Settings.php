@@ -1,13 +1,13 @@
 <?php
 
-namespace yii2mod\settings\components;
+namespace app\components;
 
 use Yii;
 use yii\base\Component;
 use yii\caching\Cache;
 use yii\di\Instance;
 use yii\helpers\ArrayHelper;
-use app\modules\admin\models\SettingType;
+use app\modules\admin\models\enumerables\SettingType;
 
 /**
  * Class Settings

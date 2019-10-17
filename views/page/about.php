@@ -10,7 +10,7 @@ $this->title = 'О компании';
 
 <div class="content__headline">
     <header class="headline has-cover">
-        <div class="headline__cover" style="background-image: url(/img/<?=$banner[0]['img']?>)"></div>
+        <div class="headline__cover" style="background-image: url(/uploads/<?=$banner[0]['img']?>)"></div>
         <div class="container">
             <div class="grid is-row">
                 <div class="col-8">
@@ -73,7 +73,7 @@ $this->title = 'О компании';
                                                 <article class="history-item">
                                                     <figure class="history-item__cover"><img
                                                                 class="history-item__image" alt
-                                                                src="/img/<?=$item['img']?>"></figure>
+                                                                src="/uploads/<?=$item['img']?>"></figure>
                                                     <div class="grid is-row">
                                                         <div class="col-6 shift-3">
                                                             <div class="history-item__inner">
@@ -114,21 +114,17 @@ $this->title = 'О компании';
                                         </ul>
                                     </div>
                                 </div>
-
                                 <div class="company-history__controls">
-                                    <button class="company-history__arrow" ref="prev"><span
-                                                class="arrow is-up"><svg class="arrow__icon" tabindex="-1"><use
-                                                        tabindex="-1"
-                                                        xlink:href="/img/sprite.svg#arrow"></use></svg></span>
+                                    <button class="company-history__arrow" ref="prev">
+                                        <span class="arrow is-up"><svg class="arrow__icon" tabindex="-1">
+                                                <use tabindex="-1" xlink:href="/img/sprite.svg#arrow"></use></svg></span>
                                     </button>
                                     <div class="company-history__roll" ref="roll">
                                         <ul class="company-history__thumbs" ref="rollList">
                                             <?php foreach ($history as $item): ?>
-                                            <li class="company-history__thumb" ref="rollItem"
-                                                data-year="<?= $item['alias'] ?>" @click="clickHandler">
-                                                <div class="company-history__cover"><img
-                                                            class="company-history__image"
-                                                            src="/img/<?= $item['img'] ?>" alt></div>
+                                            <li class="company-history__thumb" ref="rollItem" data-year="<?= $item['alias'] ?>" @click="clickHandler">
+                                                <div class="company-history__cover">
+                                                    <img class="company-history__image" src="/uploads/<?= $item['img'] ?>" alt></div>
                                             </li>
                                             <? endforeach; ?>
                                         </ul>
@@ -221,11 +217,11 @@ $this->title = 'О компании';
                                     <li class="features__item col-6">
                                         <article class="feature">
                                             <figure class="feature__cover">
-                                                <img class="feature__image" src="/img/<?= $chooseUs['img'] ?>"
+                                                <img class="feature__image" src="/uploads/<?= $chooseUs['img'] ?>"
                                                      alt="<?= $chooseUs['description'] ?>">
                                             </figure>
                                             <div class="feature__body">
-                                                <img class="feature__icon" src="/img/<?= $chooseUs['ico'] ?>" alt>
+                                                <img class="feature__icon" src="/uploads/<?= $chooseUs['ico'] ?>" alt>
                                                 <h4 class="feature__title">
                                                     <?= $chooseUs['description'] ?>
                                                 </h4>

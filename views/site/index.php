@@ -52,7 +52,7 @@ echo $this->render('/page/banners/slider', ['slider' => $slider]);
                                     <p class="service-showcase__descr"><?= Yii::$app->settings->get('Услуги', 'инфо_об_холод_штамп') ?></p>
                                     <p class="service-showcase__warn">Минимальный заказ — 100 шт</p>
                                     <div class="service-showcase__link"><a class="link"
-                                                                           href="/page/service-cold-stamping">
+                                                                           href="/page/service/1">
                                             <div class="link__inner"><span class="link__text">Перейти к услуге</span>
                                                 <div class="link__arrow"><span
                                                             class="arrow is-small is-dark no-hover"><svg
@@ -138,7 +138,7 @@ echo $this->render('/page/banners/slider', ['slider' => $slider]);
                                                     <img class="service__image" src="/uploads/services/<?=$info['img'] ?>" alt="<?= $info['name'] ?>">
                                                 </figure>
                                                 <div class="service__body">
-                                                    <img class="service__icon" src="/uploads/service-ico-<?=$i?>.svg" alt="">
+                                                    <img class="service__icon" src="/img/service-ico-<?=$i?>.svg" alt="">
                                                     <h4 class="service__title">
                                                         <a class="service__link" href="<?= $info['url'] ?>">
                                                             <?= $info['name'] ?>
@@ -200,8 +200,9 @@ echo $this->render('/page/banners/slider', ['slider' => $slider]);
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <div class="subsection__aside"><img class="subsection__image"
-                                                                        src="/img/stages.jpg" alt></div>
+                                    <div class="subsection__aside">
+                                        <img class="subsection__image" src="/img/stages.jpg" alt>
+                                    </div>
                                 </div>
                             </div>
                         </section>
@@ -223,11 +224,11 @@ echo $this->render('/page/banners/slider', ['slider' => $slider]);
                             <li class="features__item col-6">
                                 <article class="feature">
                                     <figure class="feature__cover">
-                                        <img class="feature__image" src="/img/<?=$chooseUs['img']?>"
+                                        <img class="feature__image" src="/uploads/<?=$chooseUs['img']?>"
                                         alt="<?=$chooseUs['description']?>">
                                     </figure>
                                     <div class="feature__body">
-                                        <img class="feature__icon" src="/img/<?=$chooseUs['ico']?>" alt>
+                                        <img class="feature__icon" src="/uploads/<?=$chooseUs['ico']?>" alt>
                                         <h4 class="feature__title">
                                             <?=$chooseUs['description']?>
                                         </h4>
