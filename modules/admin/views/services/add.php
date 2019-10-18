@@ -9,13 +9,15 @@
 use yii\bootstrap\Tabs;
 
 $this->title = 'Добавить услугу';
-
+$this->params['breadcrumbs'][] = ['label' => 'Все услуги', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 $display = (count($services) > 0 || !empty($services)) ? true : false;
 
 ?>
+<?= $this->render('/layouts/page-bar') ?>
 <div class="row">
     <div class="col-lg-12">
-        <h2><?= $this->title ?></h2>
+<!--        <h2>--><?//= $this->title ?><!--</h2>-->
        <?php if (\Yii::$app->session->hasFlash('success')) : ?>
            <div class="alert alert-success alert-dismissible" style="margin-top: 5%;">
                <button type="button" class="close" data-dismiss="alert" aria-label="Close">

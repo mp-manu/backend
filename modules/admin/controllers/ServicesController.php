@@ -9,6 +9,7 @@ use app\modules\admin\models\PriceList;
 use app\modules\admin\models\ServiceInfo;
 use app\modules\admin\models\WorkProccess;
 use app\modules\admin\models\WorkResults;
+use Cocur\Slugify\Slugify;
 use Yii;
 use app\modules\admin\models\Services;
 use app\modules\admin\models\ServicesSearch;
@@ -24,25 +25,7 @@ use yii\web\UploadedFile;
  */
 class ServicesController extends Controller
 {
-   /**
-    * {@inheritdoc}
-    */
-   public function behaviors()
-   {
-      return [
-          'verbs' => [
-              'class' => VerbFilter::className(),
-              'actions' => [
-                  'delete' => ['POST'],
-              ],
-          ],
-      ];
-   }
 
-   /**
-    * Lists all Services models.
-    * @return mixed
-    */
    public function actionIndex()
    {
       $searchModel = new ServicesSearch();
@@ -54,12 +37,7 @@ class ServicesController extends Controller
       ]);
    }
 
-   /**
-    * Displays a single Services model.
-    * @param integer $id
-    * @return mixed
-    * @throws NotFoundHttpException if the model cannot be found
-    */
+
    public function actionView($id)
    {
       return $this->render('view', [
@@ -67,15 +45,11 @@ class ServicesController extends Controller
       ]);
    }
 
-   /**
-    * Creates a new Services model.
-    * If creation is successful, the browser will be redirected to the 'view' page.
-    * @return mixed
-    */
+
    public function actionCreate()
    {
       $model = new Services();
-
+      $slug = new Slugify(['rulesets' => ['default', 'russian']]);
 
       if ($model->load(Yii::$app->request->post())) {
 
@@ -91,8 +65,8 @@ class ServicesController extends Controller
          if (empty($model->parent_id)) {
             $model->parent_id = 0;
          }
+         $model->alias = $slug->slugify($model->alias);
          if ($model->save()) {
-
             Yii::$app->session->setFlash('creatingSuccess', 'Запись успешно сохранено!');
             return $this->redirect(['view', 'id' => $model->id]);
          } else {
@@ -112,7 +86,7 @@ class ServicesController extends Controller
    public function actionUpdate($id)
    {
       $model = $this->findModel($id);
-
+      $slug = new Slugify(['rulesets' => ['default', 'russian']]);
 
       $oldImg = $model->img;
       $maxId = Services::find()->max('id');
@@ -130,7 +104,7 @@ class ServicesController extends Controller
          if (empty($model->parent_id)) {
             $model->parent_id = 0;
          }
-
+         $model->alias = $slug->slugify($model->alias);
          if ($model->save()) {
             Yii::$app->session->setFlash('success', 'Запись успешно обновлено!');
             return $this->redirect(['view', 'id' => $model->id]);
@@ -149,16 +123,19 @@ class ServicesController extends Controller
 
    public function actionDelete($id)
    {
-      $this->findModel($id)->delete();
+      if ($this->findModel($id)->delete()) {
+         Yii::$app->session->setFlash('success', 'Запись успешно удалено!');
+      }
 
       return $this->redirect(['index']);
    }
 
 
-   public function actionAdd($id=null){
+   public function actionAdd($id = null)
+   {
 
       $id = Html::encode($id);
-      if(!empty($id)){
+      if (!empty($id)) {
          $service_id = Services::find()->where(['id' => $id])->asArray()->one();
       }
       $serviceModel = new Services();
@@ -167,15 +144,16 @@ class ServicesController extends Controller
       $workProccess = new WorkProccess();
       $workResults = new WorkResults();
       $priceList = new PriceList();
+      $slug = new Slugify(['rulesets' => ['default', 'russian']]);
       $services = Services::find()->where(['status' => 1])->asArray()->all();
 
       /**************форма добавление услуг*********************/
-      if($serviceModel->load(Yii::$app->request->post())){
+      if ($serviceModel->load(Yii::$app->request->post())) {
          $serviceImage = UploadedFile::getInstance($serviceModel, 'img');
          $maxId = Services::find()->max('id');
-         if($maxId == 0){
+         if ($maxId == 0) {
             $maxId = 1;
-         }else{
+         } else {
             $maxId += 1;
          }
          if (!empty($serviceImage)) {
@@ -188,6 +166,7 @@ class ServicesController extends Controller
             $serviceModel->parent_id = 0;
          }
          $service_id['id'] = (empty($service_id['id'])) ? $serviceModel->id : $service_id['id'];
+         $serviceModel->alias = $slug->slugify($serviceModel->alias);
          if ($serviceModel->save()) {
             Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
             return $this->redirect(['add', 'id' => $serviceModel->id]);
@@ -198,8 +177,9 @@ class ServicesController extends Controller
       }
       /////////////////////Добавление информации об услуги//////////////////////////////////////
 
-      if($serviceInfoModel->load(Yii::$app->request->post())){
+      if ($serviceInfoModel->load(Yii::$app->request->post())) {
          $service_id['id'] = (empty($service_id['id'])) ? $serviceInfoModel->service_id : $service_id['id'];
+
          if ($serviceInfoModel->save()) {
             Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
             return $this->redirect(['add', 'id' => $service_id['id']]);
@@ -213,17 +193,17 @@ class ServicesController extends Controller
 
       if ($answerQuestions->load(Yii::$app->request->post())) {
          $service_id['id'] = (empty($service_id['id'])) ? $answerQuestions->service_id : $service_id['id'];
-         if($answerQuestions->save()){
+         if ($answerQuestions->save()) {
             Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
             return $this->redirect(['add', 'id' => $service_id['id']]);
-         }else{
+         } else {
             Yii::$app->session->setFlash('error', 'Не удается сохранить запись!');
             return $this->redirect(['add', 'id' => $service_id['id']]);
          }
       }
 
       /////////////////////Добавление процессов работы//////////////////////////////////////
-      if($workProccess->load(Yii::$app->request->post())){
+      if ($workProccess->load(Yii::$app->request->post())) {
          $max_id = WorkProccess::find()->max('id');
          if ($max_id == 0) {
             $max_id = 1;
@@ -273,8 +253,8 @@ class ServicesController extends Controller
       }
 
       /*********************************************************************************************
-      ****************************PRICELIST SAVE FORM***********************************************
-      *********************************************************************************************/
+       ****************************PRICELIST SAVE FORM***********************************************
+       *********************************************************************************************/
 
       if ($priceList->load(Yii::$app->request->post())) {
 
@@ -290,7 +270,7 @@ class ServicesController extends Controller
          }
       }
 
-       /********************************************************************************************
+      /********************************************************************************************
        *********************************************************************************************
        ********************************************************************************************/
 
@@ -307,7 +287,8 @@ class ServicesController extends Controller
    }
 
 
-   public function actionEdit($id){
+   public function actionEdit($id)
+   {
 
       $id = Html::encode($id);
       $serviceModel = $this->findModel($id);
@@ -316,11 +297,13 @@ class ServicesController extends Controller
       $workProccess = $this->findProcces($id);
       $workResults = $this->findResult($id);
       $priceList = $this->findPriceList($id);
+      $slug = new Slugify(['rulesets' => ['default', 'russian']]);
 
       $answerQuestionsData = AnswerQuestions::find()->where(['service_id' => $id, 'type' => 1])->all();
-      $workProccessData  = WorkProccess::find()->where(['service_id' => $id])->all();
-      $workResultsData  = WorkResults::find()->where(['service_id' => $id])->all();
+      $workProccessData = WorkProccess::find()->where(['service_id' => $id])->all();
+      $workResultsData = WorkResults::find()->where(['service_id' => $id])->all();
       $priceListData = PriceList::find()->where(['service_id' => $id])->orderBy('type')->all();
+      $serviceInfoData = ServiceInfo::find()->where(['service_id' => $id])->all();
 
       $services = Services::find()->where(['status' => 1])->asArray()->all();
       $service_id['id'] = $id;
@@ -328,12 +311,12 @@ class ServicesController extends Controller
       $oldServiceImg = $serviceModel->img;
 
       /**************форма добавление услуг*********************/
-      if($serviceModel->load(Yii::$app->request->post())){
+      if ($serviceModel->load(Yii::$app->request->post())) {
          $serviceImage = UploadedFile::getInstance($serviceModel, 'img');
          $maxId = Services::find()->max('id');
-         if($maxId == 0){
+         if ($maxId == 0) {
             $maxId = 1;
-         }else{
+         } else {
             $maxId += 1;
          }
          if (!empty($serviceImage)) {
@@ -341,13 +324,16 @@ class ServicesController extends Controller
             $fileName = 'service_cover_' . $maxId . '.' . $serviceImage->extension;
             $serviceImage->saveAs($path . '/services/' . $fileName);
             $serviceModel->img = $fileName;
-         }else{
+         } else {
             $serviceModel->img = $oldServiceImg;
          }
          if (empty($serviceModel->parent_id)) {
             $serviceModel->parent_id = 0;
          }
          $service_id['id'] = (empty($service_id['id'])) ? $serviceModel->id : $service_id['id'];
+
+         $serviceModel->alias = $slug->slugify($serviceModel->alias);
+
          if ($serviceModel->save()) {
             Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
             return $this->redirect(['edit', 'id' => $serviceModel->id]);
@@ -358,12 +344,12 @@ class ServicesController extends Controller
       }
       /////////////////////Добавление информации об услуги//////////////////////////////////////
 
-      if($serviceInfoModel->load(Yii::$app->request->post())){
+      if ($serviceInfoModel->load(Yii::$app->request->post())) {
          $service_id['id'] = (empty($service_id['id'])) ? $serviceInfoModel->service_id : $service_id['id'];
          if ($serviceInfoModel->save()) {
             Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
             return $this->redirect(['add', 'id' => $service_id['id']]);
-         }else{
+         } else {
             Yii::$app->session->setFlash('error', 'Не удается сохранить запись!');
             return $this->redirect(['add', 'id' => $service_id['id']]);
          }
@@ -381,6 +367,7 @@ class ServicesController extends Controller
           'service_id' => $service_id,
 
           'answerQuestionsData' => $answerQuestionsData,
+          'serviceInfoData' => $serviceInfoData,
           'workProccessData' => $workProccessData,
           'workResultsData' => $workResultsData,
           'priceListData' => $priceListData,
@@ -391,7 +378,7 @@ class ServicesController extends Controller
 
    protected function findModel($id)
    {
-      if(($model = Services::findOne($id)) !== null){
+      if (($model = Services::findOne($id)) !== null) {
          return $model;
       }
       throw new NotFoundHttpException('Страница не существует!');
@@ -399,7 +386,7 @@ class ServicesController extends Controller
 
    protected function findServiceInfoModel($id)
    {
-      if(($model = ServiceInfo::findOne(['service_id' => $id, 'status' => 1])) !== null) {
+      if (($model = ServiceInfo::findOne(['service_id' => $id, 'status' => 1])) !== null) {
          return $model;
       }
       $model = new ServiceInfo();
@@ -444,9 +431,12 @@ class ServicesController extends Controller
       }
       $model = new PriceList();
       return $model;
-
    }
 
-
-
+   public function actionGetQuestionForm()
+   {
+      $model = new AnswerQuestions();
+      $services = Services::getServices();
+      return $this->renderPartial('forms/answer-question', ['model' => $model, 'services' => $services]);
+   }
 }

@@ -6,12 +6,13 @@ use yii\helpers\Html;
 /* @var $model app\modules\admin\models\ServiceInfo */
 
 $this->title = 'Добавить информацию';
-$this->params['breadcrumbs'][] = ['label' => 'Service Infos', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Информации об услуге', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?= $this->render('/layouts/page-bar') ?>
 <div class="service-info-create">
 
-    <h3><?= Html::encode($this->title) ?></h3>
+<!--    <h3>--><?//= Html::encode($this->title) ?><!--</h3>-->
 
     <?php if (\Yii::$app->session->hasFlash('creatingError')) : ?>
         <div class="alert alert-danger alert-dismissible" style="margin-top: 5%;">

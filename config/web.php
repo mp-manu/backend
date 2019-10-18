@@ -95,7 +95,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                'page/service/<id:\d+>' => '/page/service',
+                'page/service/<alias>' => 'page/service',
             ],
         ],
         'authManager' => [

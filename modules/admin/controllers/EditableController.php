@@ -77,14 +77,14 @@ class EditableController extends Controller
       if (Yii::$app->request->post()) {
          $q_id = Yii::$app->request->post('id');
          $status = Yii::$app->request->post('status');
-         if($status == 0) {
+         if ($status == 0) {
             $status = 1;
-         }elseif($status == 1) {
+         } elseif ($status == 1) {
             $status = 0;
-         }else{
-            $status =0;
+         } else {
+            $status = 0;
          }
-         Yii::$app->db->createCommand('UPDATE answer_questions SET status = '.$status.' WHERE id=' . $q_id)->execute();
+         Yii::$app->db->createCommand('UPDATE answer_questions SET status = ' . $status . ' WHERE id=' . $q_id)->execute();
          return $status;
       }
    }
@@ -94,14 +94,14 @@ class EditableController extends Controller
       if (Yii::$app->request->post()) {
          $q_id = Yii::$app->request->post('id');
          $status = Yii::$app->request->post('status');
-         if($status == 0) {
+         if ($status == 0) {
             $status = 1;
-         }elseif($status == 1) {
+         } elseif ($status == 1) {
             $status = 0;
-         }else{
-            $status =0;
+         } else {
+            $status = 0;
          }
-         Yii::$app->db->createCommand('UPDATE work_proccess SET status = '.$status.' WHERE id=' . $q_id)->execute();
+         Yii::$app->db->createCommand('UPDATE work_proccess SET status = ' . $status . ' WHERE id=' . $q_id)->execute();
          return $status;
       }
    }
@@ -111,14 +111,14 @@ class EditableController extends Controller
       if (Yii::$app->request->post()) {
          $q_id = Yii::$app->request->post('id');
          $status = Yii::$app->request->post('status');
-         if($status == 0) {
+         if ($status == 0) {
             $status = 1;
-         }elseif($status == 1) {
+         } elseif ($status == 1) {
             $status = 0;
-         }else{
-            $status =0;
+         } else {
+            $status = 0;
          }
-         Yii::$app->db->createCommand('UPDATE work_results SET status = '.$status.' WHERE id=' . $q_id)->execute();
+         Yii::$app->db->createCommand('UPDATE work_results SET status = ' . $status . ' WHERE id=' . $q_id)->execute();
          return $status;
       }
    }
@@ -129,33 +129,34 @@ class EditableController extends Controller
       if (Yii::$app->request->post()) {
          $q_id = Yii::$app->request->post('id');
          $status = Yii::$app->request->post('status');
-         if($status == 0) {
+         if ($status == 0) {
             $status = 1;
-         }elseif($status == 1) {
+         } elseif ($status == 1) {
             $status = 0;
-         }else{
-            $status =0;
+         } else {
+            $status = 0;
          }
-         Yii::$app->db->createCommand('UPDATE price_list SET status = '.$status.' WHERE id=' . $q_id)->execute();
+         Yii::$app->db->createCommand('UPDATE price_list SET status = ' . $status . ' WHERE id=' . $q_id)->execute();
          return $status;
       }
    }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   public function actionChangeServiceinfoStatus()
+   {
+      if (Yii::$app->request->post()) {
+         $q_id = Yii::$app->request->post('id');
+         $status = Yii::$app->request->post('status');
+         if ($status == 0) {
+            $status = 1;
+         } elseif ($status == 1) {
+            $status = 0;
+         } else {
+            $status = 0;
+         }
+         Yii::$app->db->createCommand('UPDATE service_info SET status = ' . $status . ' WHERE id=' . $q_id)->execute();
+         return $status;
+      }
+   }
 
 }

@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Requisites;
 use app\modules\admin\models\AnswerQuestions;
 use app\modules\admin\models\PriceList;
+use app\modules\admin\models\PrivacyPolicy;
 use app\modules\admin\models\Sections;
 use app\modules\admin\models\ServiceInfo;
 use app\modules\admin\models\Services;
@@ -26,11 +27,12 @@ class PageController extends Controller
       ];
    }
 
-   public function actionService($id)
+   public function actionService($alias)
    {
-      $id = Html::encode($id);
-      $service = Services::find()->where(['id' => $id, 'status' => 1])->asArray()->one();
 
+      $alias = Html::encode($alias);
+      $service = Services::find()->where(['alias' => $alias, 'status' => 1])->asArray()->one();
+      $id = $service['id'];
       if(empty($service)) return $this->goHome();
 
       $serviceInfo = ServiceInfo::find()->where(['service_id' => $id, 'status' => 1])->all();
@@ -57,10 +59,9 @@ class PageController extends Controller
           ->asArray()->all();
 
 
-
+      $activeServicesId = array();
       if(!empty($priceListTable)){
          $data = array();
-         $activeServicesId = array();
          foreach ($priceListTable as $list) {
             $activeServicesId[$list['sid']] = $list['sid'];
             $data['name'][$list['sid']] = $list['name'];
@@ -119,6 +120,27 @@ class PageController extends Controller
           'sectionThanks' => $sectionThanks
       ]);
    }
+
+   public function actionPrivacyPolicy(){
+
+      $privacy = PrivacyPolicy::find()->where(['status' => 1, 'parent_id' => 0])->asArray()->all();
+      $data = array();
+      foreach ($privacy as $item){
+         $privacyChilds = PrivacyPolicy::find()
+             ->where(['status' => 1, 'parent_id' => $item['id']])
+             ->asArray()->all();
+         foreach($privacyChilds as $child){
+            $data[$item['id']][] = $item;
+            $data[$child['parent_id']]['childs'][] = $child;
+         }
+      }
+      //debug($data);
+
+      return $this->render('privacy-policy', [
+          'data' => $data
+      ]);
+   }
+
 
    public function actionError()
    {

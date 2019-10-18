@@ -12,9 +12,10 @@ use kartik\grid\GridView;
 $this->title = 'Прайс лист';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?= $this->render('/layouts/page-bar') ?>
 <div class="price-list-index">
 
-    <h3><?= Html::encode($this->title) ?></h3>
+<!--    <h3>--><?//= Html::encode($this->title) ?><!--</h3>-->
 
     <p>
         <?= Html::a('Добавить новый запись', ['create'], ['class' => 'btn btn-success']) ?>

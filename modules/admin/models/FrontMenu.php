@@ -107,7 +107,7 @@ class FrontMenu extends \yii\db\ActiveRecord
                                                 <ul class="drop-menu__list">';
          foreach ($services as $child) {
             $menu .= '<li class="drop-menu__item"><a class="drop-menu__link"
-                                        href="/page/service/' . $child['id'] . '">' . $child['name'] . '</a></li>';
+                                        href="/page/service/' . $child['alias'] . '">' . $child['name'] . '</a></li>';
          }
          $menu .= '</ul></div></drop-menu></div></li>';
       }
@@ -158,13 +158,13 @@ class FrontMenu extends \yii\db\ActiveRecord
       if (!empty($parents)) {
          foreach ($parents as $parent) {
             $footerMenu .= '<li class="links__item"><a class="links__link"
-                                                               href="/page/service/' . $parent['id'] . '">' . $parent['name'] . '</a>';
+                                                               href="/page/service/' . $parent['alias'] . '">' . $parent['name'] . '</a>';
             $childs = Services::find()->where(['parent_id' => $parent['id'], 'status' => 1])->asArray()->all();
             if (!empty($childs)) {
                $footerMenu .= '<ul class="links__sublist">';
                foreach ($childs as $child) {
                   $footerMenu .= '<li class="links__subitem"><a class="links__sublink"
-                                                                          href="/page/service/' . $child['id'] . '">
+                                                                          href="/page/service/' . $child['alias'] . '">
                             ' . $child['name'] . '</a></li>';
                }
                $footerMenu .= '</ul>';

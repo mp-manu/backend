@@ -12,48 +12,58 @@ $model->service_id = $service_id['id'];
 ?>
 
 <div class="work-proccess-form">
+    <div class="col-lg-12">
+        <p>
+           <?= Html::button('Добавить', ['class' => 'btn btn-success', 'id' =>'question-form']) ?>
+        </p>
+    </div>
    <?php if (!empty($workProccessData) && count($workProccessData) > 1): ?>
-       <div class="col-lg-12">
-           <div class="table-responsive">
-               <table class="table table-striped custom-table table-hover">
-                   <thead>
-                   <tr>
-                       <th>№</th>
-                       <th>Заголовок</th>
-                       <th>Описание</th>
-                       <th>Фото</th>
-                       <th>Действие</th>
-                   </tr>
-                   </thead>
-                   <tbody>
-                   <?php $i = 0;
-                   foreach ($workProccessData as $proccess): $i++ ?>
+       <div class="row">
+           <div class="col-lg-12">
+               <div class="table-responsive">
+                   <table class="table table-striped custom-table table-hover">
+                       <thead>
                        <tr>
-                           <td><?= $i ?></td>
-                           <td><?= $proccess['title'] ?></td>
-                           <td><?= $proccess['description'] ?></td>
-                           <td><img src="<?= Yii::getAlias('@uploads').'/proccess/'.$proccess['img'] ?>" width="150" height="100"></td>
-                           <td>
-                              <?php if ($proccess['status'] == 1): ?>
-                                  <a class="btn btn-success btn-xs" data-id="<?= $proccess['id'] ?>"
-                                     data-text="<?= $proccess['status'] ?>" title="Статус" onclick="changeStatusProccess(this)">
-                                      <i class="fa fa-check" id="pstatus<?= $proccess['id'] ?>"></i>
-                                  </a>
-                              <?php else: ?>
-                                  <a class="btn btn-danger btn-xs" data-id="<?= $proccess['id'] ?>"
-                                     data-text="<?= $proccess['status'] ?>" title="Статус" onclick="changeStatusProccess(this)">
-                                      <i class="fa fa-times" id="pstatus<?= $proccess['id'] ?>"></i>
-                                  </a>
-                              <?php endif; ?>
-                               <a class="btn btn-primary btn-xs"
-                                  href="/admin/work-proccess/update?id=<?= $proccess['id'] ?>">
-                                   <i class="fa fa-pencil" title="Изменить"></i>
-                               </a>
-                           </td>
+                           <th>№</th>
+                           <th>Заголовок</th>
+                           <th>Описание</th>
+                           <th>Фото</th>
+                           <th>Действие</th>
                        </tr>
-                   <?php endforeach; ?>
-                   </tbody>
-               </table>
+                       </thead>
+                       <tbody>
+                       <?php $i = 0;
+                       foreach ($workProccessData as $proccess): $i++ ?>
+                           <tr>
+                               <td><?= $i ?></td>
+                               <td><?= $proccess['title'] ?></td>
+                               <td><?= $proccess['description'] ?></td>
+                               <td><img src="<?= Yii::getAlias('@uploads') . '/proccess/' . $proccess['img'] ?>"
+                                        width="150" height="100"></td>
+                               <td>
+                                  <?php if ($proccess['status'] == 1): ?>
+                                      <a class="btn btn-success btn-xs" data-id="<?= $proccess['id'] ?>"
+                                         data-text="<?= $proccess['status'] ?>" title="Статус"
+                                         onclick="changeStatusProccess(this)">
+                                          <i class="fa fa-check" id="pstatus<?= $proccess['id'] ?>"></i>
+                                      </a>
+                                  <?php else: ?>
+                                      <a class="btn btn-danger btn-xs" data-id="<?= $proccess['id'] ?>"
+                                         data-text="<?= $proccess['status'] ?>" title="Статус"
+                                         onclick="changeStatusProccess(this)">
+                                          <i class="fa fa-times" id="pstatus<?= $proccess['id'] ?>"></i>
+                                      </a>
+                                  <?php endif; ?>
+                                   <a class="btn btn-primary btn-xs"
+                                      href="/admin/work-proccess/update?id=<?= $proccess['id'] ?>">
+                                       <i class="fa fa-pencil" title="Изменить"></i>
+                                   </a>
+                               </td>
+                           </tr>
+                       <?php endforeach; ?>
+                       </tbody>
+                   </table>
+               </div>
            </div>
        </div>
    <?php else: ?>

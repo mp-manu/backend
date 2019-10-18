@@ -107,11 +107,12 @@ class ImageManagerController extends Controller
 
             $img = UploadedFile::getInstance($model, 'img');
             if(!empty($img)){
-                $path = Yii::getAlias('@uploadsroot');
+                $path = Yii::getAlias('@uploadsroot').'/';
                 $imgName = $img->baseName.'.'.$img->extension;
+                  $model->img = $imgName;
+                  $model->value = $imgName;
                 $img->saveAs($path.$imgName);
-                $model->img = $imgName;
-                $model->value = $imgName;
+
             }
 
             $model->save();
@@ -137,13 +138,14 @@ class ImageManagerController extends Controller
     public function actionUpdate(int $id)
     {
         $model = $this->findModel($id);
+        $model->scenario = 'onUpdate';
         $oldImg = $model->img;
         if ($model->load(Yii::$app->request->post())) {
             $img = UploadedFile::getInstance($model, 'img');
             if(!empty($img)){
                 $path = Yii::getAlias('@uploadsroot');
                 $imgName = $img->baseName.'.'.$img->extension;
-                $img->saveAs($path.$imgName);
+                $img->saveAs($path.'/'.$imgName);
                 $model->img = $imgName;
                 $model->value = $imgName;
             }else{

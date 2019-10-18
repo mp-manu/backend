@@ -10,9 +10,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Service Infos', 'url' => ['index']
 $this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = 'Обновить';
 ?>
+<?= $this->render('/layouts/page-bar') ?>
 <div class="service-info-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<!--    <h1>--><?//= Html::encode($this->title) ?><!--</h1>-->
 
     <?= $this->render('_form', [
         'model' => $model,

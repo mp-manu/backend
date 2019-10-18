@@ -9,9 +9,10 @@ use kartik\grid\GridView;
 $this->title = 'Вопросы и ответы';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?= $this->render('/layouts/page-bar') ?>
 <div class="answer-questions-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<!--    <h1>--><?//= Html::encode($this->title) ?><!--</h1>-->
 
     <p>
         <?= Html::a('Добавить вопрос-ответ', ['create'], ['class' => 'btn btn-success']) ?>

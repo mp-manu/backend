@@ -7,13 +7,14 @@ use yii\widgets\DetailView;
 /* @var $model app\modules\admin\models\Services */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Services', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Услуги', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
+<?= $this->render('/layouts/page-bar') ?>
 <div class="services-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<!--    <h1>--><?//= Html::encode($this->title) ?><!--</h1>-->
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <?php if (\Yii::$app->session->hasFlash('creatingSuccess')) : ?>

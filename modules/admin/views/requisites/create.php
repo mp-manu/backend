@@ -6,12 +6,13 @@ use yii\helpers\Html;
 /* @var $model app\models\Requisites */
 
 $this->title = 'Добавить реквизит';
-$this->params['breadcrumbs'][] = ['label' => 'Requisites', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Реквизиты', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?= $this->render('/layouts/page-bar') ?>
 <div class="requisites-create">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<!--    <h1>--><?//= Html::encode($this->title) ?><!--</h1>-->
 
     <?= $this->render('_form', [
         'model' => $model,

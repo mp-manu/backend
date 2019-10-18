@@ -9,6 +9,7 @@ $this->title = 'Добавить услугу';
 $this->params['breadcrumbs'][] = ['label' => 'Услуги', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?= $this->render('/layouts/page-bar') ?>
 <div class="services-create">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">

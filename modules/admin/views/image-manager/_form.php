@@ -16,9 +16,9 @@ use app\modules\admin\models\enumerables\ImageType;
         <div class="card-head">
         </div>
         <div class="card-body row">
-            <?php if(!$model->isNewRecord): ?>
+            <?php if(!$model->isNewRecord && !empty($model->img)): ?>
             <div class="col-xs-12 text-center">
-                <img src="<?= Yii::getAlias('@uploads') . '/' . $model->img ?>" width="500">
+                <img src="<?= Yii::getAlias('@uploads') . '/' . $model->img ?>" width="300">
             </div>
             <?php endif; ?>
             <div class="col-lg-6">

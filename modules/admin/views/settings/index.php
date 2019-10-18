@@ -15,8 +15,9 @@ use app\modules\admin\models\SettingModel;
 $this->title = 'Настройка текстов';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?= $this->render('/layouts/page-bar') ?>
 <div class="setting-index">
-    <h1><?php echo Html::encode($this->title); ?></h1>
+<!--    <h1>--><?php //echo Html::encode($this->title); ?><!--</h1>-->
     <div class="card-box">
         <div class="card-head">
             <header><?= $this->title ?></header>

@@ -6,9 +6,10 @@ use yii\helpers\Html;
 /* @var $model app\modules\admin\models\Slider */
 
 $this->title = 'Добавить слайд';
-$this->params['breadcrumbs'][] = ['label' => 'Sliders', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Слайды', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?= $this->render('/layouts/page-bar') ?>
 <div class="slider-create">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">

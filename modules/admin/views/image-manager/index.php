@@ -13,8 +13,9 @@ use app\modules\admin\models\ImageModel;
 $this->title = 'Список фото страниц';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?= $this->render('/layouts/page-bar') ?>
 <div class="setting-index">
-    <h2><?php echo Html::encode($this->title); ?></h2>
+<!--    <h2>--><?php //echo Html::encode($this->title); ?><!--</h2>-->
     <div class="card-box">
         <div class="card-head">
             <header><?= $this->title ?></header>
@@ -44,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
                            'attribute' => 'img',
                            'format' => 'html',
                            'value' => function ($model) {
-                              return '<img src="' . Yii::getAlias('@uploads') . '/' . $model->img . '" width="300">';
+                              return '<img src="' . Yii::getAlias('@uploads') . '/' . $model->img . '" width="130">';
                            },
                        ],
                        [

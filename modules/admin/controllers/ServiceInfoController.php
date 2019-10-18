@@ -91,7 +91,7 @@ class ServiceInfoController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['/admin/services/edit', 'id' => $model->service_id]);
         }
         $services = Services::getServices();
         return $this->render('update', [

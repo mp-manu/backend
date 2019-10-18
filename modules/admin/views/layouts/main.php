@@ -6,10 +6,6 @@
 
 use app\assets\admin\AppAsset;
 use yii\helpers\Html;
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
-use app\widgets\Alert;
 
 AppAsset::register($this);
 ?>
@@ -36,7 +32,7 @@ AppAsset::register($this);
     <div class="page-wrapper">
 
         <?= $this->render('main-sections/header.php') ?>
-        <?= $this->render('main-sections/themes.php') ?>
+        <?//= $this->render('main-sections/themes.php') ?>
 
         <!-- start page container -->
         <div class="page-container">

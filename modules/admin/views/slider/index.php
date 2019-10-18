@@ -15,8 +15,9 @@ use yii\helpers\ArrayHelper;
 $this->title = 'Слайдер';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<?= $this->render('/layouts/page-bar') ?>
 <div class="slider-index">
-    <h1><?= Html::encode($this->title) ?></h1>
     <p>
         <?= Html::a('Добавить новый слайд', ['create'], ['class' => 'btn btn-success']) ?>
     </p>

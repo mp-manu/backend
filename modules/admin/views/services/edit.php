@@ -9,13 +9,15 @@
 use yii\bootstrap\Tabs;
 
 $this->title = 'Редактировать услугу';
-
+$this->params['breadcrumbs'][] = ['label' => 'Все услуги', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;
 $display = (count($services) > 0 || !empty($services)) ? true : false;
 
 ?>
+<?= $this->render('/layouts/page-bar') ?>
 <div class="row">
     <div class="col-lg-12">
-        <h2><?= $this->title ?></h2>
+<!--        <h2>--><?//= $this->title ?><!--</h2>-->
        <?php if (\Yii::$app->session->hasFlash('success')) : ?>
            <div class="alert alert-success alert-dismissible" style="margin-top: 5%;">
                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -41,7 +43,7 @@ $display = (count($services) > 0 || !empty($services)) ? true : false;
                    <?php endif; ?>
                 </header>
             </div>
-            <div class="card-head">
+            <div class="card-body">
                <?php
                echo Tabs::widget([
                    'items' => [
@@ -60,6 +62,7 @@ $display = (count($services) > 0 || !empty($services)) ? true : false;
                            'visible' => $display,
                            'content' => $this->render('forms/service-info', [
                                'model' => $serviceInfoModel,
+                               'serviceInfoData' => $serviceInfoData,
                                'services' => $services,
                                'service_id' => $service_id
                            ]),
@@ -117,4 +120,4 @@ $display = (count($services) > 0 || !empty($services)) ? true : false;
         font-weight: normal;
     }
 </style>
-<?php $this->registerJsFile('@web/admin_assets/js/change-status.js') ?>
+<?php $this->registerJsFile('@web/admin_assets/js/change-status.js', ['depends' => [yii\web\JqueryAsset::className()]]) ?>

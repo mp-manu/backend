@@ -7,13 +7,14 @@ use yii\widgets\DetailView;
 /* @var $model app\modules\admin\models\Sections */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Sections', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Разделы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
+<?= $this->render('/layouts/page-bar') ?>
 <div class="sections-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<!--    <h1>--><?//= Html::encode($this->title) ?><!--</h1>-->
 
     <p>
         <?= Html::a('Обновить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>

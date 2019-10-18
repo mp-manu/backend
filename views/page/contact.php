@@ -42,15 +42,14 @@ $this->title = 'Контакты';
                                                 <div class="col-6">
                                                     <div class="contacts__person">
                                                         <article class="person">
-                                                            <figure class="person__cover"><img
-                                                                        class="person__image"
-                                                                        src="/img/person.jpg"
-                                                                        alt="<?= Yii::$app->settings->get('Сотрудник', 'главТехник') ?>"></figure>
+                                                            <figure class="person__cover">
+                                                                <img class="person__image" src="<?= Yii::getAlias('@web') ?>/uploads/<?= Yii::$app->images->get('Главная', 'руков_цеха') ?>"
+                                                                        alt="<?= Yii::$app->settings->get('Сотрудник', 'главТехник') ?>">
+                                                            </figure>
                                                             <header class="person__header"><h4
                                                                         class="person__name"><?= Yii::$app->settings->get('Сотрудник', 'главТехник') ?></h4>
                                                                 <p class="person__position"><?= Yii::$app->settings->get('Должность', 'главТехник') ?>
 																</p>
-																
 																</header>
                                                         </article>
                                                     </div>
@@ -314,7 +313,7 @@ $this->title = 'Контакты';
                                                                             type="checkbox" name="agreement"
                                                                             required><span
                                                                             class="checkbox__label">Заказывая обратный звонок, даю согласие на обработку <a
-                                                                                href="/page/policy">персональных данных</a></span></label>
+                                                                                href="/page/privacy-policy">персональных данных</a></span></label>
                                                             </div>
                                                             <div class="form__button">
                                                                 <button class="button is-wide is-large">

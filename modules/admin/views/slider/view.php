@@ -7,13 +7,14 @@ use yii\widgets\DetailView;
 /* @var $model app\modules\admin\models\Slider */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Sliders', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Слайды', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
+<?= $this->render('/layouts/page-bar') ?>
 <div class="slider-view">
 
-    <h3><?= Html::encode($this->title) ?></h3>
+<!--    <h3>--><?//= Html::encode($this->title) ?><!--</h3>-->
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <?php if (\Yii::$app->session->hasFlash('creatingSuccess')) : ?>

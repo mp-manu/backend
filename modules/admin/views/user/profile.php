@@ -6,7 +6,9 @@
  * Time: 0:48
  */
 $this->title = 'Профиль ' . $user['username'];
+$this->params['breadcrumbs'][] = $this->title;
 ?>
+<?= $this->render('/layouts/page-bar') ?>
 <?php if (\Yii::$app->session->hasFlash('errorRetype')) : ?>
     <div class="alert alert-danger alert-dismissible" style="margin-top: 5%;">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">

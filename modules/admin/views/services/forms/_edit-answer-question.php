@@ -12,7 +12,12 @@ use yii\helpers\Html;
 
 ?>
 <?php if (!empty($answerQuestionsData) && count($answerQuestionsData) > 1): ?>
-    <div class="col-ld-12">
+    <div class="col-lg-12">
+        <p>
+           <?= Html::button('Добавить', ['class' => 'btn btn-success', 'id' =>'question-form']) ?>
+        </p>
+    </div>
+    <div class="col-lg-12" id="frm-content">
         <div class="table-responsive">
             <table class="table table-striped custom-table table-hover">
                 <thead>

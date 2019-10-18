@@ -11,10 +11,12 @@ use kartik\grid\GridView;
 
 $this->title = 'Раздел страниц';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
+<?= $this->render('/layouts/page-bar') ?>
 <div class="sections-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<!--    <h1>--><?//= Html::encode($this->title) ?><!--</h1>-->
 
     <p>
         <?= Html::a('Добавить новый раздел', ['create'], ['class' => 'btn btn-success']) ?>

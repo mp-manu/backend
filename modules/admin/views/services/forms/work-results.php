@@ -12,7 +12,12 @@ $model->service_id = $service_id['id'];
 ?>
 
 <div class="work-results-form">
-   <?php if(!empty($workResultsData) && count($workResultsData) > 1): ?>
+    <div class="col-lg-12">
+        <p>
+           <?= Html::button('Добавить', ['class' => 'btn btn-success', 'id' => 'question-form']) ?>
+        </p>
+    </div>
+   <?php if (!empty($workResultsData) && count($workResultsData) > 1): ?>
        <div class="col-lg-12">
            <div class="table-responsive">
                <table class="table table-striped custom-table table-hover">
@@ -38,16 +43,19 @@ $model->service_id = $service_id['id'];
                            <td><?= $result['deadline'] ?></td>
                            <td><?= $result['price'] ?></td>
                            <td><?= $result['tooked_metall'] ?></td>
-                           <td><img src="<?= Yii::getAlias('@uploads').'/results/'.$result['img'] ?>" width="130" height="100"></td>
+                           <td><img src="<?= Yii::getAlias('@uploads') . '/results/' . $result['img'] ?>" width="130"
+                                    height="100"></td>
                            <td>
                               <?php if ($result['status'] == 1): ?>
                                   <a class="btn btn-success btn-xs" data-id="<?= $result['id'] ?>"
-                                     data-text="<?= $result['status'] ?>" title="Статус" onclick="changeResultStatus(this)">
+                                     data-text="<?= $result['status'] ?>" title="Статус"
+                                     onclick="changeResultStatus(this)">
                                       <i class="fa fa-check" id="rstatus<?= $result['id'] ?>"></i>
                                   </a>
                               <?php else: ?>
                                   <a class="btn btn-danger btn-xs" data-id="<?= $result['id'] ?>"
-                                     data-text="<?= $result['status'] ?>" title="Статус" onclick="changeResultStatus(this)">
+                                     data-text="<?= $result['status'] ?>" title="Статус"
+                                     onclick="changeResultStatus(this)">
                                       <i class="fa fa-times" id="rstatus<?= $result['id'] ?>"></i>
                                   </a>
                               <?php endif; ?>
@@ -64,57 +72,57 @@ $model->service_id = $service_id['id'];
        </div>
 
    <?php else: ?>
-    <div class="col-sm-12">
-<!--        <h3 style="text-align: center">Добавить результаты работ</h3>-->
-       <?php $form = ActiveForm::begin(); ?>
-        <div class="col-lg-6">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-               <?= $form->field($model, 'service_id')
-                   ->dropDownList(ArrayHelper::map($services, 'id', 'name'), [
-                       'prompt' => 'Выбрать услугу'
-                   ]) ?>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-               <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-               <?= $form->field($model, 'deadline')->textInput(['maxlength' => true]) ?>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-               <?= $form->field($model, 'price')->textInput() ?>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-               <?= $form->field($model, 'tooked_metall')->textInput(['maxlength' => true]) ?>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-               <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-               <?= $form->field($model, 'status')->dropDownList(['1' => 'Включен', '0' => 'Отключен']) ?>
-            </div>
-        </div>
-        <div class="col-lg-6">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-               <?= $form->field($model, 'img')->fileInput() ?>
-            </div>
-        </div>
-        <div class="col-lg-12 text-center">
-           <?= Html::submitButton($model->isNewRecord ? 'Сохранить' : 'Обновить', ['class' => 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 m-r-20 btn-pink']) ?>
-        </div>
-       <?php ActiveForm::end(); ?>
-    </div>
+       <div class="col-sm-12">
+           <!--        <h3 style="text-align: center">Добавить результаты работ</h3>-->
+          <?php $form = ActiveForm::begin(); ?>
+           <div class="col-lg-6">
+               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                  <?= $form->field($model, 'service_id')
+                      ->dropDownList(ArrayHelper::map($services, 'id', 'name'), [
+                          'prompt' => 'Выбрать услугу'
+                      ]) ?>
+               </div>
+           </div>
+           <div class="col-lg-6">
+               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                  <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+               </div>
+           </div>
+           <div class="col-lg-6">
+               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                  <?= $form->field($model, 'deadline')->textInput(['maxlength' => true]) ?>
+               </div>
+           </div>
+           <div class="col-lg-6">
+               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                  <?= $form->field($model, 'price')->textInput() ?>
+               </div>
+           </div>
+           <div class="col-lg-6">
+               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                  <?= $form->field($model, 'tooked_metall')->textInput(['maxlength' => true]) ?>
+               </div>
+           </div>
+           <div class="col-lg-6">
+               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                  <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
+               </div>
+           </div>
+           <div class="col-lg-6">
+               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                  <?= $form->field($model, 'status')->dropDownList(['1' => 'Включен', '0' => 'Отключен']) ?>
+               </div>
+           </div>
+           <div class="col-lg-6">
+               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                  <?= $form->field($model, 'img')->fileInput() ?>
+               </div>
+           </div>
+           <div class="col-lg-12 text-center">
+              <?= Html::submitButton($model->isNewRecord ? 'Сохранить' : 'Обновить', ['class' => 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 m-r-20 btn-pink']) ?>
+           </div>
+          <?php ActiveForm::end(); ?>
+       </div>
 
-<?php endif; ?>
+   <?php endif; ?>
 </div>

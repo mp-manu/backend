@@ -49,7 +49,7 @@ use app\modules\admin\models\FrontMenu;
                             <?= Yii::$app->settings->get('Сайт', 'Имя компании') ?>
                         </p>
                     </div>
-                    <div class="col-4"><a class="footer__policy" href="/page/policy">Политика конфиденциальности</a></div>
+                    <div class="col-4"><a class="footer__policy" href="/page/privacy-policy">Политика конфиденциальности</a></div>
                     <div class="col-4">
                         <div class="footer__dc">
                             <a class="dc" href="//dancecolor.ru" target="_blank" rel="noreferrer">

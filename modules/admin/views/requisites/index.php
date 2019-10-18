@@ -10,9 +10,10 @@ use kartik\grid\GridView;
 $this->title = 'Реквизиты';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?= $this->render('/layouts/page-bar') ?>
 <div class="requisites-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<!--    <h1>--><?//= Html::encode($this->title) ?><!--</h1>-->
 
     <p>
         <?= Html::a('Добавить реквизит', ['create'], ['class' => 'btn btn-success']) ?>

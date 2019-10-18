@@ -12,6 +12,11 @@ $model->service_id = $service_id['id'];
 ?>
 
 <div class="answer-questions-form">
+    <div class="col-lg-12">
+        <p>
+           <?= Html::button('Добавить', ['class' => 'btn btn-success', 'id' =>'question-form']) ?>
+        </p>
+    </div>
    <?php $form = ActiveForm::begin(); ?>
     <div class="col-lg-6 ">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">

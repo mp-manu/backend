@@ -48,7 +48,7 @@ class AppAsset extends AssetBundle
     /*-- Common js--*/
 	    'admin_assets/js/app.js',
         'admin_assets/js/layout.js',
-        'admin_assets/js/theme-color.js',
+        //'admin_assets/js/theme-color.js',
     /*-- material --*/
         'admin_assets/plugins/material/material.min.js',
     /*-- chart js --*/

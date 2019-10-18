@@ -10,10 +10,12 @@ use kartik\grid\GridView;
 
 $this->title = 'Меню сайта';
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
+<?= $this->render('/layouts/page-bar') ?>
 <div class="front-menu-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<!--    <h1>--><?//= Html::encode($this->title) ?><!--</h1>-->
 
     <p>
         <?= Html::a('Добавить', ['create'], ['class' => 'btn btn-success']) ?>

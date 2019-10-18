@@ -7,13 +7,14 @@ use yii\widgets\DetailView;
 /* @var $model app\modules\admin\models\WorkProccess */
 
 $this->title = $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Work Proccesses', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Процесс работы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
+<?= $this->render('/layouts/page-bar') ?>
 <div class="work-proccess-view">
 
-    <h2><?= Html::encode($this->title) ?></h2>
+<!--    <h2>--><?//= Html::encode($this->title) ?><!--</h2>-->
 
     <?php if (\Yii::$app->session->hasFlash('creatingSuccess')) : ?>
         <div class="alert alert-success alert-dismissible" style="margin-top: 5%;">

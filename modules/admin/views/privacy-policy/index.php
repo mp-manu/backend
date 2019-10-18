@@ -12,9 +12,10 @@ use yii\helpers\ArrayHelper;
 $this->title = 'ПОЛИТИКА КОНФИДЕНЦИАЛЬНОСТИ САЙТА';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?= $this->render('/layouts/page-bar') ?>
 <div class="privacy-policy-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<!--    <h1>--><?//= Html::encode($this->title) ?><!--</h1>-->
 
     <p>
        <?= Html::a('Добавить', ['create'], ['class' => 'btn btn-success']) ?>

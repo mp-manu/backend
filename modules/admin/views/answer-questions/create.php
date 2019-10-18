@@ -5,12 +5,13 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\AnswerQuestions */
 
-$this->title = 'Вопрос-ответ';
-$this->params['breadcrumbs'][] = ['label' => 'Answer Questions', 'url' => ['index']];
+$this->title = 'Добавить вопросы и ответы';
+$this->params['breadcrumbs'][] = ['label' => 'Вопросы и ответы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-?>
-<div class="answer-questions-create">
 
+?>
+<?= $this->render('/layouts/page-bar') ?>
+<div class="answer-questions-create">
 <!--    <h1>--><?//= Html::encode($this->title) ?><!--</h1>-->
     <?php if (\Yii::$app->session->hasFlash('creatingError')) : ?>
         <div class="alert alert-danger alert-dismissible" style="margin-top: 5%;">

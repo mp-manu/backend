@@ -70,7 +70,8 @@ echo $this->render('/page/banners/banner', ['service' => $service]);
                                    <section class="subsection">
                                        <header class="subsection__header">
                                            <h3 class="subsection__title">
-                                               Вопрос ответ</h3>
+                                               Вопрос ответ
+                                           </h3>
                                        </header>
                                        <div class="subsection__body">
                                            <div class="subsection__accordion">
@@ -215,7 +216,7 @@ echo $this->render('/page/banners/banner', ['service' => $service]);
                                                                                type="checkbox" name="agreement"
                                                                                required><span
                                                                                class="checkbox__label">Заказывая обратный звонок, даю согласие на обработку <a
-                                                                                   href="/page/policy">персональных данных</a></span></label>
+                                                                                   href="/page/privacy-policy">персональных данных</a></span></label>
                                                                </div>
                                                                <div class="question-form__button form__button">
                                                                    <button class="button is-wide is-large">
@@ -491,7 +492,7 @@ echo $this->render('/page/banners/banner', ['service' => $service]);
                                        </div>
                                        <div class="col-6">
                                            <div class="subsection__aside">
-                                               <img class="subsection__image" src="/img/image2.jpg" alt>
+                                               <img class="subsection__image" src="<?= Yii::getAlias('@web') ?>/uploads/<?= Yii::$app->images->get('Виды гибки метала', 'виды_гибка_метала') ?>" alt>
                                            </div>
                                        </div>
                                    </div>

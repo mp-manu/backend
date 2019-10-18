@@ -15,23 +15,29 @@
                     <section class="subsection">
                         <div class="grid is-row">
                             <div class="col-6">
-                                <header class="subsection__header"><h3 class="subsection__title">
-                                        Контакты</h3></header>
+                                <header class="subsection__header">
+                                    <h3 class="subsection__title">
+                                        Контакты
+                                    </h3>
+                                </header>
                                 <div class="subsection__body">
                                     <div class="contacts">
                                         <div class="grid is-row">
                                             <div class="col-6">
                                                 <div class="contacts__person">
                                                     <article class="person">
-                                                        <figure class="person__cover"><img
-                                                                    class="person__image"
-                                                                    src="/img/person.jpg"
-                                                                    alt="Дмитрий Соляник"></figure>
-                                                        <header class="person__header"><h4
-                                                                    class="person__name">Дмитрий
-                                                                Соляник</h4>
-                                                            <p class="person__position">Главный
-                                                                техник</p></header>
+                                                        <figure class="person__cover">
+                                                            <img class="person__image" src="<?= Yii::getAlias('@web') ?>/uploads/<?= Yii::$app->images->get('Главная', 'руков_цеха') ?>"
+                                                                    alt="<?= Yii::$app->settings->get('Сотрудник', 'руков_цеха_штамп') ?>">
+                                                        </figure>
+                                                        <header class="person__header">
+                                                            <h4 class="person__name">
+                                                               <?= Yii::$app->settings->get('Сотрудник', 'руков_цеха_штамп') ?>
+                                                            </h4>
+                                                            <p class="person__position">
+                                                               <?= Yii::$app->settings->get('Сотрудник', 'главТехник') ?>
+                                                            </p>
+                                                        </header>
                                                     </article>
                                                 </div>
                                             </div>
@@ -39,27 +45,34 @@
                                                 <ul class="contacts__list">
                                                     <li class="contacts__item">
                                                         <div class="contact">
-                                                            <div class="contact__caption">Телефон
+                                                            <div class="contact__caption">
+                                                                Телефон
                                                             </div>
                                                             <a class="contact__value"
-                                                               href="tel:+7 (910) 788-40-41">+7
-                                                                (910) 788-40-41</a></div>
+                                                               href="tel:<?= Yii::$app->settings->get('Контакты', 'Телефон') ?>">
+                                                               <?= Yii::$app->settings->get('Контакты', 'Телефон') ?>
+                                                            </a>
+                                                        </div>
                                                     </li>
                                                     <li class="contacts__item">
                                                         <div class="contact">
-                                                            <div class="contact__caption">Адрес
+                                                            <div class="contact__caption">
+                                                                Адрес
                                                             </div>
-                                                            <div class="contact__value">Смоленск,
-                                                                дер. Тепличный Комбинат №1
+                                                            <div class="contact__value">
+                                                               <?= Yii::$app->settings->get('Контакты', 'адресс') ?>
                                                             </div>
                                                         </div>
                                                     </li>
                                                     <li class="contacts__item">
                                                         <div class="contact">
-                                                            <div class="contact__caption">Email
+                                                            <div class="contact__caption">
+                                                                Email
                                                             </div>
                                                             <a class="contact__value"
-                                                               href="mailto:andrey@prometey67.ru">andrey@prometey67.ru</a>
+                                                               href="mailto:<?= Yii::$app->settings->get('Контакты', 'Email') ?>">
+                                                               <?= Yii::$app->settings->get('Контакты', 'Email') ?>
+                                                            </a>
                                                         </div>
                                                     </li>
                                                 </ul>

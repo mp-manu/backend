@@ -12,6 +12,11 @@ $model->service_id = $service_id['id'];
 ?>
 
 <div class="price-list-form">
+    <div class="col-lg-12">
+        <p>
+           <?= Html::button('Добавить', ['class' => 'btn btn-success', 'id' =>'question-form']) ?>
+        </p>
+    </div>
    <?php if (!empty($priceListData) && count($priceListData) > 1): ?>
        <div class="col-lg-12">
            <div class="table-responsive">

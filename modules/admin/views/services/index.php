@@ -13,12 +13,20 @@ use  kartik\grid\GridView;
 $this->title = 'Список услуг';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?= $this->render('/layouts/page-bar') ?>
 <div class="services-index">
 
-    <h2><?= Html::encode($this->title) ?></h2>
+<!--    <h2>--><?//= Html::encode($this->title) ?><!--</h2>-->
     <p>
         <?= Html::a('Добавить услугу', ['add'], ['class' => 'btn btn-success']) ?>
     </p>
+   <?php if (\Yii::$app->session->hasFlash('success')) : ?>
+       <div class="alert alert-success alert-dismissible" style="margin-top: 5%;">
+           <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+               <span aria-hidden="true">&times;</span></button>
+          <?php echo \Yii::$app->session->getFlash('success'); ?>
+       </div>
+   <?php endif; ?>
     <div class="card-box">
         <div class="card-head">
             <header><?= $this->title ?></header>
@@ -51,7 +59,8 @@ $this->params['breadcrumbs'][] = $this->title;
                        'attribute' => 'img',
                         'format' => 'html',
                         'value' => function($model){
-                            return '<a target="_blank" href="'.Yii::getAlias('@uploads').'/services/'.$model->img.'">'.$model->img.'</a>';
+                            return '<a target="_blank" href="'.Yii::getAlias('@uploads').'/services/'.$model->img.'">
+                                    <img src="'.Yii::getAlias('@uploads').'/services/'.$model->img.'" width="250"></a>';
                         }
                     ],
                     [
@@ -79,7 +88,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'template' => '{view}{update}{delete}',
                         'buttons' => [
                             'view' => function ($url, $model) {
-                               return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', '/admin/services/details?id='.$model->id, [
+                               return Html::a('<span class="glyphicon glyphicon-eye-open"></span>', $url, [
                                    'title' => Yii::t('app', 'lead-view'),
                                ]);
                             },
@@ -91,7 +100,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             },
                             'delete' => function ($url, $model) {
                                return Html::a('<span class="glyphicon glyphicon-trash"></span>', $url, [
-                                   'title' => Yii::t('app', 'lead-delete'),
+                                   'title' => Yii::t('app', 'lead-delete'), 'data-confirm' => 'Вы уверены что хотите удалить этот запись?'
                                ]);
                             }
                         ],

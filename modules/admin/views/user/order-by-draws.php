@@ -11,8 +11,9 @@ use yii\helpers\Html;
 use yii\web\JqueryAsset;
 
 $this->title = 'Заказы по чертежу';
-
+$this->params['breadcrumbs'][] = $this->title;
 ?>
+<?= $this->render('/layouts/page-bar') ?>
 <div class="row">
     <div class="col-md-12">
         <div class="card card-box">

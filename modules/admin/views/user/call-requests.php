@@ -9,8 +9,9 @@
 use yii\helpers\Html;
 
 $this->title = 'Заказы на звонок';
-
+$this->params['breadcrumbs'][] = $this->title;
 ?>
+<?= $this->render('/layouts/page-bar') ?>
 <div class="row">
     <div class="col-md-12">
         <div class="card card-box">

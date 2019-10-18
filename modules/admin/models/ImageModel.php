@@ -26,6 +26,7 @@ use app\modules\admin\models\ImageQuery;
  */
 class ImageModel extends ActiveRecord
 {
+   const SCENARIO_MYSPECIAL = 'onUpdate';
     /**
      * @inheritdoc
      */
@@ -40,7 +41,9 @@ class ImageModel extends ActiveRecord
     public function rules()
     {
         return [
-            [['section', 'key',  'img'], 'required'],
+            [['img'], 'required', 'on' => self::SCENARIO_DEFAULT],
+            [['img'], 'safe', 'on' => self::SCENARIO_MYSPECIAL],
+            [['section', 'key'], 'required'],
             [['section', 'key'], 'unique', 'targetAttribute' => ['section', 'key']],
             [['value', 'type'], 'string'],
             [['img'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, ico'],

@@ -3,7 +3,7 @@
 /* @var $this yii\web\View */
 
 $this->title = 'Панель администратора';
-$this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => ['/']];
+$this->params['breadcrumbs'][] = ['label' => $this->title, 'url' => ['/admin']];
 
 ?>
 <?= $this->render('/layouts/page-bar') ?>

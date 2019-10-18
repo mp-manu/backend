@@ -6,12 +6,13 @@ use yii\helpers\Html;
 /* @var $model app\modules\admin\models\PriceList */
 
 $this->title = 'Добавить Прайслист';
-$this->params['breadcrumbs'][] = ['label' => 'Price Lists', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Прайслист', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?= $this->render('/layouts/page-bar') ?>
 <div class="price-list-create">
 
-    <h3><?= Html::encode($this->title) ?></h3>
+<!--    <h3>--><?//= Html::encode($this->title) ?><!--</h3>-->
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <?php if (\Yii::$app->session->hasFlash('creatingError')) : ?>
