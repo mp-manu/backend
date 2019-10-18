@@ -15,8 +15,8 @@ use app\modules\admin\models\FrontMenu;
         <div class="container">
             <div class="header__inner">
                 <div class="header__logo"><a class="logo" href="/" title="Главная страница">
-                        <div class="logo__label"><i>Тех</i>Арсенал</div>
-                        <div class="logo__caption">Современный подход<br>к&nbsp;холодной штамповке</div>
+                        <div class="logo__label"><?= Yii::$app->settings->get('Сайт', 'имя') ?></div>
+                        <div class="logo__caption"><?= Yii::$app->settings->get('Сайт', 'описание') ?></div>
                     </a></div>
                 <div class="header__nav">
                     <header-nav inline-template>
@@ -28,11 +28,14 @@ use app\modules\admin\models\FrontMenu;
                     </header-nav>
                 </div>
                 <div class="header__phone">
-                    <div class="phone"><a class="phone__value" href="tel:+7 (952) 687-58-04">+7 (952)
-                            687-58-04</a></div>
+                    <div class="phone">
+                        <a class="phone__value" href="tel:<?= Yii::$app->settings->get('Компания', 'тел') ?>">
+                          <?= Yii::$app->settings->get('Компания', 'тел') ?>
+                        </a>
+                    </div>
                 </div>
                 <div class="header__button">
-                    <button class="button is-bordered " data-modal="callback">Заказать звонок</button>
+                    <button class="button is-bordered " data-modal="callback"><?= Yii::$app->settings->get('Текст', 'заказ_звонка') ?></button>
                 </div>
             </div>
         </div>

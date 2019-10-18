@@ -18,8 +18,8 @@ use app\modules\admin\models\FrontMenu;
                     <div class="col-4">
                         <div class="footer__logo">
                             <div class="logo is-light is-vertical in-footer">
-                                <div class="logo__label"><i>Тех</i>Арсенал</div>
-                                <div class="logo__caption">Современный подход<br>к&nbsp;холодной штамповке</div>
+                                <div class="logo__label"><?= Yii::$app->settings->get('Сайт', 'имя') ?></div>
+                                <div class="logo__caption"><?= Yii::$app->settings->get('Сайт', 'описание') ?></div>
                             </div>
                         </div>
                     </div>
@@ -45,11 +45,11 @@ use app\modules\admin\models\FrontMenu;
             <div class="footer__bottom">
                 <div class="grid is-row is-middle">
                     <div class="col-4">
-                        <p class="footer__copy">© 2019
+                        <p class="footer__copy">© <?= date('Y') ?>
                             <?= Yii::$app->settings->get('Сайт', 'Имя компании') ?>
                         </p>
                     </div>
-                    <div class="col-4"><a class="footer__policy" href="/page/privacy-policy">Политика конфиденциальности</a></div>
+                    <div class="col-4"><a class="footer__policy" href="/page/privacy-policy"><?= Yii::$app->settings->get('Сайт', 'privacy') ?></a></div>
                     <div class="col-4">
                         <div class="footer__dc">
                             <a class="dc" href="//dancecolor.ru" target="_blank" rel="noreferrer">

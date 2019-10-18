@@ -53,13 +53,17 @@ AppAsset::register($this);
                         <div id="modal-thanks">
                             <section class="thanks is-compact">
                                 <div class="thanks__container">
-                                    <header class="thanks__header"><p class="thanks__caption">Наш техник скоро свяжется
-                                            с вами,<br>и Вы зададите ему любые вопросы</p></header>
+                                    <header class="thanks__header"><p class="thanks__caption">
+                                          <?= Yii::$app->settings->get('Текст', 'наш_техник') ?>
+                                        </p></header>
                                     <footer class="thanks__footer">
                                         <div class="not-found__phone">
-                                            <div class="phone is-big is-centred"><p class="phone__caption">Позвоните
-                                                    нам</p><a class="phone__value" href="tel:8 (952) 687-58-04">8 (952)
-                                                    687-58-04</a></div>
+                                            <div class="phone is-big is-centred">
+                                                <p class="phone__caption"><?= Yii::$app->settings->get('Текст', 'позваните_нам') ?></p>
+                                                <a class="phone__value" href="tel:<?= Yii::$app->settings->get('Компания', 'тел') ?>">
+                                                   <?= Yii::$app->settings->get('Компания', 'тел') ?>
+                                                </a>
+                                            </div>
                                         </div>
                                     </footer>
                                 </div>
@@ -69,8 +73,11 @@ AppAsset::register($this);
                             <callback-form inline-template>
                                 <validation-observer ref="observer">
                                     <form class="callback-form form" action="/request/need-to-call" method="post" @submit="onsubmit">
-                                        <header class="form__header"><h3 class="form__title title">Заказать обратный
-                                                звонок</h3></header>
+                                        <header class="form__header">
+                                            <h3 class="form__title title">
+                                               <?= Yii::$app->settings->get('Текст', 'заказ_звонка') ?>
+                                            </h3>
+                                        </header>
                                         <div class="form__body">
                                             <div class="grid is-columns">
                                                 <div class="col-6">
@@ -126,12 +133,12 @@ AppAsset::register($this);
                                         <footer class="form__footer">
                                             <div class="form__agreement"><label class="checkbox"><input
                                                             class="checkbox__input" type="checkbox" name="agreement"
-                                                            required><span class="checkbox__label">Заказывая обратный звонок, даю согласие на обработку <a
-                                                                href="/page/privacy-policy">персональных данных</a></span></label>
+                                                                required><span class="checkbox__label"><?= Yii::$app->settings->get('Сайт', 'заказывая_звонок') ?> <a
+                                                                href="/page/privacy-policy"><?= Yii::$app->settings->get('Текст', 'personal_data') ?></a></span></label>
                                             </div>
                                             <div class="form__button">
-                                                <button class="button is-wide is-large">Перезвоните мне в течении 20
-                                                    минут
+                                                <button class="button is-wide is-large">
+                                                   <?= Yii::$app->settings->get('Сайт', 'call_me') ?>
                                                 </button>
                                             </div>
                                         </footer>
@@ -143,8 +150,11 @@ AppAsset::register($this);
                             <callback-form inline-template>
                                 <validation-observer ref="observer">
                                     <form class="callback-form form" action="/request/order-by-drawing" method="post" enctype="multipart/form-data" @submit="onsubmit">
-                                        <header class="form__header"><h3 class="form__title title">Заказать по
-                                                чертежу</h3></header>
+                                        <header class="form__header">
+                                            <h3 class="form__title title">
+                                               <?= Yii::$app->settings->get('Текст', 'order_draw') ?>
+                                            </h3>
+                                        </header>
                                         <div class="form__body">
                                             <div class="grid is-columns">
                                                 <div class="col-6">
@@ -205,11 +215,11 @@ AppAsset::register($this);
                                         <footer class="form__footer">
                                             <div class="form__agreement"><label class="checkbox"><input
                                                             class="checkbox__input" type="checkbox" name="agreement"
-                                                            required><span class="checkbox__label">Заказывая обратный звонок, даю согласие на обработку <a
-                                                                href="#">персональных данных</a></span></label>
+                                                            required><span class="checkbox__label"><?= Yii::$app->settings->get('Сайт', 'заказывая_звонок') ?><a
+                                                                href="#"><?= Yii::$app->settings->get('Текст', 'personal_data') ?></a></span></label>
                                             </div>
                                             <div class="form__button">
-                                                <button class="button is-wide is-large">Отправить</button>
+                                                <button class="button is-wide is-large"><?= Yii::$app->settings->get('Текст', 'Отправить') ?></button>
                                             </div>
                                         </footer>
                                     </form>

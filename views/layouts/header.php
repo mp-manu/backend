@@ -36,7 +36,7 @@ use app\modules\admin\models\FrontMenu;
                     </div>
                 </div>
                 <div class="header__button">
-                    <button class="button is-bordered is-light" data-modal="callback">Заказать звонок</button>
+                    <button class="button is-bordered is-light" data-modal="callback"><?= Yii::$app->settings->get('Текст', 'заказ_звонка') ?></button>
                 </div>
             </div>
         </div>

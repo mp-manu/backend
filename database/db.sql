@@ -725,7 +725,7 @@ CREATE TABLE `login_details` (
   PRIMARY KEY (`login_detail_id`),
   KEY `login_user_id` (`login_user_id`),
   CONSTRAINT `login_details_ibfk_1` FOREIGN KEY (`login_user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 /*Data for the table `login_details` */
 
@@ -749,7 +749,9 @@ insert  into `login_details`(`login_detail_id`,`login_user_id`,`login_status`,`l
 (17,22,1,'2019-10-17 11:24:51',NULL,'127.0.0.1'),
 (18,22,1,'2019-10-17 11:26:14',NULL,'127.0.0.1'),
 (19,22,1,'2019-10-18 13:37:23',NULL,'127.0.0.1'),
-(20,22,1,'2019-10-18 15:42:34',NULL,'127.0.0.1');
+(20,22,1,'2019-10-18 15:42:34',NULL,'127.0.0.1'),
+(21,22,1,'2019-10-18 20:06:04',NULL,'127.0.0.1'),
+(22,22,1,'2019-10-18 20:36:01',NULL,'127.0.0.1');
 
 /*Table structure for table `migration` */
 
@@ -1176,7 +1178,7 @@ insert  into `service_info`(`id`,`service_id`,`key`,`val`,`img`,`description`,`s
 (2,1,'когда нужно штамповка','Когда вам нужна штамповка',NULL,'Нужно быстро сделать много деталей по чертежам. У вас есть чертежи. Толщина детали в широкой части не более 5 мм. Вам нужны детали сложных форм с высокой точностью размеров.',1),
 (3,1,'оборудование','Наше оборудование',NULL,'Пресса кривошипные с усилием от 6 до 100 тонн. Пресс ножницы комбинированные. Ножницы гильотинные до 12 мм.',1),
 (4,2,'advantage','Преимущества способа',NULL,'',1),
-(5,2,'advantage','Преимущества способа',NULL,'awdawda',1),
+(5,2,'advantage','Преимущества способа',NULL,'awdawda',0),
 (6,2,'advantage','Преимущества способа',NULL,'',1),
 (7,2,'advantage','Преимущества способа',NULL,'',1),
 (8,2,'advantage','Преимущества способа',NULL,'dawdawdwa',1),
@@ -1231,7 +1233,7 @@ CREATE TABLE `setting` (
   `created_at` int(11) NOT NULL,
   `updated_at` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 /*Data for the table `setting` */
 
@@ -1260,7 +1262,17 @@ insert  into `setting`(`id`,`type`,`section`,`key`,`value`,`status`,`description
 (23,'string','Главная','дверные_петли','Дверные петли',1,'Дверные петли',1571326675,1571326675),
 (24,'string','Главная','проводные_короба','Проводные короба',1,'Проводные короба',1571326786,1571326786),
 (25,'string','Главная','По вышему чертежу','По вышему чертежу...',1,'По вышему чертежу...',1571327169,1571327169),
-(26,'string','Главная','главТехник','Главный техник',1,'Главный техник',1571328556,1571328556);
+(26,'string','Главная','главТехник','Главный техник',1,'Главный техник',1571328556,1571328556),
+(27,'string','Сайт','privacy','Политика конфиденциальности',1,'Политика конфиденциальности',1571411410,1571411410),
+(28,'string','Сайт','call_me','Перезвоните мне в течении 20 минут',1,'',1571411512,1571411512),
+(29,'string','Сайт','заказывая_звонок','Заказывая обратный звонок, даю согласие на обработку',1,'',1571411584,1571411584),
+(30,'string','Текст','заказ_звонка','Заказать звонок',1,'Заказать звонок',1571411796,1571411796),
+(31,'string','Текст','отправ','Отправить',1,'',1571411930,1571411930),
+(32,'string','Текст','personal_data','персональных данных',1,'персональных данных',1571411986,1571411986),
+(33,'string','Текст','order_draw','Заказать по чертежу',1,'Заказать по чертежу',1571412105,1571412105),
+(34,'string','Текст','заказать_звонок','Заказать обратный вонок',1,'Заказать обратный звонок',1571412349,1571412349),
+(35,'string','Текст','наш_техник','Наш техник скоро свяжется с вами,<br>и Вы зададите ему любые вопросы',1,'Наш техник скоро свяжется с вами,<br>и Вы зададите ему любые вопросы',1571412527,1571412527),
+(36,'string','Текст','позваните_нам','Позвоните нам',1,'Позвоните нам',1571412767,1571412767);
 
 /*Table structure for table `slider` */
 
@@ -1317,7 +1329,7 @@ CREATE TABLE `user` (
 
 insert  into `user`(`user_id`,`username`,`user_password`,`email`,`user_type`,`is_block`,`avatar`,`created_at`,`created_by`,`updated_at`,`updated_by`,`secret_key`,`auth_key`,`session_id`) values 
 (1,'admin','f6fdffe48c908deb0f4c3bd36c032e72','admin@polytech.tj','E',0,'std7.jpg','2019-10-12 14:32:54',1,'2015-05-27 15:56:35',1,NULL,NULL,'eu1466tvbac35cfb3htftl9rorp8lkre'),
-(22,'admin2','af8eb328301d219cfd1d50e6c6a48f58',NULL,'A',0,'std5.jpg','2019-10-12 13:45:41',1,NULL,NULL,NULL,NULL,'t1969oje4v7lpbh7gtv8blsq3iv6trrt'),
+(22,'admin2','af8eb328301d219cfd1d50e6c6a48f58',NULL,'A',0,'std5.jpg','2019-10-12 13:45:41',1,NULL,NULL,NULL,NULL,'f51rgrjqbbgmsjtm7tt1sv76o48lja10'),
 (23,'admin3','7169390683d2b222ba778ca6374b59d3',NULL,'A',1,'std7.jpg','2019-10-12 13:52:10',1,NULL,NULL,NULL,NULL,'ak5h7tnec99b69cipd80ralc0p2fa23l'),
 (25,'admin4','dfa5f43cb476ef890a83010f0da7c6b0',NULL,'A',1,'std3.jpg','2019-10-12 13:57:57',1,NULL,NULL,NULL,NULL,'2pqp9rissts870sj830jkor0jntj15h9'),
 (26,'admin6','b48d62f30f50c2c191ab949186c532d3',NULL,'A',1,'std6.jpg','2019-10-12 14:05:01',1,NULL,NULL,NULL,NULL,'90c8pfqa6cchpcofouj9qsl1hvngu3f3');
