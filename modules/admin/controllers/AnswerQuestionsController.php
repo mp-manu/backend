@@ -15,25 +15,7 @@ use yii\filters\VerbFilter;
  */
 class AnswerQuestionsController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
-    /**
-     * Lists all AnswerQuestions models.
-     * @return mixed
-     */
     public function actionIndex()
     {
         $searchModel = new AnswerQuestionsSearch();
@@ -70,13 +52,12 @@ class AnswerQuestionsController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if($model->save()){
                 Yii::$app->session->setFlash('creatingSuccess', 'Запись успешно сохранено!');
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['/admin/services/edit', 'id' => $model->service_id]);
             }else{
                 Yii::$app->session->setFlash('creatingError', 'Не удается сохранить запись!');
-                return $this->redirect(['create']);
+                return $this->redirect(['/admin/services/edit', 'id' => $model->service_id]);
             }
 
-            return $this->redirect(['view', 'id' => $model->id]);
         }
         $services = Services::getServices();
         return $this->render('create', [
@@ -99,10 +80,10 @@ class AnswerQuestionsController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if($model->save()){
                 Yii::$app->session->setFlash('creatingSuccess', 'Запись успешно сохранено!');
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['/admin/services/edit', 'id' => $model->service_id]);
             }else{
                 Yii::$app->session->setFlash('creatingError', 'Не удается сохранить запись!');
-                return $this->redirect(['create']);
+                return $this->redirect(['/admin/services/edit', 'id' => $model->service_id]);
             }
         }
         $services = Services::getServices();
@@ -122,9 +103,11 @@ class AnswerQuestionsController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+         $model = $this->findModel($id);
+         $service_id = $model->service_id;
+         $model->delete();
+        return $this->redirect(['/admin/services/edit', 'id' => $service_id]);
     }
 
     /**

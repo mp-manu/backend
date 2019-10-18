@@ -18,6 +18,11 @@ use yii\widgets\ActiveForm;
                     <header><?= $this->title ?></header>
                 </div>
                 <div class="card-body">
+                   <?php if (!empty($model->img)): ?>
+                       <div class="col-md-12 text-center">
+                           <img src="<?= Yii::getAlias('@uploads') . '/results/' . $model->img ?>" width="250">
+                       </div>
+                   <?php endif; ?>
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">

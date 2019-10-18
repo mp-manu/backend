@@ -15,25 +15,7 @@ use yii\web\UploadedFile;
  */
 class WorkResultsController extends Controller
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
-    /**
-     * Lists all WorkResults models.
-     * @return mixed
-     */
     public function actionIndex()
     {
         $searchModel = new WorkResultsSearch();
@@ -84,12 +66,11 @@ class WorkResultsController extends Controller
 
             if ($model->save()) {
                 Yii::$app->session->setFlash('creatingSuccess', 'Запись успешно сохранено!');
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['/admin/services/edit', 'id' => $model->service_id]);
             } else {
                 Yii::$app->session->setFlash('creatingError', 'Не удается сохранить запись!');
-                return $this->redirect(['create']);
+                return $this->redirect(['/admin/services/edit', 'id' => $model->service_id]);
             }
-            return $this->redirect(['view', 'id' => $model->id]);
         }
 
         return $this->render('create', [
@@ -130,12 +111,12 @@ class WorkResultsController extends Controller
 
             if ($model->save()) {
                 Yii::$app->session->setFlash('creatingSuccess', 'Запись успешно сохранено!');
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['/admin/services/edit', 'id' => $model->service_id]);
             } else {
                 Yii::$app->session->setFlash('creatingError', 'Не удается сохранить запись!');
                 return $this->redirect(['create']);
             }
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['/admin/services/edit', 'id' => $model->service_id]);
         }
 
         return $this->render('update', [
@@ -152,9 +133,10 @@ class WorkResultsController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
-        return $this->redirect(['index']);
+       $model = $this->findModel($id);
+       $service_id = $model->service_id;
+       $model->delete();
+       return $this->redirect(['/admin/services/edit', 'id' => $service_id]);
     }
 
     /**

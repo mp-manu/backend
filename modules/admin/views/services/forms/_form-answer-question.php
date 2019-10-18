@@ -12,10 +12,10 @@ $model->service_id = $service_id['id'];
 ?>
 
 <div class="answer-questions-form">
-   <?php $form = ActiveForm::begin(); ?>
+   <?php $form = ActiveForm::begin(['action' => '/admin/answer-questions/create']); ?>
     <div class="col-lg-6 ">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-           <?= $form->field($model, 'question')->textarea(['rows' => 4]) ?>
+           <?= $form->field($model, 'question')->textarea(['rows' => 4, 'required' => true, 'id'=>'drop']) ?>
         </div>
     </div>
     <div class="col-lg-6 ">

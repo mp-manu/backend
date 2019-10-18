@@ -8,14 +8,15 @@ $model->service_id = $service_id['id'];
 ?>
 
 <div class="service-info-form">
-    <div class="col-lg-12">
-        <p>
-           <?= Html::button('Добавить', ['class' => 'btn btn-success', 'id' =>'question-form']) ?>
-        </p>
-    </div>
-   <?php if (!empty($serviceInfoData) && count($serviceInfoData) > 1):  ?>
-   <div class="row">
+
+   <?php if (!empty($serviceInfoData) && count($serviceInfoData) > 0):  ?>
        <div class="col-lg-12">
+           <p>
+              <?= Html::button('Добавить', ['class' => 'btn btn-success', 'id' =>'info-form']) ?>
+           </p>
+       </div>
+   <div class="row">
+       <div class="col-lg-12"  id="frm-content-info">
            <div class="table-responsive">
                <table class="table table-striped custom-table table-hover">
                    <thead>
@@ -45,6 +46,10 @@ $model->service_id = $service_id['id'];
                                       <i class="fa fa-times" id="istatus<?= $info['id'] ?>"></i>
                                   </a>
                               <?php endif; ?>
+                               <a class="btn btn-danger btn-xs"
+                                  href="/admin/service-info/delete?id=<?= $info['id'] ?>" data-confirm="Вы уверены что хотите удалить эту информацию?">
+                                   <i class="fa fa-trash-o" title="Удалить"></i>
+                               </a>
                                <a class="btn btn-primary btn-xs"
                                   href="/admin/service-info/update?id=<?= $info['id'] ?>">
                                    <i class="fa fa-pencil" title="Изменить"></i>

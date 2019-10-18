@@ -7,6 +7,8 @@
  */
 
 use yii\bootstrap\Tabs;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 
 $this->title = 'Редактировать услугу';
 $this->params['breadcrumbs'][] = ['label' => 'Все услуги', 'url' => ['index']];
@@ -18,6 +20,13 @@ $display = (count($services) > 0 || !empty($services)) ? true : false;
 <div class="row">
     <div class="col-lg-12">
 <!--        <h2>--><?//= $this->title ?><!--</h2>-->
+       <?php if (\Yii::$app->session->hasFlash('creatingSuccess')) : ?>
+           <div class="alert alert-success alert-dismissible" style="margin-top: 5%;">
+               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                   <span aria-hidden="true">&times;</span></button>
+              <?php echo \Yii::$app->session->getFlash('creatingSuccess'); ?>
+           </div>
+       <?php endif; ?>
        <?php if (\Yii::$app->session->hasFlash('success')) : ?>
            <div class="alert alert-success alert-dismissible" style="margin-top: 5%;">
                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -35,15 +44,20 @@ $display = (count($services) > 0 || !empty($services)) ? true : false;
     </div>
     <div class="col-lg-12">
         <div class="card-box">
-            <div class="card-head">
+            <div class="card-head" id="service" data-text="<?= $service_id['id']  ?>">
+
                 <header>
+                    <form action="/admin/services/edit" method="get">
                    <?php if (!empty($service_id['name'])): ?>
-                       Выбранная УСЛУГА: <span
-                               style="color: #0cc745"><?= $service_id['name'] ?></span>
+                       Выбранная УСЛУГА:
+                      <?= Html::dropDownList('id', $service_id['id'],
+                          ArrayHelper::map($services, 'id', 'name'), ['onchange' => 'this.form.submit()']) ?>
                    <?php endif; ?>
+                    </form>
                 </header>
             </div>
             <div class="card-body">
+
                <?php
                echo Tabs::widget([
                    'items' => [

@@ -9,9 +9,8 @@
 use yii\bootstrap\ActiveForm;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-
 ?>
-<?php if (!empty($answerQuestionsData) && count($answerQuestionsData) > 1): ?>
+<?php if (!empty($answerQuestionsData) && count($answerQuestionsData) > 0): ?>
     <div class="col-lg-12">
         <p>
            <?= Html::button('Добавить', ['class' => 'btn btn-success', 'id' =>'question-form']) ?>
@@ -52,6 +51,10 @@ use yii\helpers\Html;
                                    <i class="fa fa-times" id="status<?= $question['id'] ?>"></i>
                                </a>
                            <?php endif; ?>
+                            <a class="btn btn-danger btn-xs"
+                               href="/admin/answer-questions/delete?id=<?= $question['id'] ?>" data-confirm="Вы уверены что хотите удалить этот вопрос?">
+                                <i class="fa fa-trash-o" title="Удалить"></i>
+                            </a>
                             <a class="btn btn-primary btn-xs"
                                href="/admin/answer-questions/update?id=<?= $question['id'] ?>">
                                 <i class="fa fa-pencil" id="status<?= $question['id'] ?>" title="Изменить"></i>

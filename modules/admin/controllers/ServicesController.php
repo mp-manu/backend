@@ -133,7 +133,6 @@ class ServicesController extends Controller
 
    public function actionAdd($id = null)
    {
-
       $id = Html::encode($id);
       if (!empty($id)) {
          $service_id = Services::find()->where(['id' => $id])->asArray()->one();
@@ -148,7 +147,7 @@ class ServicesController extends Controller
       $services = Services::find()->where(['status' => 1])->asArray()->all();
 
       /**************форма добавление услуг*********************/
-      if ($serviceModel->load(Yii::$app->request->post())) {
+      if ($serviceModel->load(Yii::$app->request->post())){
          $serviceImage = UploadedFile::getInstance($serviceModel, 'img');
          $maxId = Services::find()->max('id');
          if ($maxId == 0) {
@@ -169,10 +168,10 @@ class ServicesController extends Controller
          $serviceModel->alias = $slug->slugify($serviceModel->alias);
          if ($serviceModel->save()) {
             Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
-            return $this->redirect(['add', 'id' => $serviceModel->id]);
+            return $this->redirect(['edit', 'id' => $serviceModel->id]);
          } else {
             Yii::$app->session->setFlash('error', 'Не удается сохранить запись!');
-            return $this->redirect(['add', 'id' => $serviceModel->id]);
+            return $this->redirect(['edit', 'id' => $serviceModel->id]);
          }
       }
       /////////////////////Добавление информации об услуги//////////////////////////////////////
@@ -182,10 +181,10 @@ class ServicesController extends Controller
 
          if ($serviceInfoModel->save()) {
             Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
-            return $this->redirect(['add', 'id' => $service_id['id']]);
+            return $this->redirect(['edit', 'id' => $service_id['id']]);
          } else {
             Yii::$app->session->setFlash('error', 'Не удается сохранить запись!');
-            return $this->redirect(['add', 'id' => $service_id['id']]);
+            return $this->redirect(['edit', 'id' => $service_id['id']]);
          }
       }
 
@@ -195,10 +194,10 @@ class ServicesController extends Controller
          $service_id['id'] = (empty($service_id['id'])) ? $answerQuestions->service_id : $service_id['id'];
          if ($answerQuestions->save()) {
             Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
-            return $this->redirect(['add', 'id' => $service_id['id']]);
+            return $this->redirect(['edit', 'id' => $service_id['id']]);
          } else {
             Yii::$app->session->setFlash('error', 'Не удается сохранить запись!');
-            return $this->redirect(['add', 'id' => $service_id['id']]);
+            return $this->redirect(['edit', 'id' => $service_id['id']]);
          }
       }
 
@@ -220,10 +219,10 @@ class ServicesController extends Controller
          $service_id['id'] = (empty($service_id['id'])) ? $workResults->service_id : $service_id['id'];
          if ($workProccess->save()) {
             Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
-            return $this->redirect(['add', 'id' => $service_id['id']]);
+            return $this->redirect(['edit', 'id' => $service_id['id']]);
          } else {
             Yii::$app->session->setFlash('error', 'Не удается сохранить запись!');
-            return $this->redirect(['add', 'id' => $service_id['id']]);
+            return $this->redirect(['edit', 'id' => $service_id['id']]);
          }
       }
 
@@ -245,10 +244,10 @@ class ServicesController extends Controller
          $service_id['id'] = (empty($service_id['id'])) ? $workResults->service_id : $service_id['id'];
          if ($workResults->save()) {
             Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
-            return $this->redirect(['add', 'id' => $service_id['id']]);
+            return $this->redirect(['edit', 'id' => $service_id['id']]);
          } else {
             Yii::$app->session->setFlash('error', 'Не удается сохранить запись!');
-            return $this->redirect(['add', 'id' => $service_id['id']]);
+            return $this->redirect(['edit', 'id' => $service_id['id']]);
          }
       }
 
@@ -262,11 +261,11 @@ class ServicesController extends Controller
          if ($priceList->save()) {
             Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
             $service_id['id'] = (empty($service_id['id'])) ? $priceList->service_id : $service_id['id'];
-            return $this->redirect(['add', 'id' => $service_id['id']]);
+            return $this->redirect(['edit', 'id' => $service_id['id']]);
          } else {
             Yii::$app->session->setFlash('error', 'Не удается сохранить запись!');
             $service_id['id'] = (empty($service_id['id'])) ? $priceList->service_id : $service_id['id'];
-            return $this->redirect(['add', 'id' => $service_id['id']]);
+            return $this->redirect(['edit', 'id' => $service_id['id']]);
          }
       }
 
@@ -348,12 +347,100 @@ class ServicesController extends Controller
          $service_id['id'] = (empty($service_id['id'])) ? $serviceInfoModel->service_id : $service_id['id'];
          if ($serviceInfoModel->save()) {
             Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
-            return $this->redirect(['add', 'id' => $service_id['id']]);
+            return $this->redirect(['edit', 'id' => $service_id['id']]);
          } else {
             Yii::$app->session->setFlash('error', 'Не удается сохранить запись!');
-            return $this->redirect(['add', 'id' => $service_id['id']]);
+            return $this->redirect(['edit', 'id' => $service_id['id']]);
          }
       }
+
+
+      /////////////////////Добавление вопросов и ответов//////////////////////////////////////
+
+      if ($answerQuestions->load(Yii::$app->request->post())) {
+         $service_id['id'] = (empty($service_id['id'])) ? $answerQuestions->service_id : $service_id['id'];
+         if ($answerQuestions->save()) {
+            Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
+            return $this->redirect(['edit', 'id' => $service_id['id']]);
+         } else {
+            Yii::$app->session->setFlash('error', 'Не удается сохранить запись!');
+            return $this->redirect(['edit', 'id' => $service_id['id']]);
+         }
+      }
+
+      /////////////////////Добавление процессов работы//////////////////////////////////////
+      if ($workProccess->load(Yii::$app->request->post())) {
+         $max_id = WorkProccess::find()->max('id');
+         if ($max_id == 0) {
+            $max_id = 1;
+         } else {
+            $max_id += 1;
+         }
+         $proccessImage = UploadedFile::getInstance($workProccess, 'img');
+         if (!empty($proccessImage)) {
+            $path = Yii::getAlias('@uploadsroot');
+            $fileName = 'work-proccess_' . $max_id . '.' . $proccessImage->extension;
+            $proccessImage->saveAs($path . '/proccess/' . $fileName);
+            $workProccess->img = $fileName;
+         }
+         $service_id['id'] = (empty($service_id['id'])) ? $workResults->service_id : $service_id['id'];
+         if ($workProccess->save()) {
+            Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
+            return $this->redirect(['edit', 'id' => $service_id['id']]);
+         } else {
+            Yii::$app->session->setFlash('error', 'Не удается сохранить запись!');
+            return $this->redirect(['edit', 'id' => $service_id['id']]);
+         }
+      }
+
+
+      /////////////////////Добавление результатов работ//////////////////////////////////////
+      if ($workResults->load(Yii::$app->request->post())) {
+         $max_id = WorkResults::find()->max('id');
+         if ($max_id == 0) {
+            $max_id = 1;
+         } else {
+            $max_id += 1;
+         }
+         $resultImage = UploadedFile::getInstance($workResults, 'img');
+         if (!empty($resultImage)) {
+            $path = Yii::getAlias('@uploadsroot');
+            $fileName = 'work-result_' . $max_id . '.' . $resultImage->extension;
+            $resultImage->saveAs($path . '/results/' . $fileName);
+            $workResults->img = $fileName;
+         }
+         $service_id['id'] = (empty($service_id['id'])) ? $workResults->service_id : $service_id['id'];
+         if ($workResults->save()) {
+            Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
+            return $this->redirect(['edit', 'id' => $service_id['id']]);
+         } else {
+            Yii::$app->session->setFlash('error', 'Не удается сохранить запись!');
+            return $this->redirect(['edit', 'id' => $service_id['id']]);
+         }
+      }
+
+      /*********************************************************************************************
+       ****************************PRICELIST SAVE FORM***********************************************
+       *********************************************************************************************/
+
+
+      if ($priceList->load(Yii::$app->request->post())) {
+
+         $priceList->description = (empty($priceList->description)) ? $priceList->signature : $priceList->description;
+         if ($priceList->save()) {
+            Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
+            $service_id['id'] = (empty($service_id['id'])) ? $priceList->service_id : $service_id['id'];
+            return $this->redirect(['edit', 'id' => $service_id['id']]);
+         } else {
+            Yii::$app->session->setFlash('error', 'Не удается сохранить запись!');
+            $service_id['id'] = (empty($service_id['id'])) ? $priceList->service_id : $service_id['id'];
+            return $this->redirect(['edit', 'id' => $service_id['id']]);
+         }
+      }
+
+
+
+
 
 
       return $this->render('edit', [
@@ -437,6 +524,60 @@ class ServicesController extends Controller
    {
       $model = new AnswerQuestions();
       $services = Services::getServices();
-      return $this->renderPartial('forms/answer-question', ['model' => $model, 'services' => $services]);
+      $id = Yii::$app->request->post('status');
+      $service_id['id'] = $id;
+      return $this->renderPartial('forms/_form-answer-question', ['model' => $model, 'services' => $services, 'service_id' => $service_id]);
    }
+
+   public function actionGetInfoForm()
+   {
+      $model = new ServiceInfo();
+      $services = Services::getServices();
+      $id = Yii::$app->request->post('status');
+      $service_id['id'] = $id;
+      return $this->renderPartial('forms/_form-service-info', ['model' => $model, 'services' => $services, 'service_id' => $service_id]);
+   }
+
+   public function actionGetProccessForm()
+   {
+      $model = new WorkProccess();
+      $services = Services::getServices();
+      $id = Yii::$app->request->post('status');
+      $service_id['id'] = $id;
+      return $this->renderPartial('forms/_form-work-proccess', ['model' => $model, 'services' => $services, 'service_id' => $service_id]);
+   }
+
+   public function actionGetResultForm()
+   {
+      $model = new WorkResults();
+      $services = Services::getServices();
+      $id = Yii::$app->request->post('status');
+      $service_id['id'] = $id;
+      return $this->renderPartial('forms/_form-work-results', ['model' => $model, 'services' => $services, 'service_id' => $service_id]);
+   }
+
+   public function actionGetPriceForm()
+   {
+      $model = new PriceList();
+      $services = Services::getServices();
+      $id = Yii::$app->request->post('status');
+      $service_id['id'] = $id;
+      return $this->renderPartial('forms/_form-price-list', ['model' => $model, 'services' => $services, 'service_id' => $service_id]);
+   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

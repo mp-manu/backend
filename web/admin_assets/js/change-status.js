@@ -133,27 +133,27 @@ function changeStatusInfo(el){
 
 
 $("#info-form").on( "click", function() {
-    var status = 'question-form';
-    var content = document.getElementById("frm-content");
+    var content = document.getElementById("frm-content-info");
+    var service_id = $('#service').data('text');
     $.ajax({
         type: "POST",
         url: '/admin/services/get-info-form',
-        data: {status: status},
+        data: {status: service_id},
         success: function(response) {
             content.innerHTML = response;
-            $("#question-form").hide();
+            $("#info-form").hide();
         }
 
     });
 });
 
 $("#question-form").on( "click", function() {
-    var status = 'question-form';
     var content = document.getElementById("frm-content");
+    var service_id = $('#service').data('text');
     $.ajax({
         type: "POST",
         url: '/admin/services/get-question-form',
-        data: {status: status},
+        data: {status: service_id},
         success: function(response) {
             content.innerHTML = response;
             $("#question-form").hide();
@@ -165,45 +165,49 @@ $("#question-form").on( "click", function() {
 
 
 $("#proccess-form").on( "click", function() {
-    var status = 'question-form';
-    var content = document.getElementById("frm-content");
+
+    var content = document.getElementById("frm-content-proccess");
+    var service_id = $('#service').data('text');
     $.ajax({
         type: "POST",
-        url: '/admin/services/get-question-form',
-        data: {status: status},
+        url: '/admin/services/get-proccess-form',
+        data: {status: service_id},
         success: function(response) {
             content.innerHTML = response;
-            $("#question-form").hide();
+            $("#proccess-form").hide();
+            $("#drop").val(service_id);
         }
 
     });
 });
 
 $("#result-form").on( "click", function() {
-    var status = 'question-form';
-    var content = document.getElementById("frm-content");
+    var content = document.getElementById("frm-content-result");
+    var service_id = $('#service').data('text');
     $.ajax({
         type: "POST",
-        url: '/admin/services/get-question-form',
-        data: {status: status},
+        url: '/admin/services/get-result-form',
+        data: {status: service_id},
         success: function(response) {
             content.innerHTML = response;
-            $("#question-form").hide();
+            $("#result-form").hide();
+            $("#drop").val(service_id);
         }
 
     });
 });
 
-$("#price-list").on( "click", function() {
-    var status = 'question-form';
-    var content = document.getElementById("frm-content");
+$("#price-form").on( "click", function() {
+    var content = document.getElementById("frm-content-price");
+    var service_id = $('#service').data('text');
     $.ajax({
         type: "POST",
-        url: '/admin/services/get-question-form',
-        data: {status: status},
+        url: '/admin/services/get-price-form',
+        data: {status: service_id},
         success: function(response) {
             content.innerHTML = response;
-            $("#question-form").hide();
+            $("#price-form").hide();
+            $("#drop-price").val(service_id);
         }
 
     });

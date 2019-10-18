@@ -1,33 +1,27 @@
 <?php
 
-use app\modules\admin\models\Services;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\modules\admin\models\Services */
+/* @var $model app\modules\admin\models\WorkResults */
 /* @var $form yii\widgets\ActiveForm */
+$model->service_id = $service_id['id'];
+
 ?>
 
-<div class="services-form">
-    <?php if(!empty($service_id['name'])): ?>
-<!--        <h3 style="text-align: center">--><?//= $service_id['name'] ?><!--</h3>-->
-    <?php else: ?>
-<!--        <h3 style="text-align: center">Добавить услугу</h3>-->
-    <?php endif; ?>
-   <?php if (!empty($model->img)): ?>
-       <div class="col-md-12 text-center">
-           <img src="<?= Yii::getAlias('@uploads') . '/services/' . $model->img ?>" width="350">
-       </div>
-   <?php endif; ?>
-    <div class="col-md-12">
-       <?php $form = ActiveForm::begin(); ?>
+<div class="work-results-form">
+    <div class="col-sm-12">
+        <!--        <h3 style="text-align: center">Добавить результаты работ</h3>-->
+       <?php $form = ActiveForm::begin(['action' => '/admin/work-results/create']); ?>
         <div class="col-lg-6">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-               <?= $form->field($model, 'parent_id')
+               <?= $form->field($model, 'service_id')
                    ->dropDownList(ArrayHelper::map($services, 'id', 'name'), [
-                       'prompt' => 'Выбрать категорию'
+                       'prompt' => 'Выбрать услугу',
+                       'required' => true,
+                        'id'=>'drop'
                    ]) ?>
             </div>
         </div>
@@ -38,12 +32,22 @@ use yii\widgets\ActiveForm;
         </div>
         <div class="col-lg-6">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-               <?= $form->field($model, 'alias')->textarea(['rows' => 3]) ?>
+               <?= $form->field($model, 'deadline')->textInput(['maxlength' => true]) ?>
             </div>
         </div>
         <div class="col-lg-6">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-               <?= $form->field($model, 'description')->textarea(['rows' => 3]) ?>
+               <?= $form->field($model, 'price')->textInput() ?>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+               <?= $form->field($model, 'tooked_metall')->textInput(['maxlength' => true]) ?>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+               <?= $form->field($model, 'description')->textInput(['maxlength' => true]) ?>
             </div>
         </div>
         <div class="col-lg-6">

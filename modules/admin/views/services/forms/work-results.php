@@ -12,14 +12,14 @@ $model->service_id = $service_id['id'];
 ?>
 
 <div class="work-results-form">
-    <div class="col-lg-12">
-        <p>
-           <?= Html::button('Добавить', ['class' => 'btn btn-success', 'id' => 'question-form']) ?>
-        </p>
-    </div>
-   <?php if (!empty($workResultsData) && count($workResultsData) > 1): ?>
+   <?php if (!empty($workResultsData) && count($workResultsData) > 0): ?>
        <div class="col-lg-12">
-           <div class="table-responsive">
+           <p>
+              <?= Html::button('Добавить', ['class' => 'btn btn-success', 'id' => 'result-form']) ?>
+           </p>
+       </div>
+       <div class="col-lg-12">
+           <div class="table-responsive" id="frm-content-result">
                <table class="table table-striped custom-table table-hover">
                    <thead>
                    <tr>
@@ -59,10 +59,15 @@ $model->service_id = $service_id['id'];
                                       <i class="fa fa-times" id="rstatus<?= $result['id'] ?>"></i>
                                   </a>
                               <?php endif; ?>
+                               <a class="btn btn-danger btn-xs"
+                                  href="/admin/work-results/delete?id=<?= $result['id'] ?>" data-confirm="Вы уверены что хотите удалить этот результат работы?">
+                                   <i class="fa fa-trash-o" title="Удалить"></i>
+                               </a>
                                <a class="btn btn-primary btn-xs"
                                   href="/admin/work-results/update?id=<?= $result['id'] ?>">
                                    <i class="fa fa-pencil" title="Изменить"></i>
                                </a>
+
                            </td>
                        </tr>
                    <?php endforeach; ?>
