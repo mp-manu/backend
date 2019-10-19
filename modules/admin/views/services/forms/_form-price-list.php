@@ -16,15 +16,6 @@ $model->service_id = $service_id['id'];
        <?php $form = ActiveForm::begin(['action' => '/admin/price-list/create']); ?>
         <div class="col-lg-6 p-t-3">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-               <?= $form->field($model, 'service_id')
-                   ->dropDownList(ArrayHelper::map($services, 'id', 'name'), [
-                       'prompt' => 'Выбрать услугу',
-                       'required' => true,
-                   ]) ?>
-            </div>
-        </div>
-        <div class="col-lg-6 p-t-3">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
                <?= $form->field($model, 'signature')->textInput(['maxlength' => true]) ?>
             </div>
         </div>

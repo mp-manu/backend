@@ -507,7 +507,7 @@ echo $this->render('/page/banners/banner', ['service' => $service]);
     <!---------------END SECTION Виды под услуг виды гибки метала--------------------->
 
     <!---------------SECTION PRICELIST МАТРИЦА Прайслистов --------------------->
-   <?php if(!empty($activeServicesId)): ?>
+   <?php if(!empty($activeServicesId) && !empty($data)): ?>
        <div class="content__section is-pb110 is-pt0">
            <section class="section">
                <div class="container">

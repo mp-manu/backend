@@ -6,8 +6,7 @@ use yii\helpers\Html;
 /* @var $model app\modules\admin\models\WorkProccess */
 
 $this->title = 'Обновить процесс работы: ' . $model->title;
-$this->params['breadcrumbs'][] = ['label' => 'Процесс работы', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => 'Редактирование услуги', 'url' => ['/admin/services/edit', 'id' => $model->service_id]];
 $this->params['breadcrumbs'][] = 'Обновить';
 ?>
 <?= $this->render('/layouts/page-bar') ?>

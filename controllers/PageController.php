@@ -60,8 +60,8 @@ class PageController extends Controller
 
 
       $activeServicesId = array();
+      $data = array();
       if(!empty($priceListTable)){
-         $data = array();
          foreach ($priceListTable as $list) {
             $activeServicesId[$list['sid']] = $list['sid'];
             $data['name'][$list['sid']] = $list['name'];
@@ -70,7 +70,6 @@ class PageController extends Controller
             $data['price'][$list['length']][$list['depth']][$list['sid']] = $list['price'];
          }
       }
-
 
       return $this->render('service', [
           'service' => $service,
@@ -82,7 +81,6 @@ class PageController extends Controller
           'activeServicesId' => $activeServicesId,
           'priceList' => $priceList,
           'data' => $data,
-
       ]);
    }
 

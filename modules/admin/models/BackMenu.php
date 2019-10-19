@@ -94,11 +94,12 @@ class BackMenu extends \yii\db\ActiveRecord
                             <span class="title">Услуги</span><span class="arrow"></span></a>';
                   $menu .= '<ul class="sub-menu">';
                   $menu .= '<li class="nav-item">';
+                  $menu .= '<a href="/admin/services/add" class="nav-link nav-toggle">';
+                  $menu .= '<span class="title">Добавить</span></a></li>';
+                  $menu .= '<li class="nav-item">';
                   $menu .= '<a href="/admin/services/index" class="nav-link nav-toggle">';
                   $menu .= '<span class="title">Все услуги</span></a></li>';
-                  $menu .= '<li class="nav-item">';
-                  $menu .= '<a href="/admin/services/add" class="nav-link nav-toggle">';
-                  $menu .= '<span class="title">Добавить услугу</span></a></li>';
+
                   $menu .= '<li class="nav-item">';
                   foreach ($service as $serv) {
                      $menu .= '<li class="nav-item">';

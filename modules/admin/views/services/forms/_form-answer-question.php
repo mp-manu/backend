@@ -13,24 +13,16 @@ $model->service_id = $service_id['id'];
 
 <div class="answer-questions-form">
    <?php $form = ActiveForm::begin(['action' => '/admin/answer-questions/create']); ?>
-    <div class="col-lg-6 ">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-           <?= $form->field($model, 'question')->textarea(['rows' => 4, 'required' => true, 'id'=>'drop']) ?>
+        <div class="col-lg-6 ">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+               <?= $form->field($model, 'question')->textarea(['rows' => 4, 'required' => true, 'id' => 'drop']) ?>
+            </div>
         </div>
-    </div>
-    <div class="col-lg-6 ">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-           <?= $form->field($model, 'answer')->textarea(['maxlength' => true, 'rows' => 4]) ?>
+        <div class="col-lg-6 ">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+               <?= $form->field($model, 'answer')->textarea(['maxlength' => true, 'rows' => 4]) ?>
+            </div>
         </div>
-    </div>
-    <div class="col-lg-6 ">
-        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-           <?= $form->field($model, 'service_id')
-               ->dropDownList(ArrayHelper::map($services, 'id', 'name'), [
-                   'prompt' => 'Выбрать категорию'
-               ]) ?>
-        </div>
-    </div>
     <div class="col-lg-6 ">
         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
            <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>

@@ -67,7 +67,6 @@ use yii\helpers\Html;
         </div>
     </div>
 <?php else: ?>
-
     <div class="answer-questions-form">
        <?php $form = ActiveForm::begin(); ?>
         <div class="col-lg-6 ">

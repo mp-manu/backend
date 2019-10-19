@@ -74,7 +74,7 @@ $display = (count($services) > 0 || !empty($services)) ? true : false;
                        [
                            'label' => 'Информация об услуге',
                            'visible' => $display,
-                           'content' => $this->render('forms/service-info', [
+                           'content' => $this->render('edit-forms/service-info', [
                                'model' => $serviceInfoModel,
                                'serviceInfoData' => $serviceInfoData,
                                'services' => $services,
@@ -84,7 +84,7 @@ $display = (count($services) > 0 || !empty($services)) ? true : false;
                        [
                            'label' => 'Вопросы и ответы',
                            'visible' => $display,
-                           'content' => $this->render('forms/_edit-answer-question', [
+                           'content' => $this->render('edit-forms/_edit-answer-question', [
                                'model' => $answerQuestions,
                                'answerQuestionsData' => $answerQuestionsData,
                                'services' => $services,
@@ -94,7 +94,7 @@ $display = (count($services) > 0 || !empty($services)) ? true : false;
                        [
                            'label' => 'Процесс работы',
                            'visible' => $display,
-                           'content' => $this->render('forms/work-proccess', [
+                           'content' => $this->render('edit-forms/work-proccess', [
                                'model' => $workProccess,
                                'workProccessData' => $workProccessData,
                                'services' => $services,
@@ -104,7 +104,7 @@ $display = (count($services) > 0 || !empty($services)) ? true : false;
                        [
                            'label' => 'Результат работы',
                            'visible' => $display,
-                           'content' => $this->render('forms/work-results', [
+                           'content' => $this->render('edit-forms/work-results', [
                                'model' => $workResults,
                                'workResultsData' => $workResultsData,
                                'services' => $services,
@@ -114,7 +114,7 @@ $display = (count($services) > 0 || !empty($services)) ? true : false;
                        [
                            'label' => 'Прайс лист',
                            'visible' => $display,
-                           'content' => $this->render('forms/price-list',
+                           'content' => $this->render('edit-forms/price-list',
                                [
                                    'model' => $priceList,
                                    'priceListData' => $priceListData,

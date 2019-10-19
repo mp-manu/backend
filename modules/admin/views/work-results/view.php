@@ -7,10 +7,11 @@ use yii\widgets\DetailView;
 /* @var $model app\modules\admin\models\WorkResults */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Work Results', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Результат работы', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
+<?= $this->render('/layouts/page-bar') ?>
 <div class="work-results-view">
 
 <!--    <h1>--><?//= Html::encode($this->title) ?><!--</h1>-->

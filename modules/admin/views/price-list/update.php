@@ -6,8 +6,7 @@ use yii\helpers\Html;
 /* @var $model app\modules\admin\models\PriceList */
 
 $this->title = 'Обновить прайслист: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Прайслист', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => 'Редактирование услуги', 'url' => ['/admin/services/edit', 'id' => $model->service_id]];
 $this->params['breadcrumbs'][] = 'Обновить';
 ?>
 <?= $this->render('/layouts/page-bar') ?>

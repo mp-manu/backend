@@ -123,9 +123,20 @@ class ServicesController extends Controller
 
    public function actionDelete($id)
    {
-      if ($this->findModel($id)->delete()) {
-         Yii::$app->session->setFlash('success', 'Запись успешно удалено!');
+      $model = $this->findModel($id);
+      if(!empty($model) && isset($model)){
+         ServiceInfo::deleteAll(['service_id' => $id]);
+         AnswerQuestions::deleteAll(['service_id' => $id]);
+         WorkProccess::deleteAll(['service_id' => $id]);
+         WorkResults::deleteAll(['service_id' => $id]);
+         PriceList::deleteAll(['service_id' => $id]);
+         $model->delete();
       }
+
+
+
+
+      Yii::$app->session->setFlash('success', 'Запись успешно удалено!');
 
       return $this->redirect(['index']);
    }

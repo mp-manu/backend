@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <!--    <h2>--><?//= Html::encode($this->title) ?><!--</h2>-->
     <p>
-        <?= Html::a('Добавить услугу', ['add'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить услугу', ['add'], ['class' => 'btn btn-info']) ?>
     </p>
    <?php if (\Yii::$app->session->hasFlash('success')) : ?>
        <div class="alert alert-success alert-dismissible" style="margin-top: 5%;">

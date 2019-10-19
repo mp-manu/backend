@@ -63,7 +63,7 @@ class SectionsSearch extends Sections
             'id' => $this->id,
             'page_id' => $this->page_id,
             'type' => $this->type,
-            'status' => $this->status,
+            's.status' => $this->status,
         ]);
 
         $query->andFilterWhere(['like', 'title', $this->title])

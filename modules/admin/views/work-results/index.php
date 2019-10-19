@@ -11,6 +11,7 @@ use kartik\grid\GridView;
 $this->title = 'Примеры работ';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+<?= $this->render('/layouts/page-bar') ?>
 <div class="work-results-index">
 
 <!--    <h1>--><?//= Html::encode($this->title) ?><!--</h1>-->

@@ -6,8 +6,7 @@ use yii\helpers\Html;
 /* @var $model app\modules\admin\models\ServiceInfo */
 
 $this->title = 'Обновить доп. инфо: ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Service Infos', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = ['label' => 'Редактирование услуги', 'url' => ['/admin/services/edit', 'id' => $model->service_id]];
 $this->params['breadcrumbs'][] = 'Обновить';
 ?>
 <?= $this->render('/layouts/page-bar') ?>

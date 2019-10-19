@@ -42,7 +42,7 @@ $display = (count($services) > 0 || !empty($services)) ? true : false;
                    <?php endif; ?>
                 </header>
             </div>
-            <div class="card-head">
+            <div class="card-body">
                <?php
                echo Tabs::widget([
                    'items' => [

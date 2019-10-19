@@ -15,16 +15,7 @@ $model->service_id = $service_id['id'];
     <div class="col-sm-12">
         <!--        <h3 style="text-align: center">Добавить результаты работ</h3>-->
        <?php $form = ActiveForm::begin(['action' => '/admin/work-results/create']); ?>
-        <div class="col-lg-6">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-               <?= $form->field($model, 'service_id')
-                   ->dropDownList(ArrayHelper::map($services, 'id', 'name'), [
-                       'prompt' => 'Выбрать услугу',
-                       'required' => true,
-                        'id'=>'drop'
-                   ]) ?>
-            </div>
-        </div>
+
         <div class="col-lg-6">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
                <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
