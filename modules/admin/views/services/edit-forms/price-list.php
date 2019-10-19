@@ -86,17 +86,14 @@ $model->service_id = $service_id['id'];
        <!--    <h3 style="text-align: center">Прайс лист</h3>-->
       <?php $form = ActiveForm::begin(); ?>
        <div class="row">
-           <div class="col-lg-6 ">
+           <div class="col-lg-6">
                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                  <?= $form->field($model, 'service_id')
-                      ->dropDownList(ArrayHelper::map($services, 'id', 'name'), [
-                          'prompt' => 'Выбрать категорию',
-                      ]) ?>
+                  <?= $form->field($model, 'signature')->textInput(['maxlength' => true]) ?>
                </div>
            </div>
            <div class="col-lg-6">
                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                  <?= $form->field($model, 'signature')->textInput(['maxlength' => true]) ?>
+                  <?= $form->field($model, 'price')->textInput() ?>
                </div>
            </div>
        </div>
@@ -120,21 +117,17 @@ $model->service_id = $service_id['id'];
            </div>
            <div class="col-lg-6">
                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                  <?= $form->field($model, 'price')->textInput() ?>
+                  <?= $form->field($model, 'type')->dropDownList(['2' => 'Таблица', '1' => 'Список']) ?>
                </div>
            </div>
        </div>
        <div class="row">
-           <div class="col-lg-6">
+           <div class="col-lg-12">
                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
                   <?= $form->field($model, 'status')->dropDownList(['1' => 'Включен', '0' => 'Отключен']) ?>
                </div>
            </div>
-           <div class="col-lg-6">
-               <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                  <?= $form->field($model, 'type')->dropDownList(['2' => 'Таблица', '1' => 'Список']) ?>
-               </div>
-           </div>
+
        </div>
        <div class="row">
            <div class="col-lg-12">

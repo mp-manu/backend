@@ -9,11 +9,12 @@
 use yii\bootstrap\ActiveForm;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+
 ?>
 <?php if (!empty($answerQuestionsData) && count($answerQuestionsData) > 0): ?>
     <div class="col-lg-12">
         <p>
-           <?= Html::button('Добавить', ['class' => 'btn btn-success', 'id' =>'question-form']) ?>
+           <?= Html::button('Добавить', ['class' => 'btn btn-success', 'id' => 'question-form']) ?>
         </p>
     </div>
     <div class="col-lg-12" id="frm-content">
@@ -52,7 +53,8 @@ use yii\helpers\Html;
                                </a>
                            <?php endif; ?>
                             <a class="btn btn-danger btn-xs"
-                               href="/admin/answer-questions/delete?id=<?= $question['id'] ?>" data-confirm="Вы уверены что хотите удалить этот вопрос?">
+                               href="/admin/answer-questions/delete?id=<?= $question['id'] ?>"
+                               data-confirm="Вы уверены что хотите удалить этот вопрос?">
                                 <i class="fa fa-trash-o" title="Удалить"></i>
                             </a>
                             <a class="btn btn-primary btn-xs"
@@ -69,44 +71,42 @@ use yii\helpers\Html;
 <?php else: ?>
     <div class="answer-questions-form">
        <?php $form = ActiveForm::begin(); ?>
-        <div class="col-lg-6 ">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-               <?= $form->field($model, 'question')->textarea(['rows' => 4]) ?>
+        <div class="row">
+            <div class="col-lg-12 ">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                   <?= $form->field($model, 'question')->textInput() ?>
+                </div>
             </div>
         </div>
-        <div class="col-lg-6 ">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-               <?= $form->field($model, 'answer')->textarea(['maxlength' => true, 'rows' => 4]) ?>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                   <?= $form->field($model, 'answer')->textarea(['maxlength' => true, 'rows' => 4]) ?>
+                </div>
             </div>
         </div>
-        <div class="col-lg-6 ">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-               <?= $form->field($model, 'service_id')
-                   ->dropDownList(ArrayHelper::map($services, 'id', 'name'), [
-                       'prompt' => 'Выбрать категорию',
-                        'style' => 'display: none'
-                   ]) ?>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                   <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+                </div>
+            </div>
+            <div class="col-lg-6 ">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                   <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
+                </div>
             </div>
         </div>
-        <div class="col-lg-6 ">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-               <?= $form->field($model, 'username')->textInput(['maxlength' => true]) ?>
+        <div class="row">
+            <div class="col-lg-6 ">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                   <?= $form->field($model, 'type')->dropDownList(['1' => 'Общий', '0' => 'Пользовательский']) ?>
+                </div>
             </div>
-        </div>
-
-        <div class="col-lg-6 ">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-               <?= $form->field($model, 'phone')->textInput(['maxlength' => true]) ?>
-            </div>
-        </div>
-        <div class="col-lg-6 ">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-               <?= $form->field($model, 'type')->dropDownList(['1' => 'Общий', '0' => 'Пользовательский']) ?>
-            </div>
-        </div>
-        <div class="col-lg-12 ">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-               <?= $form->field($model, 'status')->dropDownList(['1' => 'Включен', '0' => 'Отключен']) ?>
+            <div class="col-lg-6">
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                   <?= $form->field($model, 'status')->dropDownList(['1' => 'Включен', '0' => 'Отключен']) ?>
+                </div>
             </div>
         </div>
         <div class="col-lg-12  text-center">
