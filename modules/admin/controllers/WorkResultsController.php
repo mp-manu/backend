@@ -57,18 +57,24 @@ class WorkResultsController extends Controller
                 $max_id += 1;
             }
             $resultImage = UploadedFile::getInstance($model, 'img');
+            $drawImage = UploadedFile::getInstance($model, 'img_draw');
+            $path = Yii::getAlias('@uploadsroot');
             if (!empty($resultImage)) {
-                $path = Yii::getAlias('@uploadsroot');
                 $fileName = 'work-result_' . $max_id . '.' . $resultImage->extension;
                 $resultImage->saveAs($path . '/results/' . $fileName);
                 $model->img = $fileName;
             }
+            if(!empty($drawImage)){
+               $drawfileName = 'work-result__' . $max_id . '.' . $drawImage->extension;
+               $drawImage->saveAs($path . '/results/' . $drawfileName);
+               $model->img_draw = $drawfileName;
+            }
 
             if ($model->save()) {
-                Yii::$app->session->setFlash('creatingSuccess', 'Запись успешно сохранено!');
+                Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
                 return $this->redirect(['/admin/services/edit', 'id' => $model->service_id]);
             } else {
-                Yii::$app->session->setFlash('creatingError', 'Не удается сохранить запись!');
+                Yii::$app->session->setFlash('error', 'Не удается сохранить запись!');
                 return $this->redirect(['/admin/services/edit', 'id' => $model->service_id]);
             }
         }
@@ -96,10 +102,12 @@ class WorkResultsController extends Controller
             $max_id = $model->id;
         }
         $old_img = $model->img;
+        $old_draw_img = $model->img_draw;
 
         if ($model->load(Yii::$app->request->post())) {
 
             $resultImage = UploadedFile::getInstance($model, 'img');
+            $drawImage = UploadedFile::getInstance($model, 'img_draw');
             if (!empty($resultImage)) {
                 $path = Yii::getAlias('@uploadsroot');
                 $fileName = 'work-result_' . $max_id . '.' . $resultImage->extension;
@@ -108,6 +116,14 @@ class WorkResultsController extends Controller
             }else{
                 $model->img = $old_img;
             }
+           if(!empty($drawImage)){
+              $path = Yii::getAlias('@uploadsroot');
+              $drawfileName = 'work-result__' . $max_id . '.' . $drawImage->extension;
+              $drawImage->saveAs($path . '/results/' . $drawfileName);
+              $model->img_draw = $drawfileName;
+           }else{
+              $model->img_draw = $old_draw_img;
+           }
 
             if ($model->save()) {
                 Yii::$app->session->setFlash('creatingSuccess', 'Запись успешно сохранено!');

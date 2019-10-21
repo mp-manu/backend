@@ -13,8 +13,8 @@ echo $this->render('/page/banners/slider', ['slider' => $slider]);
                         <div class="intro__label"><?= Yii::$app->settings->get('Сайт', 'имя') ?></div>
                     </div>
                     <div class="col-9">
-                        <div class="intro__body"><p
-                                    class="intro__text"><?= Yii::$app->settings->get('Компания', 'деятельность') ?></p>
+                        <div class="intro__body">
+                            <p class="intro__text"><?= Yii::$app->settings->get('Компания', 'деятельность') ?></p>
                             <div class="intro__opinion">
                                 <article class="opinion">
                                     <figure class="opinion__cover">
@@ -40,9 +40,9 @@ echo $this->render('/page/banners/slider', ['slider' => $slider]);
         </div>
     </div>
     <div class="content__image">
-        <div class="container"><img class="image"
-                                    src="/img/<?= Yii::$app->images->get('Главная', 'баннер') ?>"
-                                    alt></div>
+        <div class="container">
+            <img class="image" src="<?= Yii::getAlias('@web') ?>/uploads/<?= Yii::$app->images->get('Главная страница', 'большая_картинка') ?>" alt>
+        </div>
     </div>
     <div class="content__section is-grey">
         <section class="section">
@@ -51,19 +51,18 @@ echo $this->render('/page/banners/slider', ['slider' => $slider]);
                     <div class="service-showcase">
                         <div class="grid is-row is-middle">
                             <div class="col-4">
-                                <div class="service-showcase__header"><h2
-                                            class="service-showcase__title title"><?= Yii::$app->settings->get('Услуги', 'холодная_штамповка') ?></h2>
+                                <div class="service-showcase__header">
+                                    <h2 class="service-showcase__title title"><?= Yii::$app->settings->get('Услуги', 'холодная_штамповка') ?></h2>
                                     <p class="service-showcase__descr"><?= Yii::$app->settings->get('Услуги', 'инфо_об_холод_штамп') ?></p>
                                     <p class="service-showcase__warn"><?= Yii::$app->settings->get('Услуги', 'мин_заказ') ?></p>
                                     <div class="service-showcase__link">
                                         <a class="link" href="/page/service/1">
-                                            <div class="link__inner"><span
-                                                        class="link__text"><?= Yii::$app->settings->get('Главная', 'перейти_к_услуге') ?></span>
+                                            <div class="link__inner">
+                                                <span class="link__text"><?= Yii::$app->settings->get('Главная', 'перейти_к_услуге') ?></span>
                                                 <div class="link__arrow">
                                                     <span class="arrow is-small is-dark no-hover">
                                                         <svg class="arrow__icon" tabindex="-1">
-                                                            <use tabindex="-1"
-                                                                 xlink:href="/img/sprite.svg#arrow"></use>
+                                                            <use tabindex="-1" xlink:href="/img/sprite.svg#arrow"></use>
                                                         </svg>
                                                     </span>
                                                 </div>
@@ -121,15 +120,13 @@ echo $this->render('/page/banners/slider', ['slider' => $slider]);
                                                 </li>
                                                 <li class="examples__item">
                                                     <div class="example">
-                                                        <div class="example__header"
-                                                             data-number="04">
+                                                        <div class="example__header" data-number="04">
                                                             <h4 class="example__title">
                                                                <?= Yii::$app->settings->get('Главная', 'по_вышему_чертежу') ?>
                                                             </h4>
                                                         </div>
                                                         <div class="example__cover">
-                                                            <img class="example__image"
-                                                                 src="/uploads/<?= Yii::$app->images->get('Главная', 'по_вашему_чертежу') ?>" alt>
+                                                            <img class="example__image" src="/uploads/<?= Yii::$app->images->get('Главная', 'по_вашему_чертежу') ?>" alt>
                                                         </div>
                                                     </div>
                                                 </li>
@@ -144,6 +141,7 @@ echo $this->render('/page/banners/slider', ['slider' => $slider]);
             </div>
         </section>
     </div>
+    <?php if(!empty($otherServices)): ?>
     <div class="content__section is-pb110">
         <section class="section">
             <div class="container">
@@ -165,12 +163,9 @@ echo $this->render('/page/banners/slider', ['slider' => $slider]);
                                                             alt="<?= $info['name'] ?>">
                                                    </figure>
                                                    <div class="service__body">
-                                                       <img class="service__icon"
-                                                            src="/img/service-ico-<?= $i ?>.svg"
-                                                            alt="">
+                                                       <img class="service__icon" src="/img/service-ico-<?= $i ?>.svg" alt="">
                                                        <h4 class="service__title">
-                                                           <a class="service__link"
-                                                              href="/page/service/<?= $info['id'] ?>">
+                                                           <a class="service__link" href="/page/service/<?= $info['id'] ?>">
                                                               <?= $info['name'] ?>
                                                            </a>
                                                        </h4>
@@ -250,6 +245,7 @@ echo $this->render('/page/banners/slider', ['slider' => $slider]);
             </div>
         </section>
     </div>
+    <?php endif; ?>
    <?php if (!empty($whyChooseUs)): ?>
        <div class="content__section is-grey">
            <section class="section">

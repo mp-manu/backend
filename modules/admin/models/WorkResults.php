@@ -15,6 +15,7 @@ use Yii;
  * @property double $service_id
  * @property string $tooked_metall
  * @property string $img
+ * @property string $img_draw
  * @property string $status
  */
 class WorkResults extends \yii\db\ActiveRecord
@@ -36,12 +37,13 @@ class WorkResults extends \yii\db\ActiveRecord
         return [
             [['name', 'price', 'service_id'], 'required'],
             [['img'], 'required', 'on' => self::SCENARIO_DEFAULT],
-            [['img'], 'safe', 'on' => self::SCENARIO_MYSPECIAL],
+            [['img', 'img_draw'], 'safe', 'on' => self::SCENARIO_MYSPECIAL],
             [['status'], 'integer'],
             [['name', 'description', 'img'], 'string', 'max' => 500],
             [['deadline'], 'string', 'max' => 200],
             [['tooked_metall'], 'string', 'max' => 20],
             [['price'], 'string', 'max' => 100],
+            [['img', 'img_draw'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
         ];
     }
 
@@ -59,6 +61,7 @@ class WorkResults extends \yii\db\ActiveRecord
             'service_id' => 'Услуга',
             'tooked_metall' => 'Потребовалось металла',
             'img' => 'Фото',
+            'img_draw' => 'Фото чертежа',
             'status' => 'Доступ',
         ];
     }

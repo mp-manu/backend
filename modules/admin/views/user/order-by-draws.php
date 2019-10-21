@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         <?= $order['phone_number'] ?>
                                     </td>
                                     <td class="left">
-                                        <a href="<?= Yii::getAlias('@web') . '/img/draw-orders/' . $order['file'] ?>"><?= $order['file'] ?></a>
+                                        <a href="<?= Yii::getAlias('@web') . '/uploads/draw-orders/' . $order['file'] ?>"><img src="<?= Yii::getAlias('@web') . '/uploads/draw-orders/' . $order['file'] ?>" width="180"></a>
                                     </td>
                                     <td class="left">
                                         <?php
@@ -78,8 +78,8 @@ $this->params['breadcrumbs'][] = $this->title;
                                         ?>
                                     </td>
                                     <td class="left">
-                                        <a href="<?= Yii::getAlias('@web') . '/img/draw-orders/' . $order['file'] ?>"
-                                           download="<?= $order['file'] ?>">Скачать</a>
+                                        <a href="<?= Yii::getAlias('@web') . '/uploads/draw-orders/' . $order['file'] ?>" class="btn btn-info"
+                                           download="<?= $order['file'] ?>">Скачать файл</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>

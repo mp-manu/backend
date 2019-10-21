@@ -219,7 +219,7 @@ AppAsset::register($this);
                                                                 href="#"><?= Yii::$app->settings->get('Текст', 'personal_data') ?></a></span></label>
                                             </div>
                                             <div class="form__button">
-                                                <button class="button is-wide is-large"><?= Yii::$app->settings->get('Текст', 'Отправить') ?></button>
+                                                <button class="button is-wide is-large"><?= Yii::$app->settings->get('Текст', 'отправ') ?></button>
                                             </div>
                                         </footer>
                                     </form>

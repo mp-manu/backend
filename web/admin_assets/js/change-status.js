@@ -173,7 +173,7 @@ $("#proccess-form").on( "click", function() {
         url: '/admin/services/get-proccess-form',
         data: {status: service_id},
         success: function(response) {
-            content.innerHTML = response;
+            content.innerHTML = response['html'];
             $("#proccess-form").hide();
             $("#drop").val(service_id);
         }

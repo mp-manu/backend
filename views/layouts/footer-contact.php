@@ -88,9 +88,11 @@
                                             <validation-observer ref="observer">
                                                 <form class="callback-form form"
                                                       action="/request/need-to-call" method="post" @submit="onsubmit">
-                                                    <header class="form__header"><h3
-                                                                class="form__title title">Заказать
-                                                            обратный звонок</h3></header>
+                                                    <header class="form__header">
+                                                        <h3 class="form__title title">
+                                                        <?= Yii::$app->settings->get('Текст', 'заказать_звонок') ?>
+                                                        </h3>
+                                                    </header>
                                                     <div class="form__body">
                                                         <div class="grid is-columns">
                                                             <div class="col-6">

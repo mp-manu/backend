@@ -17,18 +17,19 @@
                     <?php foreach ($slider as $item): ?>
                         <li class="main-slider__item" ref="item">
                             <article class="slide">
-                                <div class="slide__background"
-                                     style="background-image: url(<?= Yii::getAlias('@uploads') . '/slider/' . $item['img_url'] ?>);"
-                                     data-swiper-parallax-x="-30"></div>
+                                <div class="slide__background" style="background-image: url(<?= Yii::getAlias('@uploads') . '/slider/' . $item['img_url'] ?>);" data-swiper-parallax-x="-30">
+                                </div>
                                 <div class="slide__container container">
                                     <div class="slide__grid grid is-row">
                                         <div class="col-6">
                                             <div class="slide__body">
-                                                <header class="slide__header"><h2 class="slide__title title"
-                                                                                  data-swiper-parallax-x="-40">
-                                                        <?= $item['title'] ?></h2>
-                                                    <p class="slide__caption"
-                                                       data-swiper-parallax-x="-70"><?= $item['description'] ?></p>
+                                                <header class="slide__header">
+                                                    <h2 class="slide__title title" data-swiper-parallax-x="-40">
+                                                        <?= $item['title'] ?>
+                                                    </h2>
+                                                    <p class="slide__caption" data-swiper-parallax-x="-70">
+                                                       <?= $item['description'] ?>
+                                                    </p>
                                                 </header>
                                                 <div class="slide__button" data-swiper-parallax-x="-100">
                                                     <?php if ($item['is_has_btn'] == 1): ?>
@@ -41,10 +42,9 @@
                                         </div>
                                         <?php if (!empty($item['slide_cover'])): ?>
                                             <div class="col-6">
-                                                <figure class="slide__cover" data-swiper-parallax-x="-100"><img
-                                                            class="slide__image"
-                                                            src="<?= Yii::getAlias('@uploads') . '/slider/' . $item['slide_cover'] ?>"
-                                                            alt></figure>
+                                                <figure class="slide__cover" data-swiper-parallax-x="-100">
+                                                    <img class="slide__image" src="<?= Yii::getAlias('@uploads') . '/slider/' . $item['slide_cover'] ?>" alt>
+                                                </figure>
                                             </div>
                                         <?php endif; ?>
                                     </div>

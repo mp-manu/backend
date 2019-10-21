@@ -94,7 +94,7 @@ class FrontMenu extends \yii\db\ActiveRecord
    {
       $menu = '';
 
-      $services = Services::find()->where(['status' => 1])->asArray()->all();
+      $services = Services::find()->where(['status' => 1, 'parent_id' => 0])->asArray()->all();
 
       if (!empty($services)) {
          $menu .= '<li class="header-nav__item has-dropmenu">

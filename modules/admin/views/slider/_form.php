@@ -21,75 +21,81 @@ use yii\widgets\ActiveForm;
             <header><?= $this->title ?></header>
         </div>
        <?php if (!$model->isNewRecord): ?>
-          <?php if(!empty($model->img_url)): ?>
+          <?php if (!empty($model->img_url)): ?>
                <div class="col-md-12 text-center">
-                   <img src="<?= Yii::getAlias('@uploads') . '/slider/' . $model->img_url ?>" width="500" height="300">
+                   <img src="<?= Yii::getAlias('@uploads') . '/slider/' . $model->img_url ?>"
+                        width="500" height="300">
                </div>
           <?php endif; ?>
        <?php endif; ?>
-        <div class="card-body row">
-            <div class="col-lg-6">
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                   <?= $form->field($model, 'title')->textarea(['maxlength' => true]) ?>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                       <?= $form->field($model, 'title')->textarea(['maxlength' => true]) ?>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
+                       <?= $form->field($model, 'description')->textarea(['maxlength' => true]) ?>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
-                   <?= $form->field($model, 'description')->textarea(['maxlength' => true]) ?>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
+                       <?php
+                       echo $form->field($model, 'order')->widget(Select2::classname(), [
+                           'data' => ArrayHelper::map($sliders, 'id', function ($slider) {
+                                  return 'После ' . $slider['order'] . ' - ' . $slider['title'];
+                               }) + ['0' => 'Первый слайд', '-1' => 'Последний слайд'],
+                           'options' => ['placeholder' => 'Сортировка'],
+                           'pluginOptions' => [
+                               'allowClear' => true
+                           ],
+                       ]);
+                       ?>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
+                       <?= $form->field($model, 'access')->dropDownList(['1' => 'Включен', '0' => 'Отключен']) ?>
+                    </div>
                 </div>
             </div>
-            <div class="col-lg-6">
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
-                   <?php
-                   echo $form->field($model, 'order')->widget(Select2::classname(), [
-                       'data' => ArrayHelper::map($sliders, 'id', function ($slider) {
-                              return 'После ' . $slider['order'] . ' - ' . $slider['title'];
-                           }) + ['0' => 'Первый слайд', '-1' => 'Последний слайд'],
-                       'options' => ['placeholder' => 'Сортировка'],
-                       'pluginOptions' => [
-                           'allowClear' => true
-                       ],
-                   ]);
-                   ?>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
+                       <?= $form->field($model, 'is_has_btn')->dropDownList(['1' => 'Включен', '0' => 'Отключен']) ?>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
-                   <?= $form->field($model, 'access')->dropDownList(['1' => 'Включен', '0' => 'Отключен']) ?>
-                </div>
-            </div>
 
-            <div class="col-lg-6">
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
-                   <?= $form->field($model, 'is_has_btn')->dropDownList(['1' => 'Включен', '0' => 'Отключен']) ?>
+                <div class="col-lg-6">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
+                       <?= $form->field($model, 'btn_title')->textInput() ?>
+                    </div>
                 </div>
             </div>
-
-            <div class="col-lg-6">
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
-                   <?= $form->field($model, 'btn_title')->textInput() ?>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
+                       <?= $form->field($model, 'btn_link')->textInput() ?>
+                    </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
+                       <?= $form->field($model, 'img_url')->fileInput() ?>
+                    </div>
+                </div>
 
-            <div class="col-lg-6">
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
-                   <?= $form->field($model, 'btn_link')->textInput() ?>
+                <div class="col-lg-6">
+                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
+                       <?= $form->field($model, 'slide_cover')->fileInput() ?>
+                    </div>
                 </div>
             </div>
-
-            <div class="col-lg-6">
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
-                   <?= $form->field($model, 'img_url')->fileInput() ?>
-                </div>
-            </div>
-
-            <div class="col-lg-6">
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
-                   <?= $form->field($model, 'slide_cover')->fileInput() ?>
-                </div>
-            </div>
-
-
             <div class="col-lg-12 text-center">
                <?= Html::submitButton($model->isNewRecord ? 'Сохранить' : 'Обновить', ['class' => 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 m-r-20 btn-pink']) ?>
             </div>

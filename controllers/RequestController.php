@@ -38,7 +38,7 @@ class RequestController extends Controller
                 $orderByDraw->status = 1;
                 $orderByDraw->created_at = (new Expression('NOW()'));
                 if (!empty($_FILES['file']['tmp_name'])) {
-                    $filePath = Yii::getAlias('@webroot') . '/img/draw-orders/';
+                    $filePath = Yii::getAlias('@webroot') . '/uploads/draw-orders/';
                     $uploadfile = $filePath . basename($_FILES['file']['name']);
                     move_uploaded_file($_FILES['file']['tmp_name'], $uploadfile);
                     $orderByDraw->file = basename($_FILES['file']['name']);

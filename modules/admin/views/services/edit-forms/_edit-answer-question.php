@@ -7,7 +7,6 @@
  */
 
 use yii\bootstrap\ActiveForm;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 ?>
@@ -109,6 +108,7 @@ use yii\helpers\Html;
                 </div>
             </div>
         </div>
+
         <div class="col-lg-12  text-center">
            <?= Html::submitButton($model->isNewRecord ? 'Сохранить' : 'Обновить', ['class' => 'mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 m-r-20 btn-pink']) ?>
         </div>

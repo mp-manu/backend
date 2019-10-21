@@ -43,7 +43,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     'filterInputOptions' => ['prompt' => Yii::t('yii2mod.settings', 'Select Section'), 'class' => 'form-control'],
                 ],
                 'key',
-                'value:ntext',
+                [
+                    'attribute' => 'value',
+                    'format' => 'html',
+                    'value' => function ($dataProvider) {
+                       return wordwrap($dataProvider->value, 40, '<br>');
+                    }
+                ],
                 [
                     'class' => EditableColumn::className(),
                     'attribute' => 'status',
@@ -61,7 +67,13 @@ $this->params['breadcrumbs'][] = $this->title;
                     'filter' => SettingStatus::listData(),
                     'filterInputOptions' => ['prompt' => Yii::t('yii2mod.settings', 'Select Status'), 'class' => 'form-control'],
                 ],
-                'description:ntext',
+                [
+                    'attribute' => 'description',
+                    'format' => 'html',
+                    'value' => function ($dataProvider) {
+                       return wordwrap($dataProvider->description, 40, '<br>');
+                    }
+                ],
                 [
                     'header' => Yii::t('yii2mod.settings', 'Actions'),
                     'class' => 'yii\grid\ActionColumn',

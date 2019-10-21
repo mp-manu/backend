@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\Slider */
 
-$this->title = $model->title;
+$this->title = 'Подробная информация';
 $this->params['breadcrumbs'][] = ['label' => 'Слайды', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
@@ -36,7 +36,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
+    <div class="card-box">
+        <div class="card-head">
+            <header><?= $this->title ?></header>
+        </div>
+        <div class="card-body row">
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
@@ -51,5 +55,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'access',
         ],
     ]) ?>
-
+        </div>
+    </div>
 </div>

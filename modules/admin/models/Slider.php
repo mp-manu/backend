@@ -22,6 +22,7 @@ use yii\helpers\ArrayHelper;
 class Slider extends \yii\db\ActiveRecord
 {
     const SCENARIO_MYSPECIAL = 'onUpdate';
+    //public $btn_title = 'Заказать по чертежу';
     /**
      * {@inheritdoc}
      */
@@ -40,7 +41,7 @@ class Slider extends \yii\db\ActiveRecord
             [['img_url'], 'safe', 'on' => self::SCENARIO_MYSPECIAL],
             [['is_has_btn', 'order', 'access'], 'integer'],
             [['description',  'btn_link'], 'string', 'max' => 500],
-            [['title'], 'string', 'max' => 62],
+            [['title'], 'string', 'max' => 74],
             [['img_url'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, svg'],
             [['slide_cover'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, svg'],
             [['btn_title'], 'string', 'max' => 50],
@@ -91,12 +92,11 @@ class Slider extends \yii\db\ActiveRecord
             $max_order += 1;
             return $max_order;
         }elseif($order == 0){
-            Yii::$app->db->createCommand('UPDATE slider s SET s.order = s.order + 1');
+            Yii::$app->db->createCommand('UPDATE slider s SET s.order = s.order + 1')->execute();
             return '0';
         }else{
-            $slide_order = $order + 1;
-            Yii::$app->db->createCommand('UPDATE slider s SET s.order = s.order+1 WHERE s.order >= '.$order);
-            return $slide_order;
+            Yii::$app->db->createCommand('UPDATE slider s SET s.order = s.order+1 WHERE s.order >= '.$order)->execute();
+            return $order;
         }
     }
 }

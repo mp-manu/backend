@@ -3,8 +3,6 @@
 namespace app\modules\admin\controllers;
 
 use app\modules\admin\models\AnswerQuestions;
-use app\modules\admin\models\BackMenu;
-use app\modules\admin\models\FrontMenu;
 use app\modules\admin\models\PriceList;
 use app\modules\admin\models\ServiceInfo;
 use app\modules\admin\models\WorkProccess;
@@ -13,12 +11,13 @@ use Cocur\Slugify\Slugify;
 use Yii;
 use app\modules\admin\models\Services;
 use app\modules\admin\models\ServicesSearch;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
+use yii\web\Response;
 use yii\web\UploadedFile;
+
+
 
 /**
  * ServicesController implements the CRUD actions for Services model.
@@ -124,7 +123,7 @@ class ServicesController extends Controller
    public function actionDelete($id)
    {
       $model = $this->findModel($id);
-      if(!empty($model) && isset($model)){
+      if (!empty($model) && isset($model)) {
          ServiceInfo::deleteAll(['service_id' => $id]);
          AnswerQuestions::deleteAll(['service_id' => $id]);
          WorkProccess::deleteAll(['service_id' => $id]);
@@ -132,8 +131,6 @@ class ServicesController extends Controller
          PriceList::deleteAll(['service_id' => $id]);
          $model->delete();
       }
-
-
 
 
       Yii::$app->session->setFlash('success', 'Запись успешно удалено!');
@@ -158,7 +155,7 @@ class ServicesController extends Controller
       $services = Services::find()->where(['status' => 1])->asArray()->all();
 
       /**************форма добавление услуг*********************/
-      if ($serviceModel->load(Yii::$app->request->post())){
+      if ($serviceModel->load(Yii::$app->request->post())) {
          $serviceImage = UploadedFile::getInstance($serviceModel, 'img');
          $maxId = Services::find()->max('id');
          if ($maxId == 0) {
@@ -228,6 +225,7 @@ class ServicesController extends Controller
             $workProccess->img = $fileName;
          }
          $service_id['id'] = (empty($service_id['id'])) ? $workResults->service_id : $service_id['id'];
+         if(empty($workProccess->description)) $workProccess->description = $workProccess->title;
          if ($workProccess->save()) {
             Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
             return $this->redirect(['edit', 'id' => $service_id['id']]);
@@ -246,12 +244,19 @@ class ServicesController extends Controller
             $max_id += 1;
          }
          $resultImage = UploadedFile::getInstance($workResults, 'img');
+         $drawImage = UploadedFile::getInstance($workResults, 'img_draw');
          if (!empty($resultImage)) {
             $path = Yii::getAlias('@uploadsroot');
             $fileName = 'work-result_' . $max_id . '.' . $resultImage->extension;
             $resultImage->saveAs($path . '/results/' . $fileName);
             $workResults->img = $fileName;
          }
+         if(!empty($drawImage)){
+            $drawfileName = 'work-result__' . $max_id . '.' . $drawImage->extension;
+            $drawImage->saveAs($path . '/results/' . $drawfileName);
+            $workResults->img_draw = $drawfileName;
+         }
+
          $service_id['id'] = (empty($service_id['id'])) ? $workResults->service_id : $service_id['id'];
          if ($workResults->save()) {
             Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
@@ -356,6 +361,7 @@ class ServicesController extends Controller
 
       if ($serviceInfoModel->load(Yii::$app->request->post())) {
          $service_id['id'] = (empty($service_id['id'])) ? $serviceInfoModel->service_id : $service_id['id'];
+         $serviceInfoModel->service_id = $service_id['id'];
          if ($serviceInfoModel->save()) {
             Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
             return $this->redirect(['edit', 'id' => $service_id['id']]);
@@ -370,6 +376,7 @@ class ServicesController extends Controller
 
       if ($answerQuestions->load(Yii::$app->request->post())) {
          $service_id['id'] = (empty($service_id['id'])) ? $answerQuestions->service_id : $service_id['id'];
+         $answerQuestions->service_id = $service_id['id'];
          if ($answerQuestions->save()) {
             Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
             return $this->redirect(['edit', 'id' => $service_id['id']]);
@@ -395,6 +402,8 @@ class ServicesController extends Controller
             $workProccess->img = $fileName;
          }
          $service_id['id'] = (empty($service_id['id'])) ? $workResults->service_id : $service_id['id'];
+         $workProccess->service_id = $service_id['id'];
+         if(empty($workProccess->description)) $workProccess->description = $workProccess->title;
          if ($workProccess->save()) {
             Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
             return $this->redirect(['edit', 'id' => $service_id['id']]);
@@ -414,11 +423,19 @@ class ServicesController extends Controller
             $max_id += 1;
          }
          $resultImage = UploadedFile::getInstance($workResults, 'img');
+         $drawImage = UploadedFile::getInstance($workResults, 'img_draw');
+         $workResults->service_id = $service_id['id'];
          if (!empty($resultImage)) {
             $path = Yii::getAlias('@uploadsroot');
             $fileName = 'work-result_' . $max_id . '.' . $resultImage->extension;
             $resultImage->saveAs($path . '/results/' . $fileName);
             $workResults->img = $fileName;
+         }
+         if(!empty($drawImage)){
+            $path = Yii::getAlias('@uploadsroot');
+            $drawfileName = 'work-result__' . $max_id . '.' . $drawImage->extension;
+            $drawImage->saveAs($path . '/results/' . $drawfileName);
+            $workResults->img_draw = $drawfileName;
          }
          $service_id['id'] = (empty($service_id['id'])) ? $workResults->service_id : $service_id['id'];
          if ($workResults->save()) {
@@ -438,6 +455,7 @@ class ServicesController extends Controller
       if ($priceList->load(Yii::$app->request->post())) {
 
          $priceList->description = (empty($priceList->description)) ? $priceList->signature : $priceList->description;
+         $priceList->service_id = $service_id['id'];
          if ($priceList->save()) {
             Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
             $service_id['id'] = (empty($service_id['id'])) ? $priceList->service_id : $service_id['id'];
@@ -448,11 +466,6 @@ class ServicesController extends Controller
             return $this->redirect(['edit', 'id' => $service_id['id']]);
          }
       }
-
-
-
-
-
 
       return $this->render('edit', [
           'serviceModel' => $serviceModel,
@@ -534,61 +547,58 @@ class ServicesController extends Controller
    public function actionGetQuestionForm()
    {
       $model = new AnswerQuestions();
-      $services = Services::getServices();
       $id = Yii::$app->request->post('status');
       $service_id['id'] = $id;
-      return $this->renderPartial('forms/_form-answer-question', ['model' => $model, 'services' => $services, 'service_id' => $service_id]);
+      return $this->renderPartial('forms/_form-answer-question', [
+          'model' => $model,
+          'service_id' => $service_id
+      ]);
    }
 
    public function actionGetInfoForm()
    {
       $model = new ServiceInfo();
-      $services = Services::getServices();
       $id = Yii::$app->request->post('status');
       $service_id['id'] = $id;
-      return $this->renderPartial('forms/_form-service-info', ['model' => $model, 'services' => $services, 'service_id' => $service_id]);
+      return $this->renderPartial('forms/_form-service-info', [
+          'model' => $model,
+          'service_id' => $service_id
+      ]);
    }
 
    public function actionGetProccessForm()
    {
       $model = new WorkProccess();
-      $services = Services::getServices();
+      Yii::$app->response->format = Response::FORMAT_JSON;
       $id = Yii::$app->request->post('status');
       $service_id['id'] = $id;
-      return $this->renderPartial('forms/_form-work-proccess', ['model' => $model, 'services' => $services, 'service_id' => $service_id]);
+      return [
+          'status' => 'success',
+          'html' => $this->renderPartial('forms/_form-work-proccess', [
+              'model' => $model,
+              'service_id' => $service_id
+          ])
+      ];
    }
 
    public function actionGetResultForm()
    {
       $model = new WorkResults();
-      $services = Services::getServices();
       $id = Yii::$app->request->post('status');
       $service_id['id'] = $id;
-      return $this->renderPartial('forms/_form-work-results', ['model' => $model, 'services' => $services, 'service_id' => $service_id]);
+      return $this->renderPartial('forms/_form-work-results', [
+          'model' => $model,
+          'service_id' => $service_id]);
    }
 
    public function actionGetPriceForm()
    {
       $model = new PriceList();
-      $services = Services::getServices();
       $id = Yii::$app->request->post('status');
       $service_id['id'] = $id;
-      return $this->renderPartial('forms/_form-price-list', ['model' => $model, 'services' => $services, 'service_id' => $service_id]);
+      return $this->renderPartial('forms/_form-price-list', [
+          'model' => $model,
+          'service_id' => $service_id
+      ]);
    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

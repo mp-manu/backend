@@ -51,10 +51,10 @@ class AnswerQuestionsController extends Controller
 
         if ($model->load(Yii::$app->request->post())) {
             if($model->save()){
-                Yii::$app->session->setFlash('creatingSuccess', 'Запись успешно сохранено!');
+                Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
                 return $this->redirect(['/admin/services/edit', 'id' => $model->service_id]);
             }else{
-                Yii::$app->session->setFlash('creatingError', 'Не удается сохранить запись!');
+                Yii::$app->session->setFlash('error', 'Не удается сохранить запись!');
                 return $this->redirect(['/admin/services/edit', 'id' => $model->service_id]);
             }
 

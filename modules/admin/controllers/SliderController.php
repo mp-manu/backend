@@ -93,6 +93,7 @@ class SliderController extends Controller
 
             $model->access = 1;
             $model->order = Slider::setSlideOrder($model->order);
+            if(empty($model->btn_title)) $model->btn_title='Заказать по чертежу';
             if($model->save()){
                 Yii::$app->session->setFlash('creatingSuccess', 'Запись успешно сохранено!');
                 return $this->redirect(['view', 'id' => $model->id]);
@@ -131,15 +132,11 @@ class SliderController extends Controller
         }
         $old_img = $model->img_url;
         $old_cover = $model->slide_cover;
-
         if ($model->load(Yii::$app->request->post())) {
             $slide_image = UploadedFile::getInstance($model, 'img_url');
             $slide_cover = UploadedFile::getInstance($model, 'slide_cover');
-
-
            $path = Yii::getAlias('@uploadsroot');
             if(!empty($slide_image)){
-
                 $fileName = 'slide-cover_'.$max_id.'.'.$slide_image->extension;
                 $slide_image->saveAs($path.'/slider/'.$fileName);
                 $model->img_url = $fileName;
@@ -154,9 +151,9 @@ class SliderController extends Controller
                 $model->slide_cover = $old_cover;
             }
 
-
             $model->access = 1;
             $model->order = Slider::setSlideOrder($model->order);
+            if(empty($model->btn_title)) $model->btn_title='Заказать по чертежу';
             if($model->save(false)){
                 Yii::$app->session->setFlash('creatingSuccess', 'Запись успешно сохранено!');
                 return $this->redirect(['view', 'id' => $model->id]);

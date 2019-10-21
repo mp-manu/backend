@@ -3,7 +3,7 @@
 return [
     'class' => 'yii\db\Connection',
     'dsn' => 'mysql:host=localhost;dbname=tech_arsenal',
-    'username' => 'root',
+    'username' => 'user',
     'password' => '',
     'charset' => 'utf8',
 

@@ -334,7 +334,7 @@ echo $this->render('/page/banners/banner', ['service' => $service]);
                                                                    alt>
                                                               <img class="example-showcase__schema"
                                                                    data-swiper-parallax-x="-60"
-                                                                   src="<?= Yii::getAlias('@uploads') ?>/results/<?= $result['img'] ?>"
+                                                                   src="<?= Yii::getAlias('@uploads') ?>/results/<?= $result['img_draw'] ?>"
                                                                    alt></a>
                                                       </li>
                                                   <?php endforeach; ?>

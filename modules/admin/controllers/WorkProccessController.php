@@ -64,11 +64,13 @@ class WorkProccessController extends Controller
                 $proccessImage->saveAs($path . '/proccess/' . $fileName);
                 $model->img = $fileName;
             }
+            if(empty($model->description)) $model->description = $model->title;
+            //debug($model);
             if ($model->save()) {
-                Yii::$app->session->setFlash('creatingSuccess', 'Запись успешно сохранено!');
+                Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
                 return $this->redirect(['/admin/services/edit', 'id' => $model->service_id]);
             } else {
-                Yii::$app->session->setFlash('creatingError', 'Не удается сохранить запись!');
+                Yii::$app->session->setFlash('error', 'Не удается сохранить запись!');
                 return $this->redirect(['/admin/services/edit', 'id' => $model->service_id]);
             }
 
@@ -110,6 +112,7 @@ class WorkProccessController extends Controller
             }else{
                 $model->img = $old_img;
             }
+           if(empty($model->description)) $model->description = $model->title;
             if ($model->save()) {
                 Yii::$app->session->setFlash('creatingSuccess', 'Запись успешно сохранено!');
                 return $this->redirect(['/admin/services/edit', 'id' => $model->service_id]);
