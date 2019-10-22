@@ -9,6 +9,7 @@ use app\modules\admin\models\ServiceInfoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 class ServiceInfoController extends Controller
 {
@@ -37,8 +38,20 @@ class ServiceInfoController extends Controller
    public function actionCreate()
    {
       $model = new ServiceInfo();
+      $maxId = ServiceInfo::find()->max('id');
+      if($maxId==0){
+         $maxId=1;
+      }else{
+         $maxId+=1;
+      }
       if ($model->load(Yii::$app->request->post())) {
-
+         $serviceInfoImg = UploadedFile::getInstance($model, 'img');
+         if (!empty($serviceInfoImg)) {
+            $path = Yii::getAlias('@uploadsroot');
+            $fileName = 'service-info_' . $maxId . '.' . $serviceInfoImg->extension;
+            $serviceInfoImg->saveAs($path . '/services/' . $fileName);
+            $model->img = $fileName;
+         }
          if ($model->save()) {
             Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
             return $this->redirect(['/admin/services/edit', 'id' => $model->service_id]);
@@ -60,13 +73,30 @@ class ServiceInfoController extends Controller
    {
       $model = $this->findModel($id);
 
-      if ($model->load(Yii::$app->request->post()) && $model->save()) {
+      $oldImg = $model->img;
+      $oldId = $model->id;
+
+      if ($model->load(Yii::$app->request->post())) {
+
+         $serviceInfoImg = UploadedFile::getInstance($model, 'img');
+         if (!empty($serviceInfoImg)) {
+            $path = Yii::getAlias('@uploadsroot');
+            $fileName = 'service-info_' . $oldId . '.' . $serviceInfoImg->extension;
+            $serviceInfoImg->saveAs($path . '/services/' . $fileName);
+            $model->img = $fileName;
+         }else{
+            $model->img = $oldImg;
+         }
+         if($model->save()){
+            Yii::$app->session->setFlash('success', 'Запись успешно обновлено!');
+         }else{
+            Yii::$app->session->setFlash('error', 'Не удается обновить запись!');
+         }
          return $this->redirect(['/admin/services/edit', 'id' => $model->service_id]);
       }
-      $services = Services::getServices();
+
       return $this->render('update', [
           'model' => $model,
-          'services' => $services,
       ]);
    }
 

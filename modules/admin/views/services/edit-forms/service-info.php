@@ -24,6 +24,7 @@ $model->service_id = $service_id['id'];
                            <th>№</th>
                            <th>Заголовок</th>
                            <th>Описание</th>
+                           <th>Фото</th>
                            <th>Действие</th>
                        </tr>
                        </thead>
@@ -33,6 +34,7 @@ $model->service_id = $service_id['id'];
                            <tr>
                                <td><?= $i ?></td>
                                <td><?= $info['val'] ?></td>
+                               <td><img src="/uploads/services/<?= $info['img'] ?>" width="50"></td>
                                <td><?= $info['description'] ?></td>
                                <td>
                                   <?php if ($info['status'] == 1): ?>
@@ -76,7 +78,7 @@ $model->service_id = $service_id['id'];
            </div>
            <div class="col-lg-6">
                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                  <?= $form->field($model, 'key')->textInput(['maxlength' => true]) ?>
+                  <?= $form->field($model, 'img')->fileInput(['maxlength' => true]) ?>
                </div>
            </div>
        </div>
@@ -84,7 +86,6 @@ $model->service_id = $service_id['id'];
            <div class="col-lg-12">
                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
                   <?= $form->field($model, 'status')->dropDownList(['1' => 'Включен', '0' => 'Отключен']) ?>
-
                </div>
            </div>
        </div>

@@ -11,6 +11,7 @@ use Yii;
  * @property int $service_id
  * @property string $key
  * @property string $val
+ * @property string $img
  * @property string $description
  * @property int $status
  *
@@ -32,10 +33,11 @@ class ServiceInfo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['service_id', 'key', 'val'], 'required'],
+            [['service_id', 'val'], 'required'],
             [['service_id', 'status'], 'integer'],
             [['key', 'val'], 'string', 'max' => 255],
             [['description'], 'string', 'max' => 500],
+            [['img'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, svg'],
             [['service_id'], 'exist', 'skipOnError' => true, 'targetClass' => Services::className(), 'targetAttribute' => ['service_id' => 'id']],
         ];
     }
@@ -49,6 +51,7 @@ class ServiceInfo extends \yii\db\ActiveRecord
             'id' => 'ID',
             'service_id' => 'Услуга',
             'key' => 'Алиас',
+            'img' => 'Фото',
             'val' => 'Заголовок',
             'description' => 'Описание',
             'status' => 'Доступ',

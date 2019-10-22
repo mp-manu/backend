@@ -2,6 +2,9 @@
 
 namespace app\modules\admin\models;
 
+use app\models\CallRequest;
+use app\models\Contact;
+use app\models\OrderByDrawing;
 use Yii;
 
 /**
@@ -78,6 +81,32 @@ class BackMenu extends \yii\db\ActiveRecord
    {
       $menu = '';
       $service = Services::find()->where(['status' => 1])->asArray()->all();
+      $amount_contacts = Contact::find()->where(['status' => 1])->count();
+      $amount_draw_orders = OrderByDrawing::find()->where(['status' => 1])->count();
+      $amount_call_request = CallRequest::find()->where(['status' => 1])->count();
+      $amount_answer_question = AnswerQuestions::find()->where(['type' => 2, 'status' => 1])->count();
+      $sum = $amount_contacts+$amount_draw_orders+$amount_call_request+$amount_answer_question;
+      if($sum>0){
+         Yii::$app->db->createCommand("UPDATE back_menu 
+		   SET notifyscript = '<span class=\"label label-rouded label-menu label-danger\">$sum</span>' WHERE nodeid=27;")->execute();
+      }
+      if($amount_contacts>0){
+         Yii::$app->db->createCommand("UPDATE back_menu 
+		   SET notifyscript = '<span class=\"label label-rouded label-menu label-warning\">$amount_contacts</span>' WHERE nodeid=35;")->execute();
+      }
+      if($amount_answer_question>0){
+         Yii::$app->db->createCommand("UPDATE back_menu 
+		   SET notifyscript = '<span class=\"label label-rouded label-menu label-success\">$amount_answer_question</span>' WHERE nodeid=38;")->execute();
+      }
+      if($amount_call_request>0){
+         Yii::$app->db->createCommand("UPDATE back_menu 
+		   SET notifyscript = '<span class=\"label label-rouded label-menu label-info\">$amount_call_request</span>' WHERE nodeid=36;")->execute();
+      }
+      if($amount_draw_orders>0){
+         Yii::$app->db->createCommand("UPDATE back_menu 
+		   SET notifyscript = '<span class=\"label label-rouded label-menu label-danger\">$amount_draw_orders</span>' WHERE nodeid=37;")->execute();
+      }
+
 
       $parent0 = BackMenu::find()
           ->where(['parentnodeid' => 0, 'userstatus' => ['ALL'], 'nodeaccess' => 1])
@@ -99,7 +128,6 @@ class BackMenu extends \yii\db\ActiveRecord
                   $menu .= '<li class="nav-item">';
                   $menu .= '<a href="/admin/services/index" class="nav-link nav-toggle">';
                   $menu .= '<span class="title">Все услуги</span></a></li>';
-
                   $menu .= '<li class="nav-item">';
                   foreach ($service as $serv) {
                      $menu .= '<li class="nav-item">';
@@ -131,7 +159,7 @@ class BackMenu extends \yii\db\ActiveRecord
                foreach ($parent1 as $item1) {
                   $menu .= '<li class="nav-item">';
                   $menu .= '<a href="' . $item1['nodeurl'] . '" class="nav-link nav-toggle">';
-                  $menu .= '<i class="' . $item1['nodeicon'] . '"></i> ' . $item1['notifyscript'];;
+                  $menu .= '<i class="' . $item1['nodeicon'] . '"></i> ' . $item1['notifyscript'];
                   $menu .= '<span class="title">' . $item1['nodename'] . '</span>';
                   $menu .= '<span class="' . $item1['arrow_tag'] . '"></span></a>';
                   $menu .= '</a>';

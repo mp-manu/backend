@@ -354,11 +354,23 @@ class ServicesController extends Controller
             return $this->redirect(['edit', 'id' => $serviceModel->id]);
          }
       }
-      /////////////////////Добавление информации об услуги//////////////////////////////////////
 
+
+      /////////////////////Добавление информации об услуги//////////////////////////////////////
+      $oldImg = $serviceInfoModel->img;
+      $oldId = rand(1, 9).rand(1, 9);
       if ($serviceInfoModel->load(Yii::$app->request->post())) {
          $service_id['id'] = (empty($service_id['id'])) ? $serviceInfoModel->service_id : $service_id['id'];
          $serviceInfoModel->service_id = $service_id['id'];
+         $serviceInfoImg = UploadedFile::getInstance($serviceInfoModel, 'img');
+         if (!empty($serviceInfoImg)) {
+            $path = Yii::getAlias('@uploadsroot');
+            $fileName = 'service-info_' . $oldId . '.' . $serviceInfoImg->extension;
+            $serviceInfoImg->saveAs($path . '/services/' . $fileName);
+            $serviceInfoModel->img = $fileName;
+         }else{
+            $serviceInfoModel->img = $oldImg;
+         }
          if ($serviceInfoModel->save()) {
             Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
             return $this->redirect(['edit', 'id' => $service_id['id']]);

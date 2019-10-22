@@ -23,7 +23,7 @@ $model->service_id = $service_id['id'];
         </div>
         <div class="col-lg-6">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-               <?= $form->field($model, 'key')->textInput(['maxlength' => true, 'required' => true]) ?>
+               <?= $form->field($model, 'img')->fileInput() ?>
             </div>
         </div>
     </div>

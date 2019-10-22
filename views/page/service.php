@@ -28,9 +28,8 @@ echo $this->render('/page/banners/banner', ['service' => $service]);
                               ?>
                                   <li class="options__item col-4">
                                       <article class="option">
-                                          <header class="option__header"><img class="option__icon"
-                                                                              src="<?= Yii::getAlias('@web') ?>/img/option-<?= $k ?>.svg"
-                                                                              alt>
+                                          <header class="option__header">
+                                              <img class="option__icon" src="<?= Yii::getAlias('@uploads') ?>/services/<?= $info['img'] ?>" alt>
                                               <h3 class="option__title"><?= $info['val'] ?></h3>
                                           </header>
                                           <div class="option__body">
