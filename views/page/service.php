@@ -313,7 +313,7 @@ echo $this->render('/page/banners/banner', ['service' => $service]);
        <div class="content__section is-dark is-pb100">
            <section class="section">
                <div class="container">
-                   <header class="section__header"><h2 class="section__title title"><?= Yii::$app->settings->get('Загаловки', 'пример_работ') ?></h2>
+                   <header class="section__header"><h2 class="section__title title"><?= Yii::$app->settings->get('Текст', 'пример_работ') ?></h2>
                    </header>
                    <div class="section__body">
                        <example-showcase inline-template>
@@ -328,7 +328,7 @@ echo $this->render('/page/banners/banner', ['service' => $service]);
                                                           ref="leftSliderItem"><a
                                                                   class="example-showcase__cover lightbox"
                                                                   data-group="example"
-                                                                  href="/img/results/<?= $result['img'] ?>">
+                                                                  href="<?= Yii::getAlias('@uploads') ?>/results/<?= $result['img'] ?>">
                                                               <img class="example-showcase__image"
                                                                    src="<?= Yii::getAlias('@uploads') ?>/results/<?= $result['img'] ?>"
                                                                    alt>
@@ -555,7 +555,9 @@ echo $this->render('/page/banners/banner', ['service' => $service]);
                                                                       <tr>
                                                                           <td><?= $price ?></td>
                                                                          <?php foreach ($depth as $item): ?>
-                                                                             <td><?= $item[$id] ?> ₽</td>
+                                                                                <?php if(isset($item[$id])): ?>
+                                                                                <td><?= $item[$id] ?> ₽</td>
+                                                                                <?php endif; ?>
                                                                          <?php endforeach; ?>
                                                                       </tr>
                                                                   <?php endforeach; ?>

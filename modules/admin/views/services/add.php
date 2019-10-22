@@ -52,7 +52,7 @@ $display = (count($services) > 0 || !empty($services)) ? true : false;
                                [
                                    'model' => $serviceModel,
                                    'services' => $services,
-                                   'service_id' => $service_id
+                                   //'service_id' => $service_id
                                ]),
                            'active' => true
                        ],
@@ -62,7 +62,7 @@ $display = (count($services) > 0 || !empty($services)) ? true : false;
                            'content' => $this->render('forms/service-info', [
                                'model' => $serviceInfoModel,
                                'services' => $services,
-                               'service_id' => $service_id
+                               //'service_id' => $service_id
                            ]),
                        ],
                        [
@@ -80,7 +80,7 @@ $display = (count($services) > 0 || !empty($services)) ? true : false;
                            'content' => $this->render('forms/work-proccess', [
                                'model' => $workProccess,
                                'services' => $services,
-                               'service_id' => $service_id
+                               //'service_id' => $service_id
                            ]),
                        ],
                        [
@@ -89,7 +89,7 @@ $display = (count($services) > 0 || !empty($services)) ? true : false;
                            'content' => $this->render('forms/work-results', [
                                'model' => $workResults,
                                'services' => $services,
-                               'service_id' => $service_id
+                               //'service_id' => $service_id
                            ]),
                        ],
 
@@ -100,7 +100,7 @@ $display = (count($services) > 0 || !empty($services)) ? true : false;
                                [
                                    'model' => $priceList,
                                    'services' => $services,
-                                   'service_id' => $service_id
+                                   //'service_id' => $service_id
                                ]),
                        ],
                    ]

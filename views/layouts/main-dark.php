@@ -215,10 +215,13 @@ AppAsset::register($this);
                                             </div>
                                         </div>
                                         <footer class="form__footer">
-                                            <div class="form__agreement"><label class="checkbox"><input
-                                                            class="checkbox__input" type="checkbox" name="agreement"
-                                                            required><span class="checkbox__label"><?= Yii::$app->settings->get('Сайт', 'заказывая_звонок') ?><a
-                                                                href="#"><?= Yii::$app->settings->get('Текст', 'personal_data') ?></a></span></label>
+                                            <div class="form__agreement">
+                                                <label class="checkbox">
+                                                    <input class="checkbox__input" type="checkbox" name="agreement" required>
+                                                    <span class="checkbox__label"><?= Yii::$app->settings->get('Сайт', 'заказывая_звонок') ?>
+                                                        <a href="/page/privacy-policy"><?= Yii::$app->settings->get('Текст', 'personal_data') ?></a>
+                                                    </span>
+                                                </label>
                                             </div>
                                             <div class="form__button">
                                                 <button class="button is-wide is-large"><?= Yii::$app->settings->get('Текст', 'Отправить') ?></button>

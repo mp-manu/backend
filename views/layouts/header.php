@@ -16,7 +16,11 @@ use app\modules\admin\models\FrontMenu;
             <div class="header__inner">
                 <div class="header__logo">
                     <div class="logo is-light">
+                        <?php if(Yii::$app->controller->action->id != 'index'):  ?>
+                        <a href="/" style="text-decoration: none"><div class="logo__label"><?= Yii::$app->settings->get('Сайт', 'имя') ?></div></a>
+                        <?php else: ?>
                         <div class="logo__label"><?= Yii::$app->settings->get('Сайт', 'имя') ?></div>
+                        <?php endif; ?>
                         <div class="logo__caption"><?= Yii::$app->settings->get('Сайт', 'описание') ?></div>
                     </div>
                 </div>

@@ -139,12 +139,9 @@ class ServicesController extends Controller
    }
 
 
-   public function actionAdd($id = null)
+   public function actionAdd()
    {
-      $id = Html::encode($id);
-      if (!empty($id)) {
-         $service_id = Services::find()->where(['id' => $id])->asArray()->one();
-      }
+
       $serviceModel = new Services();
       $serviceInfoModel = new ServiceInfo();
       $answerQuestions = new AnswerQuestions();
@@ -297,7 +294,7 @@ class ServicesController extends Controller
           'workResults' => $workResults,
           'priceList' => $priceList,
           'services' => $services,
-          'service_id' => $service_id
+          //'service_id' => $service_id
       ]);
    }
 
@@ -314,7 +311,7 @@ class ServicesController extends Controller
       $priceList = $this->findPriceList($id);
       $slug = new Slugify(['rulesets' => ['default', 'russian']]);
 
-      $answerQuestionsData = AnswerQuestions::find()->where(['service_id' => $id, 'type' => 1])->all();
+      $answerQuestionsData = AnswerQuestions::find()->where(['service_id' => $id])->all();
       $workProccessData = WorkProccess::find()->where(['service_id' => $id])->all();
       $workResultsData = WorkResults::find()->where(['service_id' => $id])->all();
       $priceListData = PriceList::find()->where(['service_id' => $id])->orderBy('type')->all();

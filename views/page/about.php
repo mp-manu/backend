@@ -97,10 +97,10 @@ $this->title = 'О компании';
                                                                          data-swiper-parallax-x="-60">
                                                                         <div class="person is-light is-simple">
                                                                             <div class="person__name">
-                                                                                Дмитрий Семенов
+                                                                                <?= Yii::$app->settings->get('Компания', 'основатель_компании') ?>
                                                                             </div>
                                                                             <div class="person__position">
-                                                                                Основатель компании
+                                                                               <?= Yii::$app->settings->get('Должность', 'основатель_компании') ?>
                                                                             </div>
                                                                         </div>
                                                                     </div>

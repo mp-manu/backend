@@ -160,7 +160,7 @@
                                                                         type="checkbox" name="agreement"
                                                                         required>
                                                                 <span class="checkbox__label"><?= Yii::$app->settings->get('Сайт', 'заказывая_звонок') ?>
-                                                                    <a href="#">персональных данных</a>
+                                                                    <a href="/page/privacy-policy">персональных данных</a>
                                                                 </span>
                                                             </label>
                                                         </div>

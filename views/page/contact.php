@@ -46,11 +46,10 @@ $this->title = 'Контакты';
                                                                 <img class="person__image" src="<?= Yii::getAlias('@web') ?>/uploads/<?= Yii::$app->images->get('Главная', 'руков_цеха') ?>"
                                                                         alt="<?= Yii::$app->settings->get('Сотрудник', 'главТехник') ?>">
                                                             </figure>
-                                                            <header class="person__header"><h4
-                                                                        class="person__name"><?= Yii::$app->settings->get('Сотрудник', 'главТехник') ?></h4>
-                                                                <p class="person__position"><?= Yii::$app->settings->get('Должность', 'главТехник') ?>
-																</p>
-																</header>
+                                                            <header class="person__header">
+                                                                <h4 class="person__name"><?= Yii::$app->settings->get('Сотрудник', 'главТехник') ?></h4>
+                                                                <p class="person__position"><?= Yii::$app->settings->get('Должность', 'главТехник') ?> </p>
+                                                            </header>
                                                         </article>
                                                     </div>
                                                 </div>
@@ -58,17 +57,20 @@ $this->title = 'Контакты';
                                                     <ul class="contacts__list">
                                                         <li class="contacts__item">
                                                             <div class="contact">
-                                                                <div class="contact__caption">Телефон
+                                                                <div class="contact__caption">
+                                                                    Телефон
                                                                 </div>
-                                                                <a class="contact__value"
-                                                                   href="tel:<?= Yii::$app->settings->get('Контакты', 'Телефон') ?>">
-																   <?= Yii::$app->settings->get('Контакты', 'Телефон') ?></a></div>
+                                                                <a class="contact__value" href="tel:<?= Yii::$app->settings->get('Контакты', 'Телефон') ?>">
+																   <?= Yii::$app->settings->get('Контакты', 'Телефон') ?></a>
+                                                            </div>
                                                         </li>
                                                         <li class="contacts__item">
                                                             <div class="contact">
-                                                                <div class="contact__caption">Адрес
+                                                                <div class="contact__caption">
+                                                                    Адрес
                                                                 </div>
-                                                                <div class="contact__value"><?= Yii::$app->settings->get('Контакты', 'адресс') ?>
+                                                                <div class="contact__value">
+                                                                   <?= Yii::$app->settings->get('Контакты', 'адресс') ?>
                                                                 </div>
                                                             </div>
                                                         </li>
@@ -77,7 +79,7 @@ $this->title = 'Контакты';
                                                                 <div class="contact__caption">Email
                                                                 </div>
                                                                 <a class="contact__value"
-                                                                   href="mailto:andrey@prometey67.ru">andrey@prometey67.ru</a>
+                                                                   href="mailto:andrey@prometey67.ru"><?= Yii::$app->settings->get('Контакты', 'Email') ?></a>
                                                             </div>
                                                         </li>
                                                     </ul>
@@ -233,17 +235,18 @@ $this->title = 'Контакты';
                                                                                         :class="{ &quot;is-active&quot;: active, &quot;is-ready&quot;: ready }"
                                                                                         ref="provider"
                                                                                         v-slot="{ errors }">
-                                                                                    <label class="v-input__label"><span
-                                                                                                class="v-input__placeholder">Ваш Email</span><input
-                                                                                                class="v-input__field"
-                                                                                                name="email"
-                                                                                                v-model="value"
+                                                                                    <label class="v-input__label">
+                                                                                        <span class="v-input__placeholder">Ваш Email</span>
+                                                                                        <input class="v-input__field" name="email" v-model="value"
                                                                                                 @focus="handler(&quot;focus&quot;)"
                                                                                                 @blur="handler(&quot;blur&quot;)"><span
                                                                                                 class="v-input__errors"
                                                                                                 v-if="errors.length &gt; 0"><span
                                                                                                     class="v-input__error"
-                                                                                                    v-for="error in errors">{{ error }}</span></span></label>
+                                                                                                    v-for="error in errors">{{ error }}
+                                                                                            </span>
+                                                                                        </span>
+                                                                                    </label>
                                                                                 </validation-provider>
                                                                             </v-input>
                                                                         </div>
@@ -260,17 +263,18 @@ $this->title = 'Контакты';
                                                                                         :class="{ &quot;is-active&quot;: active, &quot;is-ready&quot;: ready }"
                                                                                         ref="provider"
                                                                                         v-slot="{ errors }">
-                                                                                    <label class="v-input__label"><span
-                                                                                                class="v-input__placeholder">Название организации</span><input
-                                                                                                class="v-input__field"
-                                                                                                name="org"
+                                                                                    <label class="v-input__label">
+                                                                                        <span class="v-input__placeholder">Название организации</span>
+                                                                                        <input class="v-input__field" name="org"
                                                                                                 v-model="value"
                                                                                                 @focus="handler(&quot;focus&quot;)"
                                                                                                 @blur="handler(&quot;blur&quot;)"><span
                                                                                                 class="v-input__errors"
                                                                                                 v-if="errors.length &gt; 0"><span
                                                                                                     class="v-input__error"
-                                                                                                    v-for="error in errors">{{ error }}</span></span></label>
+                                                                                                    v-for="error in errors">{{ error }}</span>
+                                                                                        </span>
+                                                                                    </label>
                                                                                 </validation-provider>
                                                                             </v-input>
                                                                         </div>
@@ -289,16 +293,19 @@ $this->title = 'Контакты';
                                                                                         :class="{ &quot;is-active&quot;: active, &quot;is-ready&quot;: ready }"
                                                                                         v-slot="{ errors }">
                                                                                     <label class="v-textarea__label"><span
-                                                                                                class="v-textarea__placeholder">Ваше сообщение</span><textarea
+                                                                                                class="v-textarea__placeholder">Ваше сообщение</span>
+                                                                                        <textarea
                                                                                                 class="v-textarea__field"
                                                                                                 name="message"
                                                                                                 v-model="value"
                                                                                                 @focus="handler(&quot;focus&quot;)"
-                                                                                                @blur="handler(&quot;blur&quot;)"></textarea><span
-                                                                                                class="v-textarea__errors"
-                                                                                                v-if="errors.length &gt; 0"><span
-                                                                                                    class="v-textarea__error"
-                                                                                                    v-for="error in errors">{{ error }}</span></span></label>
+                                                                                                @blur="handler(&quot;blur&quot;)">
+
+                                                                                        </textarea>
+                                                                                        <span class="v-textarea__errors" v-if="errors.length &gt; 0">
+                                                                                            <span class="v-textarea__error"  v-for="error in errors">{{ error }}</span>
+                                                                                        </span>
+                                                                                    </label>
                                                                                 </validation-provider>
                                                                             </v-textarea>
                                                                         </div>
@@ -307,17 +314,17 @@ $this->title = 'Контакты';
                                                             </div>
                                                         </div>
                                                         <footer class="form__footer">
-                                                            <div class="form__agreement"><label
-                                                                        class="checkbox"><input
-                                                                            class="checkbox__input"
-                                                                            type="checkbox" name="agreement"
-                                                                            required><span
-                                                                            class="checkbox__label">Заказывая обратный звонок, даю согласие на обработку <a
-                                                                                href="/page/privacy-policy">персональных данных</a></span></label>
+                                                            <div class="form__agreement">
+                                                                <label class="checkbox">
+                                                                    <input class="checkbox__input" type="checkbox" name="agreement" required>
+                                                                    <span class="checkbox__label"><?= Yii::$app->settings->get('Сайт', 'заказывая_звонок') ?>
+                                                                        <a href="/page/privacy-policy"><?= Yii::$app->settings->get('Текст', 'personal_data') ?></a>
+                                                                    </span>
+                                                                </label>
                                                             </div>
                                                             <div class="form__button">
                                                                 <button class="button is-wide is-large">
-                                                                    Отправить сообщение
+                                                                   <?= Yii::$app->settings->get('Текст', 'send_message') ?>
                                                                 </button>
                                                             </div>
                                                         </footer>
