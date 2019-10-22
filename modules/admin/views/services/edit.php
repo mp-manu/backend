@@ -10,7 +10,7 @@ use yii\bootstrap\Tabs;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
-$this->title = 'Редактировать услугу';
+$this->title = 'Редактировать услугу: '. \app\modules\admin\models\Services::getServiceName($service_id['id']);
 $this->params['breadcrumbs'][] = ['label' => 'Все услуги', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 $display = (count($services) > 0 || !empty($services)) ? true : false;

@@ -112,4 +112,9 @@ class Services extends \yii\db\ActiveRecord
         $data = Services::find()->where(['status' => 1])->asArray()->all();
         return $data;
     }
+
+    public static function getServiceName($id){
+         $service = Services::find()->where(['id' => $id])->asArray()->one();
+         return $service['name'];
+    }
 }
