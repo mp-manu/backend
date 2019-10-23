@@ -20,11 +20,9 @@
                                                                     href="/" title="Главная">Главная</a>
                                     </li>
                                     <li class="breadcrumb__item"><a class="breadcrumb__link"
-                                                                    href="/page/service-list" title="Услуги">Список услуг</a>
+                                                                    href="/page/service-list" title="Услуги">Услуги</a>
                                     </li>
-                                    <li class="breadcrumb__item"><a class="breadcrumb__link"
-                                                                    href="/page/service/<?=$service['alias']?>" title="Услуги"><?= $service['name'] ?></a>
-                                    </li>
+                                    <li class="breadcrumb__item"><?= $service['name'] ?></li>
                                 </ul>
                             </div>
                             <h1 class="headline__title title"><?= $service['name'] ?></h1>

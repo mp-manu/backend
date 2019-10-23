@@ -26,6 +26,7 @@ AppAsset::register($this);
     <meta property="og:description" content="">
     <meta property="og:site_name" content="Главная">
     <meta property="og:locale" content="ru_RU">
+    <?= Yii::$app->settings->getMetaTags(); ?>
     <script>document.documentElement.classList.add('js');</script>
     <title><?= Html::encode($this->title) ?></title>
     <link rel="shortcut icon" href="<?= Yii::getAlias('@web') ?>/img/favicon.ico" type="image/x-icon">
@@ -241,7 +242,9 @@ AppAsset::register($this);
         </div>
     </div>
 </div>
+<?= Yii::$app->settings->getMetrikScripts(); ?>
 <?php $this->endBody() ?>
+
 </body>
 </html>
 <?php $this->endPage() ?>

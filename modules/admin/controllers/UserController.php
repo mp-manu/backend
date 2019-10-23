@@ -192,11 +192,6 @@ class UserController extends Controller
         ]);
     }
 
-    public function actionLoginDetails()
-    {
-        // TODO: Manuchehr
-    }
-
     public function actionChangePassword()
     {
         $uid = Yii::$app->user->id;

@@ -2,6 +2,7 @@
 
 namespace app\components;
 
+use app\modules\admin\models\MetatagsYandexMetrika;
 use Yii;
 use yii\base\Component;
 use yii\caching\Cache;
@@ -237,6 +238,20 @@ class Settings extends Component
         }
 
         return true;
+    }
+
+    public function getMetaTags(){
+
+       $meta = MetatagsYandexMetrika::find()->where(['status' => 1])->asArray()->one();
+
+       return $meta['tags'];
+    }
+
+
+    public function getMetrikScripts(){
+       $meta = MetatagsYandexMetrika::find()->where(['status' => 1])->asArray()->one();
+
+       return $meta['scripts'];
     }
 
     /**
