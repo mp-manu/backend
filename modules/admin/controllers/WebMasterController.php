@@ -9,6 +9,8 @@
 namespace app\modules\admin\controllers;
 
 
+use app\models\Contact;
+use app\modules\admin\models\CompanyMap;
 use app\modules\admin\models\MetatagsYandexMetrika;
 use Yii;
 use yii\db\Query;
@@ -60,6 +62,17 @@ class WebMasterController extends Controller
          }
       }
       return $this->render('update', [
+          'model' => $model
+      ]);
+   }
+
+
+
+   public function actionContactMap(){
+
+      $model = CompanyMap::findOne(1);
+
+      return $this->render('map', [
           'model' => $model
       ]);
    }
