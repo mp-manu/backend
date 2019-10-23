@@ -17,7 +17,6 @@ $display = (count($services) > 0 || !empty($services)) ? true : false;
 <?= $this->render('/layouts/page-bar') ?>
 <div class="row">
     <div class="col-lg-12">
-<!--        <h2>--><?//= $this->title ?><!--</h2>-->
        <?php if (\Yii::$app->session->hasFlash('success')) : ?>
            <div class="alert alert-success alert-dismissible" style="margin-top: 5%;">
                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -66,12 +65,21 @@ $display = (count($services) > 0 || !empty($services)) ? true : false;
                            ]),
                        ],
                        [
+                           'label' => 'Оборудование',
+                           'visible' => $display,
+                           'content' => $this->render('forms/equipment',
+                               [
+                                   'model' => $equipment,
+                                   'services' => $services,
+                               ]),
+                       ],
+                       [
                            'label' => 'Вопросы и ответы',
                            'visible' => $display,
                            'content' => $this->render('forms/answer-question', [
                                'model' => $answerQuestions,
                                'services' => $services,
-                               'service_id' => $service_id
+                               //'service_id' => $service_id
                            ]),
                        ],
                        [
@@ -103,6 +111,7 @@ $display = (count($services) > 0 || !empty($services)) ? true : false;
                                    //'service_id' => $service_id
                                ]),
                        ],
+
                    ]
                ]);
                ?>

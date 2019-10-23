@@ -39,7 +39,7 @@ class Services extends \yii\db\ActiveRecord
     {
         return [
             [['parent_id', 'status'], 'integer'],
-            [['name'], 'required'],
+            [['name', 'alias'], 'required'],
             [['description'], 'string'],
             [['name'], 'string', 'max' => 255],
             [['alias'], 'string', 'max' => 150],

@@ -423,8 +423,10 @@ echo $this->render('/page/banners/banner', ['service' => $service]);
                    <div class="section__body">
                        <div class="section__subsection">
                            <section class="subsection">
-                               <header class="subsection__header"><h3 class="subsection__title"><span><i>Виды</i> гибки метала</span>
-                                   </h3></header>
+                               <header class="subsection__header">
+                                   <h3 class="subsection__title"><span><i>Виды</i> гибки метала</span>
+                                   </h3>
+                               </header>
                                <div class="subsection__body">
                                    <div class="grid is-row">
                                        <div class="col-6">
@@ -456,25 +458,20 @@ echo $this->render('/page/banners/banner', ['service' => $service]);
                                                                           </svg>
                                                                       </div>
                                                                       <transition name="fade">
-                                                                          <div class="accordion-item__body"
-                                                                               v-if="opened">
+                                                                          <div class="accordion-item__body" v-if="opened">
                                                                               <div class="accordion-item__text text">
-                                                                                  <p><?= $service['description'] ?></p></div>
-                                                                             <?php if(!empty($service['desc'])): ?>
+                                                                                  <p><?= $service['description'] ?></p>
+                                                                              </div>
+                                                                             <?php if(!empty($subServicesEquipments[$service['id']])): ?>
                                                                                  <div class="accordion-item__equipment">
                                                                                      <article class="equipment">
                                                                                          <figure class="equipment__cover">
-                                                                                             <img class="equipment__image"
-                                                                                                  src="/img/<?= $service['img'] ?>"
-                                                                                                  alt></figure>
+                                                                                             <img src="<?= Yii::getAlias('@uploads').'/'.$subServicesEquipments[$service['id']]['img'] ?>" alt="" class="equipment__image">
+                                                                                         </figure>
                                                                                          <header class="equipment__header">
-                                                                                             <p class="equipment__caption">
-                                                                                                 Используемое
-                                                                                                 оборудование: </p>
-                                                                                             <h3 class="equipment__title">
-                                                                                                <?= $service['val'] ?></h3>
-                                                                                             <p class="equipment__descr">
-                                                                                                <?= $service['desc'] ?></p>
+                                                                                             <p class="equipment__caption">Используемое оборудование: </p>
+                                                                                             <h3 class="equipment__title"><?= $subServicesEquipments[$service['id']]['name'] ?></h3>
+                                                                                             <p class="equipment__descr"><?= $subServicesEquipments[$service['id']]['description'] ?></p>
                                                                                          </header>
                                                                                      </article>
                                                                                  </div>

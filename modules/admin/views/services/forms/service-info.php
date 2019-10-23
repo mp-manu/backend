@@ -4,7 +4,6 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$model->service_id = $service_id['id'];
 ?>
 
 <div class="service-info-form">

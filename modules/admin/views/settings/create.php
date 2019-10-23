@@ -12,8 +12,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <?= $this->render('/layouts/page-bar') ?>
 <div class="setting-create">
 
-<!--    <h1>--><?php //echo Html::encode($this->title); ?><!--</h1>-->
-
     <?php echo $this->render('_form', [
         'model' => $model,
     ]);

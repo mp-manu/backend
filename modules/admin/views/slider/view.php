@@ -27,6 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
     <p>
+        <?= Html::a('Список слайдов', ['index'], ['class' => 'btn btn-info']) ?>
         <?= Html::a('Обновить', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',

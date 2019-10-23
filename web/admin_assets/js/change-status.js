@@ -132,6 +132,35 @@ function changeStatusInfo(el){
 }
 
 
+function changeStatusEquipment(el){
+    var id = $(el).data('id');
+    var status = $(el).data('text');
+    $.ajax({
+        type: "POST",
+        url: '/admin/editable/change-equipment-status',
+        data: {id: id, status: status},
+        success: function(responese) {
+            var s = responese;
+            if(s == 1){
+                $(el).data("text", s);
+                $("#eqstatus"+id).removeAttr("class");
+                $(el).removeAttr("class");
+                $(el).addClass("btn btn-success btn-xs");
+                $("#eqstatus"+id).addClass("fa fa-check");
+            }else{
+                $(el).data("text", s);
+                $("#eqstatus"+id).removeAttr("class");
+                $(el).removeAttr("class");
+                $(el).addClass("btn btn-danger btn-xs");
+                $("#eqstatus"+id).addClass("fa fa-times");
+            }
+        }
+    });
+}
+
+
+
+
 $("#info-form").on( "click", function() {
     var content = document.getElementById("frm-content-info");
     var service_id = $('#service').data('text');
@@ -208,6 +237,21 @@ $("#price-form").on( "click", function() {
             content.innerHTML = response;
             $("#price-form").hide();
             $("#drop-price").val(service_id);
+        }
+
+    });
+});
+
+$("#equipment-form").on( "click", function() {
+    var content = document.getElementById("frm-content-equipment");
+    var service_id = $('#service').data('text');
+    $.ajax({
+        type: "POST",
+        url: '/admin/services/get-equipment-form',
+        data: {status: service_id},
+        success: function(response) {
+            content.innerHTML = response;
+            $("#equipment-form").hide();
         }
 
     });

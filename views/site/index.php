@@ -165,7 +165,7 @@ echo $this->render('/page/banners/slider', ['slider' => $slider]);
                                                    <div class="service__body">
                                                        <img class="service__icon" src="/img/service-ico-<?= $i ?>.svg" alt="">
                                                        <h4 class="service__title">
-                                                           <a class="service__link" href="/page/service/<?= $info['id'] ?>">
+                                                           <a class="service__link" target="_blank" href="/page/service/<?= $info['alias'] ?>">
                                                               <?= $info['name'] ?>
                                                            </a>
                                                        </h4>

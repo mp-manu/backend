@@ -3,6 +3,7 @@
 namespace app\modules\admin\controllers;
 
 use app\modules\admin\models\AnswerQuestions;
+use app\modules\admin\models\Equipment;
 use app\modules\admin\models\PriceList;
 use app\modules\admin\models\ServiceInfo;
 use app\modules\admin\models\WorkProccess;
@@ -148,6 +149,8 @@ class ServicesController extends Controller
       $workProccess = new WorkProccess();
       $workResults = new WorkResults();
       $priceList = new PriceList();
+      $equipment = new Equipment();
+
       $slug = new Slugify(['rulesets' => ['default', 'russian']]);
       $services = Services::find()->where(['status' => 1])->asArray()->all();
 
@@ -282,6 +285,31 @@ class ServicesController extends Controller
          }
       }
 
+
+      /*********************************************************************************************
+       ****************************EQUIPMENT SAVE FORM***********************************************
+       *********************************************************************************************/
+
+      if ($equipment->load(Yii::$app->request->post())) {
+         $max_id = Equipment::find()->max('id');
+         if ($max_id == 0) $max_id = 1; else $max_id += 1;
+         $equipmentImg = UploadedFile::getInstance($equipment, 'img');
+         if (!empty($equipmentImg)) {
+            $path = Yii::getAlias('@uploadsroot');
+            $fileName = 'equipment_' . $max_id . '.' . $equipmentImg->extension;
+            $equipmentImg->saveAs($path . '/' . $fileName);
+            $equipment->img = $fileName;
+         }
+         if ($equipment->save()) {
+            Yii::$app->session->setFlash('success', 'Запись успешно сохранено!');
+            return $this->redirect(['edit', 'id' => $equipment->service_id]);
+         } else {
+            Yii::$app->session->setFlash('error', 'Не удается сохранить запись!');
+            return $this->redirect(['edit', 'id' => $equipment->service_id]);
+         }
+      }
+
+
       /********************************************************************************************
        *********************************************************************************************
        ********************************************************************************************/
@@ -293,6 +321,7 @@ class ServicesController extends Controller
           'workProccess' => $workProccess,
           'workResults' => $workResults,
           'priceList' => $priceList,
+          'equipment' => $equipment,
           'services' => $services,
           //'service_id' => $service_id
       ]);
@@ -309,6 +338,8 @@ class ServicesController extends Controller
       $workProccess = $this->findProcces($id);
       $workResults = $this->findResult($id);
       $priceList = $this->findPriceList($id);
+      $equipment = $this->findEquipment($id);
+
       $slug = new Slugify(['rulesets' => ['default', 'russian']]);
 
       $answerQuestionsData = AnswerQuestions::find()->where(['service_id' => $id])->all();
@@ -316,6 +347,7 @@ class ServicesController extends Controller
       $workResultsData = WorkResults::find()->where(['service_id' => $id])->all();
       $priceListData = PriceList::find()->where(['service_id' => $id])->orderBy('type')->all();
       $serviceInfoData = ServiceInfo::find()->where(['service_id' => $id])->all();
+      $equipmentData = Equipment::find()->where(['service_id' => $id])->all();
 
       $services = Services::find()->where(['status' => 1])->asArray()->all();
       $service_id['id'] = $id;
@@ -422,7 +454,6 @@ class ServicesController extends Controller
          }
       }
 
-
       /////////////////////Добавление результатов работ//////////////////////////////////////
       if ($workResults->load(Yii::$app->request->post())) {
          $max_id = WorkResults::find()->max('id');
@@ -476,6 +507,8 @@ class ServicesController extends Controller
          }
       }
 
+
+
       return $this->render('edit', [
           'serviceModel' => $serviceModel,
           'serviceInfoModel' => $serviceInfoModel,
@@ -483,6 +516,7 @@ class ServicesController extends Controller
           'workProccess' => $workProccess,
           'workResults' => $workResults,
           'priceList' => $priceList,
+          'equipment' => $equipment,
           'services' => $services,
           'service_id' => $service_id,
 
@@ -491,6 +525,7 @@ class ServicesController extends Controller
           'workProccessData' => $workProccessData,
           'workResultsData' => $workResultsData,
           'priceListData' => $priceListData,
+          'equipmentData' => $equipmentData,
       ]);
 
    }
@@ -553,6 +588,14 @@ class ServicesController extends Controller
       return $model;
    }
 
+   protected function findEquipment($id){
+      if (($model = Equipment::findOne(['service_id' => $id, 'status' => 1])) !== null) {
+         return $model;
+      }
+      $model = new Equipment();
+      return $model;
+   }
+
    public function actionGetQuestionForm()
    {
       $model = new AnswerQuestions();
@@ -606,6 +649,16 @@ class ServicesController extends Controller
       $id = Yii::$app->request->post('status');
       $service_id['id'] = $id;
       return $this->renderPartial('forms/_form-price-list', [
+          'model' => $model,
+          'service_id' => $service_id
+      ]);
+   }
+
+   public function actionGetEquipmentForm(){
+      $model = new Equipment();
+      $id = Yii::$app->request->post('status');
+      $service_id['id']=$id;
+      return $this->renderPartial('forms/_form-equipment', [
           'model' => $model,
           'service_id' => $service_id
       ]);

@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $model app\modules\admin\models\WorkProccess */
 /* @var $form yii\widgets\ActiveForm */
 
-$model->service_id = $service_id['id'];
+//$model->service_id = $service_id['id'];
 ?>
 <?php $form = ActiveForm::begin(); ?>
     <div class="row">

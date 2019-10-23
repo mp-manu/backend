@@ -73,6 +73,16 @@ $display = (count($services) > 0 || !empty($services)) ? true : false;
                                ]),
                            ],
                            [
+                               'label' => 'Оборудование',
+                               'visible' => $display,
+                               'content' => $this->render('edit-forms/equipment',
+                                   [
+                                       'model' => $equipment,
+                                       'equipmentData' => $equipmentData,
+                                       'services' => $services
+                                   ]),
+                           ],
+                           [
                                'label' => 'Вопросы и ответы',
                                'visible' => $display,
                                'content' => $this->render('edit-forms/_edit-answer-question', [
@@ -113,6 +123,7 @@ $display = (count($services) > 0 || !empty($services)) ? true : false;
                                        'service_id' => $service_id
                                    ]),
                            ],
+
                        ]
                    ]);
                    ?>

@@ -7,7 +7,7 @@ use yii\widgets\ActiveForm;
 /* @var $this yii\web\View */
 /* @var $model app\modules\admin\models\PriceList */
 /* @var $form yii\widgets\ActiveForm */
-$model->service_id = $service_id['id'];
+//$model->service_id = $service_id['id'];
 
 ?>
 

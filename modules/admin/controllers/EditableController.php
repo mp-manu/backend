@@ -159,4 +159,21 @@ class EditableController extends Controller
       }
    }
 
+   public function actionChangeEquipmentStatus()
+   {
+      if (Yii::$app->request->post()) {
+         $q_id = Yii::$app->request->post('id');
+         $status = Yii::$app->request->post('status');
+         if ($status == 0) {
+            $status = 1;
+         } elseif ($status == 1) {
+            $status = 0;
+         } else {
+            $status = 0;
+         }
+         Yii::$app->db->createCommand('UPDATE equipment SET status = ' . $status . ' WHERE id=' . $q_id)->execute();
+         return $status;
+      }
+   }
+
 }

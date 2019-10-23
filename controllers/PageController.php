@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Requisites;
 use app\modules\admin\models\AnswerQuestions;
+use app\modules\admin\models\Equipment;
 use app\modules\admin\models\PriceList;
 use app\modules\admin\models\PrivacyPolicy;
 use app\modules\admin\models\Sections;
@@ -50,6 +51,10 @@ class PageController extends Controller
       $servicesAndSubservices[$id]=$id;
       $servicesAndSubservices = ArrayHelper::map($subServices, 'id', 'id');
 
+      $subServicesEquipments = Equipment::find()
+          ->where(['service_id' => $servicesAndSubservices, 'status' => 1])
+          ->asArray()->all();
+      $subServicesEquipments = ArrayHelper::index($subServicesEquipments, 'service_id');
 
       $priceListTable = PriceList::find()
           ->select('p.*, s.name, s.id as sid')
@@ -71,6 +76,7 @@ class PageController extends Controller
          }
       }
 
+
       return $this->render('service', [
           'service' => $service,
           'serviceInfo' => $serviceInfo,
@@ -79,6 +85,7 @@ class PageController extends Controller
           'workResults' => $workResults,
           'subServices' => $subServices,
           'activeServicesId' => $activeServicesId,
+          'subServicesEquipments' => $subServicesEquipments,
           'priceList' => $priceList,
           'data' => $data,
       ]);
@@ -140,6 +147,16 @@ class PageController extends Controller
    }
 
 
+   public function actionServiceList(){
+
+      $services = Services::find()->where(['status' => 1])->asArray()->all();
+
+      return $this->render('service-list', [
+         'services' => $services
+      ]);
+   }
+
+
    public function actionError()
    {
       $errorPage = Sections::find()->where(['page_id' => 6])->asArray()->one();
@@ -148,10 +165,11 @@ class PageController extends Controller
       ]);
    }
 
+
    public function beforeAction($action)
    {
       if (parent::beforeAction($action)) {
-         if ($action->id == 'error' || $action->id == 'contact' || $action->id == 'thanks') {
+         if ($action->id == 'error' || $action->id == 'contact' || $action->id == 'thanks'|| $action->id == 'service-list') {
             $this->layout = 'main-dark';
          }
          return true;

@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 /* @var $model app\modules\admin\models\AnswerQuestions */
 /* @var $form yii\widgets\ActiveForm */
 
-$model->service_id = $service_id['id'];
+//$model->service_id = $service_id['id'];
 ?>
 
 <div class="answer-questions-form">

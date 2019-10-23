@@ -21,21 +21,21 @@ $model->service_id = $service_id['id'];
            ]
        ]); ?>
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-12">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
                <?= $form->field($model, 'title')->textInput(['maxlength' => true, 'required' => true]) ?>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+               <?= $form->field($model, 'status')->dropDownList(['1' => 'Включен', '0' => 'Отключен']) ?>
             </div>
         </div>
         <div class="col-lg-6">
             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
                <?= $form->field($model, 'img')->fileInput(['maxlength' => true, 'required' => true]) ?>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-               <?= $form->field($model, 'status')->dropDownList(['1' => 'Включен', '0' => 'Отключен']) ?>
             </div>
         </div>
     </div>

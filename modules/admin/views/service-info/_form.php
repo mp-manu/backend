@@ -12,12 +12,12 @@ use yii\widgets\ActiveForm;
 <div class="service-info-form">
    <?php $form = ActiveForm::begin(); ?>
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-lg-12">
             <div class="card-box">
                 <div class="card-head">
                     <header><?= $this->title ?></header>
                 </div>
-                <div class="card-body row">
+                <div class="card-body">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
@@ -40,7 +40,7 @@ use yii\widgets\ActiveForm;
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
-                               <?= $form->field($model, 'description')->textarea(['maxlength' => true]) ?>
+                               <?= $form->field($model, 'description')->textarea(['maxlength' => true, 'rows' => 4]) ?>
                             </div>
                         </div>
                     </div>
@@ -54,4 +54,3 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
 </div>
-
