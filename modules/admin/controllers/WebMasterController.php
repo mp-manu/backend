@@ -70,6 +70,7 @@ class WebMasterController extends Controller
 
    public function actionContactMap(){
 
+
       $model = CompanyMap::findOne(1);
 
       return $this->render('map', [
