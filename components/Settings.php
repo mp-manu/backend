@@ -38,7 +38,7 @@ class Settings extends Component
     /**
      * @var string the key used to store settings data in cache
      */
-    public $cacheKey = 'settings';
+    public $cacheKey = 'settings-key';
 
     /**
      * @var \yii2mod\settings\models\SettingModel setting model

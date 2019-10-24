@@ -35,7 +35,7 @@ class Images extends Component
     /**
      * @var string the key used to store settings data in cache
      */
-    public $cacheKey = 'images-manager';
+    public $cacheKey = 'images-key';
 
     /**
      * @var 'app\modules\admin\model\ImageModel';
