@@ -2,10 +2,12 @@
 
 namespace app\components;
 
+use app\modules\admin\models\CompanyMap;
 use app\modules\admin\models\MetatagsYandexMetrika;
 use Yii;
 use yii\base\Component;
 use yii\caching\Cache;
+use yii\db\Query;
 use yii\di\Instance;
 use yii\helpers\ArrayHelper;
 use app\modules\admin\models\enumerables\SettingType;
@@ -253,6 +255,19 @@ class Settings extends Component
 
        return $meta['scripts'];
     }
+
+
+    public function getAddressLatitude(){
+       $latitude = CompanyMap::find()->asArray()->one();
+
+       return $latitude['center1'];
+    }
+
+   public function getAddressLongitude(){
+      $latitude = CompanyMap::find()->asArray()->one();
+
+      return $latitude['center2'];
+   }
 
     /**
      * Set type for setting

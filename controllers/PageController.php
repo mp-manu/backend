@@ -94,9 +94,12 @@ class PageController extends Controller
    public function actionContact()
    {
       $reqvisit = Requisites::find()->where(['status' => 1])->asArray()->one();
-
+      $latitude = \Yii::$app->settings->getAddressLatitude();
+      $longitude = \Yii::$app->settings->getAddressLongitude();
       return $this->render('contact', [
-          'reqvisit' => $reqvisit
+          'reqvisit' => $reqvisit,
+          'latitude' => $latitude,
+          'longitude' => $longitude,
       ]);
    }
 

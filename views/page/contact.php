@@ -6,6 +6,7 @@
  * Time: 0:18
  */
 $this->title = 'Контакты';
+
 ?>
 
 <div class="content__headline">
@@ -16,8 +17,8 @@ $this->title = 'Контакты';
                     <div class="headline__body">
                         <div class="headline__breadcrumb">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb__item"><a class="breadcrumb__link"
-                                                                href="/" title="Главная">Главная</a>
+                                <li class="breadcrumb__item">
+                                    <a class="breadcrumb__link" href="/" title="Главная">Главная</a>
                                 </li>
                             </ul>
                         </div>
@@ -96,7 +97,7 @@ $this->title = 'Контакты';
                                             <div class="contact-map"
                                                  :class="{ &quot;is-ready&quot;: ready }">
                                                 <div class="contact-map__container" ref="container"
-                                                     data-initial="{&quot;center&quot;:[54.76947905613925,32.11584049999999],&quot;zoom&quot;:16,&quot;markers&quot;:[{&quot;address&quot;:&quot;Смоленск, дер. Тепличный Комбинат №1&quot;,&quot;coords&quot;:[54.76947905613925,32.11584049999999],&quot;image&quot;:{&quot;href&quot;:&quot;/img/marker.svg&quot;,&quot;size&quot;:[65,54],&quot;offset&quot;:[-19,-54]}}]}"></div>
+                                                     data-initial="{&quot;center&quot;:[<?= $latitude ?>,<?= $longitude ?>],&quot;zoom&quot;:16,&quot;markers&quot;:[{&quot;address&quot;:&quot;Смоленск, дер. Тепличный Комбинат №1&quot;,&quot;coords&quot;:[<?= $latitude ?>,<?= $longitude ?>],&quot;image&quot;:{&quot;href&quot;:&quot;/img/marker.svg&quot;,&quot;size&quot;:[65,54],&quot;offset&quot;:[-19,-54]}}]}"></div>
                                             </div>
                                         </contact-map>
                                     </div>

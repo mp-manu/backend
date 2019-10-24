@@ -17,8 +17,7 @@ $this->title = 'О компании';
                     <div class="headline__body">
                         <div class="headline__breadcrumb">
                             <ul class="breadcrumb">
-                                <li class="breadcrumb__item"><a class="breadcrumb__link"
-                                                                href="/" title="Главная">Главная</a>
+                                <li class="breadcrumb__item"><a class="breadcrumb__link" href="/" title="Главная">Главная</a>
                                 </li>
                             </ul>
                         </div>

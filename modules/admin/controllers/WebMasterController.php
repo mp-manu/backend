@@ -79,6 +79,21 @@ class WebMasterController extends Controller
    }
 
 
+   public function actionChangeCoords(){
+
+      $coord1 = Yii::$app->request->post('latitude');
+      $coord2 = Yii::$app->request->post('longitude');
+
+      $query = Yii::$app->db->createCommand('UPDATE company_map SET center1 = "'.$coord1.'", center2="'.$coord2.'" WHERE id=1');
+      if($query->execute()){
+         return 'ok';
+      }else{
+         return 'error';
+      }
+
+   }
+
+
    protected function findModel($id)
    {
       if (($model = MetatagsYandexMetrika::findOne($id)) !== null) {
