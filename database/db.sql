@@ -31,7 +31,7 @@ CREATE TABLE `answer_questions` (
   `status` tinyint(4) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `service_id` (`service_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 /*Data for the table `answer_questions` */
 
@@ -635,7 +635,7 @@ CREATE TABLE `company_map` (
 /*Data for the table `company_map` */
 
 insert  into `company_map`(`id`,`center1`,`center2`,`coord1`,`coord2`,`zoom`,`address`,`image`,`size1`,`size2`,`offset1`,`offset2`) values 
-(1,'55.43','37.75','54.76947905613925','32.11584049999999',16,'Смоленск, дер. Тепличный Комбинат №1',NULL,NULL,NULL,NULL,NULL);
+(1,'54.769448634610164','32.11594564028027','54.76947905613925','32.11584049999999',16,'Смоленск, дер. Тепличный Комбинат №1',NULL,NULL,NULL,NULL,NULL);
 
 /*Table structure for table `contact` */
 
@@ -777,7 +777,7 @@ CREATE TABLE `login_details` (
   PRIMARY KEY (`login_detail_id`),
   KEY `login_user_id` (`login_user_id`),
   CONSTRAINT `login_details_ibfk_1` FOREIGN KEY (`login_user_id`) REFERENCES `user` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
 /*Data for the table `login_details` */
 
@@ -805,7 +805,9 @@ insert  into `login_details`(`login_detail_id`,`login_user_id`,`login_status`,`l
 (21,22,1,'2019-10-18 20:06:04',NULL,'127.0.0.1'),
 (22,22,1,'2019-10-18 20:36:01',NULL,'127.0.0.1'),
 (23,22,1,'2019-10-23 09:06:26',NULL,'127.0.0.1'),
-(24,1,1,'2019-10-23 13:14:33',NULL,'127.0.0.1');
+(24,1,1,'2019-10-23 13:14:33',NULL,'127.0.0.1'),
+(25,22,1,'2019-10-24 09:48:01',NULL,'127.0.0.1'),
+(26,22,1,'2019-10-24 12:26:27',NULL,'127.0.0.1');
 
 /*Table structure for table `metatags_yandex_metrika` */
 
@@ -1132,7 +1134,7 @@ CREATE TABLE `service_info` (
   `status` tinyint(2) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `service_id` (`service_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 /*Data for the table `service_info` */
 
@@ -1155,7 +1157,7 @@ CREATE TABLE `services` (
   `url` varchar(500) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 /*Data for the table `services` */
 
@@ -1287,7 +1289,7 @@ CREATE TABLE `user` (
 
 insert  into `user`(`user_id`,`username`,`user_password`,`email`,`user_type`,`is_block`,`avatar`,`created_at`,`created_by`,`updated_at`,`updated_by`,`secret_key`,`auth_key`,`session_id`) values 
 (1,'admin','f6fdffe48c908deb0f4c3bd36c032e72','admin@polytech.tj','E',0,'std7.jpg','2019-10-12 14:32:54',1,'2015-05-27 15:56:35',1,NULL,NULL,'noj2eibubersb270ohs2dadiv6af0b4d'),
-(22,'admin2','af8eb328301d219cfd1d50e6c6a48f58',NULL,'A',0,'std5.jpg','2019-10-12 13:45:41',1,NULL,NULL,NULL,NULL,'k8d4iqfrpf4bddlou0cpm1k6mjlfoj64'),
+(22,'admin2','af8eb328301d219cfd1d50e6c6a48f58',NULL,'A',0,'std5.jpg','2019-10-12 13:45:41',1,NULL,NULL,NULL,NULL,'i44c6ra6ukintfbsfc83gfcelnb5qifb'),
 (23,'admin3','7169390683d2b222ba778ca6374b59d3',NULL,'A',1,'std7.jpg','2019-10-12 13:52:10',1,NULL,NULL,NULL,NULL,'ak5h7tnec99b69cipd80ralc0p2fa23l'),
 (25,'admin4','dfa5f43cb476ef890a83010f0da7c6b0',NULL,'A',1,'std3.jpg','2019-10-12 13:57:57',1,NULL,NULL,NULL,NULL,'2pqp9rissts870sj830jkor0jntj15h9'),
 (26,'admin6','b48d62f30f50c2c191ab949186c532d3',NULL,'A',1,'std6.jpg','2019-10-12 14:05:01',1,NULL,NULL,NULL,NULL,'90c8pfqa6cchpcofouj9qsl1hvngu3f3');
