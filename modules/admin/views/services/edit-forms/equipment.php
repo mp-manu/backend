@@ -59,7 +59,7 @@ use yii\widgets\ActiveForm;
                         <?php endif; ?>
                         <a class="btn btn-danger btn-xs"
                            href="/admin/equipment/delete?id=<?= $equipment['id'] ?>"
-                           data-confirm="Вы уверены что хотите удалить этот прайс лист?">
+                           data-confirm="Вы уверены что хотите удалить этот оборудование?">
                            <i class="fa fa-trash-o" title="Удалить"></i>
                         </a>
                         <a class="btn btn-primary btn-xs"
@@ -112,7 +112,7 @@ use yii\widgets\ActiveForm;
         </div>
     </div>
       <?= $form->field($model, 'service_id')
-          ->textInput(['value' => $_GET['id']])->label(false) ?>
+          ->hiddenInput(['value' => $_GET['id']])->label(false) ?>
       <?php ActiveForm::end(); ?>
    <?php endif; ?>
 </div>

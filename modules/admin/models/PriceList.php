@@ -75,4 +75,7 @@ class PriceList extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Services::className(), ['id' => 'service_id']);
     }
+
+
+
 }
